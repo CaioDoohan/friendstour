@@ -27,10 +27,7 @@ body {
   color: #726277;
   font-size: 13px; }
 
-article, aside, footer, header, nav, section {
-  display: block; }
-
-figcaption, figure, main {
+article, aside, footer, header, nav, section, figcaption, figure, main {
   display: block; }
 
 figure {

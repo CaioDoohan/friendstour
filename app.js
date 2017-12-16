@@ -1,9 +1,11 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express        = require('express');
+var path           = require('path');
+var favicon        = require('serve-favicon');
+var logger         = require('morgan');
+var cookieParser   = require('cookie-parser');
+var bodyParser     = require('body-parser');
+var sass           = require('node-sass');
+var sassMiddleware = require('node-sass-middleware');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -31,6 +33,15 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+// adding the sass middleware
+app.use(sassMiddleware({
+    src: path.join(__dirname, 'scss'),
+    dest: path.join(__dirname, 'public'),
+    debug: true,
+    outputStyle: 'compressed',
+    prefix:  '/stylesheets'
+}));
 
 // error handler
 app.use(function(err, req, res, next) {
