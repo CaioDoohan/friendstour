@@ -8,7 +8,7 @@ $(document).ready(function(){
         autoplay: true,
         autoplaySpeed: 2000,
         fade: true,
-        cssEase: 'linear'
+        cssEase: 'linear',
     });
     $(".carvg").slick({
         infinite: true,
@@ -17,6 +17,14 @@ $(document).ready(function(){
         dots:false,
         autoplay: true,
         autoplaySpeed: 6000,
-        variableWidth: true,
+        adaptiveHeight: true,
+        responsive: [
+            {
+              breakpoint: 1091,
+              settings: {
+                  arrows:false,
+              }
+            }
+          ]
     });
 });
