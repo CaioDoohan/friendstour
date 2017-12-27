@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www & node-sass --watch scss -o public/stylesheets"
+    "start": "nodemon ./bin/www",
+    "scss": "node-sass --watch scss -o public/stylesheets"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -13,10 +14,10 @@
     "express": "^4.15.5",
     "morgan": "^1.9.0",
     "node-sass": "^4.7.2",
+    "node-sass-middleware": "^0.11.0",
     "nodemon": "^1.12.5",
     "serve-favicon": "^2.4.5",
-    "slick-carousel": "^1.8.1",
-    "node-sass": "^4.7.2",
-    "node-sass-middleware": "^0.11.0"
-  }
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {}
 }
