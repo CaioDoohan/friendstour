@@ -22,9 +22,26 @@ $(document).ready(function(){
             {
               breakpoint: 1091,
               settings: {
-                  arrows:false,
+                  arrows:false
+              },
+
+              breakpoint:688,
+              settings:{
+                centerMode: true,
+                centerPadding: '50px',
+                slidesToShow: 1,
               }
             }
           ]
+    });
+    $(".menumob").click(function(){
+        $(this).toggleClass("active");
+        $(this).parent().find(".menu-top").toggleClass("open");
+        var scroll = $(window).scrollTop();
+        if ($(".menumob").hasClass("active")) {
+            $(".menumob").addClass("scroll");
+        } else {
+            $(".menumob").removeClass("scroll");
+        }      
     });
 });

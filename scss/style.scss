@@ -363,6 +363,10 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   }
 }
 
+.menumob{
+  display: none;
+}
+
 .btn{
   background-color:transparent;
   padding: 5px 8px;
@@ -560,6 +564,9 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           &>li:first-child{
             margin-left:0!important;
           }
+          &>li:last-child{
+            margin-right:0!important;
+          }
           .pass{
             background-color:#018dc2;
           }
@@ -569,9 +576,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           .package{
             background-color:#c29001;
           }
-          // .ticket{
-          //   background-color:#01c272;
-          // }
           .transp{
             background-color:#c20101;
           }
@@ -830,6 +834,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     }
     ul{
       padding: 15px 0;
+      display: table;
       li{
         margin:15px 0;
         width:31%;
@@ -1017,10 +1022,211 @@ footer{
     padding: 0 10px;
     box-sizing: border-box;
   }
-  .vg.prom h3{
+  .menu-top h2{
+    font-size:14px;
+  }
+  .slick-dotted.slick-slider{
+    margin-bottom: 10px;
+  }
+  .full > div h3{
     padding-left: 0;
   }
 }
+
+@media screen and (max-width:870px){
+  .top > h1 img{
+    margin: initial;
+    max-width: 165px;
+  }
+  .top nav{
+    text-align: right;
+  }
+  @keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+  }
+  @-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+  }
+  @-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+  }
+  @-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
+  .menu-top{
+    background-color: rgba(66, 66, 66, 0.9098039215686274);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 1;
+    line-height: 40px;
+    padding-top: 15%;
+    // display: none;
+    animation: fadeout 0.8s;
+    -moz-animation: fadeout 0.8s; /* Firefox */
+    -webkit-animation: fadeout 0.8s; /* Safari and Chrome */
+    -o-animation: fadeout 0.8s; /* Opera */
+    left:110%;
+    transition: all 0.5s;
+    li{
+      text-align: center;
+      display: block;
+      a{
+        display: inline-block;
+      }
+      h2{
+        font-size: 30px;
+        color:#fff;
+        display: table;
+        margin: 0 auto;
+        &:hover{
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3607843137254902);
+          background-color: #c3c3c31c;
+        }
+      }
+    }
+  }
+  .menumob{
+    position: relative;
+    display: table;
+    width: 40px;
+    height: 30px;
+    margin: 0 auto;
+    z-index: 3;
+    span{
+      margin: 0 auto;
+      position: relative;
+      top: 12px;
+      width: 40px;
+      height: 5px;
+      background-color: #d05a35;
+      display: block;
+      -webkit-transition-duration: 0s; transition-duration: 0s;
+      -webkit-transition-delay: 0.2s; transition-delay: 0.2s;
+      &::before{
+        margin-top: -10px;
+        border-radius: 4px 4px 0 0;
+        -webkit-transition-property: margin, -webkit-transform; transition-property: margin, transform;
+        -webkit-transition-duration: 0.2s; transition-duration: 0.2s;
+        -webkit-transition-delay: 0.2s, 0s; transition-delay: 0.2s, 0s;
+      }
+      &::after{
+        margin-top: 10px;
+        border-radius: 0 0 4px 4px;
+        -webkit-transition-property: margin, -webkit-transform; transition-property: margin, transform;
+        -webkit-transition-duration: 0.2s; transition-duration: 0.2s;
+        -webkit-transition-delay: 0.2s, 0s; transition-delay: 0.2s, 0s;
+      }
+      &::before, &::after{
+        position: absolute;
+        content: '';
+        width: 40px;
+        height: 5px;
+        background-color: #d05a35;
+        display: block;
+      }
+    }
+
+    &.active{
+      span{
+        background-color: rgba(0,0,0,0.0);
+        -webkit-transition-delay: 0.2s; transition-delay: 0.2s;
+        &::before{
+          margin-top: 0;
+          border-radius: 0 0 0 0;
+          -webkit-transform: rotate(45deg); transform: rotate(45deg);
+          -webkit-transition-delay: 0s, 0.2s; transition-delay: 0s, 0.2s;
+        }
+        &::after{
+          margin-top: 0;
+          border-radius: 0 0 0 0;
+          -webkit-transform: rotate(-45deg); transform: rotate(-45deg);
+          -webkit-transition-delay: 0s, 0.2s; transition-delay: 0s, 0.2s;
+        }
+      }
+    }
+  }
+  .open{
+    display: block!important;
+    animation: fadein 0.8s;
+    left:0;
+    -moz-animation: fadein 0.8s; /* Firefox */
+    -webkit-animation: fadein 0.8s; /* Safari and Chrome */
+    -o-animation: fadein 0.8s; /* Opera */
+  }
+
+  .scroll{
+    position: fixed;
+    top: 67px;
+    right: 6.5%;
+    width: auto;
+  }
+  
+  .crl{
+    margin: 5px 0;
+  }
+  .crl.vg .carvg .item{
+    min-height: 388px;
+  }
+  .crl.vg .carvg .item > div .name h5{
+    font-size: 20px;
+  }
+  .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .inc li h6{
+    font-size:14px;
+  }
+  .crl.vg .carvg .item > div .local li::after, .crl.vg .carvg .item > div .tempo li::after, .crl.vg .carvg .item > div .inc li::after{
+    padding: 0 2px;
+    box-sizing: border-box;
+  }
+  .emp .empresa{
+    margin: 20px 0;
+  }
+  .emp .empresa ul{
+    margin: 0 auto;
+  }
+  .emp .empresa ul li{
+    width: 100%;
+    margin: 10px 0;
+    float: none;
+  }
+}
+
+@media screen and (max-width:688px){
+  .crl.vg .carvg .item{
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .crl.vg .carvg .item figure img{
+    max-width:100%;
+    max-height: 100%;
+  }
+  .crl.vg .carvg .slick-slide{
+    min-height: 410px;
+  }
+}
+
+
 
 
 
