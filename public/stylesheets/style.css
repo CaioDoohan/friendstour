@@ -405,7 +405,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   padding: 15px 0;
   position: relative; }
   .crl.vg .carvg .slick-slide {
-    margin: 0 5px; }
+    margin: 0 10px; }
   .crl.vg .carvg .slick-track {
     padding: 15px 0; }
   .crl.vg .carvg .item {
@@ -415,6 +415,13 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     display: table;
     position: relative;
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15); }
+    .crl.vg .carvg .item .up, .crl.vg .carvg .item .down {
+      display: table;
+      width: 100%; }
+    .crl.vg .carvg .item .up {
+      min-height: 150px; }
+    .crl.vg .carvg .item .down {
+      margin-top: 9%; }
     .crl.vg .carvg .item figure img {
       max-width: 484px;
       max-height: 186px;
@@ -475,7 +482,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
         border-bottom: 1px solid #e0e0e0;
         display: table;
         width: 100%;
-        margin: 3px 0 5px; }
+        margin: 6px 0; }
         .crl.vg .carvg .item > div .local li, .crl.vg .carvg .item > div .tempo li, .crl.vg .carvg .item > div .inc li {
           display: table;
           float: left;
@@ -766,6 +773,13 @@ footer {
       font-weight: 800;
       font-size: 12px; }
 
+.cont {
+  background-color: #f5f2f5;
+  padding: 15px 5px;
+  box-sizing: border-box; }
+  .cont h3 {
+    font-size: 30px; }
+
 @media screen and (max-width: 990px) {
   .container {
     padding: 0 10px;
@@ -813,8 +827,9 @@ footer {
     bottom: 0;
     height: 100%;
     z-index: 1;
+    overflow: scroll;
     line-height: 40px;
-    padding-top: 15%;
+    padding-top: 150px;
     animation: fadeout 0.8s;
     -moz-animation: fadeout 0.8s;
     /* Firefox */
@@ -937,9 +952,77 @@ footer {
 @media screen and (max-width: 688px) {
   .crl.vg .carvg .item {
     max-width: 100%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    min-height: 420px; }
   .crl.vg .carvg .item figure img {
     max-width: 100%;
     max-height: 100%; }
   .crl.vg .carvg .slick-slide {
-    min-height: 410px; } }
+    min-height: 410px;
+    margin: 0 16px; }
+  .crl.vg .slick-list {
+    min-height: 530px; }
+  .crl.vg .carvg .item > div .name h5 {
+    padding: 8px 0; }
+  footer .col-12 > div {
+    width: 100%;
+    display: table; }
+    footer .col-12 > div figure {
+      display: none; }
+    footer .col-12 > div address {
+      margin: 0 auto;
+      text-align: center; }
+    footer .col-12 > div .iframe {
+      margin: 0 auto;
+      display: table;
+      float: none; }
+  .emp .empresa ul li > div i {
+    font-size: 30px; }
+  .emp .empresa ul li > div .fa-money {
+    font-size: 30px;
+    padding: 6px 7px; }
+  .emp .empresa ul li > div .fa-star {
+    font-size: 30px;
+    padding: 5px 6px; } }
+
+@media screen and (max-width: 480px) {
+  .top > h1 img {
+    max-width: 130px; }
+  .scroll {
+    top: 50px;
+    right: 8%; }
+  .crl.vg .slick-list {
+    min-height: 445px; }
+  .crl h3, .parc h3, .emp .empresa h3 {
+    font-size: 28px; }
+  .crl.vg .carvg .slick-slide {
+    margin: 0 6px; }
+  .crl.vg .carvg .item > div .name h5 {
+    font-size: 18px; }
+  .crl.vg .carvg .item > div .local li h5, .crl.vg .carvg .item > div .tempo li h5, .crl.vg .carvg .item > div .inc li h5, .emp .empresa ul li > div h4 {
+    font-size: 13px; }
+  .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .inc li h6, .emp .empresa ul li > div p {
+    font-size: 12px; }
+  .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5 {
+    font-size: 20px; }
+  .crl.vg .carvg .item > div .local li, .crl.vg .carvg .item > div .tempo li, .crl.vg .carvg .item > div .inc li {
+    margin: 5px 3px; }
+  .crl.vg .carvg .item > div .fpag li i, .crl.vg .carvg .item > div .fpag li p {
+    font-size: 12px; }
+  .crl.vg .carvg .item {
+    min-height: 410px; }
+  .crl.vg .carvg .item .down {
+    margin-top: 12%; }
+  .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc {
+    padding: 3px 0;
+    margin: 5px 0; }
+  .crl.vg .carvg {
+    padding: 8px 0; }
+  .full > div {
+    padding: 5px 0; }
+  footer .col-12 > div address p {
+    font-size: 12px; }
+  footer .col-12 .formpag p {
+    font-size: 13px; }
+  footer .col-12 .formpag ul li i {
+    font-size: 20px; } }

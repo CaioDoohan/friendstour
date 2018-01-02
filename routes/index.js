@@ -16,5 +16,8 @@ router.get('/lista', function(req, res, next) {
   res.render('lista', { title: 'Friendstour - Lista' });
 });
 
+router.get('/contato', function(req, res, next) {
+  res.render('contato', { title: 'Friendstour - Contato' });
+});
 
 module.exports = router;

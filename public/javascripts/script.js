@@ -24,11 +24,11 @@ $(document).ready(function(){
               settings: {
                   arrows:false
               },
-
+            },
+            {
               breakpoint:688,
               settings:{
-                centerMode: true,
-                centerPadding: '50px',
+                arrows:false,
                 slidesToShow: 1,
               }
             }
