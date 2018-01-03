@@ -3,11 +3,61 @@
 <main>
   <div class="container">
     <div class="row">
-      <section class="cont">
-        <h3>ENTRE EM CONTATO</h3>
+      <section class="cont col-12">
+        <div class="col-12">
+            <h3>ENTRE EM CONTATO</h3>
+            <span>Texto texto texto texto texto</span>
+        </div>
+        <div class="col-6">
+          <form action="" name="formcont" method="post">
+            <div>
+                <input type="text" placeholder="Nome" name="nome" required/>
+                <input type="text" placeholder="Telefone" name="telefone" class="phone_with_ddd" required/>
+            </div>
+            <div>
+                <input type="email" placeholder="E-mail" name ="email" required/>
+                <select type="text">
+                    <option value="" disabled selected>Como conheceu a Friend's Tour?</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="google">Google</option>
+                    <option value="amigos">Amigos</option>
+                    <option value="cliente">Já sou cliente</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+            <textarea placeholder="Sua mensagem:" name="mensagem" required></textarea>
+            <button type="submit" value="enviar" onclick="" class="btn">Enviar</button>
+          </form>
+        </div>
+        <div class="col-6">
+          <div class="tel">
+            <div>
+              <i class="fa fa-whatsapp" aria-hidden="true"></i>
+              <h4>
+                13 97406-1452
+              </h4>
+            </div>
+            <div>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+              <h4>
+                13 98112-3712
+              </h4>
+            </div>
+          </div>
+          <div class="loc">
+            <h4>Santos - SP</h4>
+            <h5>11015-151</h5>
+          </div>
+        </div>
       </section>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+  <script>
+    $(function() {
+        $(".phone_with_ddd").mask("(00) 00000-0000");
+    });
+  </script>
 </main>
 <% include partial/footer %>
 
