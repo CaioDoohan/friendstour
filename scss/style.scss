@@ -1036,7 +1036,7 @@ footer{
 }
 
 
-.cont{
+.cont,.comp{
   background-color:rgb(230, 230, 230);
   padding: 15px 10px;
   box-sizing: border-box;
@@ -1044,6 +1044,8 @@ footer{
   h3{
     font-size:30px;
     margin: 5px 0;
+    font-family: Nunito-Black;
+    color:#d05a35;
   }
 
   &>div.col-12{
@@ -1153,6 +1155,81 @@ footer{
     }
   }
 }
+
+.comp{
+  .ct{
+    display: table;
+    width: 100%;
+    &>figure{
+      float: left;
+      width: 60%;
+      padding: 15px 10px;
+      box-sizing: border-box;
+      img{
+        width: 100%;
+      }
+    }
+
+    &>div{
+      float: left;
+      width: 40%;
+      padding: 15px 10px;
+      box-sizing: border-box;
+
+      h4{
+        font-size:22px;
+        text-transform: uppercase;
+      }
+
+      p{
+        font-size:14px;
+        padding: 10px 0;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .ms{
+    display: table;
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+  }
+
+  .ms.full{
+    &>div{
+      border-bottom: 1px solid rgb(169, 169, 169);
+      padding: 5px 0;
+      margin: 15px 0;
+      &>div{
+        position: absolute;
+        background-color: #e6e6e6;
+        bottom: -15px;
+        font-size: 22px;
+        left: 0;
+        display: table;
+        h4,i{
+          display: table-cell;
+          vertical-align: middle;
+          font-size:22px;
+        }  
+  
+        i{
+          font-size:25px;
+          padding: 0 10px;
+          box-sizing: border-box;
+        }
+      }
+      
+    }
+
+    p{
+      padding: 15px 0;
+      line-height: 20px;
+    }
+  }
+}
+
 @media screen and (max-width:990px){
   .container{
     padding: 0 10px;

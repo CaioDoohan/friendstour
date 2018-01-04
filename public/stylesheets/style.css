@@ -784,28 +784,30 @@ footer {
       font-weight: 800;
       font-size: 12px; }
 
-.cont {
+.cont, .comp {
   background-color: #e6e6e6;
   padding: 15px 10px;
   box-sizing: border-box; }
-  .cont h3 {
+  .cont h3, .comp h3 {
     font-size: 30px;
-    margin: 5px 0; }
-  .cont > div.col-12 {
+    margin: 5px 0;
+    font-family: Nunito-Black;
+    color: #d05a35; }
+  .cont > div.col-12, .comp > div.col-12 {
     margin: 10px 0;
     padding: 5px 5px;
     border-bottom: 1px solid #d6d6d6;
     box-sizing: border-box; }
-  .cont > div.col-6 {
+  .cont > div.col-6, .comp > div.col-6 {
     padding: 10px 5px;
     box-sizing: border-box; }
-  .cont form {
+  .cont form, .comp form {
     display: block;
     width: 100%; }
-    .cont form > div {
+    .cont form > div, .comp form > div {
       display: table;
       width: 100%; }
-      .cont form > div > input, .cont form > div select, .cont form > div option {
+      .cont form > div > input, .cont form > div select, .cont form > div option, .comp form > div > input, .comp form > div select, .comp form > div option {
         display: table;
         float: left;
         width: 48%;
@@ -815,16 +817,16 @@ footer {
         border: 1px solid transparent;
         font-family: Nunito-black;
         color: #726277; }
-        .cont form > div > input::placeholder, .cont form > div select::placeholder, .cont form > div option::placeholder {
+        .cont form > div > input::placeholder, .cont form > div select::placeholder, .cont form > div option::placeholder, .comp form > div > input::placeholder, .comp form > div select::placeholder, .comp form > div option::placeholder {
           font-family: Nunito-Regular; }
-      .cont form > div select {
+      .cont form > div select, .comp form > div select {
         padding: 5px;
         font-family: Nunito-Regular; }
-      .cont form > div > input:first-child {
+      .cont form > div > input:first-child, .comp form > div > input:first-child {
         margin-left: 0; }
-      .cont form > div > input:last-child, .cont form > div select {
+      .cont form > div > input:last-child, .cont form > div select, .comp form > div > input:last-child, .comp form > div select {
         margin-right: 0; }
-    .cont form textarea {
+    .cont form textarea, .comp form textarea {
       width: 100%;
       box-sizing: border-box;
       border: 1px solid transparent;
@@ -837,34 +839,87 @@ footer {
       max-width: 100%;
       min-height: 96px;
       margin: 10px 0 0; }
-      .cont form textarea::placeholder {
+      .cont form textarea::placeholder, .comp form textarea::placeholder {
         font-family: Nunito-Regular; }
-    .cont form > button {
+    .cont form > button, .comp form > button {
       float: right;
       color: #545454;
       padding: 5px 10px;
       font-size: 15px;
       font-weight: normal !important;
       margin-top: 15px; }
-  .cont .tel, .cont .loc {
+  .cont .tel, .cont .loc, .comp .tel, .comp .loc {
     text-align: center;
     font-family: Nunito-black;
     padding: 10px 0; }
-    .cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i {
+    .cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i, .comp .tel h4, .comp .tel i, .comp .loc h4, .comp .loc i {
       font-size: 32px; }
-    .cont .tel h5, .cont .loc h5 {
+    .cont .tel h5, .cont .loc h5, .comp .tel h5, .comp .loc h5 {
       font-size: 28px; }
-    .cont .tel > div, .cont .loc > div {
+    .cont .tel > div, .cont .loc > div, .comp .tel > div, .comp .loc > div {
       display: table;
       margin: 0 auto;
       padding: 0 5px;
       box-sizing: border-box; }
-      .cont .tel > div > i, .cont .tel > div h4, .cont .loc > div > i, .cont .loc > div h4 {
+      .cont .tel > div > i, .cont .tel > div h4, .cont .loc > div > i, .cont .loc > div h4, .comp .tel > div > i, .comp .tel > div h4, .comp .loc > div > i, .comp .loc > div h4 {
         display: table;
         float: left; }
-      .cont .tel > div i, .cont .loc > div i {
+      .cont .tel > div i, .cont .loc > div i, .comp .tel > div i, .comp .loc > div i {
         padding: 0 5px;
         box-sizing: border-box; }
+
+.comp .ct {
+  display: table;
+  width: 100%; }
+  .comp .ct > figure {
+    float: left;
+    width: 60%;
+    padding: 15px 10px;
+    box-sizing: border-box; }
+    .comp .ct > figure img {
+      width: 100%; }
+  .comp .ct > div {
+    float: left;
+    width: 40%;
+    padding: 15px 10px;
+    box-sizing: border-box; }
+    .comp .ct > div h4 {
+      font-size: 22px;
+      text-transform: uppercase; }
+    .comp .ct > div p {
+      font-size: 14px;
+      padding: 10px 0;
+      line-height: 20px; }
+
+.comp .ms {
+  display: table;
+  width: 100%;
+  padding: 5px 10px;
+  box-sizing: border-box; }
+
+.comp .ms.full > div {
+  border-bottom: 1px solid darkgray;
+  padding: 5px 0;
+  margin: 15px 0; }
+  .comp .ms.full > div > div {
+    position: absolute;
+    background-color: #e6e6e6;
+    bottom: -15px;
+    font-size: 22px;
+    left: 0;
+    display: table; }
+    .comp .ms.full > div > div h4, .comp .ms.full > div > div i {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 22px; }
+    .comp .ms.full > div > div i {
+      font-size: 25px;
+      padding: 0 10px;
+      box-sizing: border-box; }
+
+.comp .ms.full p {
+  padding: 15px 0;
+  line-height: 20px; }
 
 @media screen and (max-width: 990px) {
   .container {
