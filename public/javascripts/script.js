@@ -10,7 +10,7 @@ $(document).ready(function(){
         fade: true,
         cssEase: 'linear',
     });
-    $(".carvg").slick({
+    $(".hm").slick({
         infinite: true,
         slidesToShow: 2,
         slidesToScroll: 1,

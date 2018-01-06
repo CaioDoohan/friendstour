@@ -114,7 +114,7 @@ select {
   padding: 0;
   overflow: visible; }
 
-input:focus, button:focus, textarea:focus, select:focus, option:focus {
+input:focus, button:focus, textarea:focus, select:focus, option:focus, a:focus {
   outline: none; }
 
 button, select {
@@ -176,6 +176,100 @@ canvas {
 
 template {
   display: none; }
+
+input,
+label,
+select,
+button,
+textarea {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: normal;
+  background: none;
+  line-height: 1;
+  /* Browsers have different default form fonts */
+  font-size: 13px;
+  font-family: Arial; }
+
+/* Remove the stupid outer glow in Webkit */
+input:focus, figure:focus, img:focus {
+  outline: 0; }
+
+/* Box Sizing Reset
+-----------------------------------------------*/
+/* All of our custom controls should be what we expect them to be */
+input,
+textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
+
+/* These elements are usually rendered a certain way by the browser */
+button,
+input[type=reset],
+input[type=button],
+input[type=submit],
+input[type=checkbox],
+input[type=radio],
+select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* Text Inputs
+-----------------------------------------------*/
+/* Button Controls
+-----------------------------------------------*/
+input[type=checkbox],
+input[type=radio] {
+  width: 13px;
+  height: 13px; }
+
+/* File Uploads
+-----------------------------------------------*/
+/* Search Input
+-----------------------------------------------*/
+/* Make webkit render the search input like a normal text field */
+input[type=search] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box; }
+
+/* Turn off the recent search for webkit. It adds about 15px padding on the left */
+::-webkit-search-decoration {
+  display: none; }
+
+/* Buttons
+-----------------------------------------------*/
+button,
+input[type="reset"],
+input[type="button"],
+input[type="submit"] {
+  /* Fix IE7 display bug */
+  overflow: visible;
+  width: auto; }
+
+/* IE8 and FF freak out if this rule is within another selector */
+::-webkit-file-upload-button {
+  padding: 0;
+  border: 0;
+  background: none; }
+
+/* Textarea
+-----------------------------------------------*/
+textarea {
+  /* Move the label to the top */
+  vertical-align: top;
+  /* Turn off scroll bars in IE unless needed */
+  overflow: auto; }
+
+/* Selects
+-----------------------------------------------*/
+select[multiple] {
+  /* Move the label to the top */
+  vertical-align: top; }
 
 p {
   margin: 0; }
@@ -261,7 +355,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     border-radius: 0 0 8px 8px;
     box-sizing: border-box; }
     .top .inf i, .top .inf p {
-      color: #fff;
+      color: #fff !important;
       font-weight: 800;
       font-size: 14px;
       display: table-cell;
@@ -295,7 +389,8 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     font-size: 15px;
     font-family: Nunito-Light;
     padding: 5px 8px;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    cursor: pointer; }
     .menu-top h2:hover {
       color: #fff;
       background-color: #c3c3c3; }
@@ -441,7 +536,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     .crl.vg .carvg .item > div {
       display: table;
       width: 100%;
-      padding: 5px;
+      padding: 1.05%;
       box-sizing: border-box; }
       .crl.vg .carvg .item > div .inf {
         min-height: 20px;
@@ -497,7 +592,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
         .crl.vg .carvg .item > div .local li, .crl.vg .carvg .item > div .tempo li, .crl.vg .carvg .item > div .inc li {
           display: table;
           float: left;
-          margin: 0 3px;
+          margin: 0 0.65%;
           text-align: center; }
           .crl.vg .carvg .item > div .local li h5, .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .local li::before, .crl.vg .carvg .item > div .local li::after, .crl.vg .carvg .item > div .local li i, .crl.vg .carvg .item > div .tempo li h5, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .tempo li::before, .crl.vg .carvg .item > div .tempo li::after, .crl.vg .carvg .item > div .tempo li i, .crl.vg .carvg .item > div .inc li h5, .crl.vg .carvg .item > div .inc li h6, .crl.vg .carvg .item > div .inc li::before, .crl.vg .carvg .item > div .inc li::after, .crl.vg .carvg .item > div .inc li i {
             display: table-cell;
@@ -750,7 +845,8 @@ footer {
         box-sizing: border-box; }
         footer .col-12 > div address p {
           line-height: 18px;
-          font-size: 14px; }
+          font-size: 14px;
+          color: #726277 !important; }
         footer .col-12 > div address i {
           color: #60ef57;
           font-weight: bold; }
@@ -816,12 +912,14 @@ footer {
         box-sizing: border-box;
         border: 1px solid transparent;
         font-family: Nunito-black;
-        color: #726277; }
+        color: #726277;
+        background-color: #fff; }
         .cont form > div > input::placeholder, .cont form > div select::placeholder, .cont form > div option::placeholder, .comp form > div > input::placeholder, .comp form > div select::placeholder, .comp form > div option::placeholder {
           font-family: Nunito-Regular; }
       .cont form > div select, .comp form > div select {
         padding: 5px;
-        font-family: Nunito-Regular; }
+        font-family: Nunito-Regular;
+        background-color: #fff; }
       .cont form > div > input:first-child, .comp form > div > input:first-child {
         margin-left: 0; }
       .cont form > div > input:last-child, .cont form > div select, .comp form > div > input:last-child, .comp form > div select {
@@ -838,7 +936,8 @@ footer {
       min-width: 100%;
       max-width: 100%;
       min-height: 96px;
-      margin: 10px 0 0; }
+      margin: 10px 0 0;
+      background-color: #fff; }
       .cont form textarea::placeholder, .comp form textarea::placeholder {
         font-family: Nunito-Regular; }
     .cont form > button, .comp form > button {
@@ -851,7 +950,8 @@ footer {
   .cont .tel, .cont .loc, .comp .tel, .comp .loc {
     text-align: center;
     font-family: Nunito-black;
-    padding: 10px 0; }
+    padding: 10px 0;
+    color: #726277 !important; }
     .cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i, .comp .tel h4, .comp .tel i, .comp .loc h4, .comp .loc i {
       font-size: 32px; }
     .cont .tel h5, .cont .loc h5, .comp .tel h5, .comp .loc h5 {
@@ -921,6 +1021,73 @@ footer {
   padding: 15px 0;
   line-height: 20px; }
 
+.tit {
+  position: relative; }
+  .tit h3 {
+    font-size: 40px;
+    top: 30px;
+    position: absolute;
+    display: table;
+    background-color: #d05a35;
+    color: #fff;
+    left: -8px;
+    padding: 5px 10px; }
+    .tit h3::before {
+      width: 0;
+      height: 0;
+      border-top: 9px solid transparent;
+      border-bottom: 0px solid transparent;
+      border-right: 9px solid #ad4b2d;
+      position: absolute;
+      top: -9px;
+      left: 0;
+      content: " "; }
+  .tit figure img {
+    width: 100%; }
+
+.flt.full > div {
+  padding: 10px 0; }
+  .flt.full > div h4 {
+    font-size: 25px;
+    bottom: -19px;
+    position: absolute;
+    background-color: #fff;
+    padding: 5px 10px;
+    font-family: Nunito-Black;
+    color: #d05a35; }
+
+.flt.full select {
+  position: absolute;
+  background-color: #fff !important;
+  padding: 5px 10px;
+  border: 1px solid #b9b9b9 !important;
+  bottom: -15px;
+  border-radius: 7px;
+  right: 0;
+  font-size: 15px;
+  color: #828282 !important;
+  font-family: Nunito-regular !important; }
+  .flt.full select option {
+    outline-color: #b9b9b9; }
+
+.list {
+  display: table;
+  width: 100%; }
+  .list tr {
+    width: 100% !important;
+    padding: 10px 0; }
+    .list tr td {
+      width: 48%;
+      vertical-align: top; }
+      .list tr td .item {
+        margin: 10px 0; }
+        .list tr td .item .event {
+          top: -5px !important; }
+    .list tr > td:first-child {
+      padding-right: 1%; }
+    .list tr > td:last-child {
+      padding-left: 1%; }
+
 @media screen and (max-width: 990px) {
   .container {
     padding: 0 10px;
@@ -934,7 +1101,10 @@ footer {
   .cont form > div > input, .cont form > div select, .cont form > div option {
     width: 100%;
     float: none;
-    margin: 10px 0; } }
+    margin: 10px 0; }
+  .comp .ct > figure, .comp .ct > div {
+    width: 100%;
+    float: none; } }
 
 @media screen and (max-width: 870px) {
   .top > h1 img {
@@ -1078,7 +1248,7 @@ footer {
     margin: 5px 0; }
   .crl.vg .carvg .item {
     min-height: 388px; }
-  .crl.vg .carvg .item > div .name h5 {
+  .crl.vg .carvg .item > div .name h5, .flt.full > div h4 {
     font-size: 20px; }
   .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .inc li h6 {
     font-size: 14px; }
@@ -1092,12 +1262,22 @@ footer {
   .emp .empresa ul li {
     width: 100%;
     margin: 10px 0;
-    float: none; } }
+    float: none; }
+  .crl.vg .carvg .item {
+    margin: 10px 0; }
+  .crl.vg .carvg .item > div .local li::after, .crl.vg .carvg .item > div .tempo li::after, .crl.vg .carvg .item > div .inc li::after {
+    content: " "; }
+  .tit h3 {
+    font-size: 35px; } }
+
+@media screen and (max-width: 730px) {
+  .list {
+    padding: 25px 0 0 !important; } }
 
 @media screen and (max-width: 688px) {
   .crl.vg .carvg .item {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 15px auto 7.5px;
     min-height: 420px; }
   .crl.vg .carvg .item figure img {
     max-width: 100%;
@@ -1134,7 +1314,20 @@ footer {
     .cont > div.col-6 button {
       float: none;
       margin: 15px auto 0;
-      display: block; } }
+      display: block; }
+  .tit h3 {
+    font-size: 25px; } }
+
+.comp {
+  padding: 10px; }
+  .comp .ct > figure, .comp .comp .ct > div, .comp .ms {
+    padding: 5px; }
+
+@media screen and (max-width: 580px) {
+  .list tr td {
+    display: block;
+    width: 100%;
+    padding: 0 !important; } }
 
 @media screen and (max-width: 480px) {
   .top .inf {
@@ -1146,16 +1339,12 @@ footer {
     right: 8%; }
   .crl.vg .slick-list {
     min-height: 445px; }
-  .crl h3, .parc h3, .emp .empresa h3, .cont h3 {
+  .crl h3, .parc h3, .emp .empresa h3, .cont h3, .comp h3 {
     font-size: 27px; }
   .crl.vg .carvg .slick-slide {
     margin: 0 6px; }
-  .crl.vg .carvg .item > div .name h5, .cont .tel h5, .cont .loc h5 {
+  .crl.vg .carvg .item > div .name h5, .cont .tel h5, .cont .loc h5, .comp .ct > div h4, .comp .ms.full > div > div h4, .comp .ms.full > div > div i {
     font-size: 18px; }
-  .crl.vg .carvg .item > div .local li h5, .crl.vg .carvg .item > div .tempo li h5, .crl.vg .carvg .item > div .inc li h5, .emp .empresa ul li > div h4 {
-    font-size: 13px; }
-  .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .inc li h6, .emp .empresa ul li > div p, .top .inf i, .top .inf p {
-    font-size: 12px; }
   .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5, .cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i {
     font-size: 20px; }
   .crl.vg .carvg .item > div .local li, .crl.vg .carvg .item > div .tempo li, .crl.vg .carvg .item > div .inc li {
@@ -1163,14 +1352,16 @@ footer {
   .crl.vg .carvg .item > div .fpag li i, .crl.vg .carvg .item > div .fpag li p {
     font-size: 12px; }
   .crl.vg .carvg .item {
-    min-height: 410px; }
+    min-height: 415px; }
   .crl.vg .carvg .item .down {
     margin-top: 12%; }
-  .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc {
-    padding: 3px 0;
-    margin: 5px 0; }
+  .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc, .crl.vg .carvg .item > div .name, .crl.vg .carvg .item > div .inf {
+    padding: 0px 0;
+    margin: 0 0; }
   .crl.vg .carvg {
     padding: 8px 0; }
+  .crl.vg .carvg.list .item {
+    margin: 20px 0; }
   .full > div {
     padding: 5px 0; }
   footer .col-12 > div address p {
@@ -1180,4 +1371,12 @@ footer {
   footer .col-12 .formpag ul li i {
     font-size: 20px; }
   footer .col-12 > div .iframe {
-    width: 300px !important; } }
+    width: 300px !important; }
+  .comp .ct > div p {
+    padding: 5px 0; }
+  .flt.full > div h4 {
+    display: none; }
+  .flt.full select {
+    width: 100%; }
+  .list {
+    padding: 15px 0 0 !important; } }
