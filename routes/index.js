@@ -20,4 +20,8 @@ router.get('/contato', function(req, res, next) {
   res.render('contato', { title: 'Friendstour - Contato' });
 });
 
-module.exports = router;
+router.get('/detalhes', function(req, res, next) {
+  res.render('detalhes', { title: 'Friendstour - Detalhes' });
+});
+
+module.exports = router;  

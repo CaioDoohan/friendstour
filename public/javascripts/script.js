@@ -44,4 +44,14 @@ $(document).ready(function(){
             $(".menumob").removeClass("scroll");
         }      
     });
+
+    $(".sell").click(function(){
+        $("#form").show('slow');
+        // if($("#form").is(':visible')){
+        //     $(this).click(function(){
+        //         $(this).hide('slow');
+        //     })
+        // }
+        
+    });
 });

@@ -1,23 +1,198 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel="icon" href="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <meta charset="utf-8">
-    <meta content="" name="description">
-    <meta name="author" content="Improving">
-    <meta name="keywords" content="">
-    <meta name="robots" content="INDEX, FOLLOW">
-    <meta name="language" content="Portuguese">
-    <meta name="country" content="Brazil">
-    <meta name="copyright" content="Friendstour -  © 2018">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/javascripts/jquery.js"></script>
-    <script src='/javascripts/script.js'></script>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include partial/header %>
+<% include partial/menu %>
+<main>
+  <div class="container">
+    <div class="row">
+      <section class="desc col-12">
+          <div>
+              <h3>
+                PARK DAS ÁGUAS - MAGIC CITY 
+              </h3>
+          </div>
+      </section>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div>
+            <div class="prft">
+              <figure>
+                <a href="" title="" class="example-image-link">
+                   <img src="/images/magic.png" alt="Magic City" class="example-image" selecionado="0"/>
+                </a>
+              </figure>
+            </div>
+            <ul class="secft">
+              <li>
+                <figure>
+                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                      <img src="/images/magic.png" alt="Magic City" class="example-image" selecionado="0"/>
+                    </a>
+                </figure>
+              </li>
+              <li>
+                <figure>
+                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                      <img src="/images/magic2.png" alt="Magic City" class="example-image" selecionado="0"/>
+                    </a>
+                </figure>
+              </li>
+              <li>
+                <figure>
+                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                      <img src="/images/magic3.png" alt="Magic City" class="example-image" selecionado="0"/>
+                    </a>
+                </figure>
+              </li>
+              <li>
+                <figure>
+                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                      <img src="/images/magic4.png" alt="Magic City" class="example-image" selecionado="0"/>
+                    </a>
+                </figure>
+              </li>
+              <li>
+                <figure>
+                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                      <img src="/images/magic2.png" alt="Magic City" class="example-image" selecionado="0"/>
+                    </a>
+                </figure>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <section class="col-4 lg">
+        <div class="dl">
+          <h4>Detalhes</h4>
+        </div>
+        <div class="det">
+            <ul class="local">
+              <li>
+                <h5>Origem:</h5>
+                <h6>Santos</h6>
+              </li>
+              <li>
+                <h5>Cidade:</h5>
+                <h6>Tibiriçá - Suzano/SP</h6>
+              </li>
+              <li>
+                <h5>Percurso:</h5>
+                <h6>Santos </h6>
+              </li>
+            </ul>
+            <ul class="tempo">
+              <li>
+                <h5>Horário:</h5>
+                <h6>15:00</h6>
+              </li>
+              <li>
+                <h5>Data:</h5>
+                <h6>20/12/17</h6>
+              </li>
+              <li>
+                <h5>Saída:</h5>
+                <h6>09:00</h6>
+              </li>
+            </ul>
+            <ul class="inc">
+              <li>
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <h6>Transporte</h6>
+              </li>
+              <li>
+                <i class="fa fa-check" aria-hidden="true"></i>
+                <h6>Ingresso</h6>
+              </li>
+            </ul>
+            <div class="valor">
+              <div>
+                  <h5>
+                    a partir de:
+                  </h5>
+                  <h6>
+                    R$160,00
+                  </h6>
+              </div>
+            </div>
+            <ul class="fpag">
+              <li class="imp">
+                <i class="fa fa-certificate" aria-hidden="true"></i>
+                <p>
+                  PARCELAMENTOs IMPERDÍVEIS!
+                </p>
+              </li>
+              <li class="parc">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <p>
+                  Pague em até <span>4</span>x !
+                </p>
+              </li>
+            </ul>
+            <button type="button" class="btn sell">COMPRAR</button>
+        </div>
+      </section>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
+      <script>
+        lightbox.option({
+          resizeDuration: 200,
+          positionFromTop: '30%',
+          wrapAround: !0 
+        }), $($(".example-image")[0]).parent().bind("click", function(e) {
+          $(".example-image[selecionado=1]").click(), e.preventDefault()
+        });
+        var clickImage = function() {
+          $(".example-image").attr("selecionado", "0"), $(this).attr("selecionado", "1"), $($(".example-image")[0]).attr("src", $(this).attr("src"))
+        };
+        $(".example-image").each(function(e, a) {
+          e > 0 && $(a).mouseover(clickImage).click(clickImage)
+        });
+      </script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/close.png" />
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/loading.gif" />
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/next.png" />
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/prev.png" />
+    </div>
+    <div class="row">
+      <section class="col-12 lg dsc">
+        <div class="dl dc">
+          <h4>Descrição</h4>
+        </div>
+        <div class="txt">
+          <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+          <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+          <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div id="form" class="shadow">
+      <form action="" id="formsell" name="formsell" method="get" class="">
+        <span>
+          ENTRE EM CONTATO AGORA<br> COM UM DE NOSSOS VENDEDORES
+        </span>
+        <div>
+            <input type="text" placeholder="Nome completo" name="nome" required/>
+            <input type="text" placeholder="Telefone" name="telefone" class="phone_with_ddd" required/>
+        </div>
+        <div>
+            <input type="email" placeholder="E-mail" name ="email" required/>
+            <input type="text" placeholder="Data de nascimento" name ="nascimento" class="date" required/>
+        </div>
+        <div>
+            <input type="text" placeholder="RG" name ="rg" class="rg" required/>
+            <input type="text" placeholder="CPF" name ="cpf" class="cpf" required/>
+        </div>
+        <textarea placeholder="Olá, gostaria de comprar..." name="mensagem" required></textarea>
+        <button type="submit" value="enviar" onclick="" class="btn">Enviar</button>
+      </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+  <script>
+    $(function() {
+        $(".phone_with_ddd").mask("(00) 00000-0000");
+        $('.date').mask('00/00/0000');
+        $('.rg').mask('00.000.000-0');
+        $('.cpf').mask('000.000.000-00');
+    });
+  </script>
+</main>
+<% include partial/footer %>
