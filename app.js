@@ -8,8 +8,9 @@ var sass           = require('node-sass');
 var sassMiddleware = require('node-sass-middleware');
 var consign        = require('consign');
 
-
-// consign().include('routes').into(app);
+// consign()
+//    .include('routes')
+//    .into(app);
 var index = require('./routes/index');
 var users = require('./routes/users');
 

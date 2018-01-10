@@ -9,14 +9,14 @@
             <span>Texto texto texto texto texto</span>
         </div>
         <div class="col-6">
-          <form action="" name="formcont" method="post">
+          <form action="/views/contato/salvar" name="formcont" method="post">
             <div>
                 <input type="text" placeholder="Nome" name="nome" required/>
                 <input type="text" placeholder="Telefone" name="telefone" class="phone_with_ddd" required/>
             </div>
             <div>
                 <input type="email" placeholder="E-mail" name ="email" required/>
-                <select type="text">
+                <select type="text" name="redesocial">
                     <option value="" disabled selected>Como conheceu a Friend's Tour?</option>
                     <option value="facebook">Facebook</option>
                     <option value="google">Google</option>
