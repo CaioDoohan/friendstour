@@ -760,6 +760,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
             border-bottom: 1px solid #cccccc;
             border-bottom-style: dashed;
             text-align: center;
+            text-transform: uppercase;
           }
         }
         .local,.tempo,.inc{
@@ -1641,7 +1642,7 @@ footer{
 
 .shadow{
   position: fixed;
-  left: -110%;
+  left: 0;
   right: 0;
   top:0;
   background-color: rgba(0, 0, 0, 0.89);
@@ -1650,6 +1651,7 @@ footer{
   padding: 0 10px;
   box-sizing: border-box;
   display: none;
+  overflow: scroll;
   form{
     display: table;
     margin: 0 auto;
@@ -1670,7 +1672,7 @@ footer{
     &>div{
       display: table;
       width: 100%;
-      &>input,select{
+      &>input{
         display: table;
         float: left;
         width: 48%;
@@ -1724,6 +1726,12 @@ footer{
       margin: 15px auto;
     }
   }
+  i{
+    font-size: 35px;
+    float: right;
+    color: #d05a35;
+    cursor: pointer;
+  }
 }
 @media screen and (max-width:990px){
   .container{
@@ -1750,7 +1758,16 @@ footer{
     float: none;
   }
 
+  .prft{
+    figure{
+      overflow: hidden;
 
+      img{
+        width: auto;
+        margin-left: -17%;
+      }
+    }
+  }
 }
 
 @media screen and (max-width:870px){
@@ -1943,6 +1960,61 @@ footer{
   .tit h3{
     font-size:35px;
   }
+
+  .listdet{
+    &>div.col-8,section.lg{
+      width:100%;
+    }
+
+    .lg{
+      margin-top: 20px;
+    }
+
+    .det{
+      li{
+        display: table;
+        float: left;
+        margin: 5px 1%;
+      }
+
+      ul{
+        width: 100%;
+        display: table;
+        &>li:first-child{
+          margin-left: 0;
+        }
+        &>li:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+
+    .valor{
+      margin: 20px 0;
+    }
+    .fpag{
+      &>li{
+        float: none;
+        margin: 5px auto!important;
+      }
+    }
+  }
+
+  .prft{
+    figure{
+      img{
+        max-width: 100%;
+        height: auto;
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .secft li img{
+    max-width: 100%;
+    height: 75px;
+  }
 }
 
 @media screen and (max-width:730px){
@@ -2033,13 +2105,29 @@ footer{
       border:none;
     }
   }
-}
+  .comp{
+    padding: 10px;
+  
+    .ct > figure, .comp .ct > div,.ms{
+      padding: 5px;
+    }
+  }
 
-.comp{
-  padding: 10px;
+  .desc > div h3{
+    font-size:25px;
+    margin: 0 auto;
+    display: table;
+  }
 
-  .ct > figure, .comp .ct > div,.ms{
-    padding: 5px;
+  .dl h4{
+    padding: 8px 9px;
+    font-size: 20px;
+  }
+  .det h5{
+    font-size: 18px;
+  }
+  .det h6{
+    font-size:16px;
   }
 }
 
@@ -2048,6 +2136,28 @@ footer{
     display: block;
     width: 100%;
     padding: 0!important;
+  }
+
+  .listdet .det li{
+    margin: 5px auto!important;
+    float: none;
+  }
+  .det .valor > div{
+    float: none;
+    margin: 0 auto;
+  }
+
+  .dl.dc h4{
+    width: 100%;
+  }
+
+  .shadow form > div > input{
+    width: 100%;
+    margin: 5px 0!important;
+  }
+
+  .shadow form span{
+    font-size:25px;
   }
 }
 @media screen and (max-width:480px){

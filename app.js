@@ -6,7 +6,10 @@ var cookieParser   = require('cookie-parser');
 var bodyParser     = require('body-parser');
 var sass           = require('node-sass');
 var sassMiddleware = require('node-sass-middleware');
+var consign        = require('consign');
 
+
+// consign().include('routes').into(app);
 var index = require('./routes/index');
 var users = require('./routes/users');
 

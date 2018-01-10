@@ -583,7 +583,8 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           font-weight: bold;
           border-bottom: 1px solid #cccccc;
           border-bottom-style: dashed;
-          text-align: center; }
+          text-align: center;
+          text-transform: uppercase; }
       .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc {
         border-bottom: 1px solid #e0e0e0;
         display: table;
@@ -1232,7 +1233,7 @@ footer {
 
 .shadow {
   position: fixed;
-  left: -110%;
+  left: 0;
   right: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.89);
@@ -1240,7 +1241,8 @@ footer {
   z-index: 5;
   padding: 0 10px;
   box-sizing: border-box;
-  display: none; }
+  display: none;
+  overflow: scroll; }
   .shadow form {
     display: table;
     margin: 0 auto;
@@ -1259,7 +1261,7 @@ footer {
     .shadow form > div {
       display: table;
       width: 100%; }
-      .shadow form > div > input, .shadow form > div select {
+      .shadow form > div > input {
         display: table;
         float: left;
         width: 48%;
@@ -1270,7 +1272,7 @@ footer {
         font-family: Nunito-black;
         color: #726277;
         background-color: #fff; }
-        .shadow form > div > input::placeholder, .shadow form > div select::placeholder {
+        .shadow form > div > input::placeholder {
           font-family: Nunito-Regular; }
       .shadow form > div > input:first-child {
         margin-left: 0; }
@@ -1299,6 +1301,11 @@ footer {
       font-weight: normal !important;
       display: table;
       margin: 15px auto; }
+  .shadow i {
+    font-size: 35px;
+    float: right;
+    color: #d05a35;
+    cursor: pointer; }
 
 @media screen and (max-width: 990px) {
   .container {
@@ -1316,7 +1323,12 @@ footer {
     margin: 10px 0; }
   .comp .ct > figure, .comp .ct > div {
     width: 100%;
-    float: none; } }
+    float: none; }
+  .prft figure {
+    overflow: hidden; }
+    .prft figure img {
+      width: auto;
+      margin-left: -17%; } }
 
 @media screen and (max-width: 870px) {
   .top > h1 img {
@@ -1480,7 +1492,35 @@ footer {
   .crl.vg .carvg .item > div .local li::after, .crl.vg .carvg .item > div .tempo li::after, .crl.vg .carvg .item > div .inc li::after {
     content: " "; }
   .tit h3 {
-    font-size: 35px; } }
+    font-size: 35px; }
+  .listdet > div.col-8, .listdet section.lg {
+    width: 100%; }
+  .listdet .lg {
+    margin-top: 20px; }
+  .listdet .det li {
+    display: table;
+    float: left;
+    margin: 5px 1%; }
+  .listdet .det ul {
+    width: 100%;
+    display: table; }
+    .listdet .det ul > li:first-child {
+      margin-left: 0; }
+    .listdet .det ul > li:last-child {
+      margin-right: 0; }
+  .listdet .valor {
+    margin: 20px 0; }
+  .listdet .fpag > li {
+    float: none;
+    margin: 5px auto !important; }
+  .prft figure img {
+    max-width: 100%;
+    height: auto;
+    margin-left: 0;
+    width: 100%; }
+  .secft li img {
+    max-width: 100%;
+    height: 75px; } }
 
 @media screen and (max-width: 730px) {
   .list {
@@ -1537,18 +1577,41 @@ footer {
     margin: 0 auto;
     position: static; }
     .tit h3:before {
-      border: none; } }
-
-.comp {
-  padding: 10px; }
-  .comp .ct > figure, .comp .comp .ct > div, .comp .ms {
-    padding: 5px; }
+      border: none; }
+  .comp {
+    padding: 10px; }
+    .comp .ct > figure, .comp .comp .ct > div, .comp .ms {
+      padding: 5px; }
+  .desc > div h3 {
+    font-size: 25px;
+    margin: 0 auto;
+    display: table; }
+  .dl h4 {
+    padding: 8px 9px;
+    font-size: 20px; }
+  .det h5 {
+    font-size: 18px; }
+  .det h6 {
+    font-size: 16px; } }
 
 @media screen and (max-width: 580px) {
   .list tr td {
     display: block;
     width: 100%;
-    padding: 0 !important; } }
+    padding: 0 !important; }
+  .listdet .det li {
+    margin: 5px auto !important;
+    float: none; }
+  .det .valor > div {
+    float: none;
+    margin: 0 auto; }
+  .dl.dc h4 {
+    width: 100%; }
+  .shadow form > div > input {
+    width: 100%;
+    margin: 5px 0 !important; }
+  .shadow form span {
+    font-size: 25px; } }
 
 @media screen and (max-width: 480px) {
   .top .inf {

@@ -47,11 +47,8 @@ $(document).ready(function(){
 
     $(".sell").click(function(){
         $("#form").show('slow');
-        // if($("#form").is(':visible')){
-        //     $(this).click(function(){
-        //         $(this).hide('slow');
-        //     })
-        // }
-        
+        $(".fc").click(function(){
+            $("#form").hide('slow');
+        });
     });
 });
