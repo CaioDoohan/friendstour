@@ -6,14 +6,10 @@ var cookieParser   = require('cookie-parser');
 var bodyParser     = require('body-parser');
 var sass           = require('node-sass');
 var sassMiddleware = require('node-sass-middleware');
-var consign        = require('consign');
-
-// consign()
-//    .include('routes')
-//    .into(app);
-var index = require('./routes/index');
-var users = require('./routes/users');
-
+var chalk          = require('chalk');
+var routes         = require('./routes/index');
+var routesADM      = require('./routes/users');
+var moment         = require('moment');
 var app = express();
 
 // view engine setup
@@ -28,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', routes);
+app.use('/admin', routesADM);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,11 +36,11 @@ app.use(function(req, res, next) {
 
 // adding the sass middleware
 app.use(sassMiddleware({
-    src: path.join(__dirname, 'scss'),
+    src: path.join(__dirname, 'scss/styleADM'),
     dest: path.join(__dirname, 'public'),
     debug: true,
     outputStyle: 'compressed',
-    prefix:  '/stylesheets'
+    prefix:  '/stylesheets/styleADM'
 }));
 
 // error handler
@@ -59,3 +55,41 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(8080, function(){
+  console.log(' ');  
+  console.log(chalk.green("                 /         / "));
+  console.log(chalk.green("              /' .,,,,  ./       "));   
+  console.log(chalk.green("             /';'     ,/     "));
+  console.log(chalk.green("            / /   ,,//,`'`       "));
+  console.log(chalk.green("           ( ,, '_,  ,,,' ``    "));
+  console.log(chalk.green("           |    /") + chalk.red("@") + chalk.green("  ,,, ;' `   "));
+  console.log(chalk.green("          /    .   ,''/' `,``    "));
+  console.log(chalk.green("         /   .     ./, `,, ` ;  "));
+  console.log(chalk.green("      ,./  .   ,-,',` ,,/''\,'    "));
+  console.log(chalk.green("     |   /; ./,,'`,,'' |   |      "));
+  console.log(chalk.green("     |     /   ','    /    |   "));
+  console.log(chalk.green("      \___/'   '     |     |   "));
+  console.log(chalk.green("        `,,'  |      /     `\   "));
+  console.log(chalk.green("             /      |        ~\   "));
+  console.log(chalk.green("            '       ( "));
+  console.log(chalk.green("           : "));
+  console.log(chalk.green("          ; .         \--  "));
+  console.log(chalk.green("        :   \         ;  Made by Nóis "));
+  console.log(' ');
+  
+  
+  console.log(chalk.yellow('Tamo juntão na porta ') + chalk.white.bgRed.bold('8080') );
+});

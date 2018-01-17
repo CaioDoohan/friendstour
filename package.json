@@ -3,16 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodemon app.js",
     "scss": "node-sass --watch scss -o public/stylesheets"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
-    "consign": "^0.1.6",
+    "chalk": "^2.3.0",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.15.5",
+    "moment": "^2.20.1",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "node-sass": "^4.7.2",

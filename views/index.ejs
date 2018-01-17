@@ -44,53 +44,45 @@
                     <div>
                       <div class="up">
                           <ul class="inf">
-                            <!-- <li class="pass">
+                            <li class="pass">
                               <i class="fa fa-plane" aria-hidden="true"></i>
                               <h4>Passagem</h4>
-                            </li> -->
-                            <!-- <li class="hotel">
+                            </li> 
+                            <li class="hotel">
                               <i class="fa fa-building-o" aria-hidden="true"></i>
                               <h4>Hotel</h4>
-                            </li> -->
+                            </li>
                             <li class="package">
                               <i class="fa fa-tags" aria-hidden="true"></i>
-                              <h4>Pacote</h4>
+                              <h4>Excursão</h4>
                             </li>
-                            <!-- <li class="transp">
+                            <li class="transp">
                               <i class="fa fa-bus" aria-hidden="true"></i>
                               <h4>Transporte</h4>
-                            </li> -->
+                            </li>
                           </ul>
                           <div class="name">
                             <h5><%= teste[i].nome %></h5>
                           </div>
-                          <ul class="local">
-                            <li>
-                              <h5>Origem:</h5>
-                              <h6>Santos</h6>
-                            </li>
+                          <!-- <ul class="local">
                             <li>
                               <h5>Cidade:</h5>
-                              <h6>Tibiriçá - Suzano/SP</h6>
+                              <h6><%= teste[i].cidade %></h6>
                             </li>
-                            <!-- <li>
-                              <h5>Percurso:</h5>
-                              <h6>Santos </h6>
-                            </li> -->
-                          </ul>
+                          </ul> -->
                           <ul class="tempo">
                             <!-- <li>
                               <h5>Horário:</h5>
-                              <h6>15:00</h6>
+                              <h6><%= teste[i].horario%></h6>
                             </li> -->
                             <li>
-                              <h5>Data:</h5>
-                              <h6>20/12/17</h6>
+                              <h5>Duração:</h5>
+                              <h6><%= teste[i].data%></h6>
                             </li>
-                            <li>
+                            <!-- <li>
                               <h5>Saída:</h5>
-                              <h6>09:00</h6>
-                            </li>
+                              <h6><%= teste[i].saida %></h6>
+                            </li> -->
                           </ul>
                           <ul class="inc">
                             <li>
@@ -115,16 +107,16 @@
                             </div>
                           </div>
                           <ul class="fpag">
-                            <!-- <li class="imp">
+                            <li class="imp">
                               <i class="fa fa-certificate" aria-hidden="true"></i>
                               <p>
                                 PARCELAMENTOs IMPERDÍVEIS!
                               </p>
-                            </li> -->
+                            </li>
                             <li class="parc">
                               <i class="fa fa-plus" aria-hidden="true"></i>
                               <p>
-                                Pague em até <span>4</span>x !
+                                Pague em até <span><%= teste[i].formpag %></span>x !
                               </p>
                             </li>
                           </ul>
@@ -573,22 +565,22 @@
                       <div>
                         <div class="up">
                             <ul class="inf">
-                              <!-- <li class="pass">
+                              <li class="pass">
                                 <i class="fa fa-plane" aria-hidden="true"></i>
                                 <h4>Passagem</h4>
                               </li> -->
-                              <!-- <li class="hotel">
+                              <li class="hotel">
                                 <i class="fa fa-building-o" aria-hidden="true"></i>
                                 <h4>Hotel</h4>
-                              </li> -->
+                              </li>
                               <li class="package">
                                 <i class="fa fa-tags" aria-hidden="true"></i>
                                 <h4>Pacote</h4>
                               </li>
-                              <!-- <li class="transp">
+                              <li class="transp">
                                 <i class="fa fa-bus" aria-hidden="true"></i>
                                 <h4>Transporte</h4>
-                              </li> -->
+                              </li>
                             </ul>
                             <div class="name">
                               <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
@@ -602,16 +594,12 @@
                                 <h5>Cidade:</h5>
                                 <h6>Tibiriçá - Suzano/SP</h6>
                               </li>
-                              <!-- <li>
-                                <h5>Percurso:</h5>
-                                <h6>Santos </h6>
-                              </li> -->
                             </ul>
                             <ul class="tempo">
-                              <!-- <li>
+                              <li>
                                 <h5>Horário:</h5>
                                 <h6>15:00</h6>
-                              </li> -->
+                              </li>
                               <li>
                                 <h5>Data:</h5>
                                 <h6>20/12/17</h6>
@@ -644,12 +632,12 @@
                               </div>
                             </div>
                             <ul class="fpag">
-                              <!-- <li class="imp">
+                              <li class="imp">
                                 <i class="fa fa-certificate" aria-hidden="true"></i>
                                 <p>
                                   PARCELAMENTOs IMPERDÍVEIS!
                                 </p>
-                              </li> -->
+                              </li>
                               <li class="parc">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                 <p>

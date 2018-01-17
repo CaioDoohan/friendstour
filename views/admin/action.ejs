@@ -1,0 +1,115 @@
+<% include ../partial/headerADM %>
+<% include ../partial/menuADM %>
+<main>
+    <div class="row">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <div class="col col-12">
+            <div class="tit">
+                <p><%= title%></p>
+            </div>
+            <div class="list">
+                <p>Adicionar Projeto:</p>
+                <form method="post" action="/admin/action/salvar_teste">
+                    <div>
+                        <label>
+                            Categoria:
+                        </label>
+                        <select name="id_categoria">
+                            <option value="" disabled selected>Escolha a categoria</option>
+                            <%for(var i = 0; i < categoria.length; i++){ %>
+                                <option value="<%=  categoria[i].id_categoria%>"><%=  categoria[i].id_categoria%> - <%=  categoria[i].nome%></option>
+                            <% }%>
+                        </select>
+                    </div>
+                    <div>
+                        <label>
+                            Tipo:
+                        </label>
+                        <select name="id_tipagem">
+                            <option value="" disabled selected>Escolha o tipo</option>
+                            <%for(var i = 0; i < tipagem.length; i++){ %>
+                                <option value="<%=  tipagem[i].id_tipagem%>"><%=  tipagem[i].id_tipagem%> - <%=  tipagem[i].tipo%></option>
+                            <% }%>
+                        </select>
+                    </div>
+                    <div>
+                        <label>
+                            Nome:
+                        </label>
+                        <input type="text"  name="nome" />
+                    </div>
+                    <div>
+                        <label>
+                            Cidade(partida):
+                        </label>
+                        <input type="text"  name="cidade" />
+                    </div> 
+                    <div>
+                        <label>
+                            Destino:
+                        </label>
+                        <input type="text"  name="destino" />
+                    </div> 
+                    <div>
+                        <label>
+                            Horário:
+                        </label>
+                        <input type="text"  name="horario" class="horario" placeholder="Exemplo: 00:00"/>
+                    </div>
+                    <div>
+                        <label>
+                            Data:
+                        </label>
+                        <input type="text"  name="data" class="datepicker" placeholder="00/00"/>
+                    </div>                                           
+                    <div>
+                        <label>
+                            Saída:
+                        </label>
+                        <input type="text" name="saida" class="datepicker" placeholder="00/00"/>
+                    </div>    
+                    <div>
+                        <label>
+                            Valor:
+                        </label>
+                        <input type="text" name="valor" class="datepicker"/>
+                    </div> 
+                    <div>
+                        <label>
+                            Quantidade de parcelas:
+                        </label>
+                        <input type="text" name="formpag" />
+                    </div> 
+                    <!-- <div>
+                        <label>
+                            Últimas Vagas:
+                        </label>
+                        <input type="checkbox" >
+                    </div>      -->
+                    <button type="submit" value="enviar" onclick="">Enviar</button>               
+                </form>
+            </div>
+        </div>
+        <script>
+          $( function() {
+                $( ".datepicker" ).datepicker();
+          } );
+
+          $(function(){
+            setInterval(function(){
+                var divUtc = $('#divUTC');
+                var divLocal = $('#divLocal');  
+                //put UTC time into divUTC  
+                divUtc.text(moment.utc().format('YYYY-MM-DD HH:mm:ss'));      
+                
+                //get text from divUTC and conver to local timezone  
+                var localTime  = moment.utc(divUtc.text()).toDate();
+                localTime = moment(localTime).format('DD-MM-YYYY HH:mm:ss');
+                divLocal.text(localTime);        
+            },1000);
+          });
+        </script>
+    </div>  
+</main>
+<% include ../partial/footerADM %>

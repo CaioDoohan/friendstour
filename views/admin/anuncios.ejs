@@ -1,0 +1,24 @@
+<% include ../partial/headerADM %>
+<% include ../partial/menuADM %>
+<main>
+    <div class="row">
+        <div class="col col-12">
+            <div class="tit">
+                <p><%= title%></p>
+            </div>
+            <div class="list">
+                <p>Selecione a categoria do anúncio:</p>
+                <ul>
+                   <%for (var i=0; i < categoria.length; i++) {%>
+                    <li>
+                        <a href="/admin/action" title='<%= categoria[i].nome%>' value='<%= categoria[i].id %>'>
+                            <%= categoria[i].nome %>
+                        </a>
+                    </li>
+                    <% }%>
+                </ul>
+            </div>
+        </div>
+    </div>  
+</main>
+<% include ../partial/footerADM %>
