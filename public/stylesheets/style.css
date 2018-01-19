@@ -526,8 +526,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
       width: 100%; }
     .crl.vg .carvg .item .up {
       min-height: 150px; }
-    .crl.vg .carvg .item .down {
-      margin-top: 9%; }
     .crl.vg .carvg .item figure img {
       max-width: 484px;
       max-height: 186px;
@@ -577,16 +575,24 @@ h1, h2, h3, h4, h5, h6, ul, figure {
         .crl.vg .carvg .item > div .inf .transp {
           background-color: #c20101; }
       .crl.vg .carvg .item > div .name {
-        padding: 5px 2px 2px; }
+        padding: 5px 2px;
+        border-bottom: 1px solid #cccccc;
+        border-bottom-style: dashed; }
         .crl.vg .carvg .item > div .name h5 {
           font-size: 22px;
           font-weight: bold;
-          border-bottom: 1px solid #cccccc;
-          border-bottom-style: dashed;
           text-align: center;
-          text-transform: uppercase; }
+          text-transform: uppercase;
+          line-height: 25px; }
+      .crl.vg .carvg .item > div .desc {
+        padding: 5px 0;
+        text-align: center; }
+        .crl.vg .carvg .item > div .desc p {
+          font-size: 12px;
+          line-height: 20px;
+          box-sizing: border-box;
+          margin: 5px 0; }
       .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc {
-        border-bottom: 1px solid #e0e0e0;
         display: table;
         width: 100%;
         margin: 6px 0; }
@@ -693,6 +699,16 @@ h1, h2, h3, h4, h5, h6, ul, figure {
 .inc i, .inc h6 {
   color: green; }
 
+.inc i {
+  font-size: 18px !important; }
+
+.inc h6 {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px !important;
+  padding: 0 3px;
+  box-sizing: border-box; }
+
 .fpag {
   background-color: #f3f3f3; }
   .fpag li {
@@ -708,8 +724,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
       font-size: 11px; }
     .fpag li p {
       font-family: Nunito-black;
-      padding: 0 3px;
-      text-transform: uppercase; }
+      padding: 0 3px; }
   .fpag .imp {
     color: #e2bf00 !important;
     margin: 5px auto; }
@@ -1105,7 +1120,12 @@ footer {
     color: #d05a35;
     box-sizing: border-box;
     font-family: Nunito-Black;
-    display: inline-block; }
+    display: inline-block;
+    text-transform: uppercase !important; }
+
+.lightbox {
+  top: 5% !important;
+  position: fixed; }
 
 .prft {
   display: block;
@@ -1119,7 +1139,8 @@ footer {
     .prft figure img {
       max-width: 650px;
       width: 100%;
-      height: 420px; }
+      height: 390px;
+      cursor: pointer; }
 
 .secft {
   display: table;
@@ -1136,7 +1157,8 @@ footer {
     .secft li img {
       height: 60px;
       max-width: 120px;
-      width: 100%; }
+      width: 100%;
+      cursor: pointer; }
   .secft > li:nth-child(5n+1) {
     margin-left: 0 !important; }
   .secft > li:nth-child(5n) {
@@ -1144,17 +1166,28 @@ footer {
 
 .lg {
   background-color: #e6e6e6;
-  padding: 15px 10px;
+  padding: 10px;
   box-sizing: border-box;
   box-shadow: 0px 1px 11px #909090; }
   .lg p {
     margin: 10px 0;
     line-height: 22px; }
+  .lg .inc {
+    color: green; }
+    .lg .inc i {
+      font-size: 18px; }
+    .lg .inc h6 {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 0 3px;
+      box-sizing: border-box; }
 
 .lg.dsc {
   margin: 35px 0 10px; }
 
 .dl {
+  padding: 0 1%;
   margin-bottom: 30px;
   position: relative;
   padding: 14px 0; }
@@ -1169,7 +1202,8 @@ footer {
     padding: 5px 10px;
     width: 100%;
     background-color: #d05a35;
-    text-align: center; }
+    text-align: center;
+    text-transform: uppercase !important; }
     .dl h4::after {
       width: 0;
       height: 0;
@@ -1185,6 +1219,9 @@ footer {
   box-sizing: border-box;
   display: block;
   position: relative; }
+  .det .desc p {
+    font-size: 14px !important;
+    line-height: 20px; }
   .det > ul, .det > div {
     margin: 5px 0;
     box-sizing: border-box; }
@@ -1210,8 +1247,6 @@ footer {
       float: right; }
     .det .valor h6 {
       font-size: 25px; }
-  .det .inc {
-    color: green; }
   .det button {
     display: table;
     padding: 5px 9px;
@@ -1230,6 +1265,12 @@ footer {
     top: -8px;
     left: 0;
     content: " "; }
+
+.dl.dc .txt {
+  text-align: left;
+  line-height: 25px;
+  font-size: 14px;
+  text-justify: auto; }
 
 .shadow {
   position: fixed;
@@ -1327,8 +1368,7 @@ footer {
   .prft figure {
     overflow: hidden; }
     .prft figure img {
-      width: auto;
-      margin-left: -17%; } }
+      width: auto; } }
 
 @media screen and (max-width: 870px) {
   .top > h1 img {
@@ -1520,7 +1560,7 @@ footer {
     width: 100%; }
   .secft li img {
     max-width: 100%;
-    height: 75px; } }
+    height: 85px; } }
 
 @media screen and (max-width: 730px) {
   .list {
@@ -1585,14 +1625,17 @@ footer {
   .desc > div h3 {
     font-size: 25px;
     margin: 0 auto;
-    display: table; }
+    display: table;
+    text-align: center; }
   .dl h4 {
     padding: 8px 9px;
     font-size: 20px; }
   .det h5 {
     font-size: 18px; }
   .det h6 {
-    font-size: 16px; } }
+    font-size: 16px; }
+  .secft li img {
+    height: 60px; } }
 
 @media screen and (max-width: 580px) {
   .list tr td {
@@ -1663,4 +1706,6 @@ footer {
   .flt.full select {
     width: 100%; }
   .list {
-    padding: 15px 0 0 !important; } }
+    padding: 15px 0 0 !important; }
+  .secft li img {
+    height: 45px; } }

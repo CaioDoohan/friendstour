@@ -35,11 +35,13 @@
                <h3>Promoções</h3>
             </div>
             <ul class="carvg hm">
-              <%for (var i=0; i < teste.length; i++) {%>
+              <%for (var i=0; i < produto.length; i++) {%>
                 <li>
-                  <div class="item">
+                  <div class="item" data-caio='<%=produto[i].vagas_prod%>'>
                     <figure>
-                      <img src="images/magic.jpg" alt="Friend's Tour"/>
+                      <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
+                        <img src="images/magic.jpg" alt="Friend's Tour"/>
+                      </a>
                     </figure>
                     <div>
                       <div class="up">
@@ -62,26 +64,29 @@
                             </li>
                           </ul>
                           <div class="name">
-                            <h5><%= teste[i].nome %></h5>
+                            <h5><%= produto[i].nome_prod %></h5>
                           </div>
-                          <!-- <ul class="local">
-                            <li>
-                              <h5>Cidade:</h5>
-                              <h6><%= teste[i].cidade %></h6>
-                            </li>
-                          </ul> -->
-                          <ul class="tempo">
+                          <div class="desc">
+                            <p><%= produto[i].desc_prod %></p>
+                          </div>
+                          <ul class="local">
                             <!-- <li>
-                              <h5>Horário:</h5>
-                              <h6><%= teste[i].horario%></h6>
+                              <h5>Cidade:</h5>
+                              <h6><%= produto[i].cidade %></h6>
                             </li> -->
+                          </ul>
+                          <ul class="tempo">
+                            <li>
+                              <h5>Horário:</h5>
+                              <h6><%= produto[i].horario%></h6>
+                            </li>
                             <li>
                               <h5>Duração:</h5>
-                              <h6><%= teste[i].data%></h6>
+                              <h6><%= produto[i].data%></h6>
                             </li>
                             <!-- <li>
                               <h5>Saída:</h5>
-                              <h6><%= teste[i].saida %></h6>
+                              <h6><%= produto[i].data %></h6>
                             </li> -->
                           </ul>
                           <ul class="inc">
@@ -102,7 +107,7 @@
                                   a partir de:
                                 </h5>
                                 <h6>
-                                  R$<%= teste[i].valor%>
+                                    R$<%= produto[i].valor_prod %>
                                 </h6>
                             </div>
                           </div>
@@ -110,24 +115,26 @@
                             <li class="imp">
                               <i class="fa fa-certificate" aria-hidden="true"></i>
                               <p>
-                                PARCELAMENTOs IMPERDÍVEIS!
+                                PARCELAMENTOS IMPERDÍVEIS!
                               </p>
                             </li>
                             <li class="parc">
                               <i class="fa fa-plus" aria-hidden="true"></i>
                               <p>
-                                Pague em até <span><%= teste[i].formpag %></span>x !
+                                PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>x !
                               </p>
                             </li>
                           </ul>
                       </div>
                     </div>
-                    <div class="event ult">
-                      <span>
-                        ÚLTIMAS VAGAS
-                      </span>
-                      <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    </div>
+                    <%if ( produto[i].vagas_prod == true ) { %>
+                      <div class="event ult">
+                        <span>
+                          ÚLTIMAS VAGAS
+                        </span>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      </div>
+                    <% }  else {}%>
                   </div>
                 </li>
               <% } %>
@@ -140,414 +147,107 @@
                   <h3>Nacional</h3>
                 </div>
                 <ul class="carvg hm">
-                  <li>
-                    <div class="item">
-                      <figure>
-                        <img src="images/magic.jpg" alt="Friend's Tour"/>
-                      </figure>
-                      <div>
-                        <div class="up">
-                            <ul class="inf">
-                              <!-- <li class="pass">
-                                <i class="fa fa-plane" aria-hidden="true"></i>
-                                <h4>Passagem</h4>
-                              </li> -->
-                              <!-- <li class="hotel">
-                                <i class="fa fa-building-o" aria-hidden="true"></i>
-                                <h4>Hotel</h4>
-                              </li> -->
-                              <li class="package">
-                                <i class="fa fa-tags" aria-hidden="true"></i>
-                                <h4>Pacote</h4>
-                              </li>
-                              <!-- <li class="transp">
-                                <i class="fa fa-bus" aria-hidden="true"></i>
-                                <h4>Transporte</h4>
-                              </li> -->
-                            </ul>
-                            <div class="name">
-                              <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
+                    <%for (var i=0; i < produto.length; i++) {%>
+                      <li>
+                        <div class="item">
+                          <figure>
+                            <a href="/detalhes/:id=<%= produto[i].id_prod %>" title="Veja mais">
+                              <img src="images/magic.jpg" alt="Friend's Tour"/>
+                            </a>
+                          </figure>
+                          <div>
+                            <div class="up">
+                                <ul class="inf">
+                                  <li class="pass">
+                                    <i class="fa fa-plane" aria-hidden="true"></i>
+                                    <h4>Passagem</h4>
+                                  </li> 
+                                  <li class="hotel">
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                    <h4>Hotel</h4>
+                                  </li>
+                                  <li class="package">
+                                    <i class="fa fa-tags" aria-hidden="true"></i>
+                                    <h4>Excursão</h4>
+                                  </li>
+                                  <li class="transp">
+                                    <i class="fa fa-bus" aria-hidden="true"></i>
+                                    <h4>Transporte</h4>
+                                  </li>
+                                </ul>
+                                <div class="name">
+                                  <h5><%= produto[i].nome_prod %></h5>
+                                </div>
+                                <div class="desc">
+                                  <p><%= produto[i].desc_prod %></p>
+                                </div>
+                                <ul class="local">
+                                  <!-- <li>
+                                    <h5>Cidade:</h5>
+                                    <h6><%= produto[i].cidade %></h6>
+                                  </li> -->
+                                </ul>
+                                <ul class="tempo">
+                                  <li>
+                                    <h5>Horário:</h5>
+                                    <h6><%= produto[i].horario%></h6>
+                                  </li>
+                                  <li>
+                                    <h5>Duração:</h5>
+                                    <h6><%= produto[i].data%></h6>
+                                  </li>
+                                  <!-- <li>
+                                    <h5>Saída:</h5>
+                                    <h6><%= produto[i].data %></h6>
+                                  </li> -->
+                                </ul>
+                                <ul class="inc">
+                                  <li>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <h6>Transporte</h6>
+                                  </li>
+                                  <li>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <h6>Ingresso</h6>
+                                  </li>
+                                </ul>
                             </div>
-                            <ul class="local">
-                              <li>
-                                <h5>Origem:</h5>
-                                <h6>Santos</h6>
-                              </li>
-                              <li>
-                                <h5>Cidade:</h5>
-                                <h6>Tibiriçá - Suzano/SP</h6>
-                              </li>
-                              <!-- <li>
-                                <h5>Percurso:</h5>
-                                <h6>Santos </h6>
-                              </li> -->
-                            </ul>
-                            <ul class="tempo">
-                              <!-- <li>
-                                <h5>Horário:</h5>
-                                <h6>15:00</h6>
-                              </li> -->
-                              <li>
-                                <h5>Data:</h5>
-                                <h6>20/12/17</h6>
-                              </li>
-                              <li>
-                                <h5>Saída:</h5>
-                                <h6>09:00</h6>
-                              </li>
-                            </ul>
-                            <ul class="inc">
-                              <li>
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                <h6>Transporte</h6>
-                              </li>
-                              <li>
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                <h6>Ingresso</h6>
-                              </li>
-                            </ul>
-                        </div>
-                        <div class="down">
-                            <div class="valor">
-                              <div>
-                                  <h5>
-                                    a partir de:
-                                  </h5>
-                                  <h6>
-                                    R$160,00
-                                  </h6>
-                              </div>
+                            <div class="down">
+                                <div class="valor">
+                                  <div>
+                                      <h5>
+                                        a partir de:
+                                      </h5>
+                                      <h6>
+                                          R$<%= produto[i].valor_prod %>
+                                      </h6>
+                                  </div>
+                                </div>
+                                <ul class="fpag">
+                                  <li class="imp">
+                                    <i class="fa fa-certificate" aria-hidden="true"></i>
+                                    <p>
+                                      PARCELAMENTOs IMPERDÍVEIS!
+                                    </p>
+                                  </li>
+                                  <li class="parc">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <p>
+                                      Pague em até <span><%= produto[i].saida %></span>x !
+                                    </p>
+                                  </li>
+                                </ul>
                             </div>
-                            <ul class="fpag">
-                              <!-- <li class="imp">
-                                <i class="fa fa-certificate" aria-hidden="true"></i>
-                                <p>
-                                  PARCELAMENTOs IMPERDÍVEIS!
-                                </p>
-                              </li> -->
-                              <li class="parc">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                <p>
-                                  Pague em até <span>4</span>x !
-                                </p>
-                              </li>
-                            </ul>
-                        </div>
-                      </div>
-                      <div class="event ult">
-                        <span>
-                          ÚLTIMAS VAGAS
-                        </span>
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                      <div class="item">
-                        <figure>
-                          <img src="images/magic.jpg" alt="Friend's Tour"/>
-                        </figure>
-                        <div>
-                          <div class="up">
-                              <ul class="inf">
-                                <!-- <li class="pass">
-                                  <i class="fa fa-plane" aria-hidden="true"></i>
-                                  <h4>Passagem</h4>
-                                </li> -->
-                                <!-- <li class="hotel">
-                                  <i class="fa fa-building-o" aria-hidden="true"></i>
-                                  <h4>Hotel</h4>
-                                </li> -->
-                                <li class="package">
-                                  <i class="fa fa-tags" aria-hidden="true"></i>
-                                  <h4>Pacote</h4>
-                                </li>
-                                <!-- <li class="transp">
-                                  <i class="fa fa-bus" aria-hidden="true"></i>
-                                  <h4>Transporte</h4>
-                                </li> -->
-                              </ul>
-                              <div class="name">
-                                <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
-                              </div>
-                              <ul class="local">
-                                <li>
-                                  <h5>Origem:</h5>
-                                  <h6>Santos</h6>
-                                </li>
-                                <li>
-                                  <h5>Cidade:</h5>
-                                  <h6>Tibiriçá - Suzano/SP</h6>
-                                </li>
-                                <!-- <li>
-                                  <h5>Percurso:</h5>
-                                  <h6>Santos </h6>
-                                </li> -->
-                              </ul>
-                              <ul class="tempo">
-                                <!-- <li>
-                                  <h5>Horário:</h5>
-                                  <h6>15:00</h6>
-                                </li> -->
-                                <li>
-                                  <h5>Data:</h5>
-                                  <h6>20/12/17</h6>
-                                </li>
-                                <li>
-                                  <h5>Saída:</h5>
-                                  <h6>09:00</h6>
-                                </li>
-                              </ul>
-                              <ul class="inc">
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Transporte</h6>
-                                </li>
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Ingresso</h6>
-                                </li>
-                              </ul>
                           </div>
-                          <div class="down">
-                              <div class="valor">
-                                <div>
-                                    <h5>
-                                      a partir de:
-                                    </h5>
-                                    <h6>
-                                      R$160,00
-                                    </h6>
-                                </div>
-                              </div>
-                              <ul class="fpag">
-                                <!-- <li class="imp">
-                                  <i class="fa fa-certificate" aria-hidden="true"></i>
-                                  <p>
-                                    PARCELAMENTOs IMPERDÍVEIS!
-                                  </p>
-                                </li> -->
-                                <li class="parc">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  <p>
-                                    Pague em até <span>4</span>x !
-                                  </p>
-                                </li>
-                              </ul>
+                          <div class="event ult">
+                            <span>
+                              ÚLTIMAS VAGAS
+                            </span>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <div class="event ult">
-                          <span>
-                            ÚLTIMAS VAGAS
-                          </span>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="item">
-                        <figure>
-                          <img src="images/magic.jpg" alt="Friend's Tour"/>
-                        </figure>
-                        <div>
-                          <div class="up">
-                              <ul class="inf">
-                                <!-- <li class="pass">
-                                  <i class="fa fa-plane" aria-hidden="true"></i>
-                                  <h4>Passagem</h4>
-                                </li> -->
-                                <!-- <li class="hotel">
-                                  <i class="fa fa-building-o" aria-hidden="true"></i>
-                                  <h4>Hotel</h4>
-                                </li> -->
-                                <li class="package">
-                                  <i class="fa fa-tags" aria-hidden="true"></i>
-                                  <h4>Pacote</h4>
-                                </li>
-                                <!-- <li class="transp">
-                                  <i class="fa fa-bus" aria-hidden="true"></i>
-                                  <h4>Transporte</h4>
-                                </li> -->
-                              </ul>
-                              <div class="name">
-                                <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
-                              </div>
-                              <ul class="local">
-                                <li>
-                                  <h5>Origem:</h5>
-                                  <h6>Santos</h6>
-                                </li>
-                                <li>
-                                  <h5>Cidade:</h5>
-                                  <h6>Tibiriçá - Suzano/SP</h6>
-                                </li>
-                                <!-- <li>
-                                  <h5>Percurso:</h5>
-                                  <h6>Santos </h6>
-                                </li> -->
-                              </ul>
-                              <ul class="tempo">
-                                <!-- <li>
-                                  <h5>Horário:</h5>
-                                  <h6>15:00</h6>
-                                </li> -->
-                                <li>
-                                  <h5>Data:</h5>
-                                  <h6>20/12/17</h6>
-                                </li>
-                                <li>
-                                  <h5>Saída:</h5>
-                                  <h6>09:00</h6>
-                                </li>
-                              </ul>
-                              <ul class="inc">
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Transporte</h6>
-                                </li>
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Ingresso</h6>
-                                </li>
-                              </ul>
-                          </div>
-                          <div class="down">
-                              <div class="valor">
-                                <div>
-                                    <h5>
-                                      a partir de:
-                                    </h5>
-                                    <h6>
-                                      R$160,00
-                                    </h6>
-                                </div>
-                              </div>
-                              <ul class="fpag">
-                                <!-- <li class="imp">
-                                  <i class="fa fa-certificate" aria-hidden="true"></i>
-                                  <p>
-                                    PARCELAMENTOs IMPERDÍVEIS!
-                                  </p>
-                                </li> -->
-                                <li class="parc">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  <p>
-                                    Pague em até <span>4</span>x !
-                                  </p>
-                                </li>
-                              </ul>
-                          </div>
-                        </div>
-                        <div class="event ult">
-                          <span>
-                            ÚLTIMAS VAGAS
-                          </span>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="item">
-                        <figure>
-                          <img src="images/magic.jpg" alt="Friend's Tour"/>
-                        </figure>
-                        <div>
-                          <div class="up">
-                              <ul class="inf">
-                                <!-- <li class="pass">
-                                  <i class="fa fa-plane" aria-hidden="true"></i>
-                                  <h4>Passagem</h4>
-                                </li> -->
-                                <!-- <li class="hotel">
-                                  <i class="fa fa-building-o" aria-hidden="true"></i>
-                                  <h4>Hotel</h4>
-                                </li> -->
-                                <li class="package">
-                                  <i class="fa fa-tags" aria-hidden="true"></i>
-                                  <h4>Pacote</h4>
-                                </li>
-                                <!-- <li class="transp">
-                                  <i class="fa fa-bus" aria-hidden="true"></i>
-                                  <h4>Transporte</h4>
-                                </li> -->
-                              </ul>
-                              <div class="name">
-                                <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
-                              </div>
-                              <ul class="local">
-                                <li>
-                                  <h5>Origem:</h5>
-                                  <h6>Santos</h6>
-                                </li>
-                                <li>
-                                  <h5>Cidade:</h5>
-                                  <h6>Tibiriçá - Suzano/SP</h6>
-                                </li>
-                                <!-- <li>
-                                  <h5>Percurso:</h5>
-                                  <h6>Santos </h6>
-                                </li> -->
-                              </ul>
-                              <ul class="tempo">
-                                <!-- <li>
-                                  <h5>Horário:</h5>
-                                  <h6>15:00</h6>
-                                </li> -->
-                                <li>
-                                  <h5>Data:</h5>
-                                  <h6>20/12/17</h6>
-                                </li>
-                                <li>
-                                  <h5>Saída:</h5>
-                                  <h6>09:00</h6>
-                                </li>
-                              </ul>
-                              <ul class="inc">
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Transporte</h6>
-                                </li>
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Ingresso</h6>
-                                </li>
-                              </ul>
-                          </div>
-                          <div class="down">
-                              <div class="valor">
-                                <div>
-                                    <h5>
-                                      a partir de:
-                                    </h5>
-                                    <h6>
-                                      R$160,00
-                                    </h6>
-                                </div>
-                              </div>
-                              <ul class="fpag">
-                                <!-- <li class="imp">
-                                  <i class="fa fa-certificate" aria-hidden="true"></i>
-                                  <p>
-                                    PARCELAMENTOs IMPERDÍVEIS!
-                                  </p>
-                                </li> -->
-                                <li class="parc">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  <p>
-                                    Pague em até <span>4</span>x !
-                                  </p>
-                                </li>
-                              </ul>
-                          </div>
-                        </div>
-                        <div class="event ult">
-                          <span>
-                            ÚLTIMAS VAGAS
-                          </span>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                  </li>
+                      </li>
+                    <% } %>
                 </ul>
             </section>
         </div>
@@ -557,410 +257,107 @@
                   <h3>Internacional</h3>
                 </div>
                 <ul class="carvg hm">
-                  <li>
-                    <div class="item">
-                      <figure>
-                        <img src="images/magic.jpg" alt="Friend's Tour"/>
-                      </figure>
-                      <div>
-                        <div class="up">
-                            <ul class="inf">
-                              <li class="pass">
-                                <i class="fa fa-plane" aria-hidden="true"></i>
-                                <h4>Passagem</h4>
-                              </li> -->
-                              <li class="hotel">
-                                <i class="fa fa-building-o" aria-hidden="true"></i>
-                                <h4>Hotel</h4>
-                              </li>
-                              <li class="package">
-                                <i class="fa fa-tags" aria-hidden="true"></i>
-                                <h4>Pacote</h4>
-                              </li>
-                              <li class="transp">
-                                <i class="fa fa-bus" aria-hidden="true"></i>
-                                <h4>Transporte</h4>
-                              </li>
-                            </ul>
-                            <div class="name">
-                              <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
+                    <%for (var i=0; i < produto.length; i++) {%>
+                      <li>
+                        <div class="item">
+                          <figure>
+                            <a href="/detalhes/:id=<%= produto[i].id_prod %>" title="Veja mais">
+                              <img src="images/magic.jpg" alt="Friend's Tour"/>
+                            </a>
+                          </figure>
+                          <div>
+                            <div class="up">
+                                <ul class="inf">
+                                  <li class="pass">
+                                    <i class="fa fa-plane" aria-hidden="true"></i>
+                                    <h4>Passagem</h4>
+                                  </li> 
+                                  <li class="hotel">
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                    <h4>Hotel</h4>
+                                  </li>
+                                  <li class="package">
+                                    <i class="fa fa-tags" aria-hidden="true"></i>
+                                    <h4>Excursão</h4>
+                                  </li>
+                                  <li class="transp">
+                                    <i class="fa fa-bus" aria-hidden="true"></i>
+                                    <h4>Transporte</h4>
+                                  </li>
+                                </ul>
+                                <div class="name">
+                                  <h5><%= produto[i].nome_prod %></h5>
+                                </div>
+                                <div class="desc">
+                                  <p><%= produto[i].desc_prod %></p>
+                                </div>
+                                <ul class="local">
+                                  <!-- <li>
+                                    <h5>Cidade:</h5>
+                                    <h6><%= produto[i].cidade %></h6>
+                                  </li> -->
+                                </ul>
+                                <ul class="tempo">
+                                  <li>
+                                    <h5>Horário:</h5>
+                                    <h6><%= produto[i].horario%></h6>
+                                  </li>
+                                  <li>
+                                    <h5>Duração:</h5>
+                                    <h6><%= produto[i].data%></h6>
+                                  </li>
+                                  <!-- <li>
+                                    <h5>Saída:</h5>
+                                    <h6><%= produto[i].data %></h6>
+                                  </li> -->
+                                </ul>
+                                <ul class="inc">
+                                  <li>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <h6>Transporte</h6>
+                                  </li>
+                                  <li>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <h6>Ingresso</h6>
+                                  </li>
+                                </ul>
                             </div>
-                            <ul class="local">
-                              <li>
-                                <h5>Origem:</h5>
-                                <h6>Santos</h6>
-                              </li>
-                              <li>
-                                <h5>Cidade:</h5>
-                                <h6>Tibiriçá - Suzano/SP</h6>
-                              </li>
-                            </ul>
-                            <ul class="tempo">
-                              <li>
-                                <h5>Horário:</h5>
-                                <h6>15:00</h6>
-                              </li>
-                              <li>
-                                <h5>Data:</h5>
-                                <h6>20/12/17</h6>
-                              </li>
-                              <li>
-                                <h5>Saída:</h5>
-                                <h6>09:00</h6>
-                              </li>
-                            </ul>
-                            <ul class="inc">
-                              <li>
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                <h6>Transporte</h6>
-                              </li>
-                              <li>
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                <h6>Ingresso</h6>
-                              </li>
-                            </ul>
-                        </div>
-                        <div class="down">
-                            <div class="valor">
-                              <div>
-                                  <h5>
-                                    a partir de:
-                                  </h5>
-                                  <h6>
-                                    R$160,00
-                                  </h6>
-                              </div>
+                            <div class="down">
+                                <div class="valor">
+                                  <div>
+                                      <h5>
+                                        a partir de:
+                                      </h5>
+                                      <h6>
+                                          R$<%= produto[i].valor_prod %>
+                                      </h6>
+                                  </div>
+                                </div>
+                                <ul class="fpag">
+                                  <li class="imp">
+                                    <i class="fa fa-certificate" aria-hidden="true"></i>
+                                    <p>
+                                      PARCELAMENTOs IMPERDÍVEIS!
+                                    </p>
+                                  </li>
+                                  <li class="parc">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <p>
+                                      Pague em até <span><%= produto[i].saida %></span>x !
+                                    </p>
+                                  </li>
+                                </ul>
                             </div>
-                            <ul class="fpag">
-                              <li class="imp">
-                                <i class="fa fa-certificate" aria-hidden="true"></i>
-                                <p>
-                                  PARCELAMENTOs IMPERDÍVEIS!
-                                </p>
-                              </li>
-                              <li class="parc">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                <p>
-                                  Pague em até <span>4</span>x !
-                                </p>
-                              </li>
-                            </ul>
-                        </div>
-                      </div>
-                      <div class="event ult">
-                        <span>
-                          ÚLTIMAS VAGAS
-                        </span>
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                      <div class="item">
-                        <figure>
-                          <img src="images/magic.jpg" alt="Friend's Tour"/>
-                        </figure>
-                        <div>
-                          <div class="up">
-                              <ul class="inf">
-                                <!-- <li class="pass">
-                                  <i class="fa fa-plane" aria-hidden="true"></i>
-                                  <h4>Passagem</h4>
-                                </li> -->
-                                <!-- <li class="hotel">
-                                  <i class="fa fa-building-o" aria-hidden="true"></i>
-                                  <h4>Hotel</h4>
-                                </li> -->
-                                <li class="package">
-                                  <i class="fa fa-tags" aria-hidden="true"></i>
-                                  <h4>Pacote</h4>
-                                </li>
-                                <!-- <li class="transp">
-                                  <i class="fa fa-bus" aria-hidden="true"></i>
-                                  <h4>Transporte</h4>
-                                </li> -->
-                              </ul>
-                              <div class="name">
-                                <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
-                              </div>
-                              <ul class="local">
-                                <li>
-                                  <h5>Origem:</h5>
-                                  <h6>Santos</h6>
-                                </li>
-                                <li>
-                                  <h5>Cidade:</h5>
-                                  <h6>Tibiriçá - Suzano/SP</h6>
-                                </li>
-                                <!-- <li>
-                                  <h5>Percurso:</h5>
-                                  <h6>Santos </h6>
-                                </li> -->
-                              </ul>
-                              <ul class="tempo">
-                                <!-- <li>
-                                  <h5>Horário:</h5>
-                                  <h6>15:00</h6>
-                                </li> -->
-                                <li>
-                                  <h5>Data:</h5>
-                                  <h6>20/12/17</h6>
-                                </li>
-                                <li>
-                                  <h5>Saída:</h5>
-                                  <h6>09:00</h6>
-                                </li>
-                              </ul>
-                              <ul class="inc">
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Transporte</h6>
-                                </li>
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Ingresso</h6>
-                                </li>
-                              </ul>
                           </div>
-                          <div class="down">
-                              <div class="valor">
-                                <div>
-                                    <h5>
-                                      a partir de:
-                                    </h5>
-                                    <h6>
-                                      R$160,00
-                                    </h6>
-                                </div>
-                              </div>
-                              <ul class="fpag">
-                                <!-- <li class="imp">
-                                  <i class="fa fa-certificate" aria-hidden="true"></i>
-                                  <p>
-                                    PARCELAMENTOs IMPERDÍVEIS!
-                                  </p>
-                                </li> -->
-                                <li class="parc">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  <p>
-                                    Pague em até <span>4</span>x !
-                                  </p>
-                                </li>
-                              </ul>
+                          <div class="event ult">
+                            <span>
+                              ÚLTIMAS VAGAS
+                            </span>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <div class="event ult">
-                          <span>
-                            ÚLTIMAS VAGAS
-                          </span>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="item">
-                        <figure>
-                          <img src="images/magic.jpg" alt="Friend's Tour"/>
-                        </figure>
-                        <div>
-                          <div class="up">
-                              <ul class="inf">
-                                <!-- <li class="pass">
-                                  <i class="fa fa-plane" aria-hidden="true"></i>
-                                  <h4>Passagem</h4>
-                                </li> -->
-                                <!-- <li class="hotel">
-                                  <i class="fa fa-building-o" aria-hidden="true"></i>
-                                  <h4>Hotel</h4>
-                                </li> -->
-                                <li class="package">
-                                  <i class="fa fa-tags" aria-hidden="true"></i>
-                                  <h4>Pacote</h4>
-                                </li>
-                                <!-- <li class="transp">
-                                  <i class="fa fa-bus" aria-hidden="true"></i>
-                                  <h4>Transporte</h4>
-                                </li> -->
-                              </ul>
-                              <div class="name">
-                                <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
-                              </div>
-                              <ul class="local">
-                                <li>
-                                  <h5>Origem:</h5>
-                                  <h6>Santos</h6>
-                                </li>
-                                <li>
-                                  <h5>Cidade:</h5>
-                                  <h6>Tibiriçá - Suzano/SP</h6>
-                                </li>
-                                <!-- <li>
-                                  <h5>Percurso:</h5>
-                                  <h6>Santos </h6>
-                                </li> -->
-                              </ul>
-                              <ul class="tempo">
-                                <!-- <li>
-                                  <h5>Horário:</h5>
-                                  <h6>15:00</h6>
-                                </li> -->
-                                <li>
-                                  <h5>Data:</h5>
-                                  <h6>20/12/17</h6>
-                                </li>
-                                <li>
-                                  <h5>Saída:</h5>
-                                  <h6>09:00</h6>
-                                </li>
-                              </ul>
-                              <ul class="inc">
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Transporte</h6>
-                                </li>
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Ingresso</h6>
-                                </li>
-                              </ul>
-                          </div>
-                          <div class="down">
-                              <div class="valor">
-                                <div>
-                                    <h5>
-                                      a partir de:
-                                    </h5>
-                                    <h6>
-                                      R$160,00
-                                    </h6>
-                                </div>
-                              </div>
-                              <ul class="fpag">
-                                <!-- <li class="imp">
-                                  <i class="fa fa-certificate" aria-hidden="true"></i>
-                                  <p>
-                                    PARCELAMENTOs IMPERDÍVEIS!
-                                  </p>
-                                </li> -->
-                                <li class="parc">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  <p>
-                                    Pague em até <span>4</span>x !
-                                  </p>
-                                </li>
-                              </ul>
-                          </div>
-                        </div>
-                        <div class="event ult">
-                          <span>
-                            ÚLTIMAS VAGAS
-                          </span>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="item">
-                        <figure>
-                          <img src="images/magic.jpg" alt="Friend's Tour"/>
-                        </figure>
-                        <div>
-                          <div class="up">
-                              <ul class="inf">
-                                <!-- <li class="pass">
-                                  <i class="fa fa-plane" aria-hidden="true"></i>
-                                  <h4>Passagem</h4>
-                                </li> -->
-                                <!-- <li class="hotel">
-                                  <i class="fa fa-building-o" aria-hidden="true"></i>
-                                  <h4>Hotel</h4>
-                                </li> -->
-                                <li class="package">
-                                  <i class="fa fa-tags" aria-hidden="true"></i>
-                                  <h4>Pacote</h4>
-                                </li>
-                                <!-- <li class="transp">
-                                  <i class="fa fa-bus" aria-hidden="true"></i>
-                                  <h4>Transporte</h4>
-                                </li> -->
-                              </ul>
-                              <div class="name">
-                                <h5>PARQUE DAS AGUAS - MAGIC CITY</h5>
-                              </div>
-                              <ul class="local">
-                                <li>
-                                  <h5>Origem:</h5>
-                                  <h6>Santos</h6>
-                                </li>
-                                <li>
-                                  <h5>Cidade:</h5>
-                                  <h6>Tibiriçá - Suzano/SP</h6>
-                                </li>
-                                <!-- <li>
-                                  <h5>Percurso:</h5>
-                                  <h6>Santos </h6>
-                                </li> -->
-                              </ul>
-                              <ul class="tempo">
-                                <!-- <li>
-                                  <h5>Horário:</h5>
-                                  <h6>15:00</h6>
-                                </li> -->
-                                <li>
-                                  <h5>Data:</h5>
-                                  <h6>20/12/17</h6>
-                                </li>
-                                <li>
-                                  <h5>Saída:</h5>
-                                  <h6>09:00</h6>
-                                </li>
-                              </ul>
-                              <ul class="inc">
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Transporte</h6>
-                                </li>
-                                <li>
-                                  <i class="fa fa-check" aria-hidden="true"></i>
-                                  <h6>Ingresso</h6>
-                                </li>
-                              </ul>
-                          </div>
-                          <div class="down">
-                              <div class="valor">
-                                <div>
-                                    <h5>
-                                      a partir de:
-                                    </h5>
-                                    <h6>
-                                      R$160,00
-                                    </h6>
-                                </div>
-                              </div>
-                              <ul class="fpag">
-                                <!-- <li class="imp">
-                                  <i class="fa fa-certificate" aria-hidden="true"></i>
-                                  <p>
-                                    PARCELAMENTOs IMPERDÍVEIS!
-                                  </p>
-                                </li> -->
-                                <li class="parc">
-                                  <i class="fa fa-plus" aria-hidden="true"></i>
-                                  <p>
-                                    Pague em até <span>4</span>x !
-                                  </p>
-                                </li>
-                              </ul>
-                          </div>
-                        </div>
-                        <div class="event ult">
-                          <span>
-                            ÚLTIMAS VAGAS
-                          </span>
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                  </li>
+                      </li>
+                    <% } %>
                 </ul>
             </section>
         </div>
@@ -1001,7 +398,7 @@
                   </div>
                 </li>
               </ul>
-              <form action="http://example.com/" method="get">
+              <form action="/empresa" method="get">
                 <button class="btn">Saiba mais</button>
               </form>
             </section>

@@ -403,8 +403,8 @@ header {
 footer {
   padding: 0 5px;
   box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
-  font-size: 15px;
-  color: #ffffff;
+  font-size: 12px;
+  color: #d3d3d3;
   text-align: center; }
 
 .tit {
@@ -416,69 +416,119 @@ footer {
     font-weight: bold; }
 
 .list {
+  margin: 20px 0;
+  width: 100%;
+  display: table; }
+  .list tr {
+    box-sizing: border-box;
+    width: 100%; }
+    .list tr td, .list tr th {
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 14px;
+      border: 1px solid white;
+      border-collapse: collapse;
+      padding: 5px 2px; }
+    .list tr th {
+      font-size: 16px; }
+  .list .options td {
+    border: none; }
+    .list .options td i {
+      cursor: pointer;
+      transition: all 0.5s; }
+    .list .options td .fa-pencil-square-o:hover {
+      color: blue; }
+    .list .options td .fa-trash-o:hover {
+      color: red; }
+    .list .options td .on {
+      color: green !important; }
+    .list .options td .off {
+      color: red !important; }
+  .list tr:first-child {
+    padding: 15px 0; }
+  .list tr:last-child {
+    border-bottom: 1px solid white; }
+
+.add a {
   padding: 5px 10px;
-  margin: 20px 0; }
-  .list p {
-    box-sizing: border-box; }
-  .list ul {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.23);
+  border: 1px solid rgba(255, 255, 255, 0.23);
+  cursor: pointer;
+  font-size: 18px;
+  display: table;
+  float: right;
+  clear: both;
+  margin: 15px 0;
+  transition: all 0.5s; }
+  .add a:hover {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    background-color: #d05a35; }
+
+.formlist p {
+  box-sizing: border-box; }
+
+.formlist ul {
+  display: table;
+  padding: 10px 0; }
+  .formlist ul li {
+    padding: 15px 0;
     display: table;
-    padding: 10px 0; }
-    .list ul li {
-      padding: 15px 0;
-      display: table;
-      float: left;
-      margin: 0 10px; }
-      .list ul li a {
-        color: #ffffff;
-        font-size: 22px;
-        border: 1px solid #ffffff;
-        padding: 5px 10px;
-        transition: all 0.5s; }
-        .list ul li a:hover {
-          background-color: orange; }
-    .list ul > li:first-child {
-      margin-left: 0; }
-    .list ul > li:last-child {
-      margin-right: 0; }
-  .list form {
-    padding: 15px 20px;
+    float: left;
+    margin: 0 10px; }
+    .formlist ul li a {
+      color: #ffffff;
+      font-size: 22px;
+      border: 1px solid #ffffff;
+      padding: 5px 10px;
+      transition: all 0.5s; }
+      .formlist ul li a:hover {
+        background-color: orange; }
+  .formlist ul > li:first-child {
+    margin-left: 0; }
+  .formlist ul > li:last-child {
+    margin-right: 0; }
+
+.formlist form {
+  padding: 15px 20px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box; }
+  .formlist form div {
+    margin: 15px 0;
     display: table;
     width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid black; }
+  .formlist form label {
+    background-color: orange;
+    padding: 5px 10px;
+    font-size: 15px;
+    color: white;
+    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: middle; }
+  .formlist form input, .formlist form select, .formlist form option, .formlist form textarea {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 18px;
+    color: white;
+    padding: 5px 8px;
+    margin: 0 15px;
+    width: 100%;
+    color: black;
+    font-weight: bold;
+    background-color: white;
     box-sizing: border-box; }
-    .list form div {
-      margin: 15px 0;
-      display: table;
-      width: 100%;
-      padding: 10px 0;
-      border-bottom: 1px solid black; }
-    .list form label {
-      background-color: orange;
-      padding: 5px 10px;
-      font-size: 15px;
-      color: white;
-      box-sizing: border-box;
-      display: table-cell;
-      vertical-align: middle; }
-    .list form input, .list form select, .list form option {
-      display: table-cell;
-      vertical-align: middle;
-      font-size: 18px;
-      color: white;
-      padding: 5px 8px;
-      margin: 0 15px;
-      width: 100%;
-      color: black;
-      font-weight: bold;
-      background-color: white;
-      box-sizing: border-box; }
-    .list form select, .list form option {
-      text-transform: uppercase; }
-    .list form input[type="checkbox"] {
-      -webkit-appearance: checkbox; }
-    .list form button {
-      background-color: white;
-      padding: 8px 10px;
-      box-sizing: border-box;
-      font-size: 20px;
-      display: table;
-      margin: 0 auto; }
+  .formlist form select, .formlist form option {
+    text-transform: uppercase; }
+  .formlist form input[type="checkbox"] {
+    -webkit-appearance: checkbox; }
+  .formlist form button {
+    background-color: white;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    display: table;
+    margin: 0 auto; }

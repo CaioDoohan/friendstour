@@ -10,6 +10,7 @@ $(document).ready(function(){
         fade: true,
         cssEase: 'linear',
     });
+
     $(".hm").slick({
         infinite: true,
         slidesToShow: 2,
@@ -34,6 +35,7 @@ $(document).ready(function(){
             }
           ]
     });
+
     $(".menumob").click(function(){
         $(this).toggleClass("active");
         $(this).parent().find(".menu-top").toggleClass("open");

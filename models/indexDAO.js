@@ -5,9 +5,13 @@ var Event = function(){
 }
 
 Event.prototype.getAnuncio = function(callback){
+
     console.log("--DB:ON--");
-    this._con.query('select * from anuncio order by data_criacao desc', callback);
+
+    this._con.query('select * from produto order by datacriacao_prod desc', callback);
+    
     console.log("--DB:OFF--");
+
     this._con.end();
 }
 

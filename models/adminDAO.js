@@ -5,7 +5,7 @@
 // }
 
 // Event.prototype.getAnuncio = function(callback){
-//     this._con.query('select * from teste order by data_criacao desc', callback);
+//     this._con.query('select * from produto order by data_criacao desc', callback);
 
 
 //     this._con.end();

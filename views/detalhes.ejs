@@ -6,7 +6,7 @@
       <section class="desc col-12">
           <div>
               <h3>
-                PARK DAS ÁGUAS - MAGIC CITY 
+                <%= produto.nome_prod%> 
               </h3>
           </div>
       </section>
@@ -14,9 +14,13 @@
     <div class="row listdet">
       <div class="col-8">
         <div>
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/prev.png" />
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/next.png" />
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/loading.gif" />
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/close.png" />
             <div class="prft">
               <figure>
-                <a href="" title="" class="example-image-link">
+                <a href="/images/magic.png" title="" class="example-image-link">
                    <img src="/images/magic.png" alt="Magic City" class="example-image" selecionado="0"/>
                 </a>
               </figure>
@@ -24,35 +28,35 @@
             <ul class="secft">
               <li>
                 <figure>
-                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                    <a href="/images/magic.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
                       <img src="/images/magic.png" alt="Magic City" class="example-image" selecionado="0"/>
                     </a>
                 </figure>
               </li>
               <li>
                 <figure>
-                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                    <a href="/images/magic2.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
                       <img src="/images/magic2.png" alt="Magic City" class="example-image" selecionado="0"/>
                     </a>
                 </figure>
               </li>
               <li>
                 <figure>
-                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                    <a href="/images/magic3.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
                       <img src="/images/magic3.png" alt="Magic City" class="example-image" selecionado="0"/>
                     </a>
                 </figure>
               </li>
               <li>
                 <figure>
-                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                    <a href="/images/magic4.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
                       <img src="/images/magic4.png" alt="Magic City" class="example-image" selecionado="0"/>
                     </a>
                 </figure>
               </li>
               <li>
                 <figure>
-                    <a href="" title="" data-lightbox="image-1" data-title="My caption" class="example-image-link">
+                    <a href="/images/magic2.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
                       <img src="/images/magic2.png" alt="Magic City" class="example-image" selecionado="0"/>
                     </a>
                 </figure>
@@ -61,18 +65,25 @@
         </div>
       </div>
       <section class="col-4 lg">
-        <!-- <div class="dl">
-          <h4>Detalhes</h4>
-        </div> -->
+        <div class="dl">
+          <h4>EXCURSÃO</h4>
+        </div>
         <div class="det">
+            <div class="desc">
+              <p><%= produto.desc_prod %></p>
+            </div>
             <ul class="local">
-               <li>
+               <!-- <li>
                 <h5>Imperdível:</h5>
                 <h6>Hospedagem com tudo incluso para 2 pessoas</h6>
-              </li> 
+              </li>  -->
               <li>
-                <h5>Destino:</h5>
-                <h6>Suzano - SP</h6>
+                <h5>Dia:</h5>
+                <h6><%= produto.data%></h6>
+              </li>
+              <li>
+                <h5>Horário:</h5>
+                <h6><%= produto.horario%></h6>
               </li>
               <!-- <li>
                 <h5>Cidade:</h5>
@@ -113,7 +124,7 @@
                     a partir de:
                   </h5>
                   <h6>
-                    R$160,00
+                    R$<%= produto.valor_prod%>
                   </h6>
               </div>
             </div>
@@ -127,33 +138,13 @@
               <li class="parc">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <p>
-                  Pague em até <span>4</span>x !
+                  PAGUE EM ATÉ <span><%= produto.parcelas_prod%></span>x !
                 </p>
               </li>
             </ul>
             <button type="button" class="btn sell">COMPRAR</button>
         </div>
       </section>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
-      <script>
-        lightbox.option({
-          resizeDuration: 200,
-          positionFromTop: '30%',
-          wrapAround: !0 
-        }), $($(".example-image")[0]).parent().bind("click", function(e) {
-          $(".example-image[selecionado=1]").click(), e.preventDefault()
-        });
-        var clickImage = function() {
-          $(".example-image").attr("selecionado", "0"), $(this).attr("selecionado", "1"), $($(".example-image")[0]).attr("src", $(this).attr("src"))
-        };
-        $(".example-image").each(function(e, a) {
-          e > 0 && $(a).mouseover(clickImage).click(clickImage)
-        });
-      </script>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/close.png" />
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/loading.gif" />
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/next.png" />
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/prev.png" />
     </div>
     <div class="row">
       <section class="col-12 lg dsc">
@@ -161,9 +152,7 @@
           <h4>Descrição</h4>
         </div>
         <div class="txt">
-          <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
-          <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
-          <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+          <p><%= produto.texto_prod%></p>
         </div>
       </section>
     </div>
@@ -192,11 +181,28 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
   <script>
-    $(function() {
+    $(document).ready(function() {
+        lightbox.option({
+          resizeDuration: 200,
+          wrapAround: !0
+        });
         $(".phone_with_ddd").mask("(00) 00000-0000");
         $('.date').mask('00/00/0000');
         $('.rg').mask('00.000.000-0');
         $('.cpf').mask('000.000.000-00');
+
+        // $("a.roadtrip").lightBox();
+
+        $($(".example-image")[0]).parent().bind("click", function(e) {
+           $(".example-image[selecionado=1]").click(), e.preventDefault()
+        });
+        
+        var clickImage = function() {
+        $(".example-image").attr("selecionado", "0"), $(this).attr("selecionado", "1"), $($(".example-image")[0]).attr("src", $(this).attr("src"))
+        };
+        $(".example-image").each(function(e, a) {
+        e > 0 && $(a).mouseover(clickImage).click(clickImage)
+        });
     });
   </script>
 </main>

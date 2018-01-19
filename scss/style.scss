@@ -688,9 +688,9 @@ h1, h2, h3, h4, h5, h6, ul, figure {
       .up{
         min-height: 150px;
       }
-      .down{
-        margin-top: 9%;
-      }
+      // .down{
+      //   margin-top: 9%;
+      // }
       figure{
         img{
           max-width:484px;
@@ -753,18 +753,29 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           }
         }
         .name{
-          padding: 5px 2px 2px;
+          padding: 5px 2px;
+          border-bottom: 1px solid #cccccc;
+          border-bottom-style: dashed;
           h5{
-            font-size:22px;
+            font-size: 22px;
             font-weight: bold;
-            border-bottom: 1px solid #cccccc;
-            border-bottom-style: dashed;
             text-align: center;
             text-transform: uppercase;
+            line-height: 25px;
+          }
+        }
+        .desc{
+          padding: 5px 0;
+          text-align: center;
+          p{
+            font-size: 12px;
+            line-height: 20px;
+            box-sizing: border-box;
+            margin: 5px 0;
           }
         }
         .local,.tempo,.inc{
-          border-bottom: 1px solid #e0e0e0;
+          // border-bottom: 1px solid #e0e0e0;
           display: table;
           width: 100%;
           margin: 6px 0;
@@ -921,6 +932,16 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   i,h6{
     color:green;
   }
+  i{
+    font-size:18px!important;
+  }
+  h6{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size:14px!important;
+    padding: 0 3px;
+    box-sizing: border-box;
+  }
 }
 .fpag{
   // border-top: 1px solid #e0e0e0;
@@ -941,7 +962,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     p{
       font-family:Nunito-black;
       padding: 0 3px;
-      text-transform: uppercase;
+      // text-transform: uppercase;
     }
   }
   .imp{
@@ -1472,10 +1493,19 @@ footer{
       box-sizing: border-box;
       font-family: Nunito-Black;
       display:inline-block;
+      text-transform: uppercase!important;
     }
   }
 }
-
+.lightbox{
+  top:5%!important;
+  position: fixed;
+  // .lb-image{
+  //   max-width:650px;
+  //   width: 100%;
+  //   height:390px;
+  // }
+}
 .prft{
   display: block;
   margin-bottom: 5px;
@@ -1488,7 +1518,8 @@ footer{
     img{
       max-width:650px;
       width: 100%;
-      height:420px;
+      height:390px;
+      cursor: pointer;
     }
   }
 }
@@ -1509,6 +1540,7 @@ footer{
       height: 60px;
       max-width: 120px;
       width: 100%;
+      cursor: pointer;
     }
   }
   &>li:nth-child(5n+1){
@@ -1522,12 +1554,25 @@ footer{
 
 .lg{
   background-color: #e6e6e6;
-  padding: 15px 10px;
+  padding: 10px;
   box-sizing: border-box;
   box-shadow: 0px 1px 11px rgb(144, 144, 144);
   p{
     margin:10px 0;
     line-height: 22px;
+  }
+  .inc{
+    color:green;
+    i{
+      font-size:18px;
+    }
+    h6{
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size:14px;
+      padding: 0 3px;
+      box-sizing: border-box;
+    }
   }
 }
 
@@ -1535,10 +1580,17 @@ footer{
   margin: 35px 0 10px;
 }
 .dl{
-  // padding: 0 1%;
+  padding: 0 1%;
   margin-bottom: 30px;
   position: relative;
   padding: 14px 0;
+  // h3{
+  //   color: #d05a35;
+  //   box-sizing: border-box;
+  //   font-family: Nunito-Black;
+  //   display:inline-block;
+  //   font-size:24px;
+  // }
   h4{
     font-size: 25px;
     font-weight: bold;
@@ -1551,6 +1603,7 @@ footer{
     width: 100%;
     background-color: #d05a35;
     text-align: center;
+    text-transform: uppercase!important;
     &::after{
       width: 0;
       height: 0;
@@ -1570,6 +1623,12 @@ footer{
   display: block;
   position: relative;
 
+  .desc{
+    p{
+      font-size:14px!important;
+      line-height:20px;
+    }
+  }
   &>ul,&>div{
     margin: 5px 0;
     // padding: 0 10px;
@@ -1610,10 +1669,6 @@ footer{
       font-size:25px;
     }
   }
-
-  .inc{
-    color:green;
-  }
   button{
     // margin: 0 auto;
     display: table;
@@ -1637,6 +1692,13 @@ footer{
       left:0;
       content: " ";
     }
+  }
+
+  .txt{
+    text-align: left;
+    line-height: 25px;
+    font-size:14px;
+    text-justify: auto;
   }
 }
 
@@ -1764,7 +1826,7 @@ footer{
 
       img{
         width: auto;
-        margin-left: -17%;
+        // margin-left: -17%;
       }
     }
   }
@@ -2013,7 +2075,7 @@ footer{
 
   .secft li img{
     max-width: 100%;
-    height: 75px;
+    height: 85px;
   }
 }
 
@@ -2117,6 +2179,7 @@ footer{
     font-size:25px;
     margin: 0 auto;
     display: table;
+    text-align: center;
   }
 
   .dl h4{
@@ -2128,6 +2191,9 @@ footer{
   }
   .det h6{
     font-size:16px;
+  }
+  .secft li img{
+    height: 60px;
   }
 }
 
@@ -2258,6 +2324,9 @@ footer{
   }
   .list{
     padding: 15px 0 0!important;
+  }
+  .secft li img{
+    height: 45px;
   }
 }
 

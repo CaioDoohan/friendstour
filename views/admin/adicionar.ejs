@@ -1,0 +1,90 @@
+<% include ../partial/headerADM %>
+<% include ../partial/menuADM %>
+<main>
+    <div class="row">
+        <div class="col col-12">
+            <div class="tit">
+                <p><%= title %></p>
+            </div>
+            <div class="formlist">
+                <p>Adicionar Projeto:</p>
+                <form method="post" action="/admin/anuncios/adicionar/dados_enviados">
+                    <div>
+                        <label>
+                            Nome:
+                        </label>
+                        <input type="text"  name="nome_prod" required/>
+                    </div>
+                    <div>
+                        <label>
+                            Categoria:
+                        </label>
+                        <% for(var i = 0; i < categoria.length; i++) { %>
+                            <input type="checkbox" name="categoria" value="<%=  categoria[i].id_cat%>"/>
+                            <p><%=  categoria[i].id_cat%> - <%=  categoria[i].nome_cat%></p>
+                        <% } %>
+                    </div>
+                    <div>
+                        <label>
+                            Pequena Descrição:
+                        </label>
+                        <textarea name="desc_prod" required></textarea>
+                    </div> 
+                    <div>
+                        <label>
+                            Data - Horário (ISO):
+                        </label>
+                        <input type="text"  name="data_prod" class="dataISO" placeholder="ANO/MÊS/DIA HORA:MINUTOS:SEGUNDOS" required/>
+                    </div>
+                    <div>
+                        <label>
+                            O Anúncio é internacional ?
+                        </label>
+                        <input type="checkbox" name="tipo_prod">
+                    </div> 
+                    <div>
+                        <label>
+                            Valor:
+                        </label>
+                        <input type="text" name="valor" required/>
+                    </div> 
+                    <div>
+                        <label>
+                            Inclusos:
+                        </label>
+                        <% for(var i = 0; i < inclusos.length; i++) { %>
+                            <input type="checkbox" name="incluso" value="<%= inclusos[i].id_inc %>"/>
+                            <p><%= inclusos[i].nome_inc %></p>
+                        <% } %>
+                    </div>
+                    <div>
+                        <label>
+                            Quantidade de parcelas:
+                        </label>
+                        <input type="text" name="parcelas_prod" required/>
+                    </div> 
+                    <div>
+                        <label>
+                            Últimas Vagas:
+                        </label>
+                        <input type="checkbox" name="ativo_prod">
+                    </div>   
+                    <div>
+                        <label>
+                            Detalhes:
+                        </label>
+                        <textarea name="text_prod" required></textarea>
+                    </div>  
+                    <button type="submit" value="enviar">Enviar</button>               
+                </form>
+            </div>
+        </div>
+    </div> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
+    <script>
+        $(document).ready(function(){
+            $('.dataISO').mask('0000/00/00  00:00:00');
+        });
+    </script>
+</main>
+<% include ../partial/footerADM %>
