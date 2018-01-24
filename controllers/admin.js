@@ -3,10 +3,6 @@ var router   = express.Router();
 var moment   = require('moment');
 var Anuncios    = require("../models/adminDAO.js");
 
-// router.get('/', function(req, res, next) {
-//     res.render('/admin/principal', { title: 'Friendstour - Admin'});
-// });
-
 router.get('/', function(req, res, next) {
     
     var AnunciosModel = new Anuncios();
@@ -22,7 +18,6 @@ router.get('/', function(req, res, next) {
             result[i].dia = moment(result[i].saida).format('l');
             result[i].formpag;
             result[i].percurso;
-            console.log(result);
         }
 
         res.render('index', { 
@@ -32,5 +27,7 @@ router.get('/', function(req, res, next) {
         });
     });
 });
+
+
 
 module.exports = router;

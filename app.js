@@ -10,7 +10,7 @@ var chalk          = require('chalk');
 var routes         = require('./routes/index');
 var routesADM      = require('./routes/users');
 var moment         = require('moment');
-var app = express();
+var app            = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -69,26 +69,26 @@ module.exports = app;
 
 
 app.listen(8080, function(){
-  console.log(' ');  
-  console.log(chalk.green("                 /         / "));
-  console.log(chalk.green("              /' .,,,,  ./       "));   
-  console.log(chalk.green("             /';'     ,/     "));
-  console.log(chalk.green("            / /   ,,//,`'`       "));
-  console.log(chalk.green("           ( ,, '_,  ,,,' ``    "));
-  console.log(chalk.green("           |    /") + chalk.red("@") + chalk.green("  ,,, ;' `   "));
-  console.log(chalk.green("          /    .   ,''/' `,``    "));
-  console.log(chalk.green("         /   .     ./, `,, ` ;  "));
-  console.log(chalk.green("      ,./  .   ,-,',` ,,/''\,'    "));
-  console.log(chalk.green("     |   /; ./,,'`,,'' |   |      "));
-  console.log(chalk.green("     |     /   ','    /    |   "));
-  console.log(chalk.green("      \___/'   '     |     |   "));
-  console.log(chalk.green("        `,,'  |      /     `\   "));
-  console.log(chalk.green("             /      |        ~\   "));
-  console.log(chalk.green("            '       ( "));
-  console.log(chalk.green("           : "));
-  console.log(chalk.green("          ; .         \--  "));
-  console.log(chalk.green("        :   \         ;  Made by Nóis "));
-  console.log(' ');
+//   console.log(' ');  
+//   console.log(chalk.green("                 /         / "));
+//   console.log(chalk.green("              /' .,,,,  ./       "));   
+//   console.log(chalk.green("             /';'     ,/     "));
+//   console.log(chalk.green("            / /   ,,//,`'`       "));
+//   console.log(chalk.green("           ( ,, '_,  ,,,' ``    "));
+//   console.log(chalk.green("           |    /") + chalk.red("@") + chalk.green("  ,,, ;' `   "));
+//   console.log(chalk.green("          /    .   ,''/' `,``    "));
+//   console.log(chalk.green("         /   .     ./, `,, ` ;  "));
+//   console.log(chalk.green("      ,./  .   ,-,',` ,,/''\,'    "));
+//   console.log(chalk.green("     |   /; ./,,'`,,'' |   |      "));
+//   console.log(chalk.green("     |     /   ','    /    |   "));
+//   console.log(chalk.green("      \___/'   '     |     |   "));
+//   console.log(chalk.green("        `,,'  |      /     `\   "));
+//   console.log(chalk.green("             /      |        ~\   "));
+//   console.log(chalk.green("            '       ( "));
+//   console.log(chalk.green("           : "));
+//   console.log(chalk.green("          ; .         \--  "));
+//   console.log(chalk.green("        :   \         ;  Made by Nóis "));
+//   console.log(' ');
   
   
   console.log(chalk.yellow('Tamo juntão na porta ') + chalk.white.bgRed.bold('8080') );

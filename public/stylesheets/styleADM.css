@@ -449,7 +449,7 @@ footer {
   .list tr:last-child {
     border-bottom: 1px solid white; }
 
-.add a {
+.add a, .add button {
   padding: 5px 10px;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.23);
@@ -461,74 +461,90 @@ footer {
   clear: both;
   margin: 15px 0;
   transition: all 0.5s; }
-  .add a:hover {
+  .add a:hover, .add button:hover {
     color: #ffffff;
     border: 1px solid #ffffff;
     background-color: #d05a35; }
 
-.formlist p {
-  box-sizing: border-box; }
-
-.formlist ul {
-  display: table;
-  padding: 10px 0; }
-  .formlist ul li {
-    padding: 15px 0;
-    display: table;
-    float: left;
-    margin: 0 10px; }
-    .formlist ul li a {
-      color: #ffffff;
-      font-size: 22px;
-      border: 1px solid #ffffff;
-      padding: 5px 10px;
-      transition: all 0.5s; }
-      .formlist ul li a:hover {
-        background-color: orange; }
-  .formlist ul > li:first-child {
-    margin-left: 0; }
-  .formlist ul > li:last-child {
-    margin-right: 0; }
-
 .formlist form {
-  padding: 15px 20px;
   display: table;
-  width: 100%;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 5px;
+  padding: 15px 20px;
   box-sizing: border-box; }
-  .formlist form div {
-    margin: 15px 0;
+  .formlist form > div {
+    width: 100%;
+    display: table;
+    padding: 15px 0; }
+    .formlist form > div label, .formlist form > div input {
+      display: table-cell;
+      vertical-align: middle; }
+    .formlist form > div label {
+      font-weight: bold;
+      color: #253138;
+      font-size: 15px; }
+    .formlist form > div input {
+      background-color: transparent;
+      border: 1px solid white;
+      padding: 5px 10px;
+      text-align: left;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid rgba(128, 128, 128, 0.278431); }
+  .formlist form .check label {
     display: table;
     width: 100%;
-    padding: 10px 0;
-    border-bottom: 1px solid black; }
-  .formlist form label {
-    background-color: orange;
-    padding: 5px 10px;
-    font-size: 15px;
-    color: white;
-    box-sizing: border-box;
-    display: table-cell;
-    vertical-align: middle; }
-  .formlist form input, .formlist form select, .formlist form option, .formlist form textarea {
-    display: table-cell;
-    vertical-align: middle;
-    font-size: 18px;
-    color: white;
-    padding: 5px 8px;
-    margin: 0 15px;
+    padding: 5px 0 10px;
+    text-align: center; }
+  .formlist form .check > div {
+    display: table;
     width: 100%;
-    color: black;
+    margin: 10px 0 5px; }
+    .formlist form .check > div > div {
+      display: table-cell;
+      vertical-align: middle; }
+  .formlist form .check > div.int {
+    margin: 0 auto;
+    display: table;
+    width: auto; }
+  .formlist form .check input {
+    border: none;
+    background-color: inherit; }
+  .formlist form .check input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    float: left;
+    width: auto; }
+  .formlist form .check p {
+    float: left;
+    font-size: 13px;
+    color: #253138;
     font-weight: bold;
-    background-color: white;
-    box-sizing: border-box; }
-  .formlist form select, .formlist form option {
-    text-transform: uppercase; }
-  .formlist form input[type="checkbox"] {
-    -webkit-appearance: checkbox; }
-  .formlist form button {
-    background-color: white;
-    padding: 8px 10px;
-    box-sizing: border-box;
-    font-size: 20px;
+    margin: 0 5px; }
+  .formlist form .txt label {
     display: table;
-    margin: 0 auto; }
+    width: 100%;
+    padding: 5px 0 10px;
+    text-align: center; }
+  .formlist form .txt div {
+    display: table;
+    width: 100%; }
+    .formlist form .txt div textarea {
+      width: 100%;
+      padding: 10px 5px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      min-width: 462px;
+      min-height: 80px;
+      border: 1px solid rgba(128, 128, 128, 0.278431); }
+  .formlist form button {
+    margin: 0 auto;
+    color: #253138;
+    background-color: white;
+    border: 1px solid #253138;
+    float: none;
+    padding: 10px 15px; }
+    .formlist form button:hover {
+      border: 1px solid #d05a35; }

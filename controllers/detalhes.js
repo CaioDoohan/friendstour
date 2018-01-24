@@ -11,26 +11,28 @@ router.get('/:id', function(req, res, next) {
 
     Detalhes.getId( id , function(erro, result){
 
-        var teste = result.length > 0 ? result[0] : undefined;
+        var prod = result.length > 0 ? result[0] : undefined;
         var param;
 
-        if(teste != undefined){
+        if(prod != undefined){
 
             param = {
-                id_prod : teste.id_prod,
-                nome_prod : teste.nome_prod,
-                desc_prod : teste.desc_prod,
-                horario : teste.horario = moment(teste.data_prod).format('HH:mm'),
-                data : teste.data = moment(teste.data_prod).format('DD/MM'),
-                valor_prod : teste.valor_prod,
-                parcelas_prod : teste.parcelas_prod,
-                texto_prod : teste.texto_prod,
+                id_prod : prod.id_prod,
+                nome_prod : prod.nome_prod,
+                desc_prod : prod.desc_prod,
+                horario : prod.horario = moment(prod.data_prod).format('HH:mm'),
+                data : prod.data = moment(prod.data_prod).format('DD/MM'),
+                valor_prod : prod.valor_prod,
+                parcelas_prod : prod.parcelas_prod,
+                texto_prod : prod.texto_prod,
                 
             }
         }
-        console.log('RESULT QUERY:', param);     
+        // console.log('RESULT QUERY:', param);     
         res.render('detalhes', { title: 'Friendstour - Detalhes', produto : param});
     });
 });
+
+
 
 module.exports = router;

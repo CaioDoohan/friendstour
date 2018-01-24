@@ -7,6 +7,4 @@ router.get('/', function(req,res,next){
 
 router.use('/anuncios', require('../controllers/anuncios'));
 
-// router.use('/action', require('../controllers/action'));
-
 module.exports = router;

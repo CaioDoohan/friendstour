@@ -1,14 +1,19 @@
-var db = require('../config/dbConnection.js');
+var mysql = require('promise-mysql');
+var config = require('../config/dbConnection');
+var db;
+var connection;
 
 var DetalhesDAO = function(){
-    this._con = new db();
+    db = mysql.createConnection(config.mysqlOptions);
 }
  
 DetalhesDAO.prototype.getId = function(id,callback){
-    console.log(id);
-    this._con.query('select * from produto where id_prod = ' + id, callback);
+    db.then(function(conn){
+        
+        conn.query('select * from produto where id_prod = ' + id, callback);
 
-    this._con.end();
+        conn.end();
+    });
 }
 
 module.exports = DetalhesDAO;

@@ -55,13 +55,15 @@
                             <table style="width:100%" class="options">
                                 <tr>
                                     <td>
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar"></i>
+                                        <a href="/admin/anuncios/editar/produto-<%= produto[i].id_prod %>" title="Editar" >
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         <%if(produto[i].ativo_prod == true){%>
-                                          <i class="fa fa-power-off on" aria-hidden="true" title="Ativar/Desativar"></i>
+                                          <i class="fa fa-power-off on" aria-hidden="true" title="Ativo"></i>
                                         <%} else{%>
-                                          <i class="fa fa-power-off off" aria-hidden="true" title="Ativar/Desativar"></i>
+                                          <i class="fa fa-power-off off" aria-hidden="true" title="Desativo"></i>
                                         <% } %>
                                     </td>
                                     <td>
