@@ -15,6 +15,7 @@
     "express": "^4.15.5",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
+    "multer": "^1.3.0",
     "mysql": "^2.15.0",
     "node-sass": "^4.7.2",
     "node-sass-middleware": "^0.11.0",
@@ -23,5 +24,18 @@
     "serve-favicon": "^2.4.5",
     "slick-carousel": "^1.8.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaioDoohan/friendstour.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaioDoohan/friendstour/issues"
+  },
+  "homepage": "https://github.com/CaioDoohan/friendstour#readme",
+  "description": ""
 }

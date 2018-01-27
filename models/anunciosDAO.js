@@ -1,6 +1,7 @@
 var mysql = require('promise-mysql');
 var config = require('../config/dbConnection');
 var chalk = require('chalk');
+var moment = require('moment');
 var db;
 var connection;
 
@@ -31,30 +32,34 @@ Anuncio.prototype.getInclusos = function(callback){
         
         conn.query('select * from inclusos order by id_inc asc', callback);
 
-        conn.end();
+        // conn.end();
     })
 }
 
-Anuncio.prototype.addAnuncio = function(dados, callback){
+Anuncio.prototype.addAnuncio = function(dadosForm, callback){
+    var confirmacao;
     db.then(function(conn){
         var insert = "INSERT INTO produto(nome_prod,desc_prod,data_prod,valor_prod,nacional_prod,vagas_prod,parcelas_prod,texto_prod) VALUES(?,?,?,?,?,?,?,?)";
+        
         connection = conn;
+
         var tabProd = [
-            dados.nome_prod,
-            dados.desc_prod,
-            dados.data_prod,
-            dados.valor_prod,
-            (dados.nacional_prod == "on" ? true : false),
-            (dados.vagas_prod == "on" ? true : false),
-            dados.parcelas_prod,
-            dados.texto_prod,
-        ]
-        console.log(chalk.red("--DADOS CADASTRADOS--"));
+            dadosForm.nome_prod,
+            dadosForm.desc_prod,
+            dadosForm.data_prod,
+            dadosForm.valor_prod,
+            (dadosForm.nacional_prod == "on" ? true : false),
+            (dadosForm.vagas_prod == "on" ? true : false),
+            dadosForm.parcelas_prod,
+            dadosForm.texto_prod,
+        ];
+
         connection.query(insert,tabProd,callback);
+        console.log(chalk.red("--DADOS CADASTRADOS--"));
         
     }).then(function(erro){
-        console.log(dados);
-        var getId = ("select id_prod from produto where nome_prod = '" + dados.nome_prod + "'order by 1 desc limit 1");
+        // console.log(dadosForm);
+        var getId = ("select id_prod from produto where nome_prod = '" + dadosForm.nome_prod + "' order by 1 desc limit 1");
 
         // console.log(chalk.yellow(getId));
 
@@ -62,10 +67,12 @@ Anuncio.prototype.addAnuncio = function(dados, callback){
 
     }).then(function(userID){
 
+        console.log(chalk.blue(userID));
+
         id = userID[0].id_prod;
         
-        for(var k = 0; k < dados.incluso.length; k++){
-            var sqlInc = "insert into inc_prod(id_inc,id_prod) values("+ dados.incluso[k] + "," + id + ")";
+        for(var k = 0; k < dadosForm.incluso.length; k++){
+            var sqlInc = "insert into inc_prod(id_inc,id_prod) values("+ dadosForm.incluso[k] + "," + id + ")";
             // console.log(dados.incluso[k] + '---' + id);
             connection.query(sqlInc);
         }
@@ -76,13 +83,12 @@ Anuncio.prototype.addAnuncio = function(dados, callback){
 
     }).then(function(id){
 
-        for(var k = 0; k < dados.categoria.length; k++){
-            var sqlCat = "insert into cat_prod(id_cat,id_prod) values("+ dados.categoria[k] + "," + id + ")";
+        for(var k = 0; k < dadosForm.categoria.length; k++){
+            var sqlCat = "insert into cat_prod(id_cat,id_prod) values("+ dadosForm.categoria[k] + "," + id + ")";
             // console.log(chalk.green(dados.categoria[k] + '---' + id));
             connection.query(sqlCat);
         }
-        // console.log(chalk.blue(sqlCat));
-        connection.end();
+
         console.log(chalk.yellow("PRODUTO ADICIONADO"));
     });
 }
@@ -119,7 +125,7 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
             vagas_prod : dados[0].vagas_prod,
             criacao : dados[0].datacriacao_prod
         };
-
+        // console.log(chalk.blue(prod.data_prod));
         var sqlCat = ("select id_cat from cat_prod where id_prod =" + idProd);
         
         return connection.query(sqlCat);
@@ -131,6 +137,7 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
             categoria.push({
                 id_cat : cat[i].id_cat
             });
+            // console.log(chalk.blue(categoria[i].id_cat));
 
         }
 
@@ -166,32 +173,112 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
     });
 }
 
-Anuncio.prototype.editAnuncio = function(dadosAlter, alteracao){
-    console.log(dadosAlter);
+Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
+    // console.log(dadosEdit);
     var prod = {},
+        id,
         catIds = [],
         incIds = [],
         prodAlterado = {};
+        sqlPrefer = 'SET SQL_SAFE_UPDATES = 0';
     db.then(function(conn){
 
         connection = conn;
+        connection.query(sqlPrefer);
+        console.log(chalk.blue("Preferences: OFF"));
 
         prod = {
-            id_prod : dadosAlter.id_prod,
-            nome_prod : dadosAlter.nome_prod,
-            desc_prod : dadosAlter.desc_prod,
-            data_prod : dadosAlter.data_prod,
-            nacional_prod : dadosAlter.nacional_prod,
-            valor_prod : dadosAlter.valor_prod,
-            parcelas_prod : dadosAlter.parcelas_prod,
-            vagas_prod : dadosAlter.vagas_prod,
-            texto_prod : dadosAlter.texto_prod
+            id_prod : dadosEdit.id_prod,
+            nome_prod : dadosEdit.nome_prod,
+            desc_prod : dadosEdit.desc_prod,
+            data_prod : dadosEdit.data_prod,
+            nacional_prod : (dadosEdit.nacional_prod == "on" ? true : false),
+            valor_prod : dadosEdit.valor_prod,
+            parcelas_prod : dadosEdit.parcelas_prod,
+            vagas_prod : (dadosEdit.vagas_prod == "on" ? true : false),
+            texto_prod : dadosEdit.texto_prod
         }
 
-
-        var sqlUpdate = ("UPDATE produto SET ? where id_prod=" + prod.id_prod);
+        // console.log(prod);
+        var sqlUpdate = ("UPDATE produto SET ? where id_prod = " + prod.id_prod);
         
-        connection.query(sqlUpdate, prod);
-    })
+        
+        connection.query(sqlUpdate,prod);
+        console.log('Works');
+    }).then(function(){
+
+        id = dadosEdit.id_prod;
+
+        var removeCat = ("DELETE FROM cat_prod WHERE id_prod = " + id);
+        var upCat = ("INSERT into cat_prod SET ? ");
+        
+        connection.query(removeCat);
+        console.log(chalk.yellow("Categorias retiradas"));
+
+        for(var i = 0; i < dadosEdit.categoria.length; i++){
+            
+            catIds.push({
+                id_cat : dadosEdit.categoria[i],
+                id_prod : dadosEdit.id_prod
+            })
+            connection.query(upCat, catIds[i]);
+        }
+        
+        console.log(chalk.yellow("Categorias adicionadas"));
+
+    }).then(function(){
+        id = dadosEdit.id_prod;
+        
+        var removeInc = ("DELETE FROM inc_prod WHERE id_prod = " + id);
+        var upInc = ("INSERT into inc_prod SET ? ");
+        
+        connection.query(removeInc);
+        console.log(chalk.yellow("Inclusos retirados"));
+
+        for(var i = 0; i < dadosEdit.incluso.length; i++){
+            
+            incIds.push({
+                id_inc : dadosEdit.incluso[i],
+                id_prod : dadosEdit.id_prod
+            })
+            connection.query(upInc, incIds[i]);
+        }
+        
+        console.log(chalk.yellow("Inclusos adicionados"));
+
+
+        prodAlterado = {
+            id_prod : prod.id_prod,
+            nome_prod : prod.nome_prod,
+            desc_prod : prod.desc_prod,
+            dia_prod : moment(prod.data_prod).format('YYYY/MM/DD'),
+            hora_prod : moment(prod.data_prod).format('HH:mm:ss'),
+            nacional_prod : prod.nacional_prod,
+            valor_prod : prod.valor_prod,
+            parcelas_prod : prod.parcelas_prod,
+            vagas_prod : prod.vagas_prod,
+            texto_prod : prod.texto_prod,
+            categoria : catIds,
+            inclusos : incIds,
+        }
+        console.log(prodAlterado);
+
+        alteracao(0, prodAlterado);
+    });
 }
+
+Anuncio.prototype.removeAnuncio = function(id, callback){
+    var idProd;
+    db.then(function(conn){
+        connection = conn;
+        idProd = id;
+
+        var sqlRemove = ("DELETE FROM produto WHERE id_prod = " + idProd);
+        
+        connection.query(sqlRemove);
+
+        return callback(0,0);
+    });
+}
+
 module.exports = Anuncio;

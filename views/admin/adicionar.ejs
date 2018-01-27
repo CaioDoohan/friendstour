@@ -7,7 +7,7 @@
                 <p><%= title %></p>
             </div>
             <div class="formlist">
-                <form method="post" action="/admin/anuncios/adicionar/dados_enviados">
+                <form method="post" action="/admin/anuncios/adicionar/dados_enviados" role="form">
                     <div>
                         <label>
                             Nome
@@ -37,9 +37,15 @@
                     </div> 
                     <div>
                         <label>
-                            Data - Horário (ISO)
+                            Data
                         </label>
-                        <input type="text"  name="data_prod" class="dataISO" value="<%= produto.data_prod%>"required/>
+                        <input type="text"  name="dia_prod" id="calendario" value="<%= produto.dia_prod%>" required/>
+                    </div>
+                    <div>
+                        <label>
+                            Hora
+                        </label>
+                        <input type="text" class="hora" name="hora_prod" value="<%= produto.hora_prod%>" required/>
                     </div>
                     <div class="check">
                         <label>
@@ -69,7 +75,7 @@
                         <label>
                             Quantidade de parcelas
                         </label>
-                        <input type="text" name="parcelas_prod" placeholder="Quantidade de parcelas" required/>
+                        <input type="text" name="parcelas_prod" class="parcelas" placeholder="Quantidade de parcelas" required/>
                     </div> 
                     <div class="check">
                         <label>
@@ -96,9 +102,40 @@
         </div>
     </div> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
+    <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
     <script>
         $(document).ready(function(){
-            $('.dataISO').mask('0000/00/00  00:00:00');
+            jQuery.browser = {};
+                (function () {
+                    jQuery.browser.msie = false;
+                    jQuery.browser.version = 0;
+                    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                        jQuery.browser.msie = true;
+                        jQuery.browser.version = RegExp.$1;
+                    }
+            })();
+            $('.parcelas').mask('00');
+            $('.hora').mask('00:00:00');
+            $( "#calendario" ).datepicker({
+                showButtonPanel:true,
+                dateFormat: 'yy-mm-dd',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+            });
+
+            var add = <%= add%>;
+
+            function confirmAdd(confirmacao){
+                if( confirmacao == true ){
+                    alert('Produto adicionado com sucesso');
+                }
+            }
+
+            confirmAdd(add);
+            
         });
     </script>
 </main>

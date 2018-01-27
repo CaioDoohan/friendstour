@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     var EventModel = new Event();
 
     EventModel.getAnuncios(function(erro,produtos){
-        // console.log(produtos[4]);
+
         for(var i=0 ; i < produtos.length; i++){
 
             produtos[i].id_prod;
@@ -24,7 +24,6 @@ router.get('/', function(req, res, next) {
             produtos[i].vagas_prod;
             produtos[i].categoria;
             produtos[i].inclusos;
-            
         }
         
         res.render('index', { title: 'Friendstour - Home', produto : produtos});    

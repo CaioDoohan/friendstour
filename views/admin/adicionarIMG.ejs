@@ -1,0 +1,37 @@
+<% include ../partial/headerADM %>
+<% include ../partial/menuADM %>
+<main>
+    <div class="row">
+        <div class="col col-12">
+            <div class="tit">
+                <p><%= title %></p>
+            </div>
+            <div class="formlist">
+                <form method="post" action="/admin/imagens/envio" role="form" enctype="multipart/form-data">
+                    <div>
+                        <label>
+                            ID:<%=  dados.id_prod%>
+                        </label>
+                        <input type="hidden" name="id_prod" placeholder="Id" value="<%=  dados.id_prod %>" />
+                    </div>
+                    <div>
+                        <label>
+                            Imagem Home
+                        </label>
+                        <input type="file"  name="imghome"/>
+                    </div>
+                    <div>
+                        <label>
+                            Imagem Detalhes
+                        </label>
+                        <input type="file"  name="imgdet" multiple/>
+                    </div>
+                    <div class="add">
+                        <button type="submit" value="enviar" >Enviar</button>               
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+</main>
+<% include ../partial/footerADM %>

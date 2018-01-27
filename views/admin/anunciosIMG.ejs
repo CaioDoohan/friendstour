@@ -6,11 +6,6 @@
             <div class="tit">
                 <p><%= title%></p>
             </div>
-            <div class="add">
-                <a href="/admin/anuncios/adicionar" title="Adicionar" class="add">
-                    Adicionar
-                </a> 
-            </div>
             <table class="list">
                 <colgroup span="5" class="columns"></colgroup>
                 <tr>
@@ -22,9 +17,6 @@
                     </th>
                     <th>
                         Data de Criação
-                    </th>
-                    <th>
-                        Últimas Vagas
                     </th>
                     <th>
                         Opções
@@ -44,19 +36,12 @@
                         </td>
                         <td>
                             <%= produto[i].datacriacao_prod%>
-                        </td>
-                        <td>
-                            <%if(produto[i].vagas_prod == true){%>
-                                Ativo
-                            <% } else{ %>
-                                Desativado
-                            <% } %>
-                        </td>                      
+                        </td>                   
                         <td>
                             <table style="width:100%" class="options">
                                 <tr>
                                     <td>
-                                        <a href="/admin/anuncios/editar/produto-<%= produto[i].id_prod %>" title="Editar" >
+                                        <a href="/admin/imagens/editar-:<%= produto[i].id_prod %>" title="Editar" >
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                     </td>
@@ -68,8 +53,8 @@
                                         <% } %>
                                     </td>
                                     <td>
-                                        <a href="/admin/anuncios/remover/produto-<%= produto[i].id_prod %>" title="Remover">
-                                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <a href="/admin/imagens/adicionar-<%= produto[i].id_prod %>" title="Adicionar Imagem">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -82,18 +67,4 @@
         </div>
     </div>  
 </main>
-<script>
-    $(document).ready(function(){
-        var remove = <%= remove%>;
-
-        function confirmRemove(remove){
-            if( remove == true ){
-                alert("Produto removido com sucesso");
-            }
-        };
-
-        confirmRemove(remove);
-    });
-    
-</script>
 <% include ../partial/footerADM %>

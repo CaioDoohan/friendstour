@@ -35,127 +35,120 @@
                <h3>Promoções</h3>
             </div>
             <ul class="carvg hm">
-              <%for (var i=0; i < produto.length; i++) {%>
-                <li>
-                  <div class="item" data-caio='<%=produto[i].vagas_prod%>'>
-                    <figure>
-                      <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
-                        <img src="images/magic.jpg" alt="Friend's Tour"/>
-                      </a>
-                    </figure>
-                    <div>
-                      <div class="up">
-                          <ul class="inf">
-                            <% for(var k=0; k < produto[i].categoria.length; k++) { %>
-                              <%switch(produto[i].categoria[k]) { 
-                                    case 'Passagem' :%>                   
-                                      <li class="pass">
-                                        <i class="fa fa-plane" aria-hidden="true"></i>
-                                        <h4>Passagem</h4>
-                                      </li> 
-                                  <% break; 
-                                    case 'Hotel' :%>                   
-                                      <li class="hotel">
-                                        <i class="fa fa-building-o" aria-hidden="true"></i>
-                                        <h4>Hotel</h4>
-                                      </li> 
-                                  <% break; 
-                                    case 'Excursão' :%>                   
-                                      <li class="package">
-                                        <i class="fa fa-tags" aria-hidden="true"></i>
-                                        <h4>Excursão</h4>
-                                      </li>
-                                  <% break;
-                                      case 'Transporte' :%>                   
-                                      <li class="transp">
-                                        <i class="fa fa-bus" aria-hidden="true"></i>
-                                        <h4>Transporte</h4>
-                                      </li>
-                                  <% break; 
-                                    } %>
-                            <% } %>
-                          </ul>
-                          <div class="name">
-                            <h5><%= produto[i].nome_prod %></h5>
-                          </div>
-                          <div class="desc">
-                            <p><%= produto[i].desc_prod %></p>
-                          </div>
-                          <ul class="local">
-                            <!-- <li>
-                              <h5>Cidade:</h5>
-                              <h6><%= produto[i].cidade %></h6>
-                            </li> -->
-                          </ul>
-                          <ul class="tempo">
-                            <li>
-                              <h5>Horário:</h5>
-                              <h6><%= produto[i].horario%></h6>
-                            </li>
-                            <li>
-                              <h5>Dia:</h5>
-                              <h6><%= produto[i].data%></h6>
-                            </li>
-                            <!-- <li>
-                              <h5>Saída:</h5>
-                              <h6><%= produto[i].data %></h6>
-                            </li> -->
-                          </ul>
-                          <ul class="inc">
-                            <%for(var k = 0; k < produto[i].inclusos.length; k++){%>
-                              <li>
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                <h6><%= produto[i].inclusos[k] %></h6>
-                              </li>
-                            <% } %>
-                            <!-- <li>
-                              <i class="fa fa-check" aria-hidden="true"></i>
-                              <h6>Transporte</h6>
-                            </li>
-                            <li>
-                              <i class="fa fa-check" aria-hidden="true"></i>
-                              <h6>Ingresso</h6>
-                            </li> -->
-                          </ul>
-                      </div>
-                      <div class="down">
-                          <div class="valor">
-                            <div>
-                                <h5>
-                                  a partir de:
-                                </h5>
-                                <h6>
-                                    R$<%= produto[i].valor_prod %>
-                                </h6>
+              <%for (var i=0; i < produto.length; i++) {
+
+                if( produto[i].ativo_prod == true ){ %>
+                  <li>
+                    <div class="item" data-caio='<%=produto[i].vagas_prod%>'>
+                      <figure>
+                        <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
+                          <img src="images/magic.jpg" alt="Friend's Tour"/>
+                        </a>
+                      </figure>
+                      <div>
+                        <div class="up">
+                            <ul class="inf">
+                              <% for(var k=0; k < produto[i].categoria.length; k++) { %>
+                                <%switch(produto[i].categoria[k]) { 
+                                      case 'Passagem' :%>                   
+                                        <li class="pass">
+                                          <i class="fa fa-plane" aria-hidden="true"></i>
+                                          <h4>Passagem</h4>
+                                        </li> 
+                                    <% break; 
+                                      case 'Hotel' :%>                   
+                                        <li class="hotel">
+                                          <i class="fa fa-building-o" aria-hidden="true"></i>
+                                          <h4>Hotel</h4>
+                                        </li> 
+                                    <% break; 
+                                      case 'Excursão' :%>                   
+                                        <li class="package">
+                                          <i class="fa fa-tags" aria-hidden="true"></i>
+                                          <h4>Excursão</h4>
+                                        </li>
+                                    <% break;
+                                        case 'Transporte' :%>                   
+                                        <li class="transp">
+                                          <i class="fa fa-bus" aria-hidden="true"></i>
+                                          <h4>Transporte</h4>
+                                        </li>
+                                    <% break; 
+                                      } %>
+                              <% } %>
+                            </ul>
+                            <div class="name">
+                              <h5><%= produto[i].nome_prod %></h5>
                             </div>
-                          </div>
-                          <ul class="fpag">
-                            <li class="imp">
-                              <i class="fa fa-certificate" aria-hidden="true"></i>
-                              <p>
-                                PARCELAMENTOS IMPERDÍVEIS!
-                              </p>
-                            </li>
-                            <li class="parc">
-                              <i class="fa fa-plus" aria-hidden="true"></i>
-                              <p>
-                                PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>x !
-                              </p>
-                            </li>
-                          </ul>
+                            <div class="desc">
+                              <p><%= produto[i].desc_prod %></p>
+                            </div>
+                            <!-- <ul class="local">
+                              <li>
+                                <h5>Cidade:</h5>
+                                <h6><%= produto[i].cidade %></h6>
+                              </li>
+                            </ul> -->
+                            <ul class="tempo">
+                              <li>
+                                <h5>Horário:</h5>
+                                <h6><%= produto[i].horario%></h6>
+                              </li>
+                              <li>
+                                <h5>Dia:</h5>
+                                <h6><%= produto[i].data%></h6>
+                              </li>
+                            </ul>
+                            <ul class="inc">
+                              <%for(var k = 0; k < produto[i].inclusos.length; k++){%>
+                                <li>
+                                  <i class="fa fa-check" aria-hidden="true"></i>
+                                  <h6><%= produto[i].inclusos[k] %></h6>
+                                </li>
+                              <% } %>
+                            </ul>
+                        </div>
+                        <div class="down">
+                            <div class="valor">
+                              <div>
+                                  <h5>
+                                    a partir de:
+                                  </h5>
+                                  <h6>
+                                      R$<%= produto[i].valor_prod %>
+                                  </h6>
+                              </div>
+                            </div>
+                            <ul class="fpag">
+                              <!-- <li class="imp">
+                                <i class="fa fa-certificate" aria-hidden="true"></i>
+                                <p>
+                                  PARCELAMENTOS IMPERDÍVEIS!
+                                </p>
+                              </li> -->
+                              <li class="parc">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                <p>
+                                  PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>x !
+                                </p>
+                              </li>
+                            </ul>
+                        </div>
                       </div>
+                      <%if ( produto[i].vagas_prod == true ) { %>
+                        <div class="event ult">
+                          <span>
+                            ÚLTIMAS VAGAS
+                          </span>
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </div>
+                      <% }  else {}%>
                     </div>
-                    <%if ( produto[i].vagas_prod == true ) { %>
-                      <div class="event ult">
-                        <span>
-                          ÚLTIMAS VAGAS
-                        </span>
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                      </div>
-                    <% }  else {}%>
-                  </div>
-                </li>
-              <% } %>
+                  </li>
+                <% } else{ %>
+                  
+                <% }              
+              } %>
             </ul>
           </section>
         </div>
@@ -165,7 +158,9 @@
                   <h3>Nacional</h3>
                 </div>
                 <ul class="carvg hm">
-                    <%for (var i=0; i < produto.length; i++) {%>
+                  <%for (var i=0; i < produto.length; i++) {
+                    
+                    if( produto[i].ativo_prod == true ){ %>
                       <li>
                         <div class="item" data-caio='<%=produto[i].vagas_prod%>'>
                           <figure>
@@ -211,12 +206,12 @@
                                 <div class="desc">
                                   <p><%= produto[i].desc_prod %></p>
                                 </div>
-                                <ul class="local">
-                                  <!-- <li>
+                                <!-- <ul class="local">
+                                  <li>
                                     <h5>Cidade:</h5>
                                     <h6><%= produto[i].cidade %></h6>
-                                  </li> -->
-                                </ul>
+                                  </li>
+                                </ul> -->
                                 <ul class="tempo">
                                   <li>
                                     <h5>Horário:</h5>
@@ -226,10 +221,6 @@
                                     <h5>Dia:</h5>
                                     <h6><%= produto[i].data%></h6>
                                   </li>
-                                  <!-- <li>
-                                    <h5>Saída:</h5>
-                                    <h6><%= produto[i].data %></h6>
-                                  </li> -->
                                 </ul>
                                 <ul class="inc">
                                   <%for(var k = 0; k < produto[i].inclusos.length; k++){%>
@@ -238,14 +229,6 @@
                                       <h6><%= produto[i].inclusos[k] %></h6>
                                     </li>
                                   <% } %>
-                                  <!-- <li>
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    <h6>Transporte</h6>
-                                  </li>
-                                  <li>
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    <h6>Ingresso</h6>
-                                  </li> -->
                                 </ul>
                             </div>
                             <div class="down">
@@ -260,12 +243,12 @@
                                   </div>
                                 </div>
                                 <ul class="fpag">
-                                  <li class="imp">
+                                  <!-- <li class="imp">
                                     <i class="fa fa-certificate" aria-hidden="true"></i>
                                     <p>
                                       PARCELAMENTOS IMPERDÍVEIS!
                                     </p>
-                                  </li>
+                                  </li> -->
                                   <li class="parc">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                     <p>
@@ -285,7 +268,10 @@
                           <% }  else {}%>
                         </div>
                       </li>
-                    <% } %>
+                    <% } else{ %>
+                      
+                    <% }              
+                  } %>
                 </ul>
             </section>
         </div>
@@ -295,7 +281,9 @@
                   <h3>Internacional</h3>
                 </div>
                 <ul class="carvg hm">
-                    <%for (var i=0; i < produto.length; i++) {%>
+                  <%for (var i=0; i < produto.length; i++) {
+                    
+                    if( produto[i].ativo_prod == true ){ %>
                       <li>
                         <div class="item" data-caio='<%=produto[i].vagas_prod%>'>
                           <figure>
@@ -341,12 +329,12 @@
                                 <div class="desc">
                                   <p><%= produto[i].desc_prod %></p>
                                 </div>
-                                <ul class="local">
-                                  <!-- <li>
+                                <!-- <ul class="local">
+                                  <li>
                                     <h5>Cidade:</h5>
                                     <h6><%= produto[i].cidade %></h6>
-                                  </li> -->
-                                </ul>
+                                  </li>
+                                </ul> -->
                                 <ul class="tempo">
                                   <li>
                                     <h5>Horário:</h5>
@@ -356,10 +344,6 @@
                                     <h5>Dia:</h5>
                                     <h6><%= produto[i].data%></h6>
                                   </li>
-                                  <!-- <li>
-                                    <h5>Saída:</h5>
-                                    <h6><%= produto[i].data %></h6>
-                                  </li> -->
                                 </ul>
                                 <ul class="inc">
                                   <%for(var k = 0; k < produto[i].inclusos.length; k++){%>
@@ -368,14 +352,6 @@
                                       <h6><%= produto[i].inclusos[k] %></h6>
                                     </li>
                                   <% } %>
-                                  <!-- <li>
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    <h6>Transporte</h6>
-                                  </li>
-                                  <li>
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    <h6>Ingresso</h6>
-                                  </li> -->
                                 </ul>
                             </div>
                             <div class="down">
@@ -390,12 +366,12 @@
                                   </div>
                                 </div>
                                 <ul class="fpag">
-                                  <li class="imp">
+                                  <!-- <li class="imp">
                                     <i class="fa fa-certificate" aria-hidden="true"></i>
                                     <p>
                                       PARCELAMENTOS IMPERDÍVEIS!
                                     </p>
-                                  </li>
+                                  </li> -->
                                   <li class="parc">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                     <p>
@@ -415,7 +391,10 @@
                           <% }  else {}%>
                         </div>
                       </li>
-                    <% } %>
+                    <% } else{ %>
+                      
+                    <% }              
+                  } %>
                 </ul>
             </section>
         </div>

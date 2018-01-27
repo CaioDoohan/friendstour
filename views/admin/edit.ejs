@@ -66,9 +66,15 @@
                     </div> 
                     <div>
                         <label>
-                            Data - Horário (ISO)
+                            Data
                         </label>
-                        <input type="text"  name="data_prod" class="dataISO" value="<%= produto.data_prod%>"required/>
+                        <input type="text"  name="dia_prod" id="calendario" value="<%= produto.dia_prod%>" required/>
+                    </div>
+                    <div>
+                        <label>
+                            Hora
+                        </label>
+                        <input type="text" class="hora" name="hora_prod" placeholder="00:00:00" value="<%= produto.hora_prod%>" required/>
                     </div>
                     <div class="check">
                         <label>
@@ -76,10 +82,10 @@
                         </label>
                         <div class="int">
                             <% if( produto.nacional_prod == true) {%>
-                                <input type="checkbox" name="nacional_prod" value="<%= produto.nacional_prod%>" checked>  
+                                <input type="checkbox" name="nacional_prod" checked />  
                             <% } 
                               else { %>
-                                <input type="checkbox" name="nacional_prod" value="<%= produto.nacional_prod%>">  
+                                <input type="checkbox" name="nacional_prod" />  
                             <% } %>
                             <p>Sim</p>
                         </div>
@@ -113,10 +119,10 @@
                         </label>
                         <div class="int">
                             <% if( produto.vagas_prod == true) { %>
-                                <input type="checkbox" name="vagas_prod" value="<%=  produto.vagas_prod%>" checked/>
+                                <input type="checkbox" name="vagas_prod" checked/>
                             <% } 
                                 else { %>
-                                <input type="checkbox" name="vagas_prod" value="<%=  produto.vagas_prod%>">  
+                                <input type="checkbox" name="vagas_prod"/>  
                             <% } %>
                             <p>Sim</p>
                         </div>
@@ -139,9 +145,39 @@
         </div>
     </div> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
+    <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
     <script>
         $(document).ready(function(){
-            $('.dataISO').mask('0000/00/00  00:00:00');
+            jQuery.browser = {};
+                (function () {
+                    jQuery.browser.msie = false;
+                    jQuery.browser.version = 0;
+                    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+                        jQuery.browser.msie = true;
+                        jQuery.browser.version = RegExp.$1;
+                    }
+            })();
+            $('.parcelas').mask('00');
+            $('.hora').mask('00:00:00');
+            $( "#calendario" ).datepicker({
+                showButtonPanel:true,
+                dateFormat: 'yy-mm-dd',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+            });
+
+            var edit = <%= edit%>;
+
+            function confirmEdit(confirmacao){
+                if( confirmacao == true ){
+                    alert('Produto editado com sucesso');
+                }
+            }
+
+            confirmAdd(edit);
         });
     </script>
 </main>
