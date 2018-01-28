@@ -1,6 +1,7 @@
 var express      = require('express')
 var router       = express.Router();
 var moment       = require('moment');
+var nodemailer   = require('nodemailer');
 var DetalhesDAO  = require('../models/DetalhesDAO.js');
 
 router.get('/:id', function(req, res, next) {
@@ -31,6 +32,59 @@ router.get('/:id', function(req, res, next) {
         // console.log('RESULT QUERY:', param);     
         res.render('detalhes', { title: 'Friendstour - Detalhes', produto : param});
     });
+});
+
+router.post('/email', function(req, res, next){
+
+    console.log(req.body);
+
+    var output = `
+
+    <p>Teste email</p>
+    <ul>
+     <li>Nome : ${req.body.nome}</li>
+     <li>Nome : ${req.body.telefone}</li>
+     <li>Nome : ${req.body.email}</li>
+     <li>Nome : ${req.body.nascimento}</li>
+     <li>Nome : ${req.body.rg}</li>
+     <li>Nome : ${req.body.cpf}</li>
+     <li>Nome : ${req.body.mensagem}</li>
+    </ul>
+    
+    `;
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+               user: 'pereiradoohan@gmail.com',
+               pass: 'Manuela@2016'
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Friends Tour - Reserva" <pereiradoohan@outlook.com>', // sender address
+        to: 'pereiradoohan@gmail.com', // list of receivers
+        subject: 'Friends Tour - Reserva ✔', // Subject line
+        text: 'Hello world?', // plain text body
+        html: output // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    });
+
+
+    res.render("detalhes", { title : 'Detalhes' , produto : { } });
+
 });
 
 

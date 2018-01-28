@@ -20,7 +20,7 @@ Imagem.prototype.getAllAnuncio = function(callback){
 
 Imagem.prototype.insertImages = function(object){
     var home_id;
-    var det_id = {};
+    var det = [];
     db.then(function(conn){
 
         connection = conn;
@@ -41,7 +41,7 @@ Imagem.prototype.insertImages = function(object){
         var detname_img = [];
         var sqlEdit = "INSERT INTO images_det SET ?";
 
-        for(var k=0; k < object.det_img.length; k++){
+        for(var k = 0; k < object.det_img.length; k++){
 
             detname_img.push({
                 name_img : object.det_img[k].name_img,
@@ -50,22 +50,27 @@ Imagem.prototype.insertImages = function(object){
             connection.query(sqlEdit,detname_img[k]);
         }
 
-        console.log(detname_img);
-        
+        // console.log(detname_img);
+
         for(var i = 0; i < detname_img.length; i++){
-
-            var getDet = ("SELECT det_id from images_det where name_img = '" + detname_img[i].name_img + " ' order by 1 desc limit 1");
-            console.log(getDet);
             
-            connection.query(getDet, function(erro,result){
-                console.log(result[i].det_id);
-                //NÃO CONSIGO RETORNAR A PROPRIEDADE DET_ID DO RESULTADO DA QUERY
-                // QUERO RETORNAR ELAS PRA PODER DAR UM .PUSH() 
+            var getDet = ("SELECT det_id from images_det where name_img = '" + detname_img[i].name_img + " ' order by 1 desc limit 1");
+
+            connection.query(getDet, function(erro, result){
+
+                for(var k = 0; k < result.length; k++){
+                    
+                    det.push({
+                        det_id : result[k].det_id
+                    });
+                    console.log(chalk.blue(det[0].det_id));
+                    //NÃO CONSIGO RETORNAR DET PARA O PRÓXIMO .THEN()
+                }
             });
+        }        
 
-        }
-
-
+    }).then(function(){
+        
     });
 
 }

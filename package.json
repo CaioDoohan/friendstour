@@ -19,6 +19,7 @@
     "mysql": "^2.15.0",
     "node-sass": "^4.7.2",
     "node-sass-middleware": "^0.11.0",
+    "nodemailer": "^4.4.2",
     "nodemon": "^1.12.5",
     "promise-mysql": "^3.2.0",
     "serve-favicon": "^2.4.5",

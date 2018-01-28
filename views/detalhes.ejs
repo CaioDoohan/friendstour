@@ -158,7 +158,7 @@
     </div>
   </div>
   <div id="form" class="shadow">
-      <form action="" id="formsell" name="formsell" method="get" class="">
+      <form action="/detalhes/email" id="formsell" name="formsell" method="post">
         <i class="fa fa-window-close fc" aria-hidden="true" title="Voltar"></i>
         <span>
           ENTRE EM CONTATO AGORA<br> COM UM DE NOSSOS VENDEDORES
@@ -176,7 +176,7 @@
             <input type="text" placeholder="CPF" name ="cpf" class="cpf" required/>
         </div>
         <textarea placeholder="Olá, gostaria de comprar..." name="mensagem" required></textarea>
-        <button type="submit" value="enviar" onclick="" class="btn">Enviar</button>
+        <button type="submit" value="enviar" class="btn">Enviar</button>
       </form>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
@@ -190,8 +190,6 @@
         $('.date').mask('00/00/0000');
         $('.rg').mask('00.000.000-0');
         $('.cpf').mask('000.000.000-00');
-
-        // $("a.roadtrip").lightBox();
 
         $($(".example-image")[0]).parent().bind("click", function(e) {
            $(".example-image[selecionado=1]").click(), e.preventDefault()
