@@ -397,8 +397,6 @@ header {
           font-weight: 600;
           padding: 0 5px;
           box-sizing: border-box; }
-  .menu .sub {
-    display: none; }
 
 footer {
   padding: 0 5px;
@@ -466,85 +464,103 @@ footer {
     border: 1px solid #ffffff;
     background-color: #d05a35; }
 
-.formlist form {
+.formlist {
   display: table;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 5px;
-  padding: 15px 20px;
-  box-sizing: border-box; }
-  .formlist form > div {
-    width: 100%;
+  margin: 0 auto; }
+  .formlist form {
     display: table;
-    padding: 15px 0; }
-    .formlist form > div label, .formlist form > div input {
-      display: table-cell;
-      vertical-align: middle; }
-    .formlist form > div label {
-      font-weight: bold;
-      color: #253138;
-      font-size: 15px; }
-    .formlist form > div input {
-      background-color: transparent;
-      border: 1px solid white;
-      padding: 5px 10px;
-      text-align: left;
-      font-size: 14px;
-      width: 100%;
-      box-sizing: border-box;
-      border-radius: 5px;
-      border: 1px solid rgba(128, 128, 128, 0.278431); }
-  .formlist form .check label {
-    display: table;
-    width: 100%;
-    padding: 5px 0 10px;
-    text-align: center; }
-  .formlist form .check > div {
-    display: table;
-    width: 100%;
-    margin: 10px 0 5px; }
-    .formlist form .check > div > div {
-      display: table-cell;
-      vertical-align: middle; }
-  .formlist form .check > div.int {
-    margin: 0 auto;
-    display: table;
-    width: auto; }
-  .formlist form .check input {
-    border: none;
-    background-color: inherit; }
-  .formlist form .check input[type="checkbox"] {
-    -webkit-appearance: checkbox;
-    float: left;
-    width: auto; }
-  .formlist form .check p {
-    float: left;
-    font-size: 13px;
-    color: #253138;
-    font-weight: bold;
-    margin: 0 5px; }
-  .formlist form .txt label {
-    display: table;
-    width: 100%;
-    padding: 5px 0 10px;
-    text-align: center; }
-  .formlist form .txt div {
-    display: table;
-    width: 100%; }
-    .formlist form .txt div textarea {
-      width: 100%;
-      padding: 10px 5px;
-      box-sizing: border-box;
-      border-radius: 5px;
-      min-width: 462px;
-      min-height: 80px;
-      border: 1px solid rgba(128, 128, 128, 0.278431); }
-  .formlist form button {
-    margin: 0 auto;
-    color: #253138;
     background-color: white;
-    border: 1px solid #253138;
-    float: none;
-    padding: 10px 15px; }
-    .formlist form button:hover {
-      border: 1px solid #d05a35; }
+    border-radius: 5px;
+    padding: 15px 20px;
+    box-sizing: border-box; }
+    .formlist form > div {
+      width: 100%;
+      display: table;
+      padding: 15px 0; }
+      .formlist form > div label, .formlist form > div input {
+        display: table-cell;
+        vertical-align: middle; }
+      .formlist form > div label {
+        font-weight: bold;
+        color: #253138;
+        font-size: 15px; }
+      .formlist form > div input {
+        background-color: transparent;
+        border: 1px solid white;
+        padding: 5px 10px;
+        text-align: left;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid rgba(128, 128, 128, 0.278431); }
+    .formlist form .check label {
+      display: table;
+      width: 100%;
+      padding: 5px 0 10px;
+      text-align: center; }
+    .formlist form .check > div {
+      display: table;
+      width: 100%;
+      margin: 10px 0 5px; }
+      .formlist form .check > div > div {
+        display: table-cell;
+        vertical-align: middle; }
+    .formlist form .check > div.int {
+      margin: 0 auto;
+      display: table;
+      width: auto; }
+    .formlist form .check input {
+      border: none;
+      background-color: inherit; }
+    .formlist form .check input[type="checkbox"] {
+      -webkit-appearance: checkbox;
+      float: left;
+      width: auto; }
+    .formlist form .check p {
+      float: left;
+      font-size: 13px;
+      color: #253138;
+      font-weight: bold;
+      margin: 0 5px; }
+    .formlist form .txt label {
+      display: table;
+      width: 100%;
+      padding: 5px 0 10px;
+      text-align: center; }
+    .formlist form .txt div {
+      display: table;
+      width: 100%; }
+      .formlist form .txt div textarea {
+        width: 100%;
+        padding: 10px 5px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        min-width: 462px;
+        min-height: 80px;
+        border: 1px solid rgba(128, 128, 128, 0.278431); }
+    .formlist form button {
+      margin: 0 auto;
+      color: #253138;
+      background-color: white;
+      border: 1px solid #253138;
+      float: none;
+      padding: 10px 15px; }
+      .formlist form button:hover {
+        border: 1px solid #d05a35; }
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6; }
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1; }

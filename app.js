@@ -10,17 +10,57 @@ var chalk          = require('chalk');
 var routes         = require('./routes/index');
 var routesADM      = require('./routes/users');
 var moment         = require('moment');
+var validator      = require('express-validator'); 
+var session        = require('express-session');
+// var passport       = require('passport');
+// var LocalStrategy  = require('passport-local').Strategy
 var app            = express();
+
+// var auth = require("./auth.js")(app);
+
+// app.use(auth.initialize());
+// app.auth = auth;
+
+app.use(session({
+  cookie: { maxAge: 60000 }, 
+  secret: 'S0m3th1ng',
+  resave: false, 
+  saveUninitialized: false
+  })
+);
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+app.use(validator({
+
+  errorFormatter : function( param, msg , value){
+    var namespace  = param.split( '.' ),
+    root = namespace.shift(),
+    formParam = root;
+
+    while(namespace.length){
+     formParam += '[' +  namespace.shift() + ']'; 
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+
+}))
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

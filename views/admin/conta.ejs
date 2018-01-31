@@ -1,6 +1,42 @@
 <% include ../partial/headerADM %>
 <% include ../partial/menuADM %>
 <main>
-        
+    <div class="row">
+        <div class="col-12">
+            <div class="formlist">
+                <!-- show any messages that come back with authentication -->
+                <% if (erros){ 
+                    for( var i = 0; i < erros.length; i++) { %>
+                        <div class="alert alert-danger"><%= erros[i].msg%></div>
+                    <% }
+                 } %>
+
+                <!-- LOGIN FORM -->
+                <form action="/admin/account/register" method="post" class="formlist">
+                    <div>
+                        <label>Name</label>
+                        <input type="text" name="name">
+                    </div>
+                    <div>
+                        <label>Username</label>
+                        <input type="text" name="username">
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div>
+                        <label>Confirm Password</label>
+                        <input type="password" name="password2">
+                    </div>
+                    <button type="submit" >Registrar Usuário</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
 <% include ../partial/footerADM %>

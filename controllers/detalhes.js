@@ -43,12 +43,12 @@ router.post('/email', function(req, res, next){
     <p>Teste email</p>
     <ul>
      <li>Nome : ${req.body.nome}</li>
-     <li>Nome : ${req.body.telefone}</li>
-     <li>Nome : ${req.body.email}</li>
-     <li>Nome : ${req.body.nascimento}</li>
-     <li>Nome : ${req.body.rg}</li>
-     <li>Nome : ${req.body.cpf}</li>
-     <li>Nome : ${req.body.mensagem}</li>
+     <li>Telefone : ${req.body.telefone}</li>
+     <li>Email : ${req.body.email}</li>
+     <li>Data de Nascimento : ${req.body.nascimento}</li>
+     <li>RG : ${req.body.rg}</li>
+     <li>CPF : ${req.body.cpf}</li>
+     <li>Mensagem : ${req.body.mensagem}</li>
     </ul>
     
     `;
