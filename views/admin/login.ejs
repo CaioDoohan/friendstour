@@ -1,14 +1,23 @@
 <% include ../partial/headerADM %>
-<% include ../partial/menuADM %>
-    <main>
+<header>
+</header>
+<main>
+    <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="formlist">
+                <div class="formLog">
                     <!-- show any messages that come back with authentication -->
-                    
-
+                    <% if (erros){ 
+                        for( var i = 0; i < erros.length; i++) { %>
+                            <div class="alert alert-danger"><%= erros[i].msg%></div>
+                        <% }
+                        } %>
                     <!-- LOGIN FORM -->
-                    <form action="/admin/login" method="post" class="formlist">
+                    <figure>
+                        <img src="/images/logoID.png" alt="Friend's Tour" />
+                    </figure>
+                    <div class="msgs"></div>
+                    <form action="/admin/login" method="post" class="formlist" id="formLog">
                         <div>
                             <label>Username</label>
                             <input type="text" class="form-control" name="username">
@@ -17,14 +26,38 @@
                             <label>Password</label>
                             <input type="password" class="form-control" name="password">
                         </div>
-                        <div>
-                            <label>Remember Me</label>
-                            <input type="checkbox" class="form-control" name="remember" value="yes">
-                        </div>
-                        <button type="submit" >Iniciar sessão</button>
+                        <button type="submit" title="Login">Iniciar sessão</button>
                     </form>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
+<script>
+    $("#formLog").submit(function(event){
+        event.preventDefault();
+        var post_url = $(this).attr("action"); 
+        var request_method = $(this).attr("method"); 
+        var form_data = $(this).serialize(); 
+        
+        $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data,
+            dataType: 'json',
+            cache: false,
+        }).done(function(data){ 
+            console.log('DATA:',data);
+            if( data != undefined && data != null){
+                console.log("OK:", data)
+                sessionStorage.setItem("xTokenx", data);
+                window.location.href = "http://localhost:8080/admin/dashboard";
+            }else{
+                var msg = "Credenciais Incorretas";
+                $(".msgs").find('.alert').remove();
+                $(".msgs").append("<div class='alert' style='background-color: #f36e6e;border-color: #f36e6e;color: #fff;'>"+ msg +"</div>");
+            }
+        });
+    });
+</script>
 <% include ../partial/footerADM %>

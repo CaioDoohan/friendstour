@@ -3,9 +3,23 @@ var router   = express.Router();
 var moment   = require('moment');
 var chalk    = require('chalk');
 var Anuncio  = require("../models/anunciosDAO.js");
+const multer = require('multer');
+var Imagem = require('../models/imagensDAO');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "public/images/uploads/prods/");
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now()+'-'+ file.originalname);
+    }
+});
+
+var upload = multer({storage : storage});
+
+var cpUpload = upload.fields([{ name: 'imghome', maxCount: 1 }, { name: 'imgdet', maxCount: 4 }]);
 
 router.get('/', function(req, res, next) {
-    
     var AnuncioModel = new Anuncio();
 
     AnuncioModel.getAllAnuncio(function(erro, result){
@@ -37,32 +51,50 @@ router.get('/adicionar', function(req,res,next){
 router.post('/adicionar/dados_enviados', function(req,res,next){
     
     var AnuncioModel = new Anuncio(null);
+    var imgDet = [];   
     
-    var dados = req.body;
+    cpUpload(req,res,function(err) {
+        var dados = req.body;
 
-    var dadosForm = {
-        nome_prod     : dados.nome_prod,
-        categoria     : dados.categoria,
-        desc_prod     : dados.desc_prod,
-        data_prod     : (dados.dia_prod + ' ' + dados.hora_prod),
-        valor_prod    : dados.valor_prod,
-        nacional_prod : dados.nacional_prod,
-        incluso       : dados.incluso,
-        parcelas_prod : dados.parcelas_prod,
-        vagas_prod    : dados.vagas_prod,
-        texto_prod    : dados.texto_prod,
-    }
-
-    AnuncioModel.addAnuncio(dadosForm, function(erro, confirm){
-        var confirmacao = true;
-        AnuncioModel.getCategoria(function(erro,resultado){
-            
-            AnuncioModel.getInclusos(function(erro,tipos){
-                // console.log(confirm);
-                res.render('admin/adicionar', { title : 'Friendstour - Adicionar', categoria : resultado, inclusos : tipos, produto : {}, add : confirmacao });
-            });
-        });
+        var dadosForm = {
+            nome_prod     : dados.nome_prod,
+            categoria     : dados.categoria,
+            desc_prod     : dados.desc_prod,
+            data_prod     : (dados.dia_prod + ' ' + dados.hora_prod),
+            valor_prod    : dados.valor_prod,
+            nacional_prod : dados.nacional_prod,
+            incluso       : dados.incluso,
+            parcelas_prod : dados.parcelas_prod,
+            vagas_prod    : dados.vagas_prod,
+            texto_prod    : dados.texto_prod,
+        }
         
+        var imgHome = {
+            home : req.files.imghome[0].path,
+        }
+
+        for(var i = 0; i < req.files.imgdet.length; i++){
+            imgDet.push([
+                req.files.imgdet[i].path,
+                // console.log(req.files.imgdet[i]),
+            ])
+        }
+        // console.log('DADOS FORM:',dadosForm);
+        console.log('IMGS:', imgHome);
+        console.log('IMGS:', imgDet);
+
+        AnuncioModel.addAnuncio(dadosForm,imgHome, imgDet, function(erro, confirm){
+            var confirmacao = true;
+
+            // AnuncioModel.getCategoria(function(erro,resultado){
+                
+            //     AnuncioModel.getInclusos(function(erro,tipos){
+            //         // console.log(confirm);
+            //         res.render('admin/adicionar', { title : 'Friendstour - Adicionar', categoria : resultado, inclusos : tipos, produto : {}, add : confirmacao });
+            //     });
+            // });
+            
+        });
     });
 });
 

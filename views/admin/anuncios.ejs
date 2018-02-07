@@ -1,86 +1,88 @@
 <% include ../partial/headerADM %>
 <% include ../partial/menuADM %>
 <main>
-    <div class="row">
-        <div class="col col-12">
-            <div class="tit">
-                <p><%= title%></p>
-            </div>
-            <div class="add">
-                <a href="/admin/anuncios/adicionar" title="Adicionar" class="add">
-                    Adicionar
-                </a> 
-            </div>
-            <table class="list">
-                <colgroup span="5" class="columns"></colgroup>
-                <tr>
-                    <th>
-                        Nome do Anúncio
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Data de Criação
-                    </th>
-                    <th>
-                        Últimas Vagas
-                    </th>
-                    <th>
-                        Opções
-                    </th>
-                </tr>
-                <%for (var i=0; i < produto.length; i++) {%>
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <div class="tit">
+                    <p><%= title%></p>
+                </div>
+                <div class="add">
+                    <a href="/admin/anuncios/adicionar" title="Adicionar" class="add">
+                        Adicionar
+                    </a> 
+                </div>
+                <table class="list">
+                    <colgroup span="5" class="columns"></colgroup>
                     <tr>
-                        <td>
-                            <%= produto[i].nome_prod%>
-                        </td>
-                        <td>
-                            <%if(produto[i].ativo_prod == true){%>
-                             Ativo
-                            <% } else{ %>
-                             Desativado
-                            <% } %>
-                        </td>
-                        <td>
-                            <%= produto[i].datacriacao_prod%>
-                        </td>
-                        <td>
-                            <%if(produto[i].vagas_prod == true){%>
-                                Ativo
-                            <% } else{ %>
-                                Desativado
-                            <% } %>
-                        </td>                      
-                        <td>
-                            <table style="width:100%" class="options">
-                                <tr>
-                                    <td>
-                                        <a href="/admin/anuncios/editar/produto-<%= produto[i].id_prod %>" title="Editar" >
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <%if(produto[i].ativo_prod == true){%>
-                                          <i class="fa fa-power-off on" aria-hidden="true" title="Ativo"></i>
-                                        <%} else{%>
-                                          <i class="fa fa-power-off off" aria-hidden="true" title="Desativo"></i>
-                                        <% } %>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/anuncios/remover/produto-<%= produto[i].id_prod %>" title="Remover">
-                                           <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
+                        <th>
+                            Nome do Anúncio
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Data de Criação
+                        </th>
+                        <th>
+                            Últimas Vagas
+                        </th>
+                        <th>
+                            Opções
+                        </th>
                     </tr>
-                <% } %>
-                </tbody>             
-            </table>
-        </div>
-    </div>  
+                    <%for (var i=0; i < produto.length; i++) {%>
+                        <tr>
+                            <td>
+                                <%= produto[i].nome_prod%>
+                            </td>
+                            <td>
+                                <%if(produto[i].ativo_prod == true){%>
+                                    Ativo
+                                <% } else{ %>
+                                    Desativado
+                                <% } %>
+                            </td>
+                            <td>
+                                <%= produto[i].datacriacao_prod%>
+                            </td>
+                            <td>
+                                <%if(produto[i].vagas_prod == true){%>
+                                    Ativo
+                                <% } else{ %>
+                                    Desativado
+                                <% } %>
+                            </td>                      
+                            <td>
+                                <table style="width:100%" class="options">
+                                    <tr>
+                                        <td>
+                                            <a href="/admin/anuncios/editar/produto-<%= produto[i].id_prod %>" title="Editar" >
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <%if(produto[i].ativo_prod == true){%>
+                                                <i class="fa fa-power-off on" aria-hidden="true" title="Ativo"></i>
+                                            <%} else{%>
+                                                <i class="fa fa-power-off off" aria-hidden="true" title="Desativo"></i>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/anuncios/remover/produto-<%= produto[i].id_prod %>" title="Remover">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    <% } %>
+                    </tbody>             
+                </table>
+            </div>
+        </div> 
+    </div> 
 </main>
 <script>
     $(document).ready(function(){

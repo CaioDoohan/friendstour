@@ -22,128 +22,131 @@
     }
 %>
 <main>
-    <div class="row">
-        <div class="col col-12">
-            <div class="tit">
-                <p><%= title %></p>
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <div class="tit">
+                    <p><%= title %></p>
+                </div>
+                <div class="formlist">
+                    <form method="post" action="/admin/anuncios/editar/dados_alterados">
+                        <div>
+                            <label>
+                                ID:<%=  produto.id_prod%>
+                            </label>
+                            <input type="hidden" name="id_prod" placeholder="Id" value="<%=  produto.id_prod%>" />
+                        </div>
+                        <div>
+                            <label>
+                                Nome
+                            </label>
+                            <input type="text"  name="nome_prod" placeholder="Nome" value="<%=  produto.nome_prod%>" required/>
+                        </div>
+                        <div class="check">
+                            <label>
+                                Categoria
+                            </label>
+                            <div>
+                                <% for(var i = 0; i < categoria.length; i++) { %>
+                                    <div>
+                                        <input type="checkbox" name="categoria" value="<%=  categoria[i].id_cat%>" <%=hasCategory(categoria[i].id_cat)%>/>
+                                        <p><%=  categoria[i].id_cat%> - <%=  categoria[i].nome_cat%></p>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="txt">
+                            <label>
+                                Pequena Descrição
+                            </label>
+                            <div>
+                                <textarea name="desc_prod" placeholder="Descrição breve" value="<%= produto.desc_prod%>" required>
+                                    <%= produto.desc_prod%>
+                                </textarea>
+                            </div>
+                        </div> 
+                        <div>
+                            <label>
+                                Data
+                            </label>
+                            <input type="text"  name="dia_prod" id="calendario" value="<%= produto.dia_prod%>" required/>
+                        </div>
+                        <div>
+                            <label>
+                                Hora
+                            </label>
+                            <input type="text" class="hora" name="hora_prod" placeholder="00:00:00" value="<%= produto.hora_prod%>" required/>
+                        </div>
+                        <div class="check">
+                            <label>
+                                O Anúncio é internacional ?
+                            </label>
+                            <div class="int">
+                                <% if( produto.nacional_prod == true) {%>
+                                    <input type="checkbox" name="nacional_prod" checked />  
+                                <% } 
+                                    else { %>
+                                    <input type="checkbox" name="nacional_prod" />  
+                                <% } %>
+                                <p>Sim</p>
+                            </div>
+                        </div> 
+                        <div>
+                            <label>
+                                Valor
+                            </label>
+                            <input type="text" name="valor_prod" placeholder="R$" value="<%=  produto.valor_prod%>" required/>
+                        </div> 
+                        <div class="check">
+                            <label>
+                                Inclusos
+                            </label>
+                            <% for(var i = 0; i < inclusos.length; i++) { %>
+    
+                                <input type="checkbox" name="incluso" value="<%= inclusos[i].id_inc %>" <%=hasIncludes(inclusos[i].id_inc)%> />
+                                <p><%= inclusos[i].nome_inc %></p>
+    
+                            <% } %>
+                        </div>
+                        <div>
+                            <label>
+                                Quantidade de parcelas
+                            </label>
+                            <input type="text" name="parcelas_prod" placeholder="Quantidade de parcelas" value="<%=  produto.parcelas_prod%>" required/>
+                        </div> 
+                        <div class="check">
+                            <label>
+                                Últimas Vagas
+                            </label>
+                            <div class="int">
+                                <% if( produto.vagas_prod == true) { %>
+                                    <input type="checkbox" name="vagas_prod" checked/>
+                                <% } 
+                                    else { %>
+                                    <input type="checkbox" name="vagas_prod"/>  
+                                <% } %>
+                                <p>Sim</p>
+                            </div>
+                        </div>   
+                        <div class="txt">
+                            <label>
+                                Detalhes
+                            </label>
+                            <div>
+                                <textarea name="texto_prod" placeholder="Detalhes" value="<%=  produto.texto_prod%>" required>
+                                    <%=  produto.texto_prod%>
+                                </textarea>
+                            </div>
+                        </div>  
+                        <div class="add">
+                            <button type="submit" value="enviar" >Enviar</button>               
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="formlist">
-                <form method="post" action="/admin/anuncios/editar/dados_alterados">
-                    <div>
-                        <label>
-                            ID:<%=  produto.id_prod%>
-                        </label>
-                        <input type="hidden" name="id_prod" placeholder="Id" value="<%=  produto.id_prod%>" />
-                    </div>
-                    <div>
-                        <label>
-                            Nome
-                        </label>
-                        <input type="text"  name="nome_prod" placeholder="Nome" value="<%=  produto.nome_prod%>" required/>
-                    </div>
-                    <div class="check">
-                        <label>
-                            Categoria
-                        </label>
-                        <div>
-                            <% for(var i = 0; i < categoria.length; i++) { %>
-                                <div>
-                                    <input type="checkbox" name="categoria" value="<%=  categoria[i].id_cat%>" <%=hasCategory(categoria[i].id_cat)%>/>
-                                    <p><%=  categoria[i].id_cat%> - <%=  categoria[i].nome_cat%></p>
-                                </div>
-                            <% } %>
-                        </div>
-                    </div>
-                    <div class="txt">
-                        <label>
-                            Pequena Descrição
-                        </label>
-                        <div>
-                            <textarea name="desc_prod" placeholder="Descrição breve" value="<%= produto.desc_prod%>" required>
-                                <%= produto.desc_prod%>
-                            </textarea>
-                        </div>
-                    </div> 
-                    <div>
-                        <label>
-                            Data
-                        </label>
-                        <input type="text"  name="dia_prod" id="calendario" value="<%= produto.dia_prod%>" required/>
-                    </div>
-                    <div>
-                        <label>
-                            Hora
-                        </label>
-                        <input type="text" class="hora" name="hora_prod" placeholder="00:00:00" value="<%= produto.hora_prod%>" required/>
-                    </div>
-                    <div class="check">
-                        <label>
-                            O Anúncio é internacional ?
-                        </label>
-                        <div class="int">
-                            <% if( produto.nacional_prod == true) {%>
-                                <input type="checkbox" name="nacional_prod" checked />  
-                            <% } 
-                              else { %>
-                                <input type="checkbox" name="nacional_prod" />  
-                            <% } %>
-                            <p>Sim</p>
-                        </div>
-                    </div> 
-                    <div>
-                        <label>
-                            Valor
-                        </label>
-                        <input type="text" name="valor_prod" placeholder="R$" value="<%=  produto.valor_prod%>" required/>
-                    </div> 
-                    <div class="check">
-                        <label>
-                            Inclusos
-                        </label>
-                        <% for(var i = 0; i < inclusos.length; i++) { %>
-
-                            <input type="checkbox" name="incluso" value="<%= inclusos[i].id_inc %>" <%=hasIncludes(inclusos[i].id_inc)%> />
-                            <p><%= inclusos[i].nome_inc %></p>
-
-                        <% } %>
-                    </div>
-                    <div>
-                        <label>
-                            Quantidade de parcelas
-                        </label>
-                        <input type="text" name="parcelas_prod" placeholder="Quantidade de parcelas" value="<%=  produto.parcelas_prod%>" required/>
-                    </div> 
-                    <div class="check">
-                        <label>
-                            Últimas Vagas
-                        </label>
-                        <div class="int">
-                            <% if( produto.vagas_prod == true) { %>
-                                <input type="checkbox" name="vagas_prod" checked/>
-                            <% } 
-                                else { %>
-                                <input type="checkbox" name="vagas_prod"/>  
-                            <% } %>
-                            <p>Sim</p>
-                        </div>
-                    </div>   
-                    <div class="txt">
-                        <label>
-                            Detalhes
-                        </label>
-                        <div>
-                            <textarea name="texto_prod" placeholder="Detalhes" value="<%=  produto.texto_prod%>" required>
-                               <%=  produto.texto_prod%>
-                            </textarea>
-                        </div>
-                    </div>  
-                    <div class="add">
-                        <button type="submit" value="enviar" >Enviar</button>               
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> 
+        </div> 
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
     <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
     <script>

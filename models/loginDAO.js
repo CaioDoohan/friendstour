@@ -1,48 +1,67 @@
 var mysql = require('promise-mysql');
 var config = require('../config/dbConnection');
+var configJwt = require('../config/config');
 var chalk = require('chalk');
-var bcrypt = require('bcryptjs');
+var crypto = require('crypto');
+var jwt = require('jwt-simple');
 var db;
 var connection;
 
-var UserDAO = function(){
+var LoginDAO = function(){
     db = mysql.createConnection(config.mysqlOptions);
 }
 
-UserDAO.prototype.createUser = function(newUser, callback){
-    var User = {
-
-        username : newUser.username,
-        password : newUser.password,
-        email : newUser.email,
-        name : newUser.name
-    } 
-
+LoginDAO.prototype.verify = function(dadosLog, callback){
+    console.log(dadosLog);
     db.then(function(conn){
+        var connection = conn;
 
-        connection = conn;
+        var hash =  crypto.createHash('md5').update(dadosLog.password).digest("hex");
 
-        bcrypt.genSalt(10, function(err, salt) {
+        dadosLog.password = hash; 
 
-            bcrypt.hash(User.password, salt, function(err, hash) {
- 
-                User.password = hash;
-                console.log(User);
-                var insertUser = "INSERT INTO user(username, password,email,name) VALUES (?,?,?,?)";
+        var searchSQL = ("Select * from user where username = '" + dadosLog.username + "'and password = '" + dadosLog.password + "' ");
 
-                connection.query(insertUser,User, function(err, callback){
-
-                    if(err) throw chalk.yellow(err);
-                    return callback;
-                });
-                
-            });
+        connection.query(searchSQL, function(err, result){
+            console.log(result);
+            if(err) throw err;
+            else if (result[0] == undefined || result[0] ==  null) {
+                console.log("usuario nao encontrado");
+                callback(null);
+            } else {
+                const payload = {
+                    id : result[0].user_id,
+                    username : result[0].username,
+                    admin : result[0].admin
+                };
+                var token = jwt.encode(payload, configJwt.jwtSecret);
+                callback({access_token:token});
+            }
         });
-
-    })
-    
+    }); 
 }
 
+LoginDAO.prototype.getByID = function(userX, callback){
 
-module.exports = UserDAO;
+    db.then(function(conn){
+        connection = conn;
+        var sqlSearch = "SELECT * FROM user WHERE user_id = ? AND username = ?";
 
+        connection.query(sqlSearch, [userX.id, userX.username], function(err,result){
+
+            if(err) throw err;
+
+            else if( result[0] == undefined ){
+                console.log(chalk.blue("USUARIO NAO ENCONTRADO"));
+                callback(null);
+            }
+            else{
+                console.log(chalk.blue("USUARIO ENCONTRADO"));
+                callback(result);
+            }
+        });
+
+        connection.end();
+    })   
+}
+module.exports = LoginDAO;

@@ -9,15 +9,6 @@ var Imagem = function(){
     db = mysql.createConnection(config.mysqlOptions);
 }
  
-Imagem.prototype.getAllAnuncio = function(callback){
-    db.then(function(conn){
-        
-        conn.query('select * from produto order by datacriacao_prod', callback);
-
-        // conn.end();
-    })
-}
-
 Imagem.prototype.insertImages = function(object){
     var home_id;
     var det = [];
@@ -39,7 +30,7 @@ Imagem.prototype.insertImages = function(object){
         home_id = idHome;
         
         var detname_img = [];
-        var sqlEdit = "INSERT INTO images_det SET ?";
+        var sqlEdit = "INSERT INTO images_det SET ? ;select LAST_INSERT_ID()";
 
         for(var k = 0; k < object.det_img.length; k++){
 
@@ -47,11 +38,13 @@ Imagem.prototype.insertImages = function(object){
                 name_img : object.det_img[k].name_img,
             });
 
-            connection.query(sqlEdit,detname_img[k]);
+            connection.query(sqlEdit,detname_img[k],function(err,data){
+                console.log('ultimno id', data);
+            });
         }
 
         // console.log(detname_img);
-
+/*
         for(var i = 0; i < detname_img.length; i++){
             
             var getDet = ("SELECT det_id from images_det where name_img = '" + detname_img[i].name_img + " ' order by 1 desc limit 1");
@@ -67,7 +60,7 @@ Imagem.prototype.insertImages = function(object){
                     //NÃO CONSIGO RETORNAR DET PARA O PRÓXIMO .THEN()
                 }
             });
-        }        
+        }      */  
 
     }).then(function(){
         

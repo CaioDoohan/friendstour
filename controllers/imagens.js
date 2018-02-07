@@ -61,6 +61,8 @@ router.post('/envio', function(req,res,next){
         }
         var dado = req.body;
 
+        console.log('x', req.body.nomefantasia);
+
         var dados = {
             id_prod : dado.id_prod,
         };
@@ -93,11 +95,11 @@ router.post('/envio', function(req,res,next){
 
         }
 
-        ImagemModel.insertImages(object, function(erro, result){
+        // ImagemModel.insertImages(object, function(erro, result){
 
-            res.render('admin/adicionarIMG',{ title : 'Friendstour - Imagem adicionada', dados : dados});
+        //     res.render('admin/adicionarIMG',{ title : 'Friendstour - Imagem adicionada', dados : dados});
 
-        });
+        // });
     }); 
 });
 

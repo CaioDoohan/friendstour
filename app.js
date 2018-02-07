@@ -1,36 +1,22 @@
-var express        = require('express');
-var path           = require('path');
-var favicon        = require('serve-favicon');
-var logger         = require('morgan');
-var cookieParser   = require('cookie-parser');
-var bodyParser     = require('body-parser');
-var sass           = require('node-sass');
-var sassMiddleware = require('node-sass-middleware');
-var chalk          = require('chalk');
-var routes         = require('./routes/index');
-var routesADM      = require('./routes/users');
-var moment         = require('moment');
-var validator      = require('express-validator'); 
-var session        = require('express-session');
-// var passport       = require('passport');
-// var LocalStrategy  = require('passport-local').Strategy
-var app            = express();
-
-// var auth = require("./auth.js")(app);
-
-// app.use(auth.initialize());
-// app.auth = auth;
-
-app.use(session({
-  cookie: { maxAge: 60000 }, 
-  secret: 'S0m3th1ng',
-  resave: false, 
-  saveUninitialized: false
-  })
-);
-
-// app.use(passport.initialize());
-// app.use(passport.session());
+var express           = require('express');
+var path              = require('path');
+var favicon           = require('serve-favicon');
+var logger            = require('morgan');
+var cookieParser      = require('cookie-parser');
+var bodyParser        = require('body-parser');
+var sass              = require('node-sass');
+var sassMiddleware    = require('node-sass-middleware');
+var chalk             = require('chalk');
+var routes            = require('./routes/index');
+var routesADM         = require('./routes/users');
+var moment            = require('moment');
+var validator         = require('express-validator'); 
+var app               = express();
+var configJwt         = require('./config/config');
+var jwt               = require('jwt-simple');
+var passport          = require('passport');
+var User              = require('./models/loginDAO');
+var Strategy = require('passport-http-bearer').Strategy;
 
 app.use(validator({
 
@@ -49,8 +35,7 @@ app.use(validator({
     };
   }
 
-}))
-
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -73,6 +58,35 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+console.log(chalk.blue('|─ Loading JwtBearerStrategy...'));
+
+passport.use(new Strategy( function(token, cb) {
+    try{
+        var userX = jwt.decode(token, configJwt.jwtSecret);
+        var UserModel = new User();
+        UserModel.getByID(userX, function(recordnew){
+          // console.log(recordnew);
+          var record = {
+                id: recordnew[0].user_id,
+                username: recordnew[0].username,
+                email: recordnew[0].email,
+                admin : recordnew[0].admin
+          };
+          // console.log(record);
+          return (record == null ? cb(null, false) : cb(null, record));              
+        });
+        
+        UserModel = null;        
+    }
+    catch(ex){
+        console.log('Erro passport',ex);
+        return cb(null, false);
+    }    
+  })
+);
+
+app.use(passport.initialize());
 
 // adding the sass middleware
 app.use(sassMiddleware({

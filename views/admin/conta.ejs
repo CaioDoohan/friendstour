@@ -4,39 +4,124 @@
     <div class="row">
         <div class="col-12">
             <div class="formlist">
-                <!-- show any messages that come back with authentication -->
-                <% if (erros){ 
-                    for( var i = 0; i < erros.length; i++) { %>
-                        <div class="alert alert-danger"><%= erros[i].msg%></div>
-                    <% }
-                 } %>
-
+                <div class="msgs"></div>
                 <!-- LOGIN FORM -->
-                <form action="/admin/account/register" method="post" class="formlist">
+                <form method="post" action="/admin/account/register" class="formlist" id="formReg">
                     <div>
-                        <label>Name</label>
-                        <input type="text" name="name">
+                        <label>Nome</label>
+                        <input type="text" name="name" >
                     </div>
-                    <div>
+                    <div class="field name">
                         <label>Username</label>
-                        <input type="text" name="username">
+                        <input type="text" name="username" onblur="testeField(this.value)" class="fieldtest">
                     </div>
-                    <div>
+                    <div class="field email">
                         <label>Email</label>
-                        <input type="text" name="email">
+                        <input type="text" name="email" onblur="testeField(this.value)" class="fieldtest">
+                    </div>
+                    <div class="check">
+                        <label>Permissões:</label>
+                        
+                        <div>
+                            <% for(var i = 0; i < action.length; i++){%>
+                            <div>
+                                <input type="checkbox" name="action" value="<%= action[i].action_id%>"/>
+                                <p><%= action[i].action%></p>
+                            </div>
+                            <% } %>
+                        </div>
+                        
                     </div>
                     <div>
-                        <label>Password</label>
+                        <label>Senha</label>
                         <input type="password" name="password">
                     </div>
                     <div>
-                        <label>Confirm Password</label>
+                        <label>Confirme sua senha</label>
                         <input type="password" name="password2">
                     </div>
-                    <button type="submit" >Registrar Usuário</button>
+                    <button type="submit" name="submit" value="Submit Form">Registrar Usuário</button>
                 </form>
             </div>
         </div>
     </div>
 </main>
+<script>
+    function isValidEmailAddress(emailAddress) {
+        var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+        return pattern.test(emailAddress);
+    }
+    function testeField(value) {
+        if (isValidEmailAddress(value)) {
+            $.ajax({
+                method: "POST",
+                url: "/admin/account/validate",
+                data: { email: value },
+                dataType: 'json',
+                cache: false,
+                })
+                .done(function(data) {
+                    if(data.type == false){
+                        $('.field.email').find("div.text").remove();
+                        $('.field.email').append("<div class='text'><span class='red'>"+ data.msg +"</span></div>");
+                    }
+                    else if (data.type == true){
+                        $('.field.email').find("div.text").remove();
+                        $('.field.email').append("<div class='text'><span class='green'>"+ data.msg +"</span></div>");
+                    }
+                });       
+        }else {
+            $.ajax({
+                method: "POST",
+                url: "/admin/account/validate",
+                data: { user: value },
+                dataType: 'json',
+                cache: false,
+                })
+                .done(function(data) {
+                    if(data.type == false){
+                        $('.field.name').find("div.text").remove();
+                        $('.field.name').append("<div class='text'><span class='red'>"+ data.msg +"</span></div>");
+                    }
+                    else if (data.type == true){
+                        $('.field.name').find("div.text").remove();
+                        $('.field.name').append("<div class='text'><span class='green'>"+ data.msg +"</span></div>");
+                    }
+                });   
+        }
+        return false;
+    }
+
+    $(document).ready(function(){
+        $('.fieldtest').blur(function(){
+            if($(this).val() == ''){
+                $(this).parent().find("div.text").remove();
+                return false;
+            }
+        });
+    });
+    
+    $("#formReg").submit(function(event){
+        event.preventDefault();
+        var post_url = $(this).attr("action"); 
+        var request_method = $(this).attr("method"); 
+        var form_data = $(this).serialize(); 
+        
+        $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data
+        }).done(function(data){ 
+            console.log(data);
+            $(".msgs").find('.alert').remove();
+            $('input:checkbox').removeAttr('checked');
+            $.each(data,function(idx, key){
+                $(".msgs").append("<div class='alert'>"+ data[idx].msg +"</div>");
+            });
+            $('.field').find("div.text").remove();
+            // $('#formReg').find("input").val("");
+        });
+    });
+    
+</script>
 <% include ../partial/footerADM %>

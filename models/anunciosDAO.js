@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var moment = require('moment');
 var db;
 var connection;
+var arrIdsDet = [];
 
 var Anuncio = function(){
     db = mysql.createConnection(config.mysqlOptions);
@@ -36,8 +37,11 @@ Anuncio.prototype.getInclusos = function(callback){
     })
 }
 
-Anuncio.prototype.addAnuncio = function(dadosForm, callback){
+Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,imgDet, callback){
     var confirmacao;
+    var idProd;
+    var idHome;
+    
     db.then(function(conn){
         var insert = "INSERT INTO produto(nome_prod,desc_prod,data_prod,valor_prod,nacional_prod,vagas_prod,parcelas_prod,texto_prod) VALUES(?,?,?,?,?,?,?,?)";
         
@@ -89,8 +93,62 @@ Anuncio.prototype.addAnuncio = function(dadosForm, callback){
             connection.query(sqlCat);
         }
 
-        console.log(chalk.yellow("PRODUTO ADICIONADO"));
+        return id;
+        // console.log(chalk.yellow("PRODUTO ADICIONADO"));
+    }).then(function(id){
+        idProd = id;
+        
+        var homePath = imgHome.home;
+
+        var sqlHome = ("INSERT INTO images_home(name_img) VALUE('" + homePath +"') " );
+
+        return connection.query(sqlHome,homePath);
+
+    }).then(function(result){
+        var idHome = result.insertId;
+
+        var sqlHome = ("INSERT INTO home_prod(home_id,prod_id) VALUES("+ idHome + ","+ idProd + ")");
+
+        connection.query(sqlHome);
+
+    }).then(function(){
+
+        var detPaths = imgDet;
+        var that = this;
+        var idsDet = [];
+
+        for(var i =0; i < detPaths.length; i++){
+            var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + detPaths[i] + "')");
+
+            connection.query(sqlDet, function(err,result){      
+                if(err){
+                    throw err
+                }else{
+                    teste(result.insertId);
+                    console.log(arrIdsDet);
+                }
+            });
+        }
+
+        return connection.end();
+    }).then(function(){
+        console.log('ARRAY:',arrIdsDet); 
+
+        for(var i=0; i < arrIdsDet.length; i++){
+
+            var sqlInsert = ("INSERT INTO det_prod(det_id, prod_id) VALUES("+ arrIdsDet[i] +","+ idProd +")");
+
+            connection.query(sqlInsert);  
+
+        }
+       
+        connection.end();
+
     });
+}
+
+function teste(arrGambi){
+    arrIdsDet.push(arrGambi);
 }
 
 Anuncio.prototype.getFullAnuncio = function(id, result){
