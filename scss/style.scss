@@ -668,6 +668,17 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     box-sizing: border-box;
     padding: 15px 0;
     position: relative;
+
+    .undefined{
+      display: table;
+      padding: 10px 0;
+
+      p{
+        font-size:16px;
+        margin: 0 auto;
+        display: table;
+      }
+    }
     .slick-slide{
       margin:0 10px;
     }
@@ -750,6 +761,9 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           }
           .transp{
             background-color:#c20101;
+          }
+          .cruzeiro{
+            background-color:#005c7e;
           }
         }
         .name{

@@ -21,30 +21,43 @@ Anuncio.prototype.getAllAnuncio = function(callback){
 
 Anuncio.prototype.getCategoria = function(callback){
     db.then(function(conn){
-        
-        conn.query('select * from categoria order by id_cat asc', callback);
-
+        conn.query('select * from categoria order by id_cat asc', function(erro,result){
+            if(erro){
+                return callback(erro, 0);
+            }else{
+                return callback(0, result);
+            }
+        });
+        //conn.end();
         // conn.end();
     })
 }
 
 Anuncio.prototype.getInclusos = function(callback){
     db.then(function(conn){
-        
-        conn.query('select * from inclusos order by id_inc asc', callback);
+        conn.query('select * from inclusos', function(erro,result){
+            console.log("RESULT", result);
+            if(erro){
+                return callback(erro, 0);
+            }else{
+                console.log(result);
+                return callback(0, result);
+            }
+        });
 
-        // conn.end();
+        conn.end();
     })
 }
 
-Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,imgDet, callback){
+Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
     var confirmacao;
     var idProd;
+    var id;
     var idHome;
     
     db.then(function(conn){
-        var insert = "INSERT INTO produto(nome_prod,desc_prod,data_prod,valor_prod,nacional_prod,vagas_prod,parcelas_prod,texto_prod) VALUES(?,?,?,?,?,?,?,?)";
-        
+        var insert = "INSERT INTO produto(nome_prod,desc_prod,data_prod,valor_prod,nacional_prod,vagas_prod,parcelas_prod,texto_prod,promo_prod) VALUES(?,?,?,?,?,?,?,?,?)";
+
         connection = conn;
 
         var tabProd = [
@@ -56,99 +69,181 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,imgDet, callback){
             (dadosForm.vagas_prod == "on" ? true : false),
             dadosForm.parcelas_prod,
             dadosForm.texto_prod,
+            (dadosForm.promo_prod == "on" ? true : false)
         ];
 
-        connection.query(insert,tabProd,callback);
-        console.log(chalk.red("--DADOS CADASTRADOS--"));
-        
-    }).then(function(erro){
-        // console.log(dadosForm);
-        var getId = ("select id_prod from produto where nome_prod = '" + dadosForm.nome_prod + "' order by 1 desc limit 1");
+        connection.query(insert,tabProd, function(erro, result){
+           // console.log("result!", result);
+            if(erro){
+                console.log("entrou erro!", result);
+                return callback(erro, 0);
+            }
+            else{
+                console.log(chalk.blue("ID DO ANUNCIO:", result.insertId));
+                id = result.insertId;
+            }
+        });
 
-        // console.log(chalk.yellow(getId));
+        return connection.query("SELECT 1");
+    })/*.then(function(){
 
-        return connection.query(getId);
-
-    }).then(function(userID){
-
-        console.log(chalk.blue(userID));
-
-        id = userID[0].id_prod;
-        
         for(var k = 0; k < dadosForm.incluso.length; k++){
             var sqlInc = "insert into inc_prod(id_inc,id_prod) values("+ dadosForm.incluso[k] + "," + id + ")";
-            // console.log(dados.incluso[k] + '---' + id);
+            //console.log("INCLUSOS + ID PROD",dadosForm.incluso[k] + '---' + id);
             connection.query(sqlInc);
         }
-
-        // console.log(chalk.blue(sqlInc));
-
-        return id;
-
-    }).then(function(id){
+        
+    }).then(function(){
 
         for(var k = 0; k < dadosForm.categoria.length; k++){
             var sqlCat = "insert into cat_prod(id_cat,id_prod) values("+ dadosForm.categoria[k] + "," + id + ")";
-            // console.log(chalk.green(dados.categoria[k] + '---' + id));
+            //console.log(chalk.green("CATEGORIAS + ID PROD", dadosForm.categoria[k] + '---' + id));
             connection.query(sqlCat);
         }
-
-        return id;
         // console.log(chalk.yellow("PRODUTO ADICIONADO"));
-    }).then(function(id){
-        idProd = id;
-        
-        var homePath = imgHome.home;
-
-        var sqlHome = ("INSERT INTO images_home(name_img) VALUE('" + homePath +"') " );
-
-        return connection.query(sqlHome,homePath);
-
-    }).then(function(result){
-        var idHome = result.insertId;
-
-        var sqlHome = ("INSERT INTO home_prod(home_id,prod_id) VALUES("+ idHome + ","+ idProd + ")");
-
-        connection.query(sqlHome);
-
     }).then(function(){
+        //idProd = id;
+        //console.log(imgHome);
+        if(imgHome != undefined ){
+            console.log("IMAGEM HOME != undefined");
+            var homePath = imgHome.home;
 
-        var detPaths = imgDet;
-        var that = this;
-        var idsDet = [];
+            var sqlHome = ("INSERT INTO images_home(name_img) VALUE('" + homePath +"') " );
 
-        for(var i =0; i < detPaths.length; i++){
-            var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + detPaths[i] + "')");
+            //console.log(sqlHome);
 
-            connection.query(sqlDet, function(err,result){      
-                if(err){
-                    throw err
+            connection.query(sqlHome, function(erro, result){
+                if(erro){
+                    callback(erro, 0);
                 }else{
-                    teste(result.insertId);
-                    console.log(arrIdsDet);
+                    //console.log(result);
+                    idHome = result.insertId;
                 }
             });
+        }else{
+            //console.log("imagem home == NULL");
+            idHome = null;
+        }
+        return connection.query("SELECT 1");
+
+    }).then(function(){
+        //console.log("ID IMGAGEM HOME:",idHome);
+        if( idHome != null ){
+            //console.log("n é null",idHome);
+            var sqlHome = ("INSERT INTO home_prod(home_id,prod_id) VALUES("+ idHome + ","+ id + ")");
+
+            connection.query(sqlHome);
         }
 
-        return connection.end();
+        return connection.query("SELECT 1");
+
+    })/*.then(function(){
+
+        var detPaths = detImg;
+        var idsDet = [];
+        console.log("IMAGES DET:",detImg);
+        if( detPaths != undefined ){
+            console.log("ENTROU if");
+            testeAsync(detPaths);
+            console.log("6-)RESULT",arrIdsDet);
+            /*for(var i = 0; i < detPaths.length; i++){
+                var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + detPaths[i] + "')");
+
+                console.log(sqlDet);
+                connection.query(sqlDet, function(err,result){      
+                    if(err){
+                        callback(err, 0);
+                    }else{
+                        
+                        var id = result.insertId;
+                        function gambiDasBoa(id){
+                            arrIdsDet.push(arrGambi);
+                        }
+                        gambiDasBoa(result.insertId);
+                        return arrIdsDet;
+                        console.log("array dentro do else:",arrIdsDet);
+                    }
+                });
+                console.log("FORA DA CONNECTION:", arrIdsDet);
+            }
+            //console.log("FORA DO ELSE", arrIdsDet);
+            //return arrIdsDet;
+        }else{
+            console.log("ARRAY NULL");
+            arrIdsDet = null;
+        }
+        console.log("ARRAY FINAL:",arrIdsDet);
+        return connection.query("select 1;")
     }).then(function(){
         console.log('ARRAY:',arrIdsDet); 
 
-        for(var i=0; i < arrIdsDet.length; i++){
-
-            var sqlInsert = ("INSERT INTO det_prod(det_id, prod_id) VALUES("+ arrIdsDet[i] +","+ idProd +")");
-
-            connection.query(sqlInsert);  
-
+        if( arrIdsDet != null ){
+            console.log("NAO É NULL");
+            for(var i = 0; i < arrIdsDet.length; i++){
+                var sqlInsert = ("INSERT INTO det_prod(det_id, prod_id) VALUES("+ arrIdsDet[i] +","+ id +")");
+    
+                //console.log(sqlInsert);
+                connection.query(sqlInsert);
+            }
         }
-       
-        connection.end();
+        callback(0,1);
 
-    });
+        connection.end();
+    });*/
 }
 
-function teste(arrGambi){
-    arrIdsDet.push(arrGambi);
+/*
+async function testeAsync(value){
+    console.log("1-)ENTROU FUNCTION");
+    for(var i = 0; i < value.length; i++){
+        var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + value[i] + "')");
+        console.log("2."+ i +"-)"+ sqlDet);
+        await insert(sqlDet);
+    }
+    console.log("5-)FINAL:",arrIdsDet);
+    return await arrIdsDet;
+}
+
+function insert(sql){
+    connection.query(sql, function(err,result){      
+        if(err){
+            throw err;
+            //callback(err, 0);
+        }else{
+            var id = result.insertId;
+            console.log("3-)",id);
+            arrIdsDet.push(id);
+            console.log("4-)",arrIdsDet);
+            //console.log("array dentro do else:",arrIdsDet);
+        }
+    });
+}
+*/
+Anuncio.prototype.verifyEvent = function(event, validate){
+    // console.log(chalk.green(email));
+    if(event != undefined && event != null){
+        db.then(function(conn){
+            connection = conn;
+            var findEvent = ("SELECT nome_prod FROM produto WHERE nome_prod ='" + event + "' ");
+            // console.log(findUser);
+            connection.query(findEvent, function(err, callback){
+                if(err) throw err;
+                
+                else if(callback.length > 0){
+                   console.log("Usuario em uso");
+                   return validate(0, false);
+                }
+                else{
+                    console.log("Usuario disponível");
+                    return validate(0, true); 
+                }
+            });
+            connection.end();
+        });
+
+    }else{
+        return validate(0, undefined);
+    }
 }
 
 Anuncio.prototype.getFullAnuncio = function(id, result){
@@ -179,6 +274,7 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
             parcelas_prod : dados[0].parcelas_prod,
             texto_prod : dados[0].texto_prod,
             nacional_prod: dados[0].nacional_prod,
+            promo_prod : dados[0].promo_prod,
             ativo_prod : dados[0].ativo_prod,
             vagas_prod : dados[0].vagas_prod,
             criacao : dados[0].datacriacao_prod
@@ -220,6 +316,7 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
             parcelas_prod : prod.parcelas_prod,
             texto_prod : prod.texto_prod,
             nacional_prod: prod.nacional_prod,
+            promo_prod : prod.promo_prod,
             ativo_prod : prod.ativo_prod,
             vagas_prod : prod.vagas_prod,
             categoria : categoria,
@@ -232,7 +329,8 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
 }
 
 Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
-    // console.log(dadosEdit);
+    //console.log(dadosEdit);
+
     var prod = {},
         id,
         catIds = [],
@@ -251,6 +349,7 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
             desc_prod : dadosEdit.desc_prod,
             data_prod : dadosEdit.data_prod,
             nacional_prod : (dadosEdit.nacional_prod == "on" ? true : false),
+            promo_prod : (dadosEdit.promo_prod == "on" ? true : false),
             valor_prod : dadosEdit.valor_prod,
             parcelas_prod : dadosEdit.parcelas_prod,
             vagas_prod : (dadosEdit.vagas_prod == "on" ? true : false),
@@ -261,8 +360,12 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
         var sqlUpdate = ("UPDATE produto SET ? where id_prod = " + prod.id_prod);
         
         
-        connection.query(sqlUpdate,prod);
-        console.log('Works');
+        connection.query(sqlUpdate,prod, function(erro, result){
+            if(erro){
+                alteracao(erro, 0);
+            }
+        });
+        return connection.query("SELECT 1");
     }).then(function(){
 
         id = dadosEdit.id_prod;
@@ -271,7 +374,7 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
         var upCat = ("INSERT into cat_prod SET ? ");
         
         connection.query(removeCat);
-        console.log(chalk.yellow("Categorias retiradas"));
+        //console.log(chalk.yellow("Categorias retiradas"));
 
         for(var i = 0; i < dadosEdit.categoria.length; i++){
             
@@ -279,10 +382,14 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
                 id_cat : dadosEdit.categoria[i],
                 id_prod : dadosEdit.id_prod
             })
-            connection.query(upCat, catIds[i]);
+            connection.query(upCat, catIds[i], function(erro,result){
+                if(erro){
+                    alteracao(erro, 0);
+                }
+            });
         }
-        
-        console.log(chalk.yellow("Categorias adicionadas"));
+        connection.query("SELECT 1");
+        //console.log(chalk.yellow("Categorias adicionadas"));
 
     }).then(function(){
         id = dadosEdit.id_prod;
@@ -291,7 +398,7 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
         var upInc = ("INSERT into inc_prod SET ? ");
         
         connection.query(removeInc);
-        console.log(chalk.yellow("Inclusos retirados"));
+        //console.log(chalk.yellow("Inclusos retirados"));
 
         for(var i = 0; i < dadosEdit.incluso.length; i++){
             
@@ -299,29 +406,21 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
                 id_inc : dadosEdit.incluso[i],
                 id_prod : dadosEdit.id_prod
             })
-            connection.query(upInc, incIds[i]);
+            connection.query(upInc, incIds[i], function(erro,result){
+                if(erro){
+                    alteracao(erro, 0);
+                }
+            });
         }
         
-        console.log(chalk.yellow("Inclusos adicionados"));
+        //console.log(chalk.yellow("Inclusos adicionados"));
+        
+        return connection.query("SELECT 1");
+    }).then(function(){
+        
+        alteracao(null, 1);
 
-
-        prodAlterado = {
-            id_prod : prod.id_prod,
-            nome_prod : prod.nome_prod,
-            desc_prod : prod.desc_prod,
-            dia_prod : moment(prod.data_prod).format('YYYY/MM/DD'),
-            hora_prod : moment(prod.data_prod).format('HH:mm:ss'),
-            nacional_prod : prod.nacional_prod,
-            valor_prod : prod.valor_prod,
-            parcelas_prod : prod.parcelas_prod,
-            vagas_prod : prod.vagas_prod,
-            texto_prod : prod.texto_prod,
-            categoria : catIds,
-            inclusos : incIds,
-        }
-        console.log(prodAlterado);
-
-        alteracao(0, prodAlterado);
+        return connection.end();
     });
 }
 
@@ -335,8 +434,39 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
         
         connection.query(sqlRemove);
 
-        return callback(0,0);
+        return callback(0,1);
     });
+}
+
+Anuncio.prototype.desativarAnuncio = function(id, status, callback){
+
+    db.then(function(conn){
+        connection = conn;
+
+        console.log(id, status);
+
+        if( status == 'true' ){
+            var turnOFF = false;
+            var sqlDest = ("UPDATE produto SET ativo_prod = " + turnOFF + " WHERE id_prod = " + id );
+
+        }else {
+            var turnON = true;
+            var sqlDest = ("UPDATE produto SET ativo_prod = " + turnON + " WHERE id_prod = " + id );
+        }
+
+        console.log(sqlDest);
+        connection.query(sqlDest,function(err, result){
+            console.log(result);
+            if(err){
+                callback(1, 0);
+            }
+            else{
+                callback(0, 1);
+            }
+        });
+
+    })
+
 }
 
 module.exports = Anuncio;

@@ -63,15 +63,13 @@
                                         </td>
                                         <td>
                                             <%if(produto[i].ativo_prod == true){%>
-                                                <i class="fa fa-power-off on" aria-hidden="true" title="Ativo"></i>
+                                                <i class="fa fa-power-off on" title="Desativar" aria-hidden="true" onclick="turnThis(<%= produto[i].id_prod %>,<%= produto[i].ativo_prod %>)"></i>
                                             <%} else{%>
-                                                <i class="fa fa-power-off off" aria-hidden="true" title="Desativo"></i>
+                                                <i class="fa fa-power-off off" title="Ativar" onclick="turnThis(<%= produto[i].id_prod %>,<%= produto[i].ativo_prod %>)" aria-hidden="true"></i>
                                             <% } %>
                                         </td>
                                         <td>
-                                            <a href="/admin/anuncios/remover/produto-<%= produto[i].id_prod %>" title="Remover">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                            </a>
+                                            <i class="fa fa-trash-o" aria-hidden="true" onclick="remove(<%= produto[i].id_prod %>)" title="Remover"></i>
                                         </td>
                                     </tr>
                                 </table>
@@ -85,17 +83,61 @@
     </div> 
 </main>
 <script>
-    $(document).ready(function(){
-        var remove = <%= remove%>;
-
-        function confirmRemove(remove){
-            if( remove == true ){
-                alert("Produto removido com sucesso");
-            }
-        };
-
-        confirmRemove(remove);
-    });
+    function remove(value){
+        console.log(value);
+        if (window.confirm("Deseja remover este anuncio?")) {
+            $.ajax({
+                method: "POST",
+                url: "/admin/anuncios/remover",
+                data: { 
+                    id : value
+                },
+                dataType: 'json',
+                cache: false,
+            })
+            .done(function(data) {
+                alert(data.msg);
+                location.reload();
+            }); 
+        }    
+    }
     
+    function turnThis(idProd, status){
+        if( status == true ){
+            if (window.confirm("Deseja desativar este anuncio?")) {
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/anuncios/desativar",
+                    data: { 
+                        id : idProd,
+                        turn : status
+                    },
+                    dataType: 'json',
+                    cache: false, 
+                })
+                .done(function(data) {
+                    alert(data.msg);
+                    location.reload();
+                });  
+            }
+        }else{
+            if (window.confirm("Deseja ativar este anuncio?")) {
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/anuncios/desativar",
+                    data: { 
+                        id : idProd,
+                        turn : status
+                    },
+                    dataType: 'json',
+                    cache: false, 
+                })
+                .done(function(data) {
+                    alert(data.msg);
+                    location.reload();
+                });  
+            }
+        }       
+    } 
 </script>
 <% include ../partial/footerADM %>

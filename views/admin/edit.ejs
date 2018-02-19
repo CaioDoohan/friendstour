@@ -29,7 +29,7 @@
                     <p><%= title %></p>
                 </div>
                 <div class="formlist">
-                    <form method="post" action="/admin/anuncios/editar/dados_alterados">
+                    <form method="post" action="/admin/anuncios/editar/dados_enviados" id="formEdit">
                         <div>
                             <label>
                                 ID:<%=  produto.id_prod%>
@@ -91,6 +91,20 @@
                                 <p>Sim</p>
                             </div>
                         </div> 
+                        <div class="check">
+                            <label>
+                                Deseja destacar esse anúncio nas Promoções ?
+                            </label>
+                            <div class="int">
+                                <% if( produto.promo_prod == true) {%>
+                                    <input type="checkbox" name="promo_prod" checked />  
+                                <% } 
+                                    else { %>
+                                    <input type="checkbox" name="promo_prod" />  
+                                <% } %>
+                                <p>Sim</p>
+                            </div>
+                        </div>
                         <div>
                             <label>
                                 Valor
@@ -171,16 +185,24 @@
                 monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
             });
+        });
 
-            var edit = <%= edit%>;
-
-            function confirmEdit(confirmacao){
-                if( confirmacao == true ){
-                    alert('Produto editado com sucesso');
-                }
+        $("#formEdit").submit(function(event){
+            if (window.confirm("Confirmar alterações?")) {
+                event.preventDefault();
+                var post_url = $(this).attr("action"); 
+                var request_method = $(this).attr("method"); 
+                var form_data = $(this).serialize(); 
+                
+                $.ajax({
+                    url : post_url,
+                    type: request_method,
+                    data : form_data
+                }).done(function(data){ 
+                    alert(data.msg);
+                    location.reload();                
+                });
             }
-
-            confirmAdd(edit);
         });
     </script>
 </main>

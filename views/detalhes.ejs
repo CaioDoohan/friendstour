@@ -19,64 +19,55 @@
           <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/loading.gif" />
           <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/images/close.png" />
             <div class="prft">
+              <% if(produto.imagens != undefined){ %>
               <figure>
-                <a href="/images/magic.png" title="" class="example-image-link">
-                   <img src="/images/magic.png" alt="Magic City" class="example-image" selecionado="0"/>
+                <a href="../../images/uploads/prods/<%= produto.imagens[0] %>" title="" class="example-image-link">
+                   <img src="../../images/uploads/prods/<%= produto.imagens[0] %>" alt="Magic City" class="example-image" selecionado="0"/>
                 </a>
               </figure>
+              <% } else { %>
+                <figure>
+                  <a href="../../images/default.png" title="" class="example-image-link">
+                      <img src="../../images/default.png" alt="Friend's Tour" class="example-image" selecionado="0"/>
+                  </a>
+                </figure>
+              <% } %>
             </div>
             <ul class="secft">
-              <li>
-                <figure>
-                    <a href="/images/magic.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
-                      <img src="/images/magic.png" alt="Magic City" class="example-image" selecionado="0"/>
-                    </a>
-                </figure>
-              </li>
-              <li>
-                <figure>
-                    <a href="/images/magic2.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
-                      <img src="/images/magic2.png" alt="Magic City" class="example-image" selecionado="0"/>
-                    </a>
-                </figure>
-              </li>
-              <li>
-                <figure>
-                    <a href="/images/magic3.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
-                      <img src="/images/magic3.png" alt="Magic City" class="example-image" selecionado="0"/>
-                    </a>
-                </figure>
-              </li>
-              <li>
-                <figure>
-                    <a href="/images/magic4.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
-                      <img src="/images/magic4.png" alt="Magic City" class="example-image" selecionado="0"/>
-                    </a>
-                </figure>
-              </li>
-              <li>
-                <figure>
-                    <a href="/images/magic2.png" title="" rel="lightshow" data-lightbox="cars" class="example-image-link">
-                      <img src="/images/magic2.png" alt="Magic City" class="example-image" selecionado="0"/>
-                    </a>
-                </figure>
-              </li>
+              <% if( produto.imagens != undefined ) { 
+                for(var i = 0; i < produto.imagens.length; i++ ){ %>
+                    <li>
+                      <figure>
+                          <a href="../../images/uploads/prods/<%= produto.imagens[i] %>" title="Friend's Tour" rel="lightshow" data-lightbox="cars" class="example-image-link">
+                            <img src="../../images/uploads/prods/<%= produto.imagens[i] %>" alt="Friend's Tour" class="example-image" selecionado="0"/>
+                          </a>
+                      </figure>
+                    </li>
+                <% }
+              }
+              else { %>
+                  <li>
+                    <figure>
+                        <a href="../../images/default.png" title="Friend's Tour" rel="lightshow" data-lightbox="cars" class="example-image-link">
+                          <img src="../../images/default.png" alt="Friend's Tour" class="example-image" selecionado="0"/>
+                        </a>
+                    </figure>
+                  </li>
+              <% } %>
             </ul>
         </div>
       </div>
       <section class="col-4 lg">
         <div class="dl">
-          <h4>EXCURSÃO</h4>
+          <%for(var i = 0; i < produto.categorias.length; i++){%>
+            <h4><%= produto.categorias[i]%></h4>
+          <% } %>
         </div>
         <div class="det">
             <div class="desc">
               <p><%= produto.desc_prod %></p>
             </div>
             <ul class="local">
-               <!-- <li>
-                <h5>Imperdível:</h5>
-                <h6>Hospedagem com tudo incluso para 2 pessoas</h6>
-              </li>  -->
               <li>
                 <h5>Dia:</h5>
                 <h6><%= produto.data%></h6>
@@ -85,38 +76,14 @@
                 <h5>Horário:</h5>
                 <h6><%= produto.horario%></h6>
               </li>
-              <!-- <li>
-                <h5>Cidade:</h5>
-                <h6>Tibiriçá - Suzano/SP</h6>
-              </li>
-              <li>
-                <h5>Percurso:</h5>
-                <h6>Santos </h6>
-              </li> -->
             </ul>
-            <!-- <ul class="tempo">
-              <li>
-                <h5>Horário:</h5>
-                <h6>15:00</h6>
-              </li>
-              <li>
-                <h5>Data:</h5>
-                <h6>20/12/17</h6>
-              </li>
-              <li>
-                <h5>Saída:</h5>
-                <h6>09:00</h6>
-              </li>
-            </ul> -->
             <ul class="inc">
-              <li>
-                <i class="fa fa-check" aria-hidden="true"></i>
-                <h6>Transporte</h6>
-              </li>
-              <li>
-                <i class="fa fa-check" aria-hidden="true"></i>
-                <h6>Ingresso</h6>
-              </li>
+              <%for (var i=0; i < produto.inclusos.length; i++){%>
+                <li>
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                  <h6><%= produto.inclusos[i]%></h6>
+                </li>
+              <% } %>
             </ul>
             <div class="valor">
               <div>
@@ -138,7 +105,7 @@
               <li class="parc">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <p>
-                  PAGUE EM ATÉ <span><%= produto.parcelas_prod%></span>x !
+                  PAGUE EM ATÉ <span><%= produto.parcelas_prod%></span>X !
                 </p>
               </li>
             </ul>

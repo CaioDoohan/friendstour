@@ -510,6 +510,13 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   box-sizing: border-box;
   padding: 15px 0;
   position: relative; }
+  .crl.vg .carvg .undefined {
+    display: table;
+    padding: 10px 0; }
+    .crl.vg .carvg .undefined p {
+      font-size: 16px;
+      margin: 0 auto;
+      display: table; }
   .crl.vg .carvg .slick-slide {
     margin: 0 10px; }
   .crl.vg .carvg .slick-track {
@@ -574,6 +581,8 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           background-color: #c29001; }
         .crl.vg .carvg .item > div .inf .transp {
           background-color: #c20101; }
+        .crl.vg .carvg .item > div .inf .cruzeiro {
+          background-color: #005c7e; }
       .crl.vg .carvg .item > div .name {
         padding: 5px 2px;
         border-bottom: 1px solid #cccccc;

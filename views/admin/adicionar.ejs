@@ -8,12 +8,13 @@
                     <p><%= title %></p>
                 </div>
                 <div class="formlist">
+                    <div class="msgs"></div>
                     <form method="post" action="/admin/anuncios/adicionar/dados_enviados" role="form" enctype="multipart/form-data">
-                        <div>
+                        <div class="field">
                             <label>
                                 Nome
                             </label>
-                            <input type="text"  name="nome_prod" placeholder="Nome" value="<%=  produto.nome_prod%>" required/>
+                            <input type="text"  name="nome_prod" placeholder="Nome" value="<%=  produto.nome_prod%>"  onblur="testeField(this.value)" class="fieldtest" required/>
                         </div>
                         <div class="check">
                             <label>
@@ -53,15 +54,24 @@
                                 O Anúncio é internacional ?
                             </label>
                             <div class="int">
-                                <input type="checkbox" name="nacional_prod" value="<%= produto.nacional_prod%>">
+                                <input type="checkbox" name="nacional_prod">
                                 <p>Sim</p>
                             </div>
                         </div> 
+                        <div class="check">
+                            <label>
+                                Deseja destacar esse anúncio nas Promoções ?
+                            </label>
+                            <div class="int">
+                                <input type="checkbox" name="promo_prod">
+                                <p>Sim</p>
+                            </div>
+                        </div>
                         <div>
                             <label>
                                 Valor
                             </label>
-                            <input type="text" name="valor_prod" placeholder="R$" required/>
+                            <input type="text" class="valor" name="valor_prod" placeholder="R$" required/>
                         </div> 
                         <div class="check">
                             <label>
@@ -115,7 +125,6 @@
             </div>
         </div> 
     </div>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
     <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
     <script>
@@ -129,6 +138,7 @@
                         jQuery.browser.version = RegExp.$1;
                     }
             })();
+            $('.valor').mask('00000');
             $('.parcelas').mask('00');
             $('.hora').mask('00:00:00');
             $( "#calendario" ).datepicker({
@@ -141,17 +151,59 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
             });
 
-            var add = <%= add%>;
-
             function confirmAdd(confirmacao){
                 if( confirmacao == true ){
-                    alert('Produto adicionado com sucesso');
+                    var msg = "Produto adicionado";
+                    $(".msgs").find('.alert').remove();
+                    $(".msgs").append("<div class='alert' style='background-color: #f36e6e;border-color: #f36e6e;color: #fff;'>"+ msg +"</div>");
+                }else{
+                    console.log(confirmacao);
+                    var msg = confirmacao;
+                    $(".msgs").find('.alert').remove();
+                    $.each(msg,function(idx, key){
+                        $(".msgs").append("<div class='alert' style='background-color: #f36e6e;border-color: #f36e6e;color: #fff;'>"+ msg[idx].msg +"</div>");                       
+                    });
                 }
             }
-
-            confirmAdd(add);
             
+            <%if(add != null){%>
+                var add = <%= add%>;
+                
+                confirmAdd(add);
+            <%}%>
+
+            $('.fieldtest').blur(function(){
+                if($(this).val() == ''){
+                    $(this).parent().find("div.text").remove();
+                    return false;
+                }
+            });
         });
+
+        function testeField(event){
+            if(event != null && event != undefined){
+                $.ajax({
+                method: "POST",
+                url: "/admin/anuncios/validate",
+                data: { event : event },
+                dataType: 'json',
+                cache: false,
+                })
+                .done(function(data) {
+                    if(data.type == false){
+                        $('.field').find("div.text").remove();
+                        $('.field').append("<div class='text'><span class='red'>"+ data.msg +"</span></div>");
+                    }
+                    else if (data.type == true){
+                        $('.field').find("div.text").remove();
+                        $('.field').append("<div class='text'><span class='green'>"+ data.msg +"</span></div>");
+                    }
+                });
+            }else{
+                return 0;
+            }
+             
+        }
     </script>
 </main>
 <% include ../partial/footerADM %>

@@ -9,4 +9,8 @@ router.use('/imagens', require('../controllers/imagens'));
 
 router.use('/account', require('../controllers/account'));
 
+router.use('/banners', require('../controllers/banners'));
+
+router.use('/galeria', require('../controllers/galeria'));
+
 module.exports = router;

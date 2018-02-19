@@ -1,0 +1,51 @@
+<% include ../partial/headerADM %>
+<% include ../partial/menuADM %>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <div class="tit">
+                    <p><%= title %></p>
+                </div>
+                <div class="formlist">
+                    <div class="msgs"></div>
+                    <form method="post" action="/admin/banners/adicionar/dados_enviados" role="form" enctype="multipart/form-data">
+                        <div>
+                            <label>
+                                Banner
+                            </label>
+                            <input type="file"  name="banner" required/>
+                        </div>
+                        <div class="add">
+                            <button type="submit" value="enviar" >Enviar</button>               
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script>
+        $(document).ready(function(){
+            function confirmAdd(confirmacao){
+                if( confirmacao == 0 ){
+                    var txt = "Banner adicionado";
+                    $(".msgs").find('.alert').remove();
+                    $(".msgs").append("<div class='alert' style='background-color: #6ef389;border-color: #6ef389;color: #fff;'>"+ txt +"</div>");
+                }else{
+                    var txt = "Falha na operação, tente novamente";
+                    console.log(confirmacao);
+                    $(".msgs").find('.alert').remove();
+                    $(".msgs").append("<div class='alert' style='background-color: #f36e6e;border-color: #f36e6e;color: #fff;'>"+ txt +"</div>");
+                }
+            }
+            
+            <%if(msg != null){%>
+                var msg = <%= msg%>;
+                
+                confirmAdd(msg);
+            <%}%>
+
+        });
+    </script>
+</main>
+<% include ../partial/footerADM %>

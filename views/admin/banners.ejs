@@ -1,6 +1,107 @@
 <% include ../partial/headerADM %>
 <% include ../partial/menuADM %>
 <main>
-    
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <div class="tit">
+                    <p><%= title%></p>
+                </div>
+                <div class="add">
+                    <a href="/admin/banners/adicionar" title="Adicionar" class="add">
+                        Adicionar
+                    </a> 
+                </div>
+                <div class="banner">
+                    <ul>
+                        <% if(banners != undefined){%>
+                            <% for(var i=0; i < banners.length; i++) {%>
+                                <li class="item">
+                                    <figure>
+                                        <img src="../images/uploads/banners/<%= banners[i].banner %>" alt="Friendstour - Banner" />
+                                    </figure>
+                                    <div class="op">
+                                        <i class="fa fa-trash-o" aria-hidden="true" onclick="remove(<%= banners[i].banner_id %>)" title="Remover"></i>
+                                    </div>
+                                    <div class="dt">
+                                        <%= banners[i].data_criacao %>
+                                    </div>
+                                    <div class="at">
+                                        <%if(banners[i].ativo_banner == true){%>
+                                            <i class="fa fa-power-off on" title="Desativar" aria-hidden="true" onclick="turnThis(<%= banners[i].banner_id %>,<%= banners[i].ativo_banner %>)"></i>
+                                        <%} else{%>
+                                            <i class="fa fa-power-off" title="Ativar" onclick="turnThis(<%= banners[i].banner_id %>,<%= banners[i].ativo_banner %>)" aria-hidden="true"></i>
+                                        <% } %>
+                                    </div>
+                                </li>
+                            <% } %>
+                        <% } else { %>
+                            <li class="item">
+                                <p>
+                                    Nenhum banner cadastrado
+                                </p>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div> 
+    </div> 
 </main>
+<script>
+    function remove(value){
+        if (window.confirm("Deseja remover este banner?")) { 
+            $.ajax({
+                method: "POST",
+                url: "/admin/banners/remover",
+                data: { 
+                    id : value
+                },
+                dataType: 'json',
+                cache: false,
+            })
+            .done(function(data) {
+                alert(data.msg);
+                location.reload();
+            });   
+        }  
+    }
+    function turnThis(id, status){
+        if( status == true ){
+            if (window.confirm("Deseja desativar este banner?")) {
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/banners/desativar",
+                    data: { 
+                        id : id,
+                        turn : status
+                    },
+                    dataType: 'json',
+                    cache: false, 
+                })
+                .done(function(data) {
+                    alert(data.msg);
+                    location.reload();
+                });  
+            }
+        }else{
+            if (window.confirm("Deseja ativar este banner?")) {
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/banners/desativar",
+                    data: { 
+                        id : id,
+                        turn : status
+                    },
+                    dataType: 'json',
+                    cache: false, 
+                })
+                .done(function(data) {
+                    alert(data.msg);
+                    location.reload();
+                });  
+            }
+        }       
+    } 
+</script>
 <% include ../partial/footerADM %>

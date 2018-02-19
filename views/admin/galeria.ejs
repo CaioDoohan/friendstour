@@ -1,0 +1,136 @@
+<% include ../partial/headerADM %>
+<% include ../partial/menuADM %>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <div class="tit">
+                    <p><%= title%></p>
+                </div>
+                <div class="choose">
+                    <ul>
+                        <li onclick="getThis('promo_prod', 0)">
+                            <div>
+                                <p>
+                                    Promoções
+                                </p>
+                            </div>
+                        </li>
+                        <li onclick="getThis('nacional_prod',0)">
+                            <div>
+                                <p>
+                                    Nacional
+                                </p>
+                            </div>
+                        </li>
+                        <li onclick="getThis('nacional_prod', 1)">
+                            <div>
+                                <p>
+                                    Internacional
+                                </p>
+                            </div>
+                        </li>
+                        <li onclick="getThis('id_cat', 5)">
+                            <div>
+                                <p>
+                                    Cruzeiros
+                                </p>
+                            </div>
+                        </li>
+                        <li onclick="getThis('id_cat', 2)">
+                            <div>
+                                <p>
+                                    Excursões
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="msgs"></div>
+            </div>
+        </div> 
+    </div> 
+</main>
+<script>
+    function getThis(field, type){
+        console.log(field, type);
+        $.ajax({
+            method: "POST",
+            url: "/admin/galeria/get",
+            data: { 
+                field : field,
+                type : type,
+            },
+            dataType: 'json',
+            cache: false,
+        })
+        .done(function(data) {
+            $(".msgs").find('.alertget').remove();
+            if(data.msg){
+                 $(".msgs").append("<div class='alertget'>"+ data.msg +"</div>");
+            }
+            else if(data.ids){
+                console.log("ENTROU");
+                for(var i = 0; i < data.lenght; i++){
+                    console.log(data[i].ids);
+                }
+            }
+            
+        });   
+    }
+    function remove(value){
+        if (window.confirm("Deseja remover este banner?")) { 
+            $.ajax({
+                method: "POST",
+                url: "/admin/banners/remover",
+                data: { 
+                    id : value
+                },
+                dataType: 'json',
+                cache: false,
+            })
+            .done(function(data) {
+                alert(data.msg);
+                location.reload();
+            });   
+        }  
+    }
+    function turnThis(id, status){
+        if( status == true ){
+            if (window.confirm("Deseja desativar este banner?")) {
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/banners/desativar",
+                    data: { 
+                        id : id,
+                        turn : status
+                    },
+                    dataType: 'json',
+                    cache: false, 
+                })
+                .done(function(data) {
+                    alert(data.msg);
+                    location.reload();
+                });  
+            }
+        }else{
+            if (window.confirm("Deseja ativar este banner?")) {
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/banners/desativar",
+                    data: { 
+                        id : id,
+                        turn : status
+                    },
+                    dataType: 'json',
+                    cache: false, 
+                })
+                .done(function(data) {
+                    alert(data.msg);
+                    location.reload();
+                });  
+            }
+        }       
+    } 
+</script>
+<% include ../partial/footerADM %>
