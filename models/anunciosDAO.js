@@ -14,7 +14,7 @@ Anuncio.prototype.getAllAnuncio = function(callback){
         
         conn.query('select * from produto order by datacriacao_prod', callback);
 
-        conn.end();
+        // conn.end();
     })
 }
 
