@@ -110,18 +110,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-
-
-
-
-
-
-
-
-
-
-
-
 app.listen(8080, function(){
 //   console.log(' ');  
 //   console.log(chalk.green("                 /         / "));

@@ -1,7 +1,7 @@
 exports.mysqlOptions = {
-                host: 'mysql427.umbler.com',
-                user: 'friends',
-                password: 'minhamae2311',
+                host: 'localhost',
+                user: 'root',
+                password: 'm10d12',
                 database: 'friendsdb',
                 socketPath: false,
                 connectionLimit: 5,
