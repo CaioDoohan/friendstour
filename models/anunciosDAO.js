@@ -1,10 +1,9 @@
 var mysql = require('promise-mysql');
 var config = require('../config/dbConnection');
 var chalk = require('chalk');
-var moment = require('moment');
 var db;
 var connection;
-var arrIdsDet = [];
+
 
 var Anuncio = function(){
     db = mysql.createConnection(config.mysqlOptions);
@@ -36,7 +35,7 @@ Anuncio.prototype.getCategoria = function(callback){
 Anuncio.prototype.getInclusos = function(callback){
     db.then(function(conn){
         conn.query('select * from inclusos', function(erro,result){
-            console.log("RESULT", result);
+            //console.log("RESULT", result);
             if(erro){
                 return callback(erro, 0);
             }else{
@@ -54,7 +53,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
     var idProd;
     var id;
     var idHome;
-    
+    var arrIdsDet = [];
     db.then(function(conn){
         var insert = "INSERT INTO produto(nome_prod,desc_prod,data_prod,valor_prod,nacional_prod,vagas_prod,parcelas_prod,texto_prod,promo_prod) VALUES(?,?,?,?,?,?,?,?,?)";
 
@@ -73,9 +72,8 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
         ];
 
         connection.query(insert,tabProd, function(erro, result){
-           // console.log("result!", result);
             if(erro){
-                console.log("entrou erro!", result);
+                //console.log("entrou erro!", result);
                 return callback(erro, 0);
             }
             else{
@@ -85,140 +83,94 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
         });
 
         return connection.query("SELECT 1");
-    })/*.then(function(){
+    }).then(function(){
 
         for(var k = 0; k < dadosForm.incluso.length; k++){
             var sqlInc = "insert into inc_prod(id_inc,id_prod) values("+ dadosForm.incluso[k] + "," + id + ")";
-            //console.log("INCLUSOS + ID PROD",dadosForm.incluso[k] + '---' + id);
             connection.query(sqlInc);
         }
         
+        return connection.query("SELECT 1");
     }).then(function(){
 
         for(var k = 0; k < dadosForm.categoria.length; k++){
             var sqlCat = "insert into cat_prod(id_cat,id_prod) values("+ dadosForm.categoria[k] + "," + id + ")";
-            //console.log(chalk.green("CATEGORIAS + ID PROD", dadosForm.categoria[k] + '---' + id));
             connection.query(sqlCat);
         }
-        // console.log(chalk.yellow("PRODUTO ADICIONADO"));
+
+        return connection.query("SELECT 1");
     }).then(function(){
-        //idProd = id;
-        //console.log(imgHome);
         if(imgHome != undefined ){
-            console.log("IMAGEM HOME != undefined");
             var homePath = imgHome.home;
-
             var sqlHome = ("INSERT INTO images_home(name_img) VALUE('" + homePath +"') " );
-
-            //console.log(sqlHome);
-
+            console.log(sqlHome);
             connection.query(sqlHome, function(erro, result){
                 if(erro){
                     callback(erro, 0);
                 }else{
-                    //console.log(result);
+                    console.log(result);
+                    console.log("ID RESULTANTE:",result.insertId )
                     idHome = result.insertId;
                 }
             });
+
+            return connection.query("SELECT 1");
         }else{
-            //console.log("imagem home == NULL");
             idHome = null;
         }
         return connection.query("SELECT 1");
 
     }).then(function(){
-        //console.log("ID IMGAGEM HOME:",idHome);
         if( idHome != null ){
-            //console.log("n é null",idHome);
             var sqlHome = ("INSERT INTO home_prod(home_id,prod_id) VALUES("+ idHome + ","+ id + ")");
-
+            console.log(idHome);
             connection.query(sqlHome);
         }
 
         return connection.query("SELECT 1");
 
-    })/*.then(function(){
+    }).then(function(){
 
         var detPaths = detImg;
         var idsDet = [];
-        console.log("IMAGES DET:",detImg);
+        
         if( detPaths != undefined ){
-            console.log("ENTROU if");
-            testeAsync(detPaths);
-            console.log("6-)RESULT",arrIdsDet);
-            /*for(var i = 0; i < detPaths.length; i++){
+            for(var i = 0; i < detPaths.length; i++){
                 var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + detPaths[i] + "')");
 
-                console.log(sqlDet);
                 connection.query(sqlDet, function(err,result){      
                     if(err){
                         callback(err, 0);
                     }else{
-                        
-                        var id = result.insertId;
-                        function gambiDasBoa(id){
-                            arrIdsDet.push(arrGambi);
-                        }
-                        gambiDasBoa(result.insertId);
-                        return arrIdsDet;
-                        console.log("array dentro do else:",arrIdsDet);
+                        gambiboa(result.insertId,arrIdsDet);
+
                     }
                 });
-                console.log("FORA DA CONNECTION:", arrIdsDet);
             }
-            //console.log("FORA DO ELSE", arrIdsDet);
-            //return arrIdsDet;
-        }else{
-            console.log("ARRAY NULL");
-            arrIdsDet = null;
+            return connection.query("SELECT 1");
         }
-        console.log("ARRAY FINAL:",arrIdsDet);
-        return connection.query("select 1;")
-    }).then(function(){
-        console.log('ARRAY:',arrIdsDet); 
 
+        return connection.query("select 1");
+
+    }).then(function(){
+        console.log("AGORA SIM:", arrIdsDet);
         if( arrIdsDet != null ){
-            console.log("NAO É NULL");
+
             for(var i = 0; i < arrIdsDet.length; i++){
                 var sqlInsert = ("INSERT INTO det_prod(det_id, prod_id) VALUES("+ arrIdsDet[i] +","+ id +")");
     
-                //console.log(sqlInsert);
+                console.log(sqlInsert);
                 connection.query(sqlInsert);
             }
         }
         callback(0,1);
-
-        connection.end();
-    });*/
-}
-
-/*
-async function testeAsync(value){
-    console.log("1-)ENTROU FUNCTION");
-    for(var i = 0; i < value.length; i++){
-        var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + value[i] + "')");
-        console.log("2."+ i +"-)"+ sqlDet);
-        await insert(sqlDet);
-    }
-    console.log("5-)FINAL:",arrIdsDet);
-    return await arrIdsDet;
-}
-
-function insert(sql){
-    connection.query(sql, function(err,result){      
-        if(err){
-            throw err;
-            //callback(err, 0);
-        }else{
-            var id = result.insertId;
-            console.log("3-)",id);
-            arrIdsDet.push(id);
-            console.log("4-)",arrIdsDet);
-            //console.log("array dentro do else:",arrIdsDet);
-        }
     });
 }
-*/
+
+function gambiboa(value,array){
+    array.push(value);
+}
+
 Anuncio.prototype.verifyEvent = function(event, validate){
     // console.log(chalk.green(email));
     if(event != undefined && event != null){

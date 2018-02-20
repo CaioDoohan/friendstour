@@ -19,8 +19,8 @@ Banners.prototype.getAllBanners = function(banners){
 
         connection.query(sqlGet, function(erro,result){
             console.log(result);
-            if(erro){
-                banners(1, 0);
+            if(erro || result[0] == undefined){
+                banners(1, undefined);
             }
             else{
                 banners(0, result);

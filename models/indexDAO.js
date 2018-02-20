@@ -27,7 +27,7 @@ Event.prototype.getAnuncios = function(result){
         connection.query(sqlGet, function(erro,something){
             //console.log("RESULTADO -> :",something);
             //console.log("erro:",erro);
-            if(something == undefined){
+            if(something[0] == undefined){
                 produtos = undefined;
                 return result(1, produtos);
             }
@@ -71,7 +71,7 @@ Event.prototype.getAnuncios = function(result){
 
         //console.log("CATEGORIAS", cat);
         //console.log("INCLUSOS", inc);
-        //console.log("IMAGES HOME", imgHome);
+        console.log("IMAGES HOME", imgHome);
 
         for( var i = 0; i < produtos.length; i++){
 
@@ -80,7 +80,7 @@ Event.prototype.getAnuncios = function(result){
             var incF = [];
             var imgF;
 
-            //console.log("CICLO ID:", id);
+            console.log(chalk.blue("CICLO ID:", id));
 
             for(var k = 0; k < cat.length; k++){
 
@@ -106,12 +106,13 @@ Event.prototype.getAnuncios = function(result){
             //console.log("INCLUSO DO ID:", incF);
 
             for( var c = 0; c < imgHome.length; c++ ){
-                //console.log("IMAGEM ID:" + imgHome[c].prod_id + "/ID PROD:" + id);
+                console.log("IMAGEM ID:" + imgHome[c].prod_id + "/ID PROD:" + id);
                 if(imgHome[c].prod_id == id){
-                    //console.log(chalk.green("IGUALZIN PAINHO"));
+                    console.log(chalk.green("IGUALZIN PAINHO"));
+                    console.log(imgHome[c].name_img);
                     imgF = imgHome[c].name_img;
-                }else{
-                    //console.log(chalk.green("É NAO PAINHO"));
+                }else if(imgHome[c] == undefined){
+                    console.log(chalk.green("É UNDEFINED PAINHO"));
                     imgF = undefined;
                 }
             }

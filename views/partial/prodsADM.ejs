@@ -1,0 +1,53 @@
+<div class="img">
+    <div class="home banner">
+        <p>
+            Imagem Principal
+        </p>
+        <ul>
+            <%if( images.home != undefined) {%>
+                <li class="item">
+                    <figure>
+                        <img src="../images/uploads/banners/<%= images.home.name_img %>" alt="">
+                    </figure>
+                    <div class="op">
+                        <i class="fa fa-trash-o" aria-hidden="true" onclick="remove()" title="Remover"></i>
+                    </div>
+                    <div class="dt">
+                        <%= images.home.data_criacao%>
+                    </div>
+                </li>
+            <% } else {%>
+                <li>
+                    Não possui imagem principal cadastrada
+                </li>
+            <% } %>
+        </ul>
+    </div>
+    <div class="det banner">
+        <p>
+            Imagens Detalhes
+        </p>
+        <ul>
+            <%if( images.det != undefined ) {
+                for (var i = 0; i < images.det.length; i++) {%>
+                <li class="item">
+                    <figure>
+                        <img src="../images/uploads/banners/<%= images.det[i].name_img %>" alt="">
+                    </figure>
+                    <div class="op">
+                        <i class="fa fa-trash-o" aria-hidden="true" onclick="remove()" title="Remover"></i>
+                    </div>
+                    <div class="dt">
+                        <%= images.det[i].data_criacao%>
+                    </div>
+                </li>
+                <% } 
+            } 
+            else { %>
+               <li>
+                   Não possui imagens detalhes
+               </li>
+            <% } %>
+        </ul>
+    </div>
+</div>

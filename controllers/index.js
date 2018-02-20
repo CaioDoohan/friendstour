@@ -27,8 +27,8 @@ router.get('/', function(req, res, next) {
         }
         EventModel.getBanners(function(result){
             var banners = new Array();
-
-            if(result != undefined){
+            //console.log(result);
+            if(result[0] != undefined){
                 for(var i = 0 ; i < result.length; i ++){
                     banners.push(result[i].banner);
                 }

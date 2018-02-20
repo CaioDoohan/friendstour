@@ -24,8 +24,8 @@ router.get('/', function(req, res, next) {
 
     BannersModel.getAllBanners(function(err, result){
         //console.log("BANNERS", result);
-        if(err == 1){
-            res.render("admin/banners", { title : 'Friendstour - Erro', banners : {}, msg : "Falha no carregamento dos banners" });
+        if(err == 1 || result == undefined){
+            res.render("admin/banners", { title : 'Friendstour - Banners', banners : undefined });
         }else{
             //console.log(result);
             for(var i=0 ; i < result.length; i++){

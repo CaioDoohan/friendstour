@@ -46,7 +46,12 @@
                         </li>
                     </ul>
                 </div>
-                <div class="msgs"></div>
+                <div class="msgs">
+                    <ul class="type">                       
+                    </ul>
+                    <div class="img">
+                    </div>
+                </div>
             </div>
         </div> 
     </div> 
@@ -66,17 +71,48 @@
         })
         .done(function(data) {
             $(".msgs").find('.alertget').remove();
+            $(".type").find('.prod').remove();
             if(data.msg){
                  $(".msgs").append("<div class='alertget'>"+ data.msg +"</div>");
             }
             else if(data.ids){
-                console.log("ENTROU");
-                for(var i = 0; i < data.lenght; i++){
-                    console.log(data[i].ids);
-                }
+                $.each(data.ids,function(idx, key){
+                    //console.log(data.ids[idx]);
+                    $(".type").append("<li class='prod' onclick='getProd("+ data.ids[idx] +")'><p>Anuncio - ID: " + data.ids[idx] +"</p></li>");
+                });
             }
             
         });   
+    }
+    function getProd(id){
+        //console.log("GETPROD:",id);
+        $.ajax({
+            method: "POST",
+            url: "/admin/galeria/post",
+            data: { 
+                idProd : id
+            },
+            dataType: 'json',
+            cache: false,
+        })
+        .done(function(data) {
+            console.log(data);
+            $(".msgs").find('.alertget').remove();
+            if( data.msg){
+                //console.log(data.msg);
+                $(".msgs").append("<div class='alertget'>"+ data.msg +"</div>");
+            }else{
+                alert(data);
+            }     
+        });
+    }
+
+    function appPr(){
+
+    }
+
+    function appDt(){
+
     }
     function remove(value){
         if (window.confirm("Deseja remover este banner?")) { 

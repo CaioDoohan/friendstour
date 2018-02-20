@@ -13,7 +13,7 @@ $(document).ready(function(){
                  window.location.href='/admin';
             }
         }).done(function(data){ 
-            console.log('CALLBACK:',data);
+            //console.log('CALLBACK:',data);
             if(data != undefined){
                 console.log("Token Validado");
             }

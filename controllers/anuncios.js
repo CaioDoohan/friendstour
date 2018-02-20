@@ -91,19 +91,15 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
 
         var erros = req.validationErrors();
 
-        if(erros){   
-            console.log(chalk.red(erros));     
+        if(erros){     
             confirmacao = erros;
-            console.log(chalk.red(confirmacao));
             AnuncioModel.getCategoria(function(erro,resultado){
                 AnuncioModel.getInclusos(function(erro,tipos){
-                    // console.log(confirm);
                     res.render('admin/adicionar', { title : 'Friendstour - Adicionar', categoria : resultado, inclusos : tipos, produto : {}, add : confirmacao });
                 });
             });
         }else{
             var dados = req.body;
-            console.log(req.body);
             var dadosForm = {
                 nome_prod     : dados.nome_prod,
                 categoria     : dados.categoria,
@@ -120,40 +116,31 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
     
             if(req.files.imghome){
                 if( req.files.imghome != undefined ){
-                    //console.log("nao é undefined", req.files.imghome);
                     var imgHome = {
                         home : req.files.imghome[0].filename
                     }
                 }else{
-                    //console.log("é undefined", req.files.imghome);
                     var imgHome = undefined
                 }
             }
             
             if(req.files.imgdet){
-                //console.log(req.files.imgdet[0].filename);
                 if(  req.files.imgdet != undefined ){
-                    //console.log("ENTROU DIFERENTE", req.files.imgdet.length);
                     var detImg = [];
                     for(var i = 0; i < req.files.imgdet.length; i++){
-                        //console.log("ENTROU DIFERENTE", req.files.imgdet[i].filename);
                         detImg.push(req.files.imgdet[i].filename);
                     }
                 }else{
-                    //console.log("é undefined",  req.files.imgdet);
                     var detImg = undefined;
                 }
             }
             
-            //console.log('DADOS FORM:',dadosForm);
-            //console.log('IMGS:', imgHome);
-            //console.log('IMGS:', detImg);
+            console.log('DADOS FORM:',dadosForm);
+            console.log('IMGS:', imgHome);
+            console.log('IMGS:', detImg);
 
             
             AnuncioModel.addAnuncio(dadosForm,imgHome, detImg, function(erro, confirm){
-                //console.log("CONFIRMACAO:", confirmacao);
-                //console.log("ESSA É CONFIRMACAO",confirm);
-                //console.log("ESSA É ERRO",erro);
                 if(confirmacao == null || confirmacao == undefined){
                     if( confirm == 0 ){
                         var confirmacao = erro;

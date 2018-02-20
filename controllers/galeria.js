@@ -20,8 +20,8 @@ router.post('/get', function(req,res){
     var GaleriaModel = new Galeria();
 
     GaleriaModel.getIds(field, type, function(erro, result){
-        console.log(erro);
-        console.log(result);
+        //console.log(erro);
+        //console.log(result);
         var ids = new Array();
         if(erro){
             res.json({
@@ -35,13 +35,32 @@ router.post('/get', function(req,res){
             for(var i=0; i < result.length; i++){
                 ids.push(result[i].id_prod);
             }
-            console.log(ids);
+            //console.log(ids);
             res.json({
                 ids : ids
             })
         }
     });
 
-})
+});
+
+router.post('/post', function(req,res){
+
+    var id = req.body.idProd;
+
+    var GaleriaModel = new Galeria();
+
+    //console.log("CONTROL",id);
+    GaleriaModel.getImages(id, function(erro,result){
+        if( erro == 1 && result == undefined ){
+            console.log("ENTROU IF");
+            res.json({
+                msg : "Produto não possui imagens"
+            })
+        }else{
+            console.log("CONTROL:",result);
+        }
+    });
+});
 
 module.exports = router;

@@ -90,11 +90,11 @@ app.use(passport.initialize());
 
 // adding the sass middleware
 app.use(sassMiddleware({
-    src: path.join(__dirname, 'scss/styleADM'),
+    src: path.join(__dirname, 'scss/style'),
     dest: path.join(__dirname, 'public'),
     debug: true,
     outputStyle: 'compressed',
-    prefix:  '/stylesheets/styleADM'
+    prefix:  '/stylesheets/style'
 }));
 
 // error handler
