@@ -108,30 +108,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
-
-app.listen(8080, function(){
-//   console.log(' ');  
-//   console.log(chalk.green("                 /         / "));
-//   console.log(chalk.green("              /' .,,,,  ./       "));   
-//   console.log(chalk.green("             /';'     ,/     "));
-//   console.log(chalk.green("            / /   ,,//,`'`       "));
-//   console.log(chalk.green("           ( ,, '_,  ,,,' ``    "));
-//   console.log(chalk.green("           |    /") + chalk.red("@") + chalk.green("  ,,, ;' `   "));
-//   console.log(chalk.green("          /    .   ,''/' `,``    "));
-//   console.log(chalk.green("         /   .     ./, `,, ` ;  "));
-//   console.log(chalk.green("      ,./  .   ,-,',` ,,/''\,'    "));
-//   console.log(chalk.green("     |   /; ./,,'`,,'' |   |      "));
-//   console.log(chalk.green("     |     /   ','    /    |   "));
-//   console.log(chalk.green("      \___/'   '     |     |   "));
-//   console.log(chalk.green("        `,,'  |      /     `\   "));
-//   console.log(chalk.green("             /      |        ~\   "));
-//   console.log(chalk.green("            '       ( "));
-//   console.log(chalk.green("           : "));
-//   console.log(chalk.green("          ; .         \--  "));
-//   console.log(chalk.green("        :   \         ;  Made by Nóis "));
-//   console.log(' ');
-  
-  
-  console.log(chalk.yellow('Tamo juntão na porta ') + chalk.white.bgRed.bold('8080') );
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
+    console.log(chalk.blue('Umbler listening on port',chalk.yellow(port)));
 });
+
+module.exports = app;
