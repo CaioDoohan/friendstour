@@ -1,6 +1,6 @@
 exports.mysqlOptions = {
                 host: 'mysql937.umbler.com',
-                port: 3000,
+                port: 41890,
                 user: 'friends',
                 password: 'minhamae2311',
                 database: 'friendstourdb',
