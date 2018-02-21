@@ -1,8 +1,9 @@
 exports.mysqlOptions = {
-                host: 'localhost',
-                user: 'root',
-                password: 'm10d12',
-                database: 'friendsdb',
+                host: 'mysql937.umbler.com',
+                port: 3000,
+                user: 'friends',
+                password: 'minhamae2311',
+                database: 'friendstourdb',
                 socketPath: false,
                 connectionLimit: 5,
                 typeCast: function castField( field, useDefaultTypeCasting ) {
