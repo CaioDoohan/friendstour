@@ -1,5 +1,3 @@
-//import { some } from 'bluebird';
-
 var mysql = require('promise-mysql');
 var config = require('../config/dbConnection');
 var chalk = require('chalk');

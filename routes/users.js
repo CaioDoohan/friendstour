@@ -5,8 +5,6 @@ router.use('/', require('../controllers/login'));
 
 router.use('/anuncios', require('../controllers/anuncios'));
 
-router.use('/imagens', require('../controllers/imagens'));
-
 router.use('/account', require('../controllers/account'));
 
 router.use('/banners', require('../controllers/banners'));
