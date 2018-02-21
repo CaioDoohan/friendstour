@@ -114,6 +114,7 @@ Galeria.prototype.getImages = function(id, imgs){
         return connection.query("SELECT 1");
     }).then(function(){
         console.log("THIS", idsDet);
+        return connection.end();
     })
 }
 
