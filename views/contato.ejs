@@ -9,7 +9,7 @@
             <span>Texto texto texto texto texto</span>
         </div>
         <div class="col-6">
-          <form action="/contato/formulario_enviado" name="formcont" method="post">
+          <form action="/contato/formulario_enviado" name="formcont" method="post" id="formCont">
             <div>
                 <input type="text" placeholder="Nome" name="nome"  required/>
                 <input type="text" placeholder="Telefone" name="telefone" class="phone_with_ddd" required/>
@@ -56,6 +56,25 @@
   <script>
     $(function() {
         $(".phone_with_ddd").mask("(00) 00000-0000");
+    });
+    $("#formCont").submit(function(event){
+        event.preventDefault();
+        var post_url = $(this).attr("action"); 
+        var request_method = $(this).attr("method"); 
+        var form_data = $(this).serialize(); 
+        console.log(form_data);
+        $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data
+        }).done(function(data){ 
+            if( data.confirm != true ){
+              alert(data.msg);
+            }else{
+              alert(data.msg);
+              location.reload();
+            }
+        });
     });
   </script>
 </main>

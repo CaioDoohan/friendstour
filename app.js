@@ -110,7 +110,7 @@ app.use(function(err, req, res, next) {
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
-    console.log(chalk.blue('Umbler listening on port',chalk.yellow(port)));
+    console.log(chalk.blue('-|Umbler listening on port:',chalk.yellow(port)));
 });
 
 module.exports = app;

@@ -125,11 +125,12 @@
     </div>
   </div>
   <div id="form" class="shadow">
-      <form action="/detalhes/email" id="formsell" name="formsell" method="post">
+      <form action="/detalhes/email" id="formsell" method="post">
         <i class="fa fa-window-close fc" aria-hidden="true" title="Voltar"></i>
         <span>
           ENTRE EM CONTATO AGORA<br> COM UM DE NOSSOS VENDEDORES
         </span>
+        <input type="hidden" name="evento" value="<%= produto.nome_prod%>"/>
         <div>
             <input type="text" placeholder="Nome completo" name="nome" required/>
             <input type="text" placeholder="Telefone" name="telefone" class="phone_with_ddd" required/>
@@ -167,6 +168,25 @@
         };
         $(".example-image").each(function(e, a) {
         e > 0 && $(a).mouseover(clickImage).click(clickImage)
+        });
+    });
+    $("#formsell").submit(function(event){
+        event.preventDefault();
+        var post_url = $(this).attr("action"); 
+        var request_method = $(this).attr("method"); 
+        var form_data = $(this).serialize(); 
+        console.log(form_data);
+        $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data
+        }).done(function(data){ 
+            if( data.confirm != true ){
+              alert(data.msg);
+            }else{
+              alert(data.msg);
+              location.reload();
+            }
         });
     });
   </script>
