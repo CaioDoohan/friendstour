@@ -7,8 +7,9 @@ var Event    = require("../models/indexDAO.js");
 router.get('/', function(req, res, next) {
     
     var EventModel = new Event();    
-
-    EventModel.getAnuncios(function(erro,produtos){
+    var thatX = {};
+    
+    EventModel.getAnuncios(thatX,function(erro,produtos){
         //console.log("PRODS:",produtos);
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){

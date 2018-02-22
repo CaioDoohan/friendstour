@@ -11,9 +11,6 @@ router.get('/empresa', function(req, res, next) {
   res.render('empresa', { title: 'Friendstour - Empresa' });
 });
 
-/* GET lista. */
-router.get('/lista', function(req, res, next) {
-  res.render('lista', { title: 'Friendstour - Lista' });
-});
+router.use("/lista", require('../controllers/lista'));
 
 module.exports = router;  

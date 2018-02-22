@@ -9,25 +9,46 @@ var Event = function(){
     db = mysql.createConnection(config.mysqlOptions);
 }
 
-Event.prototype.getAnuncios = function(result){
+Event.prototype.getAnuncios = function(thatX,result){
     var idsProd = new Array();
     var produtos = new Array();
     var inc = new Array();
     var cat = new Array();
     var idProd = new Array();
     var imgHome = new Array();
+
+    function isEmptyObject(obj) {
+        for (var key in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    if (isEmptyObject(thatX)) {
+        thatX = {
+            statment : "WHERE ativo_prod = b'1' order by datacriacao_prod desc LIMIT 5",
+            statmentCat : '',
+            notEnd : true
+        }
+    } else {
+        ( thatX.statment != undefined ? (thatX.statmentCat = '' ) : (thatX.statment = "WHERE ativo_prod = b'1' order by datacriacao_prod desc LIMIT 10"));
+    }
+    
     db.then(function(conn){
+
         connection = conn;
         var options = "id_prod, nome_prod, desc_prod, data_prod, valor_prod, vagas_prod, parcelas_prod";
-        
-        var sqlGet = ("select "+ options +" from produto WHERE ativo_prod = b'1' order by datacriacao_prod desc LIMIT 5");
-        //console.log(sqlGet);
+
+        var sqlGet = ("select "+ options +" from produto "+ thatX.statment);
+        console.log(sqlGet);
         connection.query(sqlGet, function(erro,something){
             //console.log("RESULTADO -> :",something);
             //console.log("erro:",erro);
             if(something[0] == undefined){
                 produtos = undefined;
-                return result(1, produtos);
+                result(1, produtos);
+                return connection.end();
             }
             else{
                 produtos = something;
@@ -47,11 +68,20 @@ Event.prototype.getAnuncios = function(result){
             //idProd = idsProd;
         }
         //console.log(idsProd);
-        return connection.query("select CP.id_prod,C.nome_cat from cat_prod as CP Inner join categoria as C on C.id_cat = CP.id_cat where id_prod in (" + idsProd + " )")
-    })
-    .then(function(categorias){
+        var sqlGet = ("select CP.id_prod,C.nome_cat from cat_prod as CP Inner join categoria as C on C.id_cat = CP.id_cat where id_prod in (" + idsProd + " ) "+ thatX.statmentCat);
+        console.log(sqlGet);
+        return connection.query(sqlGet);
+    
+    }).then(function(categorias){
+        console.log(categorias);
+        if( categorias.length > 0){
+            cat = categorias;
+        }else{
+            produtos = undefined;
+            result(1, produtos);
+            return connection.end();
+        }
         
-        cat = categorias;
         //console.log(cat);
 
         return connection.query("select IP.id_prod, I.nome_inc from inc_prod as IP Inner join inclusos as I on I.id_inc = IP.id_inc where id_prod in (" + idsProd + " )");
@@ -133,6 +163,10 @@ Event.prototype.getAnuncios = function(result){
         }
        
        result(0,prodFinal);
+       if(thatX.notEnd != true){
+           console.log("CONNECTION FECHADA");
+           return connection.end();
+       }
     });
 }
 

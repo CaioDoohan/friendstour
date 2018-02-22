@@ -1061,7 +1061,8 @@ footer {
     background-color: #d05a35;
     color: #fff;
     left: -8px;
-    padding: 5px 10px; }
+    padding: 5px 10px;
+    text-transform: uppercase; }
     .tit h3::before {
       width: 0;
       height: 0;
