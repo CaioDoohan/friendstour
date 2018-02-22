@@ -16,7 +16,7 @@ var configJwt         = require('./config/config');
 var jwt               = require('jwt-simple');
 var passport          = require('passport');
 var User              = require('./models/loginDAO');
-var Strategy = require('passport-http-bearer').Strategy;
+var Strategy          = require('passport-http-bearer').Strategy;
 
 app.use(validator({
 
