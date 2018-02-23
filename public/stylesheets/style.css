@@ -235,7 +235,7 @@ input[type=radio] {
 /* Make webkit render the search input like a normal text field */
 input[type=search] {
   -webkit-appearance: textfield;
-  -webkit-box-sizing: content-box; }
+  box-sizing: content-box; }
 
 /* Turn off the recent search for webkit. It adds about 15px padding on the left */
 ::-webkit-search-decoration {
@@ -265,8 +265,6 @@ textarea {
   /* Turn off scroll bars in IE unless needed */
   overflow: auto; }
 
-/* Selects
------------------------------------------------*/
 select[multiple] {
   /* Move the label to the top */
   vertical-align: top; }
@@ -354,7 +352,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     padding: 8px 10px 5px;
     border-radius: 0 0 8px 8px;
     box-sizing: border-box; }
-    .top .inf i, .top .inf p {
+    .top .inf svg, .top .inf p {
       color: #fff !important;
       font-weight: 800;
       font-size: 14px;
@@ -558,7 +556,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           width: 80px;
           margin: 0 3px;
           max-width: 100%; }
-          .crl.vg .carvg .item > div .inf li i {
+          .crl.vg .carvg .item > div .inf li i, .crl.vg .carvg .item > div .inf li svg {
             font-size: 12px;
             display: table-cell;
             vertical-align: middle;
@@ -610,7 +608,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           float: left;
           margin: 0 0.65%;
           text-align: center; }
-          .crl.vg .carvg .item > div .local li h5, .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .local li::before, .crl.vg .carvg .item > div .local li::after, .crl.vg .carvg .item > div .local li i, .crl.vg .carvg .item > div .tempo li h5, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .tempo li::before, .crl.vg .carvg .item > div .tempo li::after, .crl.vg .carvg .item > div .tempo li i, .crl.vg .carvg .item > div .inc li h5, .crl.vg .carvg .item > div .inc li h6, .crl.vg .carvg .item > div .inc li::before, .crl.vg .carvg .item > div .inc li::after, .crl.vg .carvg .item > div .inc li i {
+          .crl.vg .carvg .item > div .local li h5, .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .local li::before, .crl.vg .carvg .item > div .local li::after, .crl.vg .carvg .item > div .local li svg, .crl.vg .carvg .item > div .tempo li h5, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .tempo li::before, .crl.vg .carvg .item > div .tempo li::after, .crl.vg .carvg .item > div .tempo li svg, .crl.vg .carvg .item > div .inc li h5, .crl.vg .carvg .item > div .inc li h6, .crl.vg .carvg .item > div .inc li::before, .crl.vg .carvg .item > div .inc li::after, .crl.vg .carvg .item > div .inc li svg {
             display: table-cell;
             vertical-align: middle;
             font-size: 12px; }
@@ -705,10 +703,10 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   .crl.vg .carvg [dir="rtl"] .slick-next:before {
     content: "‹"; }
 
-.inc i, .inc h6 {
+.inc svg, .inc h6 {
   color: green; }
 
-.inc i {
+.inc svg {
   font-size: 18px !important; }
 
 .inc h6 {
@@ -787,14 +785,12 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           vertical-align: middle;
           padding: 0 5px;
           box-sizing: border-box; }
-          .emp .empresa ul li > div i {
-            border-radius: 50%;
-            background: #2ec4b6;
+          .emp .empresa ul li > div svg {
             font-size: 35px;
             padding: 5px 10px;
-            color: #fff;
+            color: #2ec4b6;
             text-align: center; }
-          .emp .empresa ul li > div .fa-money {
+          .emp .empresa ul li > div .fa-money-bill-alt {
             font-size: 34px;
             padding: 8px 9px; }
           .emp .empresa ul li > div .fa-star {
@@ -877,7 +873,7 @@ footer {
           line-height: 18px;
           font-size: 14px;
           color: #726277 !important; }
-        footer .col-12 > div address i {
+        footer .col-12 > div address svg {
           color: #60ef57;
           font-weight: bold; }
       footer .col-12 > div .iframe {
@@ -894,7 +890,7 @@ footer {
       footer .col-12 .formpag ul li {
         float: left;
         margin: 0 10px; }
-        footer .col-12 .formpag ul li i {
+        footer .col-12 .formpag ul li svg {
           font-size: 24px; }
 
 .improving {
@@ -982,7 +978,7 @@ footer {
     font-family: Nunito-black;
     padding: 10px 0;
     color: #726277 !important; }
-    .cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i, .comp .tel h4, .comp .tel i, .comp .loc h4, .comp .loc i {
+    .cont .tel h4, .cont .tel svg, .cont .loc h4, .cont .loc svg, .comp .tel h4, .comp .tel svg, .comp .loc h4, .comp .loc svg {
       font-size: 32px; }
     .cont .tel h5, .cont .loc h5, .comp .tel h5, .comp .loc h5 {
       font-size: 28px; }
@@ -991,12 +987,15 @@ footer {
       margin: 0 auto;
       padding: 0 5px;
       box-sizing: border-box; }
-      .cont .tel > div > i, .cont .tel > div h4, .cont .loc > div > i, .cont .loc > div h4, .comp .tel > div > i, .comp .tel > div h4, .comp .loc > div > i, .comp .loc > div h4 {
+      .cont .tel > div > svg, .cont .tel > div h4, .cont .loc > div > svg, .cont .loc > div h4, .comp .tel > div > svg, .comp .tel > div h4, .comp .loc > div > svg, .comp .loc > div h4 {
         display: table;
         float: left; }
-      .cont .tel > div i, .cont .loc > div i, .comp .tel > div i, .comp .loc > div i {
+      .cont .tel > div h4, .cont .loc > div h4, .comp .tel > div h4, .comp .loc > div h4 {
+        padding: 5px 0; }
+      .cont .tel > div svg, .cont .loc > div svg, .comp .tel > div svg, .comp .loc > div svg {
         padding: 0 5px;
-        box-sizing: border-box; }
+        box-sizing: border-box;
+        font-size: 45px; }
 
 .comp .ct {
   display: table;
@@ -1034,16 +1033,16 @@ footer {
   .comp .ms.full > div > div {
     position: absolute;
     background-color: #e6e6e6;
-    bottom: -15px;
+    bottom: -22px;
     font-size: 22px;
     left: 0;
     display: table; }
-    .comp .ms.full > div > div h4, .comp .ms.full > div > div i {
+    .comp .ms.full > div > div h4, .comp .ms.full > div > div svg {
       display: table-cell;
       vertical-align: middle;
       font-size: 22px; }
-    .comp .ms.full > div > div i {
-      font-size: 25px;
+    .comp .ms.full > div > div svg {
+      font-size: 41px;
       padding: 0 10px;
       box-sizing: border-box; }
 
@@ -1179,12 +1178,13 @@ footer {
   padding: 10px;
   box-sizing: border-box;
   box-shadow: 0px 1px 11px #909090; }
-  .lg p {
+  .lg pre, .lg p {
     margin: 10px 0;
-    line-height: 22px; }
+    line-height: 22px;
+    font-family: Nunito-Regular !important; }
   .lg .inc {
     color: green; }
-    .lg .inc i {
+    .lg .inc svg {
       font-size: 18px; }
     .lg .inc h6 {
       text-transform: uppercase;
@@ -1236,6 +1236,7 @@ footer {
     margin: 5px 0;
     box-sizing: border-box; }
   .det li {
+    display: table;
     margin: 10px 0; }
   .det > li {
     margin-top: 0; }
@@ -1603,9 +1604,9 @@ footer {
       margin: 0 auto;
       display: table;
       float: none; }
-  .emp .empresa ul li > div i {
+  .emp .empresa ul li > div svg {
     font-size: 30px; }
-  .emp .empresa ul li > div .fa-money {
+  .emp .empresa ul li > div .fa-money-bill-alt {
     font-size: 30px;
     padding: 6px 7px; }
   .emp .empresa ul li > div .fa-star {
@@ -1682,7 +1683,7 @@ footer {
     margin: 0 6px; }
   .crl.vg .carvg .item > div .name h5, .cont .tel h5, .cont .loc h5, .comp .ct > div h4, .comp .ms.full > div > div h4, .comp .ms.full > div > div i {
     font-size: 18px; }
-  .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5, .cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i {
+  .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5, .cont .tel h4, .cont .tel svg, .cont .loc h4, .cont .loc i {
     font-size: 20px; }
   .crl.vg .carvg .item > div .local li, .crl.vg .carvg .item > div .tempo li, .crl.vg .carvg .item > div .inc li {
     margin: 5px 3px; }
@@ -1705,7 +1706,7 @@ footer {
     font-size: 12px; }
   footer .col-12 .formpag p {
     font-size: 13px; }
-  footer .col-12 .formpag ul li i {
+  footer .col-12 .formpag ul li svg {
     font-size: 20px; }
   footer .col-12 > div .iframe {
     width: 300px !important; }

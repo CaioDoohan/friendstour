@@ -16,7 +16,7 @@ Event.prototype.getAnuncios = function(thatX,result){
     var cat = new Array();
     var idProd = new Array();
     var imgHome = new Array();
-
+    console.log('thatX----',thatX);
     function isEmptyObject(obj) {
         for (var key in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -67,7 +67,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             //prod = produtos;
             //idProd = idsProd;
         }
-        //console.log(idsProd);
+        console.log(thatX.statmentCat);
         var sqlGet = ("select CP.id_prod,C.nome_cat from cat_prod as CP Inner join categoria as C on C.id_cat = CP.id_cat where id_prod in (" + idsProd + " ) "+ thatX.statmentCat);
         console.log(sqlGet);
         return connection.query(sqlGet);
@@ -82,7 +82,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             return connection.end();
         }
         
-        //console.log(cat);
+        console.log("PRODUTO QUE POSSUI CATEGORIA EXCURSAO:",cat);
 
         return connection.query("select IP.id_prod, I.nome_inc from inc_prod as IP Inner join inclusos as I on I.id_inc = IP.id_inc where id_prod in (" + idsProd + " )");
     })
@@ -99,7 +99,7 @@ Event.prototype.getAnuncios = function(thatX,result){
 
         //console.log("CATEGORIAS", cat);
         //console.log("INCLUSOS", inc);
-        console.log("IMAGES HOME", imgHome);
+        //console.log("IMAGES HOME", imgHome);
 
         for( var i = 0; i < produtos.length; i++){
 
@@ -114,7 +114,7 @@ Event.prototype.getAnuncios = function(thatX,result){
 
                 //var idcat = cat[k].id_prod;
                 if( cat[k].id_prod == id ){
-                    //console.log("IGUAL",idcat, id );
+                    //console.log("CATEGORIA DE PRODUTO - CAT_PROD IGUAL:",cat[k].id_prod, id );
                     catF.push(cat[k].nome_cat);
                 }
             }
@@ -134,37 +134,40 @@ Event.prototype.getAnuncios = function(thatX,result){
             //console.log("INCLUSO DO ID:", incF);
 
             for( var c = 0; c < imgHome.length; c++ ){
-                console.log("IMAGEM ID:" + imgHome[c].prod_id + "/ID PROD:" + id);
+                //console.log("IMAGEM ID:" + imgHome[c].prod_id + "/ID PROD:" + id);
                 if(imgHome[c].prod_id == id){
-                    console.log(chalk.green("IGUALZIN PAINHO"));
-                    console.log(imgHome[c].name_img);
+                    //console.log(chalk.green("IGUALZIN PAINHO"));
+                    //console.log(imgHome[c].name_img);
                     imgF = imgHome[c].name_img;
                 }else if(imgHome[c] == undefined){
-                    console.log(chalk.green("É UNDEFINED PAINHO"));
+                   // console.log(chalk.green("É UNDEFINED PAINHO"));
                     imgF = undefined;
                 }
             }
 
             //console.log("IMAGEM DO ID:", imgF);
-
-            prodFinal.push( {
-                id_prod : produtos[i].id_prod,
-                nome_prod: produtos[i].nome_prod,
-                desc_prod : produtos[i].desc_prod,
-                data_prod: produtos[i].data_prod,
-                valor_prod : produtos[i].valor_prod,
-                parcelas_prod : produtos[i].parcelas_prod,
-                vagas_prod : produtos[i].vagas_prod,
-                categoria : catF,
-                inclusos : incF,
-                imagem   : imgF
-            });
-            //console.log("FINAL:",prodFinal);
+            console.log(catF.length > 0 ? true : false);
+            if( catF.length > 0 ){
+                prodFinal.push( {
+                    id_prod : produtos[i].id_prod,
+                    nome_prod: produtos[i].nome_prod,
+                    desc_prod : produtos[i].desc_prod,
+                    data_prod: produtos[i].data_prod,
+                    valor_prod : produtos[i].valor_prod,
+                    parcelas_prod : produtos[i].parcelas_prod,
+                    vagas_prod : produtos[i].vagas_prod,
+                    categoria : catF,
+                    inclusos : incF,
+                    imagem   : imgF
+                });
+            }
+            
         }
-       
-       result(0,prodFinal);
+
+        result(0,prodFinal);
+        console.log("FINAL:",prodFinal);
        if(thatX.notEnd != true){
-           console.log("CONNECTION FECHADA");
+           //console.log("CONNECTION FECHADA");
            return connection.end();
        }
     });

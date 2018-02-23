@@ -108,7 +108,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+process.on('uncaughtException', function (err) {
+  console.log(err);
+}); 
+
 var port = process.env.PORT || 3000;
+
 app.listen(port, function () {
     console.log(chalk.blue('-|Umbler listening on port:',chalk.yellow(port)));
 });

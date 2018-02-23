@@ -45,7 +45,7 @@ router.get("/:format", function(req,res){
     var EventModel =  new Event();
 
     EventModel.getAnuncios(thatX, function(erro,produtos){
-        console.log("RESULTADO", produtos);
+        //console.log("RESULTADO", produtos);
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){
                 produtos[i].id_prod;

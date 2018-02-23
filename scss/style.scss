@@ -275,23 +275,6 @@ select
 /* Text Inputs
 -----------------------------------------------*/
 
-input[type=date],
-input[type=datetime],
-input[type=datetime-local],
-input[type=email],
-input[type=month],
-input[type=number],
-input[type=password],
-input[type=range],
-input[type=search],
-input[type=tel],
-input[type=text],
-input[type=time],
-input[type=url],
-input[type=week]
-{
-}
-
 /* Button Controls
 -----------------------------------------------*/
 
@@ -305,11 +288,6 @@ input[type=radio]
 /* File Uploads
 -----------------------------------------------*/
 
-input[type=file]
-{
-
-}
-
 /* Search Input
 -----------------------------------------------*/
 
@@ -317,7 +295,7 @@ input[type=file]
 input[type=search]
 {
 	-webkit-appearance:textfield;
-	-webkit-box-sizing:content-box;
+	box-sizing:content-box;
 }
 
 /* Turn off the recent search for webkit. It adds about 15px padding on the left */
@@ -357,14 +335,6 @@ textarea
 	
 	/* Turn off scroll bars in IE unless needed */
 	overflow:auto;
-}
-
-/* Selects
------------------------------------------------*/
-
-select
-{
-
 }
 
 select[multiple] 
@@ -477,7 +447,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     padding: 8px 10px 5px;
     border-radius: 0 0 8px 8px;
     box-sizing: border-box;
-    i, p {
+    svg, p {
       color: #fff!important;
       font-weight: 800;
       font-size: 14px;
@@ -730,7 +700,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
             width: 80px;
             margin: 0 3px;
             max-width: 100%;
-            i{
+            i,svg{
               font-size:12px;
               display: table-cell;
               vertical-align: middle;
@@ -798,7 +768,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
             float: left;
             margin: 0 0.65%;
             text-align:center;
-            h5,h6,&::before,&::after,i{
+            h5,h6,&::before,&::after,svg{
               display: table-cell;
               vertical-align: middle;
               font-size: 12px;
@@ -943,10 +913,10 @@ h1, h2, h3, h4, h5, h6, ul, figure {
 }
 
 .inc{
-  i,h6{
+  svg,h6{
     color:green;
   }
-  i{
+  svg{
     font-size:18px!important;
   }
   h6{
@@ -1041,15 +1011,15 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           vertical-align: middle;
           padding: 0 5px;
           box-sizing: border-box;
-          i{
-            border-radius: 50%;
-            background: #2ec4b6;
+          svg{
+            //border-radius: 50%;
+            //background: #2ec4b6;
             font-size: 35px;
             padding: 5px 10px;
-            color: #fff;
+            color: #2ec4b6;
             text-align: center;
           }
-          .fa-money{
+          .fa-money-bill-alt{
             font-size: 34px;
             padding: 8px 9px;
           }
@@ -1157,7 +1127,7 @@ footer{
           font-size: 14px;
           color:#726277!important;
         }
-        i{
+        svg{
           color:#60ef57;
           font-weight: bold;
         }
@@ -1181,7 +1151,7 @@ footer{
         li{
           float:left;
           margin: 0 10px;
-          i{
+          svg{
             font-size:24px;
           }
         }
@@ -1303,7 +1273,7 @@ footer{
     padding: 10px 0;
     color:#726277!important;
 
-    h4,i{
+    h4,svg{
       font-size:32px;
     }
 
@@ -1317,14 +1287,18 @@ footer{
       padding: 0 5px;
       box-sizing: border-box;
 
-      &>i,h4{
+      &>svg,h4{
         display: table;
         float: left;
       }
 
-      i{
+      h4{
+        padding: 5px 0;
+      }
+      svg{
         padding: 0 5px;
         box-sizing: border-box;
+        font-size: 45px;
       }
     }
   }
@@ -1378,18 +1352,18 @@ footer{
       &>div{
         position: absolute;
         background-color: #e6e6e6;
-        bottom: -15px;
+        bottom: -22px;
         font-size: 22px;
         left: 0;
         display: table;
-        h4,i{
+        h4,svg{
           display: table-cell;
           vertical-align: middle;
           font-size:22px;
         }  
   
-        i{
-          font-size:25px;
+        svg{
+          font-size:41px;
           padding: 0 10px;
           box-sizing: border-box;
         }
@@ -1572,13 +1546,14 @@ footer{
   padding: 10px;
   box-sizing: border-box;
   box-shadow: 0px 1px 11px rgb(144, 144, 144);
-  p{
+  pre,p{
     margin:10px 0;
     line-height: 22px;
+    font-family: Nunito-Regular!important;
   }
   .inc{
     color:green;
-    i{
+    svg{
       font-size:18px;
     }
     h6{
@@ -1651,6 +1626,7 @@ footer{
   }
 
   li{
+    display: table;
     margin: 10px 0;
   }
 
@@ -2144,11 +2120,11 @@ footer{
       }
     }
   }
-  .emp .empresa ul li > div i{
+  .emp .empresa ul li > div svg{
     font-size: 30px;
   }
   
-  .emp .empresa ul li > div .fa-money{
+  .emp .empresa ul li > div .fa-money-bill-alt{
     font-size: 30px;
     padding: 6px 7px;
   }
@@ -2276,7 +2252,7 @@ footer{
   //   font-size:12px;
   // }
 
-  .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5,.cont .tel h4, .cont .tel i, .cont .loc h4, .cont .loc i{
+  .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5,.cont .tel h4, .cont .tel svg, .cont .loc h4, .cont .loc i{
     font-size:20px;
   }
 
@@ -2319,7 +2295,7 @@ footer{
     font-size: 13px;
   }
 
-  footer .col-12 .formpag ul li i{
+  footer .col-12 .formpag ul li svg{
     font-size:20px;
   }
 

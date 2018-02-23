@@ -29,7 +29,7 @@ router.get('/:id', function(req, res, next) {
                 imagens : prod.imagem
             }
         }
-        //console.log('RESULT QUERY:', param);     
+        console.log('RESULT QUERY:', param.texto_prod);     
         res.render('detalhes', { title: 'Friendstour - Detalhes', produto : param});
     });
 });
