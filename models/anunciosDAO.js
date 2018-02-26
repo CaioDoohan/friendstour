@@ -1,6 +1,11 @@
 var mysql = require('promise-mysql');
 var config = require('../config/dbConnection');
 var chalk = require('chalk');
+var fs = require('fs');
+var path = new require('path');
+
+var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods');
+
 var db;
 var connection;
 
@@ -378,15 +383,214 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
 
 Anuncio.prototype.removeAnuncio = function(id, callback){
     var idProd;
+    var idImg;
+    var nameHome;
+    var acess;
+    var idDet = new Array();
+    var nameDet = new Array();
+
     db.then(function(conn){
         connection = conn;
         idProd = id;
+        
 
         var sqlRemove = ("DELETE FROM produto WHERE id_prod = " + idProd);
         
-        connection.query(sqlRemove);
+        connection.query(sqlRemove, function(erro, result){
+            if(erro){
+                callback(1,0);
+                return acess = false;
+            }else{
+                return acess = true;
+            }
+        });
+        return connection.query("SELECT 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            callback(1,0);
+            return connection.end();
+        }else{
+            var sqlRemove = ("DELETE FROM cat_prod WHERE id_prod = " + idProd);
+            console.log(sqlRemove);
+            connection.query(sqlRemove, function(erro, result){
+                if(erro){
+                    callback(1,0);
+                    return acess = false;
+                }
+            })
+            return connection.query("select 1");
+        }
 
-        return callback(0,1);
+        return connection.query("Select 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            callback(1,0);
+            return connection.end();
+        }else{
+            var sqlRemove = ("DELETE FROM inc_prod WHERE id_prod = " + idProd);
+
+            connection.query(sqlRemove, function(erro, result){
+                if(erro){
+                    callback(1,0);
+                    return acess = false;
+                }
+            })
+            console.log(sqlRemove);
+            return connection.query("select 1");
+        }
+
+        return connection.query("Select 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            callback(1,0);
+            return connection.end();
+        }else{
+            var sqlGet = ("SELECT home_id FROM home_prod WHERE prod_id = " + idProd);
+            console.log(sqlGet);
+            connection.query(sqlGet, function(erro, result){
+                console.log(result);
+                if(erro || result[0] == undefined){
+                    // callback(1,0);
+                    console.log(chalk.yellow("PRODUTO NÃO POSSUI IMAGEM HOME"));
+                    return acess = false;
+                }else{
+                    idImg = result[0].home_id;
+                    return idImg;
+                }
+            });
+            return connection.query("select 1");
+        }
+
+        return connection.query("Select 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            idImg = undefined;
+        }else{
+            var sqlGet = ("SELECT name_img FROM images_home WHERE home_id = "+ idImg);
+            console.log(sqlGet);
+
+            connection.query(sqlGet, function(erro, result){
+                console.log(result);
+                if(erro){
+                    callback(1,0);
+                    return acess = false;
+                }else{
+                    nameHome = result[0].name_img;
+                    var sqlRemove = ("DELETE FROM images_home WHERE home_id = "+ idImg);
+                    connection.query(sqlRemove,function(erro){
+                        if(erro){
+                            return acess = false;
+                        }else{
+                            //console.log("THAT SHIT",jsonPath);
+                            var img = (jsonPath + "/" + nameHome);
+                            fs.unlink(img,function(err){
+                                if (err) throw err;
+                                console.log(img,'-- deleted');
+                            });
+                        }
+                        return connection.query("select 1");
+                    });
+                    return connection.query("select 1");
+                }
+            })
+        }
+
+        return connection.query("Select 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+
+        var sqlGet = ("SELECT det_id FROM det_prod WHERE prod_id = " + idProd);
+        console.log(sqlGet);
+        connection.query(sqlGet, function(erro, result){
+            console.log(result);
+            if(erro || result[0] == undefined){
+                console.log(chalk.yellow("PRODUTO N POSSUI IMAGENS DETALHADAS"));
+                return acess = false;
+            }else{
+                for(var i = 0; i < result.length; i++ ){
+                    idDet.push(result[i].det_id);
+                }
+                return idDet;
+            }
+        });
+
+        return connection.query("Select 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            idDet = undefined;
+        }else{
+            var sqlGet = ("SELECT name_img FROM images_det WHERE det_id in ("+idDet+")");
+            console.log(sqlGet);
+            nameDet = [];
+            connection.query(sqlGet, function(erro, result){
+                console.log(result);
+                if(erro){
+                    callback(1,0);
+                    return acess = false;
+                }else{
+                    // console.log(result);
+                    if( result != undefined ){
+                        //console.log("ENTROU IF", result);
+                        for(var i = 0; i < result.length; i++){
+                            nameDet.push(result[i].name_img);
+                        }
+                        return nameDet;
+                    }
+                }
+            });
+            return connection.query("SELECT 1");
+        }
+        return connection.query("SELECT 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            idDet = undefined;
+        }else{
+            var sqlRemove = ("DELETE FROM images_det WHERE det_id in ("+ idDet +")");
+            console.log(sqlRemove);
+            connection.query(sqlRemove,function(erro){
+                if(erro){
+                    callback(1,0);
+                    return acess = false;
+                }
+            });
+        }
+        return connection.query("SELECT 1");
+    }).then(function(){
+        console.log("ACESS:",acess);
+        if(acess == false){
+            nameDet = undefined;
+        }else{
+            function deleteFile(file){
+                var img = (jsonPath + "\\" + file);
+                fs.unlink(img,function(err){
+                    if (err) throw err;
+                    console.log(chalk.red(img," - DELETADA"));
+                });
+                return true;
+            }
+    
+            if(nameDet != undefined){
+                for(var i = 0; i < nameDet.length; i++){
+                    deleteFile(nameDet[i],function(erro, result){
+                        if(erro){
+                            callback(1,0);
+                            return acess = false;
+                        }
+                    });
+                }
+                callback(0,1);
+                return connection.query("SELECT 1");
+            }
+        }  
+        
+        callback(0,1);
+        return connection.end();
     });
 }
 

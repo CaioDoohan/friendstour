@@ -44,16 +44,38 @@ router.post('/post', function(req,res){
 
     var GaleriaModel = new Galeria();
 
-    console.log("CONTROL",id);
+    //console.log("CONTROL",id);
     
     GaleriaModel.getImages(id, function(erro,result){
-        if( erro == 1 && result == undefined ){
-            console.log("ENTROU IF");
+        console.log("CONTROL",result);
+        if( erro == 1){
+            console.log(chalk.yellow("ERRO"));
             res.json({
-                msg : "Produto não possui imagens"
+                msg : "Erro"
             })
         }else{
-            console.log("CONTROL:",result);
+            //console.log("CONTROL:",result);
+            res.json(result);
+        }
+    });
+});
+
+router.post('/remover', function(req,res,next){
+    console.log(req.body);
+    var id = req.body.camp1;
+    var type = req.body.camp2;
+    
+    var GaleriaModel = new Galeria();
+
+    GaleriaModel.remover(id,type, function(erro, callback){
+        if( erro == 1 || callback == undefined){
+            res.json({ 
+                msg : "ERRO: repita a operação"
+             })
+        }else{
+            res.json({
+                msg : "Imagem removida"
+            })
         }
     });
 });

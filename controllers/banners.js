@@ -49,23 +49,23 @@ router.post('/adicionar/dados_enviados', function(req,res){
 
     cpUpload(req,res,function(err) {
         var banner;
-        console.log("1-)BANNER:", banner)
+        //console.log("1-)BANNER:", banner)
         if( req.files != null && req.files != undefined ){
             banner = req.files.banner[0].filename;
         }
 
         var BannersModel = new Banners();
-        console.log("2-)BANNER:", banner)
+        //console.log("2-)BANNER:", banner)
         BannersModel.addBanner(banner, function(erro,result){
             var msg;
-            console.log("2-)Result:", result);
+            //console.log("2-)Result:", result);
             if(erro == 1){
                 msg = erro;
             }
             else{
                 msg = 0;
             }
-            console.log("1-)Mensagem:", msg);
+            //console.log("1-)Mensagem:", msg);
             res.render("admin/adicionarBanner", { title : "Friendstour - Adicionar Banner", msg : msg })
         });
     });
@@ -75,9 +75,10 @@ router.post('/adicionar/dados_enviados', function(req,res){
 router.post('/remover', function(req,res,next){
 
     var id = req.body.id;
+    var name = req.body.name;
     var BannersModel = new Banners();
 
-    BannersModel.removeBanner(id, function(erro, callback){
+    BannersModel.removeBanner(id,name, function(erro, callback){
         if( erro == 1 || callback == undefined){
             res.json({ 
                 msg : "ERRO: repita a operação"

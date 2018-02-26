@@ -21,7 +21,7 @@
                                         <img src="../images/uploads/banners/<%= banners[i].banner %>" alt="Friendstour - Banner" />
                                     </figure>
                                     <div class="op">
-                                        <i class="fa fa-trash-o" aria-hidden="true" onclick="remove(<%= banners[i].banner_id %>)" title="Remover"></i>
+                                        <i class="fa fa-trash-o" aria-hidden="true" onclick="remove(<%= banners[i].banner_id %>,'<%= banners[i].banner %>')" title="Remover"></i>
                                     </div>
                                     <div class="dt">
                                         <%= banners[i].data_criacao %>
@@ -49,13 +49,14 @@
     </div> 
 </main>
 <script>
-    function remove(value){
+    function remove(value,name){
         if (window.confirm("Deseja remover este banner?")) { 
             $.ajax({
                 method: "POST",
                 url: "/admin/banners/remover",
                 data: { 
-                    id : value
+                    id : value,
+                    name : name
                 },
                 dataType: 'json',
                 cache: false,

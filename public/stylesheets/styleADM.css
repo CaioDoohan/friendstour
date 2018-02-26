@@ -739,3 +739,6 @@ footer {
   background-color: #39444a;
   color: #fff;
   display: table; }
+
+.img {
+  display: none; }

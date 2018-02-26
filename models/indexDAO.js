@@ -38,7 +38,7 @@ Event.prototype.getAnuncios = function(thatX,result){
     db.then(function(conn){
 
         connection = conn;
-        var options = "id_prod, nome_prod, desc_prod, data_prod, valor_prod, vagas_prod, parcelas_prod";
+        var options = "id_prod, nome_prod, desc_prod, data_prod, valor_prod, vagas_prod, parcelas_prod,promo_prod, nacional_prod";
 
         var sqlGet = ("select "+ options +" from produto "+ thatX.statment);
         console.log(sqlGet);
@@ -155,7 +155,9 @@ Event.prototype.getAnuncios = function(thatX,result){
                     data_prod: produtos[i].data_prod,
                     valor_prod : produtos[i].valor_prod,
                     parcelas_prod : produtos[i].parcelas_prod,
+                    nacional_prod : produtos[i].nacional_prod,
                     vagas_prod : produtos[i].vagas_prod,
+                    promo_prod : produtos[i].promo_prod,
                     categoria : catF,
                     inclusos : incF,
                     imagem   : imgF
@@ -181,7 +183,8 @@ Event.prototype.getBanners = function(banners){
         var sqlGet = ("SELECT "+ options + " from banners WHERE ativo_banner =  b'1' order by data_criacao LIMIT 3");
 
         connection.query(sqlGet, function(erro, result){
-            if(erro){
+            console.log(result);
+            if(erro || result[0] == undefined){
                 banners(undefined);
             }else{
                 banners(result);

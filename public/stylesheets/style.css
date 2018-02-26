@@ -660,7 +660,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
         position: absolute;
         left: -14px;
         top: 0; }
-      .crl.vg .carvg .item .event i, .crl.vg .carvg .item .event span {
+      .crl.vg .carvg .item .event svg, .crl.vg .carvg .item .event span {
         color: #fff;
         display: table-cell;
         vertical-align: middle; }
@@ -1358,6 +1358,10 @@ footer {
     float: right;
     color: #d05a35;
     cursor: pointer; }
+
+.red {
+  background-color: red;
+  text-transform: uppercase; }
 
 @media screen and (max-width: 990px) {
   .container {

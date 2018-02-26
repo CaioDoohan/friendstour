@@ -840,7 +840,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           left: -14px;
           top: 0;
         }
-        i,span{
+        svg,span{
           color:#fff;
           display: table-cell;
           vertical-align: middle;
@@ -1785,6 +1785,11 @@ footer{
     color: #d05a35;
     cursor: pointer;
   }
+}
+
+.red{
+  background-color: red;
+  text-transform: uppercase;
 }
 @media screen and (max-width:990px){
   .container{

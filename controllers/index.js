@@ -10,7 +10,12 @@ router.get('/', function(req, res, next) {
     var thatX = {};
     
     EventModel.getAnuncios(thatX,function(erro,produtos){
-        //console.log("PRODS:",produtos);
+        console.log("PRODS:",produtos);
+        for(var i = 0; i < produtos.length; i++){
+            if( produtos[i].categoria.includes('Cruzeiro') ){
+                console.log("Cruzeiro");
+            }console.log("Não é cruzeiro");
+        }
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){
                 produtos[i].id_prod;
@@ -21,6 +26,8 @@ router.get('/', function(req, res, next) {
                 produtos[i].valor_prod;
                 produtos[i].parcelas_prod;
                 produtos[i].vagas_prod;
+                produtos[i].nacional_prod;
+                produtos[i].promo_prod;
                 produtos[i].categoria;
                 produtos[i].inclusos;
                 produtos[i].imagem;
@@ -28,8 +35,8 @@ router.get('/', function(req, res, next) {
         }
         EventModel.getBanners(function(result){
             var banners = new Array();
-            //console.log(result);
-            if(result[0] != undefined){
+            console.log(result);
+            if(result != undefined){
                 for(var i = 0 ; i < result.length; i ++){
                     banners.push(result[i].banner);
                 }

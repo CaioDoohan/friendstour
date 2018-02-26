@@ -2,6 +2,9 @@ var mysql = require('promise-mysql');
 var config = require('../config/dbConnection');
 var chalk = require('chalk');
 var moment = require('moment');
+var fs = require('file-system');
+var path = new require('path');
+var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'banners');
 var db;
 var connection;
 
@@ -32,7 +35,7 @@ Banners.prototype.getAllBanners = function(banners){
 }
 
 Banners.prototype.addBanner = function(banner, callback){
-    console.log("3-)BANNER:", banner)
+    //console.log("3-)BANNER:", banner)
 
     db.then(function(conn){
         
@@ -58,15 +61,26 @@ Banners.prototype.addBanner = function(banner, callback){
     
 }
 
-Banners.prototype.removeBanner = function(id, callback){
+Banners.prototype.removeBanner = function(id,name,callback){
     db.then(function(conn){
         connection = conn;
-
+        console.log(name);
         var sqlRemove = ("DELETE FROM banners WHERE banner_id = " + id);
         
-        connection.query(sqlRemove);
-
-        return callback(0,1);
+        connection.query(sqlRemove, function(erro, result){
+            if(erro){
+                return callback(1,0);
+            }else{
+                var img = (jsonPath + "\\" + name); 
+                fs.unlink(img,function(err){
+                    if (err) throw err;
+                    console.log(chalk.red(img," - DELETADA"));
+                });
+            }
+            return callback(0,1);
+        });
+        
+        connection.end();
     });
 }
 
@@ -88,9 +102,11 @@ Banners.prototype.desativarBanner = function(id, status,callback){
             //console.log(result);
             if(err){
                 callback(1, 0);
+                connection.end();
             }
             else{
                 callback(0, 1);
+                connection.end();
             }
         });
 

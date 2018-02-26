@@ -50,6 +50,16 @@
                     <ul class="type">                       
                     </ul>
                     <div class="img">
+                        <div class="type1 banner">
+                            <p>Foto Principal</p>
+                            <ul id="home">
+
+                            </ul>
+                        </div>
+                        <div class="type2 banner">
+                            <p>Fotos Detalhadas</p>
+                            <ul id="detalhes"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,7 +68,7 @@
 </main>
 <script>
     function getThis(field, type){
-        console.log(field, type);
+        $('.img').hide();
         $.ajax({
             method: "POST",
             url: "/admin/galeria/get",
@@ -77,7 +87,6 @@
             }
             else if(data.ids){
                 $.each(data.ids,function(idx, key){
-                    //console.log(data.ids[idx]);
                     $(".type").append("<li class='prod' onclick='getProd("+ data.ids[idx] +")'><p>Anuncio - ID: " + data.ids[idx] +"</p></li>");
                 });
             }
@@ -85,7 +94,7 @@
         });   
     }
     function getProd(id){
-        //console.log("GETPROD:",id);
+        $('.img').hide();
         $.ajax({
             method: "POST",
             url: "/admin/galeria/post",
@@ -96,31 +105,92 @@
             cache: false,
         })
         .done(function(data) {
-            console.log(data);
             $(".msgs").find('.alertget').remove();
             if( data.msg){
-                //console.log(data.msg);
-                $(".msgs").append("<div class='alertget'>"+ data.msg +"</div>");
-            }else{
-                alert(data);
+                $(".msgs").append("<div class='alertget  red'>"+ data.msg +"</div>");
+            }
+            else{
+                $('.img').hide();
+                function appHome(dado){
+                    $('.type1').css({ "display" : "none" });
+                    $('#home').find('.item').remove();
+                    $('.img').show();
+                    if(dado.id != undefined){
+                        var cl = '';
+                        (dado.ativo == true ? (cl = "on") : (cl) );
+                        $('.type1').css({"display":"block"});
+                        $('#home').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id+",1)' title='Remover'></i></div><div class='dt'>"+ dado.data +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Desativar' onclick='turnThis("+dado.id+","+dado.ativo+",1)' aria-hidden='true'></i></div></li>");
+                    }
+                    return true;
+                }
+                
+                function appDet(dado){
+                    $('.type2').css({ "display" : "none" });
+                    $('#detalhes').find('.item').remove();
+                    $('.img').show();
+                    if(dado != undefined){
+                        $('.type2').css({"display":"block"});
+                        if(dado.nome.length <= 1){
+                            var cl = '';
+                            (dado.ativo == true ? (cl = "on") : (cl) );
+                            $('#detalhes').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id+",0)' title='Remover'></i></div><div class='dt'>"+ dado.data +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Desativar' onclick='turnThis("+dado.id+","+dado.ativo+",0)' aria-hidden='true'></i></div></li>");
+                        }else{
+                            $.each(dado.nome,function(idx, key){
+                                var cl = '';
+                                (dado.ativo[idx] == true ? (cl = "on") : (cl) );
+                                $('#detalhes').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome[idx]+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id[idx]+",0)' title='Remover'></i></div><div class='dt'>"+ dado.data[idx] +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Desativar' onclick='turnThis("+dado.id[idx]+","+dado.ativo[idx]+",0)' aria-hidden='true'></i></div></li>");
+                            });
+                        }
+                    }
+                    return true;
+                }
+
+                function undefinedItem(value,tp,id){
+                    $("."+ tp +"").css({ "display" : "none" });
+                    $("#"+ id +"").find('.item').remove();
+                    $("#"+ id +"").find('.alertget').remove();
+                    $('.img').show();
+                    var msg;
+                    if(id == 'home'){
+                        msg = "Produto sem imagem Principal";
+                        $("."+ tp +"").css({"display":"block"});
+                        $("#"+ id +"").append("<div class='alertget'>"+ msg +"</div>");
+                    }
+                    if(id == 'detalhes'){
+                        msg = "Produto sem imagens Detalhadas";
+                        $("."+ tp +"").css({"display":"block"});
+                        $("#"+ id +"").append("<div class='alertget'>"+ msg +"</div>");
+                    }
+                    return true;
+                }
+                var home = data.home;
+                var det = data.det;
+
+                if( home == undefined){
+                    undefinedItem(home,'type1','home');                   
+                }else{
+                    appHome(home);
+                }
+
+                if( det == undefined){
+                    undefinedItem(det,'type2','detalhes');
+                }else{
+                    appDet(det);
+                }                   
+                
             }     
         });
     }
 
-    function appPr(){
-
-    }
-
-    function appDt(){
-
-    }
-    function remove(value){
-        if (window.confirm("Deseja remover este banner?")) { 
+    function remove(t1,t2){
+        console.log(t1,t2);
+        if (window.confirm("Deseja remover esta Imagem?")) { 
             $.ajax({
                 method: "POST",
-                url: "/admin/banners/remover",
+                url: "/admin/galeria/remover",
                 data: { 
-                    id : value
+                    camp1 : t1,
+                    camp2 : t2
                 },
                 dataType: 'json',
                 cache: false,
