@@ -928,20 +928,20 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   }
 }
 .fpag{
-  // border-top: 1px solid #e0e0e0;
   background-color:#f3f3f3;
   li{
     display: table;
     margin: 0 auto;
     text-align: center;
     padding: 5px 0;
-    i,p{
+    svg,p{
       display: table-cell;
       vertical-align: middle;
       font-size:13px;
     }
-    i{
+    svg{
       font-size:11px;
+      margin: 5px 0;
     }
     p{
       font-family:Nunito-black;
@@ -1549,7 +1549,7 @@ footer{
   pre,p{
     margin:10px 0;
     line-height: 22px;
-    font-family: Nunito-Regular!important;
+    font-family: Nunito-Regular;
   }
   .inc{
     color:green;
@@ -1574,13 +1574,7 @@ footer{
   margin-bottom: 30px;
   position: relative;
   padding: 14px 0;
-  // h3{
-  //   color: #d05a35;
-  //   box-sizing: border-box;
-  //   font-family: Nunito-Black;
-  //   display:inline-block;
-  //   font-size:24px;
-  // }
+
   h4{
     font-size: 25px;
     font-weight: bold;
@@ -1608,15 +1602,26 @@ footer{
   }
 }
 .det{
-  // padding: 0 1% 10px 1%;
   box-sizing: border-box;
   display: block;
   position: relative;
 
+  .local{
+    display: table;
+    width: 100%;
+
+    li{
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
   .desc{
     p{
       font-size:14px!important;
       line-height:20px;
+      display: table;
+      margin: 0 auto;
+      text-align:center;
     }
   }
   &>ul,&>div{
@@ -1658,6 +1663,7 @@ footer{
     }
     h6{
       font-size:25px;
+      line-height: 22px;
     }
   }
   button{
@@ -1779,7 +1785,7 @@ footer{
       margin: 15px auto;
     }
   }
-  i{
+  svg{
     font-size: 35px;
     float: right;
     color: #d05a35;
@@ -2265,7 +2271,7 @@ footer{
     margin: 5px 3px;
   }
   
-  .crl.vg .carvg .item > div .fpag li i, .crl.vg .carvg .item > div .fpag li p{
+  .crl.vg .carvg .item > div .fpag li svg, .crl.vg .carvg .item > div .fpag li p{
     font-size:12px;
   }
 

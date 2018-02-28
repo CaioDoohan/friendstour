@@ -382,7 +382,6 @@ header .listMenu {
 
 footer {
   padding: 0 5px;
-  box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
   font-size: 12px;
   color: #d3d3d3;
   text-align: center;
@@ -589,6 +588,19 @@ footer {
         min-width: 462px;
         min-height: 80px;
         border: 1px solid rgba(128, 128, 128, 0.278431); }
+    .formlist form .obs {
+      display: table;
+      width: 100%; }
+      .formlist form .obs p {
+        margin: 15px 0;
+        font-size: 12px;
+        color: #404040;
+        font-weight: bold; }
+        .formlist form .obs p a {
+          color: blue;
+          text-decoration: underline;
+          padding: 0 5px;
+          box-sizing: border-box; }
     .formlist form button {
       margin: 0 auto;
       color: #253138;

@@ -4,6 +4,11 @@ exports.mysqlOptions = {
                 user: 'friends',
                 password: 'minhamae2311',
                 database: 'friendstourdb',
+                // host: 'localhost',
+                // port:3306,
+                // user:'root',
+                // password:'m10d12',
+                // database: 'friendsdb',
                 connectionLimit: 5,
                 typeCast: function castField( field, useDefaultTypeCasting ) {
                     

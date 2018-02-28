@@ -115,9 +115,15 @@
             console.log(data);
             $(".msgs").find('.alert').remove();
             $('input:checkbox').removeAttr('checked');
-            $.each(data,function(idx, key){
-                $(".msgs").append("<div class='alert'>"+ data[idx].msg +"</div>");
-            });
+            if($.isArray(data)){
+                console.log(true);
+                $.each(data,function(idx, key){
+                    $(".msgs").append("<div class='alert'>"+ data[idx].msg +"</div>");
+                });
+            }else{
+                $(".msgs").append("<div class='alert'>"+ data.msg +"</div>");
+            }
+            
             $('.field').find("div.text").remove();
             // $('#formReg').find("input").val("");
         });

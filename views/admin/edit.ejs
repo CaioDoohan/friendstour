@@ -60,9 +60,7 @@
                                 Pequena Descrição
                             </label>
                             <div>
-                                <textarea name="desc_prod" placeholder="Descrição breve" value="<%= produto.desc_prod%>" required>
-                                    <%= produto.desc_prod%>
-                                </textarea>
+                                <textarea name="desc_prod" placeholder="Descrição breve" value="<%= produto.desc_prod%>" required><%= produto.desc_prod%></textarea>
                             </div>
                         </div> 
                         <div>
@@ -147,9 +145,7 @@
                                 Detalhes
                             </label>
                             <div>
-                                <textarea name="texto_prod" placeholder="Detalhes" value="<%=  produto.texto_prod%>" required>
-                                    <%=  produto.texto_prod%>
-                                </textarea>
+                                <textarea name="texto_prod" placeholder="Detalhes" value="<%=  produto.texto_prod%>" required><%= produto.texto_prod%></textarea>
                             </div>
                         </div>  
                         <div class="add">
@@ -160,7 +156,6 @@
             </div>
         </div> 
     </div>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
     <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
     <script>
@@ -202,6 +197,8 @@
                     alert(data.msg);
                     location.reload();                
                 });
+            }else{
+                return 0;
             }
         });
     </script>

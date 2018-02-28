@@ -34,7 +34,7 @@
               <% } %>
             </div>
             <ul class="secft">
-              <% if( produto.imagens != undefined ) { 
+              <% if( produto.imagens != undefined) { 
                 for(var i = 0; i < produto.imagens.length; i++ ){ %>
                     <li>
                       <figure>
@@ -59,9 +59,11 @@
       </div>
       <section class="col-4 lg">
         <div class="dl">
-          <%for(var i = 0; i < produto.categorias.length; i++){%>
-            <h4><%= produto.categorias[i]%></h4>
-          <% } %>
+          <% if(produto.categorias.length > 1 ){ %>
+            <h4>PACOTE</h4>
+          <% } else { %>
+            <h4><%= produto.categorias %></h4>
+         <% } %>
         </div>
         <div class="det">
             <div class="desc">
@@ -96,12 +98,6 @@
               </div>
             </div>
             <ul class="fpag">
-              <!-- <li class="imp">
-                <i class="fa fa-certificate" aria-hidden="true"></i>
-                <p>
-                  PARCELAMENTOs IMPERDÍVEIS!
-                </p>
-              </li> -->
               <li class="parc">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <p>
@@ -119,9 +115,7 @@
           <h4>Descrição</h4>
         </div>
         <div class="txt">
-            <pre>
-              <%= produto.texto_prod%>
-            </pre>
+            <pre><%= produto.texto_prod%></pre>
         </div>
       </section>
     </div>

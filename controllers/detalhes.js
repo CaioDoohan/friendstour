@@ -18,18 +18,18 @@ router.get('/:id', function(req, res, next) {
 
            param = {
                 nome_prod : prod.nome_prod,
-                desc_prod : prod.desc_prod,
+                desc_prod : unescape(prod.desc_prod).trim(),
                 horario : prod.horario = moment(prod.data_prod).format('HH:mm'),
                 data : prod.data = moment(prod.data_prod).format('DD/MM'),
                 valor_prod : prod.valor_prod,
                 parcelas_prod : prod.parcelas_prod,
-                texto_prod : prod.texto_prod,
+                texto_prod : unescape(prod.texto_prod).trim(),
                 categorias : prod.categoria,
                 inclusos : prod.inclusos,
                 imagens : prod.imagem
             }
         }
-        console.log('RESULT QUERY:', param.texto_prod);     
+        // console.log('RESULT QUERY:', param.texto_prod);     
         res.render('detalhes', { title: 'Friendstour - Detalhes', produto : param});
     });
 });

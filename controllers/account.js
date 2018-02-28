@@ -7,6 +7,29 @@ var User      = require("../models/accountDAO.js");
 
 router.get('/',function(req, res, next) {
     var UserModel = new User();
+    var user;
+    UserModel.getUsers(function(users){
+        if(users != undefined){
+            console.log(users);
+            for(var i = 0; i < users.length; i++){
+                users[i].user_id;
+                users[i].username;
+                users[i].name;
+                users[i].ativo;
+            }
+
+        }else{
+            console.log("== ->");
+            users = undefined;
+        }
+        console.log(user);
+        res.render('admin/user', {title: 'Friendstour - Usuários', usuario : users });
+    });
+      
+});
+
+router.get('/cadastro',function(req, res, next) {
+    var UserModel = new User();
 
     UserModel.getAction(function(err, result){
         if( result != null){
@@ -17,7 +40,6 @@ router.get('/',function(req, res, next) {
     });
       
 });
-
 
 router.post('/register', function(req,res,next){
 
@@ -42,29 +64,27 @@ router.post('/register', function(req,res,next){
         return res.json( erros );
     }
     else{
-        var newUser = ({
+        var newUser = {
             name: name,
 			email: email,
 			username: username,
             password: password,
             action : action
-        })
-        UserModel.createUser(newUser, function(erro){
-            if(erro == '1'){
-                msg = "Cadastro efetuado com sucesso!";
-                msg = {
-                    msg : msg
-                }
+        }
+        console.log(chalk.blue("NEW USER FROM CONTROL:", newUser));
+        UserModel.createUser(newUser, function(erro,result){
+            console.log(result);
+            if(result != 0){
                 data = {
-                    msg : msg
+                    msg : "Cadastro efetuado com sucesso!"
                 }
-                return res.write( data.toString() );
+                res.json(data);
             }
             else{
                 data = {
                     msg : 'Credenciais incorretas ou usuário inexistente'
                 }
-                return res.write( data );
+                res.json(data);
             }
         });
     }
@@ -121,5 +141,44 @@ router.post('/validate', function(req,res,next){
         return;
     }
 });
+
+router.post('/remover', function(req,res){
+    var id = req.body.id;
+    var UserModel = new User();
+    console.log(id);
+    UserModel.remove(id, function(callback){
+        if(callback == undefined){
+            res.json({ 
+                msg : "ERRO: repita a operação"
+             })
+        }else{
+            res.json({
+                msg : "Usuário removido"
+            })
+        }
+    });
+});
+
+router.post('/desativar', function(req,res){
+    var id = req.body.id;
+    var status = req.body.turn;
+
+    var UserModel = new User();
+
+    UserModel.desativar(id,status, function(erro, result){
+        if( erro == 1 || result == undefined){
+            res.json({ 
+                msg : "ERRO: repita a operação"
+             })
+        }else{
+            res.json({
+                msg : "Status alterado"
+            })
+        }
+
+    });
+
+});
+
 
 module.exports = router;

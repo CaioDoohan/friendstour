@@ -40,14 +40,14 @@ router.post('/get', function(req,res){
 
 router.post('/post', function(req,res){
 
-    var id = req.body.idProd;
+    var idImagem = req.body.idProd;
 
     var GaleriaModel = new Galeria();
 
     //console.log("CONTROL",id);
     
-    GaleriaModel.getImages(id, function(erro,result){
-        console.log("CONTROL",result);
+    GaleriaModel.getImages(idImagem, function(erro,result){
+        // console.log("CONTROL",result);
         if( erro == 1){
             console.log(chalk.yellow("ERRO"));
             res.json({
@@ -61,9 +61,9 @@ router.post('/post', function(req,res){
 });
 
 router.post('/remover', function(req,res,next){
-    console.log(req.body);
+
     var id = req.body.camp1;
-    var type = req.body.camp2;
+    var type = (req.body.camp2 == 0 ? 'det' : 'home');
     
     var GaleriaModel = new Galeria();
 
@@ -78,6 +78,28 @@ router.post('/remover', function(req,res,next){
             })
         }
     });
+});
+
+router.post('/desativar', function(req,res){
+    var id = req.body.id;
+    var status = req.body.turn;
+    var type = (req.body.type == 0 ? 'det' : 'home');
+
+    var GaleriaModel = new Galeria();
+
+    GaleriaModel.desativar(id,status,type, function(erro, result){
+        if( erro == 1 || result == undefined){
+            res.json({ 
+                msg : "ERRO: repita a operação"
+             })
+        }else{
+            res.json({
+                msg : "Status alterado"
+            })
+        }
+
+    });
+
 });
 
 module.exports = router;

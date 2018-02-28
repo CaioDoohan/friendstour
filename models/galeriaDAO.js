@@ -48,7 +48,7 @@ Galeria.prototype.getIds = function(field, type, cb){
             }
         });
 
-        connection.end();
+        return connection.end();
     })
 }
 
@@ -68,7 +68,7 @@ Galeria.prototype.getImages = function(id, imgs){
         var sqlGet = ("SELECT home_id FROM home_prod WHERE prod_id = "+ id );
         
         connection.query(sqlGet, function(erro,result){
-            console.log(chalk.yellow("home id:", id));
+            //console.log(chalk.yellow("home id:", id));
             if(erro || result[0] == undefined){
                 //console.log("ENTROU IF MODEL");
                 // imgs(1, undefined);
@@ -181,35 +181,43 @@ Galeria.prototype.getImages = function(id, imgs){
     })
 }
 
-Galeria.prototype.remover = function(id,type, cb){
-    console.log("MODEL", id, type);
+Galeria.prototype.remover = function(idImagem,type, cb){
+    console.log("MODEL", idImagem, type);
+    var acess = true;
+    var removeProd;
+    var removeImg;
+    var sqlGet;
+    var nameImg;
+    var prod;
+    var id = idImagem
     db.then(function(conn){
-        var removeProd;
-        var removeImg;
-        var sqlGet;
-        var acess = true;
-        var nameImg;
-        var prod;
+        connection = conn;
         switch(type){
             case 'home':
-                removeProd = ("DELETE FROM home_prod WHERE home_id ="+ id);
-                removeImg = ("DELETE FROM images_home WHERE home_id ="+ id);
-                sqlGet = ("SELECT name_img FROM images_home WHERE home_id ="+ id);
-            break;
+                removeProd = ("DELETE FROM home_prod WHERE home_id = "+ id);
+                removeImg = ("DELETE FROM images_home WHERE home_id = "+ id);
+                sqlGet = ("SELECT name_img FROM images_home WHERE home_id = "+ id);
+                // console.log("->",removeProd);
+                // console.log("->",removeImg);
+                // console.log("->",sqlGet);
+                break;
 
             case 'det':
-                removeProd = ("DELETE FROM det_prod WHERE det_id ="+ id);
-                removeImg = ("DELETE FROM images_det WHERE det_id ="+ id);
-                sqlGet = ("SELECT name_img FROM images_det WHERE det_id ="+ id);
+                removeProd = ("DELETE FROM det_prod WHERE det_id = "+ id);
+                removeImg = ("DELETE FROM images_det WHERE det_id = "+ id);
+                sqlGet = ("SELECT name_img FROM images_det WHERE det_id = "+ id);
+                // console.log("->",removeProd);
+                // console.log("->",removeImg);
+                // console.log("->",sqlGet);
             break;
 
             return connection.query("SELECT 1");
         }
-
+        
+        
         connection.query(removeProd, function(erro,result){
-            console.log("RESULTADO",result);
+            // console.log("RESULTADO",result);
             if(erro || result == undefined){
-                prod = undefined;
                 console.log(chalk.yellow("PRODUTO SEM ESSA IMAGEM"));
             }
             return connection.query("select 1");
@@ -218,9 +226,11 @@ Galeria.prototype.remover = function(id,type, cb){
         return connection.query("SELECT 1");
         
     }).then(function(){
+        console.log("ACESS",acess);
         if(acess != false){
+            // console.log("ACESS TRUE");
             connection.query(sqlGet, function(erro, result){
-                console.log("IMAGE NOME", result);
+                // console.log("IMAGE NOME", result);
                 if(erro || result == undefined){
                     // cb(1,0);
                     return acess = false;   
@@ -231,12 +241,13 @@ Galeria.prototype.remover = function(id,type, cb){
                 return connection.query("SELECT 1");
             })
         }else{
-            console.log("CONNECTION ELSE");
+            console.log("ACESS FALSE");
             cb(1,0);
             return connection.end();
         }
         return connection.query("SELECT 1");
     }).then(function(){
+        console.log("ACESS",acess);
         if(acess != false){
             connection.query(removeImg, function(erro, result){
                 console.log("QUERY PARA REMOVER A IMAGEM DA PASTA",result);
@@ -244,23 +255,69 @@ Galeria.prototype.remover = function(id,type, cb){
                     cb(1,0);
                     return acess = false;
                 }else{
+                    // console.log("FOI PRA PASTA");
                     var img = (jsonPath + "\\" + nameImg); 
                     fs.unlink(img,function(err){
                         if (err) throw err;
                         console.log(chalk.red(img," - DELETADA"));
                     });
-                    //callback(0,1);
+                    cb(0,1);
+                    console.log(chalk.yellow("CONEXÃO FECHADA"));
+                    return connection.end();
                 }
                 return connection.query("select 1");
             });
-            cb(0,1);
-            return connection.end();
         }else{
-            cb(1,0);
-            return connection.end();
+            console.log("ACESS FALSE");
+            // cb(1,0);
+            // return connection.end();
         }
     });
-    
+}
+
+Galeria.prototype.desativar = function(id, status,type,callback){
+    var sqlDest;
+    db.then(function(conn){
+        connection = conn;
+
+        console.log("DADOS",id, status);
+
+        switch(type){
+            case 'home':
+                if( status == 'true' ){
+                    sqlDest = ("UPDATE images_home SET ativo_prod = b'0' WHERE home_id = " + id );
+        
+                }else {
+                    sqlDest = ("UPDATE images_home SET ativo_prod = b'1' WHERE home_id = " + id );
+                }
+                break;
+
+            case 'det':
+                if( status == 'true' ){
+                    sqlDest = ("UPDATE images_det SET ativo_prod = b'0' WHERE det_id = " + id );
+        
+                }else {
+                    sqlDest = ("UPDATE images_det SET ativo_prod = b'1' WHERE det_id = " + id );
+                }
+            break;
+
+            return connection.query("SELECT 1");
+        }         
+
+        console.log(sqlDest);
+        connection.query(sqlDest,function(err, result){
+            //console.log(result);
+            if(err){
+                callback(1, 0);
+                connection.end();
+            }
+            else{
+                callback(0, 1);
+                connection.end();
+            }
+        });
+
+    })
 }
 
 module.exports = Galeria;

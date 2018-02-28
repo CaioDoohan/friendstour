@@ -12,7 +12,6 @@ var LoginDAO = function(){
 }
 
 LoginDAO.prototype.verify = function(dadosLog, callback){
-    console.log(dadosLog);
     db.then(function(conn){
         var connection = conn;
 
@@ -20,14 +19,12 @@ LoginDAO.prototype.verify = function(dadosLog, callback){
 
         dadosLog.password = hash; 
 
-        var searchSQL = ("Select * from user where username = '" + dadosLog.username + "'and password = '" + dadosLog.password + "' ");
+        var searchSQL = ("Select * from user where username = '" + dadosLog.username + "'and password = '" + dadosLog.password + "' and ativo = b'1' ");
 
         connection.query(searchSQL, function(err, result){
-            console.log(result);
             if(err) throw err;
             else if (result[0] == undefined || result[0] ==  null) {
-                console.log("usuario nao encontrado");
-                callback(null);
+                return callback(null);
             } else {
                 const payload = {
                     id : result[0].user_id,
@@ -35,9 +32,10 @@ LoginDAO.prototype.verify = function(dadosLog, callback){
                     admin : result[0].admin
                 };
                 var token = jwt.encode(payload, configJwt.jwtSecret);
-                callback({access_token:token});
+                return callback({access_token:token});
             }
         });
+        connection.end();
     }); 
 }
 
@@ -53,15 +51,16 @@ LoginDAO.prototype.getByID = function(userX, callback){
 
             else if( result[0] == undefined ){
                 console.log(chalk.blue("USUARIO NAO ENCONTRADO"));
-                callback(null);
+                return callback(null);
             }
             else{
                 console.log(chalk.blue("USUARIO ENCONTRADO"));
-                callback(result);
+                return callback(result);
             }
         });
 
         connection.end();
     })   
 }
+
 module.exports = LoginDAO;

@@ -8,88 +8,61 @@
                     <p><%= title%></p>
                 </div>
                 <div class="add">
-                    <a href="/admin/anuncios/adicionar" title="Adicionar" class="add">
-                        Adicionar
+                    <a href="/admin/account/cadastro" title="Cadastrar" class="add">
+                        Cadastrar
                     </a> 
                 </div>
                 <table class="list">
-                    <colgroup span="6" class="columns"></colgroup>
+                    <colgroup span="4" class="columns"></colgroup>
                     <tr>
                         <th>
-                            ID
+                            Nome
                         </th>
                         <th>
-                            Nome do Anúncio
+                            Username
                         </th>
                         <th>
-                            Status
-                        </th>
-                        <th>
-                            Data de Criação
-                        </th>
-                        <th>
-                            Últimas Vagas
+                            Estado
                         </th>
                         <th>
                             Opções
                         </th>
                     </tr>
-                    <% if( produto != undefined){
-                        for (var i=0; i < produto.length; i++) {%>
+                    <% if( usuario != undefined){
+                        for (var i = 0; i < usuario.length; i++) {%>
                             <tr>
                                 <td>
-                                    <%= produto[i].id_prod%>
+                                    <%= usuario[i].name%>
                                 </td>
                                 <td>
-                                    <%= produto[i].nome_prod%>
+                                    <%= usuario[i].username%>
                                 </td>
                                 <td>
-                                    <%if(produto[i].ativo_prod == true){%>
+                                    <%if(usuario[i].ativo == true){%>
                                         Ativo
                                     <% } else{ %>
                                         Desativado
                                     <% } %>
-                                </td>
-                                <td>
-                                    <%= produto[i].datacriacao_prod%>
-                                </td>
-                                <td>
-                                    <%if(produto[i].vagas_prod == true){%>
-                                        Ativo
-                                    <% } else{ %>
-                                        Desativado
-                                    <% } %>
-                                </td>                      
+                                </td>                   
                                 <td>
                                     <table style="width:100%" class="options">
                                         <tr>
                                             <td>
-                                                <a href="/admin/anuncios/editar/produto-<%= produto[i].id_prod %>" title="Editar" >
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <%if(produto[i].ativo_prod == true){%>
-                                                    <i class="fa fa-power-off on" title="Desativar" aria-hidden="true" onclick="turnThis(<%= produto[i].id_prod %>,<%= produto[i].ativo_prod %>)"></i>
+                                                <%if(usuario[i].ativo == true){%>
+                                                    <i class="fa fa-power-off on" title="Desativar" aria-hidden="true" onclick="turnThis(<%= usuario[i].user_id %>,<%= usuario[i].ativo %>)"></i>
                                                 <%} else{%>
-                                                    <i class="fa fa-power-off off" title="Ativar" onclick="turnThis(<%= produto[i].id_prod %>,<%= produto[i].ativo_prod %>)" aria-hidden="true"></i>
+                                                    <i class="fa fa-power-off off" title="Ativar" onclick="turnThis(<%= usuario[i].user_id %>,<%= usuario[i].ativo %>)" aria-hidden="true"></i>
                                                 <% } %>
                                             </td>
                                             <td>
-                                                <i class="fa fa-trash-o" aria-hidden="true" onclick="remove(<%= produto[i].id_prod %>)" title="Remover"></i>
+                                                <i class="fa fa-trash-o" aria-hidden="true" onclick="remove(<%= usuario[i].user_id %>)" title="Remover"></i>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
                         <% } 
-                    }else { %>
-                        <tr>
-                            <td colspan="6">
-                                <strong>ALERTA!</strong> - Sem cadastro de Anúncios.
-                            </td>
-                        </tr>
-                    <% } %>
+                    } %>
                     </tbody>             
                 </table>
             </div>
@@ -102,7 +75,7 @@
         if (window.confirm("Deseja remover este anuncio?")) {
             $.ajax({
                 method: "POST",
-                url: "/admin/anuncios/remover",
+                url: "/admin/account/remover",
                 data: { 
                     id : value
                 },
@@ -121,7 +94,7 @@
             if (window.confirm("Deseja desativar este anuncio?")) {
                 $.ajax({
                     method: "POST",
-                    url: "/admin/anuncios/desativar",
+                    url: "/admin/account/desativar",
                     data: { 
                         id : idProd,
                         turn : status
@@ -138,7 +111,7 @@
             if (window.confirm("Deseja ativar este anuncio?")) {
                 $.ajax({
                     method: "POST",
-                    url: "/admin/anuncios/desativar",
+                    url: "/admin/account/desativar",
                     data: { 
                         id : idProd,
                         turn : status

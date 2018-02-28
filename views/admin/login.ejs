@@ -6,13 +6,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="formLog">
-                    <!-- show any messages that come back with authentication -->
                     <% if (erros){ 
                         for( var i = 0; i < erros.length; i++) { %>
                             <div class="alert alert-danger"><%= erros[i].msg%></div>
                         <% }
                         } %>
-                    <!-- LOGIN FORM -->
                     <figure>
                         <img src="/images/logoID.png" alt="Friend's Tour" />
                     </figure>
@@ -47,11 +45,12 @@
             dataType: 'json',
             cache: false,
         }).done(function(data){ 
-            console.log('DATA:',data);
+            // console.log('DATA:',data);
             if( data != undefined && data != null){
-                console.log("OK:", data)
+                // console.log("OK:", data)
                 sessionStorage.setItem("xTokenx", data);
-                window.location.href = "http://localhost:8080/admin/dashboard";
+                var url_base = window.location.href;
+                window.location.href = url_base +"/anuncios";
             }else{
                 var msg = "Credenciais Incorretas";
                 $(".msgs").find('.alert').remove();

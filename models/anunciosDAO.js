@@ -16,10 +16,16 @@ var Anuncio = function(){
  
 Anuncio.prototype.getAllAnuncio = function(callback){
     db.then(function(conn){
+        var options = "id_prod, nome_prod, vagas_prod, ativo_prod, datacriacao_prod"
+        conn.query("select "+ options +" from produto order by datacriacao_prod",function(erro, result){
+            if(erro != null){
+                return callback(undefined);
+            }else{
+                return callback(result);
+            }
+        });
         
-        conn.query('select * from produto order by datacriacao_prod', callback);
-
-        // conn.end();
+        conn.end();
     })
 }
 
@@ -89,11 +95,15 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
 
         return connection.query("SELECT 1");
     }).then(function(){
-
-        for(var k = 0; k < dadosForm.incluso.length; k++){
-            var sqlInc = "insert into inc_prod(id_inc,id_prod) values("+ dadosForm.incluso[k] + "," + id + ")";
-            connection.query(sqlInc);
+        if( dadosForm.incluso != undefined ){
+            for(var k = 0; k < dadosForm.incluso.length; k++){
+                var sqlInc = "insert into inc_prod(id_inc,id_prod) values("+ dadosForm.incluso[k] + "," + id + ")";
+                connection.query(sqlInc);
+            }
+        }else{
+            console.log("SEM INCLUSOS");
         }
+        
         
         return connection.query("SELECT 1");
     }).then(function(){
@@ -169,6 +179,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
             }
         }
         callback(0,1);
+        return connection.end();
     });
 }
 
@@ -199,7 +210,8 @@ Anuncio.prototype.verifyEvent = function(event, validate){
         });
 
     }else{
-        return validate(0, undefined);
+        validate(0, undefined);
+        return connection.end();
     }
 }
 
@@ -282,6 +294,7 @@ Anuncio.prototype.getFullAnuncio = function(id, result){
         };
 
         result(0,prodEdit);
+        // connection.end();
     });
 }
 
@@ -620,6 +633,8 @@ Anuncio.prototype.desativarAnuncio = function(id, status, callback){
                 callback(0, 1);
             }
         });
+
+        connection.end();
 
     })
 

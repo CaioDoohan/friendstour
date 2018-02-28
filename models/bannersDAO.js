@@ -35,7 +35,6 @@ Banners.prototype.getAllBanners = function(banners){
 }
 
 Banners.prototype.addBanner = function(banner, callback){
-    //console.log("3-)BANNER:", banner)
 
     db.then(function(conn){
         
@@ -55,8 +54,11 @@ Banners.prototype.addBanner = function(banner, callback){
                 }
             })
 
-            connection.end();
+            return connection.end();
+        }else{
+            return connection.end();
         }
+        
     })
     
 }
@@ -80,7 +82,7 @@ Banners.prototype.removeBanner = function(id,name,callback){
             return callback(0,1);
         });
         
-        connection.end();
+        return connection.end();
     });
 }
 
@@ -102,11 +104,11 @@ Banners.prototype.desativarBanner = function(id, status,callback){
             //console.log(result);
             if(err){
                 callback(1, 0);
-                connection.end();
+                return connection.end();
             }
             else{
                 callback(0, 1);
-                connection.end();
+                return connection.end();
             }
         });
 

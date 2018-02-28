@@ -2,7 +2,6 @@ var express  = require('express')
 var router   = express.Router();
 var moment   = require('moment');
 var chalk    = require('chalk');
-var Lista    = require("../models/listaDAO.js");
 var Event    = require("../models/indexDAO.js");
 
 router.get("/:format", function(req,res){

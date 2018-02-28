@@ -45,18 +45,18 @@ DetalhesDAO.prototype.getId = function(id,callback){
         }
         //console.log(inclusos);
 
-        return connection.query("select DP.prod_id, D.name_img from det_prod as DP Inner join images_det as D on D.det_id = DP.det_id where prod_id in (" + idProd + " )")
+        return connection.query("select DP.prod_id, D.name_img from det_prod as DP Inner join images_det as D on D.det_id = DP.det_id where prod_id in (" + idProd + " ) and ativo_prod = b'1'");
         
     })
     .then(function(det){
         
         if( det.length > 0 && det != undefined){
-            console.log("ENTROU DIFERENTE");
+            //console.log("ENTROU DIFERENTE");
             for(var i = 0; i < det.length; i++){
                 imgDet.push(det[i].name_img);
             }
         }else{
-            console.log("ENTROU UNDEFINED");
+            //console.log("ENTROU UNDEFINED");
             imgDet = undefined;
         }
         
@@ -77,6 +77,7 @@ DetalhesDAO.prototype.getId = function(id,callback){
         }
         //console.log(prodFinal);
         callback(0,prodFinal);
+        return connection.end();
     });
 }
 

@@ -14,13 +14,6 @@ router.get('/', function(req, res,next){
     res.render('admin/login', { title: 'Friendstour - Login', erros : {} });
 });
 
-router.get('/dashboard', function(req, res) {
-    UserModel = new User();
-
-    res.render('admin/principal', {title : "TESTE"});
-});
-
-//passport.authenticate('bearer', { session: false }),
 router.get('/verify',passport.authenticate('bearer', { session: false }),  function(req, res) {
     console.log('autenticado');
 

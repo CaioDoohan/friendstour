@@ -119,7 +119,7 @@
                         var cl = '';
                         (dado.ativo == true ? (cl = "on") : (cl) );
                         $('.type1').css({"display":"block"});
-                        $('#home').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id+",1)' title='Remover'></i></div><div class='dt'>"+ dado.data +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Desativar' onclick='turnThis("+dado.id+","+dado.ativo+",1)' aria-hidden='true'></i></div></li>");
+                        $('#home').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id+",1)' title='Remover'></i></div><div class='dt'>"+ dado.data +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Ativar/Desativar' onclick='turnThis("+dado.id+","+dado.ativo+",1)' aria-hidden='true'></i></div></li>");
                     }
                     return true;
                 }
@@ -133,12 +133,12 @@
                         if(dado.nome.length <= 1){
                             var cl = '';
                             (dado.ativo == true ? (cl = "on") : (cl) );
-                            $('#detalhes').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id+",0)' title='Remover'></i></div><div class='dt'>"+ dado.data +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Desativar' onclick='turnThis("+dado.id+","+dado.ativo+",0)' aria-hidden='true'></i></div></li>");
+                            $('#detalhes').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id+",0)' title='Remover'></i></div><div class='dt'>"+ dado.data +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Ativar/Desativar' onclick='turnThis("+dado.id+","+dado.ativo+",0)' aria-hidden='true'></i></div></li>");
                         }else{
                             $.each(dado.nome,function(idx, key){
                                 var cl = '';
                                 (dado.ativo[idx] == true ? (cl = "on") : (cl) );
-                                $('#detalhes').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome[idx]+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id[idx]+",0)' title='Remover'></i></div><div class='dt'>"+ dado.data[idx] +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Desativar' onclick='turnThis("+dado.id[idx]+","+dado.ativo[idx]+",0)' aria-hidden='true'></i></div></li>");
+                                $('#detalhes').append("<li class='item'><figure><img src='../images/uploads/prods/"+dado.nome[idx]+"' alt='Friendstour - Banner' /></figure><div class='op'><i class='fa fa-trash-o' aria-hidden='true' onclick='remove("+dado.id[idx]+",0)' title='Remover'></i></div><div class='dt'>"+ dado.data[idx] +"</div><div class='at'><i class='fa fa-power-off "+ cl +"' title='Ativar/Desativar' onclick='turnThis("+dado.id[idx]+","+dado.ativo[idx]+",0)' aria-hidden='true'></i></div></li>");
                             });
                         }
                     }
@@ -183,7 +183,6 @@
     }
 
     function remove(t1,t2){
-        console.log(t1,t2);
         if (window.confirm("Deseja remover esta Imagem?")) { 
             $.ajax({
                 method: "POST",
@@ -201,42 +200,24 @@
             });   
         }  
     }
-    function turnThis(id, status){
-        if( status == true ){
-            if (window.confirm("Deseja desativar este banner?")) {
-                $.ajax({
-                    method: "POST",
-                    url: "/admin/banners/desativar",
-                    data: { 
-                        id : id,
-                        turn : status
-                    },
-                    dataType: 'json',
-                    cache: false, 
-                })
-                .done(function(data) {
-                    alert(data.msg);
-                    location.reload();
-                });  
-            }
-        }else{
-            if (window.confirm("Deseja ativar este banner?")) {
-                $.ajax({
-                    method: "POST",
-                    url: "/admin/banners/desativar",
-                    data: { 
-                        id : id,
-                        turn : status
-                    },
-                    dataType: 'json',
-                    cache: false, 
-                })
-                .done(function(data) {
-                    alert(data.msg);
-                    location.reload();
-                });  
-            }
-        }       
+    function turnThis(id, status,type){
+        if (window.confirm("Deseja desativar este banner?")) {
+            $.ajax({
+                method: "POST",
+                url: "/admin/galeria/desativar",
+                data: { 
+                    id : id,
+                    turn : status,
+                    type : type,
+                },
+                dataType: 'json',
+                cache: false, 
+            })
+            .done(function(data) {
+                alert(data.msg);
+                location.reload();
+            });  
+        }    
     } 
 </script>
 <% include ../partial/footerADM %>

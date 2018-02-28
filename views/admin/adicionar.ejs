@@ -18,7 +18,7 @@
                         </div>
                         <div class="check">
                             <label>
-                                Categoria
+                                Categoria (selecionar pelo menos 1)
                             </label>
                             <div>
                                 <% for(var i = 0; i < categoria.length; i++) { %>
@@ -41,13 +41,13 @@
                             <label>
                                 Data
                             </label>
-                            <input type="text"  name="dia_prod" id="calendario" value="<%= produto.dia_prod%>" required/>
+                            <input type="text"  placeholder="Evitar escrever a data, selecioná-la pelo calendario" name="dia_prod" id="calendario" value="<%= produto.dia_prod%>" required/>
                         </div>
                         <div>
                             <label>
                                 Hora
                             </label>
-                            <input type="text" class="hora" name="hora_prod" value="<%= produto.hora_prod%>" required/>
+                            <input type="text" placeholder="Exemplo: 16:00:00, 09:30:00" class="hora" name="hora_prod" value="<%= produto.hora_prod%>" required/>
                         </div>
                         <div class="check">
                             <label>
@@ -71,7 +71,7 @@
                             <label>
                                 Valor
                             </label>
-                            <input type="text" class="valor" name="valor_prod" placeholder="R$" required/>
+                            <input type="text" class="valor" name="valor_prod" placeholder="R$ - Somente em real" required/>
                         </div> 
                         <div class="check">
                             <label>
@@ -105,6 +105,12 @@
                                 <textarea id="code" name="texto_prod" placeholder="Detalhes" required></textarea>
                             </div>
                         </div>  
+                        <div class="obs">
+                            <p>*Tamanho ideal para imagem home:480X190</p>
+                            <p>*Tamanho ideal para imagens detalhes:800x523</p>
+                            <p>*Passas as fotos em um compressor, antes de adicionar:<a href="https://tinypng.com" title="Compressor Tiny Panda">https://tinypng.com</a></p>
+                            <p>*Evitar fotos com nomes muito grandes</p>
+                        </div>
                         <div>
                             <label>
                                 Imagem Home

@@ -9,15 +9,37 @@ var UserDAO = function(){
     db = mysql.createConnection(config.mysqlOptions);
 }
 
+UserDAO.prototype.getUsers = function(callback){
+    db.then(function(conn){
+        connection = conn;
+
+        var options = "user_id, username, name, ativo";
+
+        connection.query("SELECT "+ options +" from user WHERE user_id != 1 order by user_id asc", function(erro,result){
+            console.log(result);
+            console.log("ERRO",erro);
+            if(erro != null){
+                return callback(undefined);
+            }else{
+                return callback(result);
+            }
+        });
+
+        return connection.end();
+    })
+}
+
 UserDAO.prototype.getAction = function(callback){
     db.then(function(conn){
         connection = conn;
         connection.query("Select * from actions order by action_id asc", function(err, resultado){
             if(resultado != null){
                 callback(0, resultado);
+                return connection.end();
             }
             else{
                 callback(err, null);
+                return connection.end();
             }
         });
     })
@@ -35,6 +57,7 @@ UserDAO.prototype.createUser = function(newUser, callback){
             newUser.email,
             newUser.name,
         ];
+        console.log("INST", inst);
         var insertUser = "INSERT INTO user(username,password,email,name) VALUES(?,?,?,?)";
         connection.query(insertUser, inst, function(err, data){
             if(err){
@@ -47,26 +70,28 @@ UserDAO.prototype.createUser = function(newUser, callback){
                         msg : 'Campo com dados duplicados'
                     }
                 }
-                callback(teste);
+                callback(teste,0);
+                return connection.end();
             }
             else{
                 idUser = data.insertId;
                 for(var i = 0; i < newUser.action.length; i++){
                     var sqlAction = "INSERT INTO action_user(action_id, user_id) VALUES("+ newUser.action[i] +","+ idUser +")";
+                    console.log(sqlAction);
                     connection.query(sqlAction, function(err,result){
                         if(err){
                             // console.log(err);
                             teste = {
                                 msg : err.sqlMessage
                             }
-                            callback(teste);
-                        }
-                        else{
-                            // console.log("USUARIO + ACTIONS");
-                            callback('1');
+                            callback(teste,0);
+                            return connection.end();
                         }
                     });
                 }
+                console.log("Usuário criado");
+                callback(0,1);
+                return connection.end();
             }
         })
     })  
@@ -84,17 +109,18 @@ UserDAO.prototype.verifyUsername = function(user, validate){
                 
                 else if(callback.length > 0){
                 //    console.log("Usuario em uso");
-                   return validate(0, false);
+                   validate(0, false);
                 }
                 else{
                     // console.log("Usuario disponível");
-                    return validate(0, true); 
+                    validate(0, true); 
                 }
             });
             connection.end();
         });
     }else{
-        return validate(0, undefined);
+        validate(0, undefined);
+        return connection.end();
     }
 }
 
@@ -117,12 +143,84 @@ UserDAO.prototype.verifyEmail = function(email, validate){
                     return validate(0, true); 
                 }
             });
-            connection.end();
+            return connection.end();
         });
 
     }else{
-        return validate(0, undefined);
+        validate(0, undefined);
+        return connection.end();
     }
 }
+
+UserDAO.prototype.remove = function(id, cb){
+    console.log("ENTROU MODEL");
+    console.log("ID:",id);
+    var acess = true;
+    db.then(function(conn){
+        connection = conn;
+        console.log("ID - ", id);
+        var sqlRemove = ("DELETE FROM user WHERE user_id = "+ id);
+        conn.query(sqlRemove, function(erro, result){
+            console.log(result);
+            if(erro || result == undefined){
+                return acess = false;
+            }
+        });
+
+        return connection.query("SELECT 1");
+    }).then(function(){
+        if(acess != false){
+            var sqlRemove =("DELETE FROM action_user WHERE user_id = "+ id);
+            connection.query(sqlRemove, function(erro,result){
+                console.log("result - ", result);
+                if(erro || result == undefined){
+                    cb(undefined);
+                }else{
+                    cb(1);
+                }
+            });
+            console.log("CONEXÃO FECHADA");
+            return connection.end();
+        }else{
+            cb(undefined);
+            return connection.end();
+        }
+        
+    })
+}
+
+UserDAO.prototype.desativar = function(id, status, callback){
+
+    db.then(function(conn){
+        connection = conn;
+
+        console.log(id, status);
+
+        if( status == 'true' ){
+            var turnOFF = false;
+            var sqlDest = ("UPDATE user SET ativo = " + turnOFF + " WHERE user_id = " + id );
+
+        }else {
+            var turnON = true;
+            var sqlDest = ("UPDATE user SET ativo = " + turnON + " WHERE user_id = " + id );
+        }
+
+        console.log(sqlDest);
+        connection.query(sqlDest,function(err, result){
+            console.log(result);
+            if(err){
+                callback(1, 0);
+            }
+            else{
+                callback(0, 1);
+            }
+        });
+
+        connection.end();
+
+    })
+
+}
+
 module.exports = UserDAO;
 

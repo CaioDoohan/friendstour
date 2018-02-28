@@ -23,15 +23,19 @@ var cpUpload = upload.fields([{ name: 'imghome', maxCount: 1 }, { name: 'imgdet'
 router.get('/', function(req, res, next) {
     var AnuncioModel = new Anuncio();
 
-    AnuncioModel.getAllAnuncio(function(erro, result){
-
-        for(var i=0 ; i < result.length; i++){
-
-            result[i].nome_prod;
-            result[i].datacriacao_prod = moment(result[i].datacriacao_prod).format('DD/MM/YYYY');
-            result[i].vagas_prod;
-            result[i].ativo_prod;
+    AnuncioModel.getAllAnuncio(function(result){
+        if(result != undefined){
+            for(var i=0 ; i < result.length; i++){
+                result[i].id_prod;
+                result[i].nome_prod;
+                result[i].datacriacao_prod = moment(result[i].datacriacao_prod).format('DD/MM/YYYY');
+                result[i].vagas_prod;
+                result[i].ativo_prod;
+            }
+        }else{
+            result == undefined;
         }
+        
         res.render('admin/anuncios', { title: 'Friendstour - Anúncio', produto : result, remove : false });
     });
 
@@ -103,14 +107,14 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
             var dadosForm = {
                 nome_prod     : dados.nome_prod,
                 categoria     : dados.categoria,
-                desc_prod     : dados.desc_prod,
+                desc_prod     : escape(dados.desc_prod).trim(),
                 data_prod     : (dados.dia_prod + ' ' + dados.hora_prod),
                 valor_prod    : dados.valor_prod,
                 nacional_prod : dados.nacional_prod,
                 incluso       : dados.incluso,
                 parcelas_prod : dados.parcelas_prod,
                 vagas_prod    : dados.vagas_prod,
-                texto_prod    : dados.texto_prod,
+                texto_prod    : escape(dados.texto_prod).trim(),
                 promo_prod    : dados.promo_prod
             }
     
@@ -136,8 +140,11 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
             }
             
             console.log('DADOS FORM:',dadosForm);
-            console.log('IMGS:', imgHome);
-            console.log('IMGS:', detImg);
+            // var texto = dadosForm.desc_prod;
+
+            // console.log('texto:',unescape(texto).trim());
+            // console.log('IMGS:', imgHome);
+            // console.log('IMGS:', detImg);
 
             
             AnuncioModel.addAnuncio(dadosForm,imgHome, detImg, function(erro, confirm){
@@ -163,19 +170,21 @@ router.get("/editar/produto-:id",function(req,res,next){
 
     var id = req.params.id;
     var AnuncioModel = new Anuncio();
+    console.log(id);
 
     AnuncioModel.getFullAnuncio(id, function(erro,resultado){
-        // console.log(resultado);
+
+        // console.log(resultado);(resultado.inclusos != undefined ? resultado.inclusos : undefined),
 
         produtoEdit = {
             id_prod: resultado.id_prod,
             nome_prod : resultado.nome_prod,
-            desc_prod : resultado.desc_prod,
+            desc_prod : unescape(resultado.desc_prod).trim(),
             dia_prod : moment(resultado.data_prod).format('YYYY/MM/DD'),
             hora_prod : moment(resultado.data_prod).format('HH:mm:ss'),
             valor_prod : resultado.valor_prod,
             parcelas_prod : resultado.parcelas_prod,
-            texto_prod : resultado.texto_prod,
+            texto_prod : unescape(resultado.texto_prod).trim(),
             nacional_prod : resultado.nacional_prod,
             promo_prod : resultado.promo_prod,
             ativo_prod : resultado.ativo_prod,
@@ -184,7 +193,7 @@ router.get("/editar/produto-:id",function(req,res,next){
             inclusos : resultado.inclusos,
             criacao : resultado.criacao,
         }
-
+        console.log(produtoEdit);
         AnuncioModel.getCategoria(function(erro,categorias){
             
             AnuncioModel.getInclusos(function(erro,incluso){
@@ -200,13 +209,12 @@ router.get("/editar/produto-:id",function(req,res,next){
 });
 
 router.post("/editar/dados_enviados", function(req,res,next){
-
     var dadosAlter = req.body;
     var dadosEdit = {
         id_prod       : dadosAlter.id_prod,
         nome_prod     : dadosAlter.nome_prod,
         categoria     : dadosAlter.categoria,
-        desc_prod     : dadosAlter.desc_prod,
+        desc_prod     : escape(dadosAlter.desc_prod).trim(),
         data_prod     : (dadosAlter.dia_prod + ' ' + dadosAlter.hora_prod),
         valor_prod    : dadosAlter.valor_prod,
         nacional_prod : dadosAlter.nacional_prod,
@@ -214,9 +222,10 @@ router.post("/editar/dados_enviados", function(req,res,next){
         incluso       : dadosAlter.incluso,
         parcelas_prod : dadosAlter.parcelas_prod,
         vagas_prod    : dadosAlter.vagas_prod,
-        texto_prod    : dadosAlter.texto_prod
+        texto_prod    : escape(dadosAlter.texto_prod).trim()
 
     }
+    
     var AnuncioModel = new Anuncio();
     
     AnuncioModel.editAnuncio(dadosEdit, function(erro, resultado){
@@ -234,7 +243,7 @@ router.post("/editar/dados_enviados", function(req,res,next){
                     msgError = ("ERRO: repita a operação - '" + erro + "' ");
             }
             res.json({ 
-                msg : msgError
+                msg : "Cancelado"
              })
         }else{
             res.json({

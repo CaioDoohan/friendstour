@@ -11,11 +11,6 @@ router.get('/', function(req, res, next) {
     
     EventModel.getAnuncios(thatX,function(erro,produtos){
         console.log("PRODS:",produtos);
-        for(var i = 0; i < produtos.length; i++){
-            if( produtos[i].categoria.includes('Cruzeiro') ){
-                console.log("Cruzeiro");
-            }console.log("Não é cruzeiro");
-        }
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){
                 produtos[i].id_prod;

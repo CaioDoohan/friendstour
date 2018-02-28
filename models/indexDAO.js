@@ -151,7 +151,7 @@ Event.prototype.getAnuncios = function(thatX,result){
                 prodFinal.push( {
                     id_prod : produtos[i].id_prod,
                     nome_prod: produtos[i].nome_prod,
-                    desc_prod : produtos[i].desc_prod,
+                    desc_prod : unescape(produtos[i].desc_prod).trim(),
                     data_prod: produtos[i].data_prod,
                     valor_prod : produtos[i].valor_prod,
                     parcelas_prod : produtos[i].parcelas_prod,

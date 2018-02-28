@@ -723,12 +723,13 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     margin: 0 auto;
     text-align: center;
     padding: 5px 0; }
-    .fpag li i, .fpag li p {
+    .fpag li svg, .fpag li p {
       display: table-cell;
       vertical-align: middle;
       font-size: 13px; }
-    .fpag li i {
-      font-size: 11px; }
+    .fpag li svg {
+      font-size: 11px;
+      margin: 5px 0; }
     .fpag li p {
       font-family: Nunito-black;
       padding: 0 3px; }
@@ -1181,7 +1182,7 @@ footer {
   .lg pre, .lg p {
     margin: 10px 0;
     line-height: 22px;
-    font-family: Nunito-Regular !important; }
+    font-family: Nunito-Regular; }
   .lg .inc {
     color: green; }
     .lg .inc svg {
@@ -1229,9 +1230,18 @@ footer {
   box-sizing: border-box;
   display: block;
   position: relative; }
+  .det .local {
+    display: table;
+    width: 100%; }
+    .det .local li {
+      display: table-cell;
+      vertical-align: middle; }
   .det .desc p {
     font-size: 14px !important;
-    line-height: 20px; }
+    line-height: 20px;
+    display: table;
+    margin: 0 auto;
+    text-align: center; }
   .det > ul, .det > div {
     margin: 5px 0;
     box-sizing: border-box; }
@@ -1257,7 +1267,8 @@ footer {
       display: table;
       float: right; }
     .det .valor h6 {
-      font-size: 25px; }
+      font-size: 25px;
+      line-height: 22px; }
   .det button {
     display: table;
     padding: 5px 9px;
@@ -1353,7 +1364,7 @@ footer {
       font-weight: normal !important;
       display: table;
       margin: 15px auto; }
-  .shadow i {
+  .shadow svg {
     font-size: 35px;
     float: right;
     color: #d05a35;
@@ -1691,7 +1702,7 @@ footer {
     font-size: 20px; }
   .crl.vg .carvg .item > div .local li, .crl.vg .carvg .item > div .tempo li, .crl.vg .carvg .item > div .inc li {
     margin: 5px 3px; }
-  .crl.vg .carvg .item > div .fpag li i, .crl.vg .carvg .item > div .fpag li p {
+  .crl.vg .carvg .item > div .fpag li svg, .crl.vg .carvg .item > div .fpag li p {
     font-size: 12px; }
   .crl.vg .carvg .item {
     min-height: 415px; }

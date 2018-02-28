@@ -13,10 +13,16 @@ $(document).ready(function(){
                  window.location.href='/admin';
             }
         }).done(function(data){ 
-            //console.log('CALLBACK:',data);
             if(data != undefined){
                 console.log("Token Validado");
             }
         });    
     }
 });
+
+function logOut(){
+    if(window.confirm("Deseja terminar sua sessão?")){
+        sessionStorage.removeItem('xTokenx');
+        location.reload();
+    }
+}
