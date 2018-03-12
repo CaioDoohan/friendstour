@@ -18,7 +18,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({storage : storage});
 
-var cpUpload = upload.fields([{ name: 'imghome', maxCount: 1 }, { name: 'imgdet', maxCount: 4 }]);
+var cpUpload = upload.fields([{ name: 'imghome', maxCount: 1 }, { name: 'imgdet', maxCount: 10 }]);
 
 router.get('/', function(req, res, next) {
     var AnuncioModel = new Anuncio();
