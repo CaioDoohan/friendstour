@@ -1232,7 +1232,7 @@ footer {
 
 .dl {
   padding: 0 1%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
   padding: 14px 0; }
   .dl h4 {
@@ -1276,7 +1276,7 @@ footer {
     margin: 0 auto;
     text-align: center; }
   .det > ul, .det > div {
-    margin: 5px 0;
+    margin: 10px 0;
     box-sizing: border-box; }
   .det li {
     display: table;
@@ -1295,6 +1295,7 @@ footer {
     margin-top: 0; }
   .det .valor {
     display: table;
+    margin-top: 25px;
     width: 100%; }
     .det .valor > div {
       display: table;
