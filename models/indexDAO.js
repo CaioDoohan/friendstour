@@ -16,7 +16,7 @@ Event.prototype.getAnuncios = function(thatX,result){
     var cat = new Array();
     var idProd = new Array();
     var imgHome = new Array();
-    console.log('thatX----',thatX);
+    // console.log('thatX----',thatX);
     function isEmptyObject(obj) {
         for (var key in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -41,7 +41,7 @@ Event.prototype.getAnuncios = function(thatX,result){
         var options = "id_prod, nome_prod, desc_prod, data_prod, valor_prod, vagas_prod, parcelas_prod,promo_prod, nacional_prod";
 
         var sqlGet = ("select "+ options +" from produto "+ thatX.statment);
-        console.log(sqlGet);
+        // console.log("QUERY 1",sqlGet);
         connection.query(sqlGet, function(erro,something){
             //console.log("RESULTADO -> :",something);
             //console.log("erro:",erro);
@@ -57,19 +57,15 @@ Event.prototype.getAnuncios = function(thatX,result){
         return connection.query("SELECT 1");
     })
     .then(function(){
-        //var idsProd = [];
-        //console.log(produtos);
+
         if(produtos != undefined ){
             for( var i = 0; i < produtos.length; i++){
-                //console.log(produtos[i].id_prod);
                 idsProd.push(produtos[i].id_prod)
             }
-            //prod = produtos;
-            //idProd = idsProd;
         }
-        console.log(thatX.statmentCat);
-        var sqlGet = ("select CP.id_prod,C.nome_cat from cat_prod as CP Inner join categoria as C on C.id_cat = CP.id_cat where id_prod in (" + idsProd + " ) "+ thatX.statmentCat);
-        console.log(sqlGet);
+
+        var sqlGet = ("select CP.id_prod,C.nome_cat from cat_prod as CP Inner join categoria as C on C.id_cat = CP.id_cat where id_prod in (" +idsProd+") "+ thatX.statmentCat);
+
         return connection.query(sqlGet);
     
     }).then(function(categorias){
@@ -82,7 +78,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             return connection.end();
         }
         
-        console.log("PRODUTO QUE POSSUI CATEGORIA EXCURSAO:",cat);
+        // console.log("PRODUTO QUE POSSUI CATEGORIA EXCURSAO:",cat);
 
         return connection.query("select IP.id_prod, I.nome_inc from inc_prod as IP Inner join inclusos as I on I.id_inc = IP.id_inc where id_prod in (" + idsProd + " )");
     })

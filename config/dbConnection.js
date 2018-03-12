@@ -9,7 +9,7 @@ exports.mysqlOptions = {
                 // user:'root',
                 // password:'m10d12',
                 // database: 'friendsdb',
-                connectionLimit: 5,
+                // connectionLimit: 5,
                 typeCast: function castField( field, useDefaultTypeCasting ) {
                     
                     if ( ( field.type === "BIT" ) && ( field.length === 1 ) ) {

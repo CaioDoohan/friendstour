@@ -43,7 +43,7 @@ LoginDAO.prototype.getByID = function(userX, callback){
 
     db.then(function(conn){
         connection = conn;
-        var sqlSearch = "SELECT * FROM user WHERE user_id = ? AND username = ?";
+        var sqlSearch = "SELECT * FROM user WHERE user_id = ? AND username = ? AND ativo = b'1'";
 
         connection.query(sqlSearch, [userX.id, userX.username], function(err,result){
 

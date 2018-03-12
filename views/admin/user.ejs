@@ -72,7 +72,7 @@
 <script>
     function remove(value){
         console.log(value);
-        if (window.confirm("Deseja remover este anuncio?")) {
+        if (window.confirm("Deseja remover este usuário?")) {
             $.ajax({
                 method: "POST",
                 url: "/admin/account/remover",
@@ -91,7 +91,7 @@
     
     function turnThis(idProd, status){
         if( status == true ){
-            if (window.confirm("Deseja desativar este anuncio?")) {
+            if (window.confirm("Deseja desativar este usuário?")) {
                 $.ajax({
                     method: "POST",
                     url: "/admin/account/desativar",
@@ -108,7 +108,7 @@
                 });  
             }
         }else{
-            if (window.confirm("Deseja ativar este anuncio?")) {
+            if (window.confirm("Deseja ativar este usuário?")) {
                 $.ajax({
                     method: "POST",
                     url: "/admin/account/desativar",

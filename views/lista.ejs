@@ -1,5 +1,35 @@
 <% include partial/header %>
 <% include partial/menu %>
+<script>
+
+  function sortItens(value, place){
+    console.log("THIS", value, place);
+    var itens = $(place).find('tr');
+    for(var i = 0; i < itens.length; i++){
+      console.log(itens);
+    }
+  }
+  function getThis(type){
+    var list = $('#list');
+    switch(type){
+      case 'high':
+      sortItens(type,list);
+      break;
+
+      case 'min':
+      sortItens(type,list);
+      break;
+
+      case 'vagas':
+      sortItens(type,list);
+      break;
+    }
+  }
+  $(document).ready(function(){
+
+    
+  });
+</script>
 <main>
   <div class="container">
     <div class="row">
@@ -19,15 +49,14 @@
             <h4>
               ORDENAR POR:
             </h4>
-            <select type="text" onchange="getThat(this.value)">
-                <option value="relevancia">Relevância</option>
-                <option value="menorpreco">Menor preço</option>
-                <option value="maiorpreco">Maior preço</option>
-                <option value="ultimavaga">Últimas vagas</option>
+            <select type="text" onchange="getThis(this.value)">
+                <option value="min">Menor preço</option>
+                <option value="high">Maior preço</option>
+                <option value="vagas">Últimas vagas</option>
             </select>
           </div>
         </div>
-        <table class="carvg list">
+        <table class="carvg list" id="list">
           <%if( produto != undefined) {
             for(var i = 0; i < produto.length; i++) {%>
             <tr>
@@ -139,8 +168,7 @@
                     <% } %>
                   </div>
               </td>
-              <% console.log("AQUIAQUAIQUAIQQUI",(i + 1));
-               if( ( i + 1) < produto.length ) { i = i + 1 %>
+              <%if( ( i + 1) < produto.length ) { i = i + 1 %>
               <td data-price="<%= produto[i].valor_prod %>" data-vg="<%= produto[i].vagas_prod %>">
                   <div class="item">
                     <figure>
@@ -261,64 +289,4 @@
     </div>
   </div>
 </main>
-<script>
-  //$(document).ready(function(){
-
-    // function sort(value){
-
-    // }
-
-    // function getThat(value){
-    //   if( value != undefined ){
-    //     switch(value){
-    //       case 'high':
-             
-    //     }
-    //   }
-    // }
-    
-  //   filterSelection("all");
-  //   function filterSelection(c) {
-  //     var x, i;
-  //     x = document.querySelectorAll('[data-price]');
-  //     if (c == "all") c = "";
-  //     for (i = 0; i < x.length; i++) {
-  //       w3RemoveClass(x[i], "show");
-  //       if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  //     }
-  //   }
-
-  //   function w3AddClass(element, name) {
-  //     var i, arr1, arr2;
-  //     arr1 = element.className.split(" ");
-  //     arr2 = name.split(" ");
-  //     for (i = 0; i < arr2.length; i++) {
-  //       if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  //     }
-  //   }
-
-  //   function w3RemoveClass(element, name) {
-  //     var i, arr1, arr2;
-  //     arr1 = element.className.split(" ");
-  //     arr2 = name.split(" ");
-  //     for (i = 0; i < arr2.length; i++) {
-  //       while (arr1.indexOf(arr2[i]) > -1) {
-  //         arr1.splice(arr1.indexOf(arr2[i]), 1);     
-  //       }
-  //     }
-  //     element.className = arr1.join(" ");
-  //   }
-
-  //   // Add active class to the current button (highlight it)
-  //   var btnContainer = document.getElementById("myBtnContainer");
-  //   var btns = btnContainer.getElementsByClassName("btn");
-  //   for (var i = 0; i < btns.length; i++) {
-  //     btns[i].addEventListener("click", function(){
-  //       var current = document.getElementsByClassName("active");
-  //       current[0].className = current[0].className.replace(" active", "");
-  //       this.className += " active";
-  //     });
-  //   }
-  // })
-</script>
 <% include partial/footer %>

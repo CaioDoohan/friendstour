@@ -370,7 +370,8 @@ header .listMenu {
   margin: 45px 0; }
   header .listMenu li {
     float: left;
-    margin: 0 5px; }
+    margin: 0 5px;
+    cursor: pointer; }
     header .listMenu li a, header .listMenu li i {
       color: #fff;
       font-weight: bold;
@@ -607,7 +608,8 @@ footer {
       background-color: white;
       border: 1px solid #253138;
       float: none;
-      padding: 10px 15px; }
+      padding: 10px 15px;
+      display: table; }
       .formlist form button:hover {
         border: 1px solid #d05a35; }
 

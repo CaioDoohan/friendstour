@@ -48,6 +48,7 @@ hr {
 pre {
   font-family: monospace, monospace;
   font-size: 1em;
+  word-break: break-all;
 }
 
 a {
@@ -1081,8 +1082,10 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     margin: 0 auto;
     padding: 15px 0;
     li{
-      display: table;
-      float:left;
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0 5%;
+      box-sizing: border-box;
       a{
         display: inline-block;
         img{
@@ -1378,6 +1381,34 @@ footer{
   }
 }
 
+.fdl{
+  background-color: #e6e6e6;
+  padding: 15px 10px;
+  box-sizing: border-box;
+  margin: 30px 0;
+
+  h3{
+    font-size:30px;
+    margin: 5px 0;
+    font-family: Nunito-Black;
+    color:#d05a35;
+    text-align: center;
+  }
+
+  h4{
+    font-family: Nunito-Black;
+    color:#d05a35;
+    font-size: 22px;
+    text-align: left;
+  }
+
+  .sub-letter{
+    display: table;
+    width: 100%;
+    margin: 25px 0;
+  }
+}
+
 .tit{
   position: relative;
   h3{
@@ -1546,10 +1577,19 @@ footer{
   padding: 10px;
   box-sizing: border-box;
   box-shadow: 0px 1px 11px rgb(144, 144, 144);
+  .txt{
+    display: table;
+    width: 100%;
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  }
+  pre{
+    white-space: pre-wrap;
+  }
   pre,p{
     margin:10px 0;
     line-height: 22px;
     font-family: Nunito-Regular;
+    word-break: break-all;       /* Internet Explorer 5.5+ */
   }
   .inc{
     color:green;

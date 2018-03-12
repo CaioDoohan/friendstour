@@ -143,8 +143,8 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
             // var texto = dadosForm.desc_prod;
 
             // console.log('texto:',unescape(texto).trim());
-            // console.log('IMGS:', imgHome);
-            // console.log('IMGS:', detImg);
+            console.log('IMGS:', imgHome);
+            console.log('IMGS:', detImg);
 
             
             AnuncioModel.addAnuncio(dadosForm,imgHome, detImg, function(erro, confirm){

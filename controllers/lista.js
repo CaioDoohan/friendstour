@@ -26,14 +26,14 @@ router.get("/:format", function(req,res){
             break;
         case 'cruzeiros':
             var thatX = {
-                statmentCat : "and nome_cat = 'Cruzeiro'",
+                statmentCat : "and nome_cat = 'Cruzeiro'" ,
             }
             var title = 'Cruzeiros';
             var banner = "/images/cruzeiros.png";
             break;
         case 'excursoes':
             var thatX = {
-                statmentCat : "and nome_cat = 'Excursão'",
+                statmentCat : "and nome_cat LIKE '%Excursão%'",
             }
             var title = 'Excursões';
             var banner ="/images/excursoes.png";
@@ -44,7 +44,7 @@ router.get("/:format", function(req,res){
     var EventModel =  new Event();
 
     EventModel.getAnuncios(thatX, function(erro,produtos){
-        //console.log("RESULTADO", produtos);
+        // console.log("RESULTADO", produtos);
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){
                 produtos[i].id_prod;

@@ -50,7 +50,7 @@ Anuncio.prototype.getInclusos = function(callback){
             if(erro){
                 return callback(erro, 0);
             }else{
-                console.log(result);
+                // console.log(result);
                 return callback(0, result);
             }
         });
@@ -88,7 +88,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
                 return callback(erro, 0);
             }
             else{
-                console.log(chalk.blue("ID DO ANUNCIO:", result.insertId));
+                // console.log(chalk.blue("ID DO ANUNCIO:", result.insertId));
                 id = result.insertId;
             }
         });
@@ -101,7 +101,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
                 connection.query(sqlInc);
             }
         }else{
-            console.log("SEM INCLUSOS");
+            // console.log("SEM INCLUSOS");
         }
         
         
@@ -118,13 +118,13 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
         if(imgHome != undefined ){
             var homePath = imgHome.home;
             var sqlHome = ("INSERT INTO images_home(name_img) VALUE('" + homePath +"') " );
-            console.log(sqlHome);
+            // console.log(sqlHome);
             connection.query(sqlHome, function(erro, result){
                 if(erro){
                     callback(erro, 0);
                 }else{
-                    console.log(result);
-                    console.log("ID RESULTANTE:",result.insertId )
+                    // console.log(result);
+                    // console.log("ID RESULTANTE:",result.insertId);
                     idHome = result.insertId;
                 }
             });
@@ -138,7 +138,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
     }).then(function(){
         if( idHome != null ){
             var sqlHome = ("INSERT INTO home_prod(home_id,prod_id) VALUES("+ idHome + ","+ id + ")");
-            console.log(idHome);
+            // console.log(idHome);
             connection.query(sqlHome);
         }
 
@@ -168,18 +168,17 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
         return connection.query("select 1");
 
     }).then(function(){
-        console.log("AGORA SIM:", arrIdsDet);
+        // console.log("AGORA SIM:", arrIdsDet);
         if( arrIdsDet != null ){
 
             for(var i = 0; i < arrIdsDet.length; i++){
                 var sqlInsert = ("INSERT INTO det_prod(det_id, prod_id) VALUES("+ arrIdsDet[i] +","+ id +")");
     
-                console.log(sqlInsert);
+                // console.log(sqlInsert);
                 connection.query(sqlInsert);
             }
         }
-        callback(0,1);
-        return connection.end();
+        return callback(0,1);
     });
 }
 
@@ -198,15 +197,15 @@ Anuncio.prototype.verifyEvent = function(event, validate){
                 if(err) throw err;
                 
                 else if(callback.length > 0){
-                   console.log("Usuario em uso");
+                //    console.log("Usuario em uso");
                    return validate(0, false);
                 }
                 else{
-                    console.log("Usuario disponível");
+                    // console.log("Usuario disponível");
                     return validate(0, true); 
                 }
             });
-            connection.end();
+            return connection.end();
         });
 
     }else{
@@ -311,7 +310,7 @@ Anuncio.prototype.editAnuncio = function(dadosEdit, alteracao){
 
         connection = conn;
         connection.query(sqlPrefer);
-        console.log(chalk.blue("Preferences: OFF"));
+        // console.log(chalk.blue("Preferences: OFF"));
 
         prod = {
             id_prod : dadosEdit.id_prod,
@@ -419,13 +418,13 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
         });
         return connection.query("SELECT 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             callback(1,0);
             return connection.end();
         }else{
             var sqlRemove = ("DELETE FROM cat_prod WHERE id_prod = " + idProd);
-            console.log(sqlRemove);
+            // console.log(sqlRemove);
             connection.query(sqlRemove, function(erro, result){
                 if(erro){
                     callback(1,0);
@@ -437,7 +436,7 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
 
         return connection.query("Select 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             callback(1,0);
             return connection.end();
@@ -450,24 +449,23 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                     return acess = false;
                 }
             })
-            console.log(sqlRemove);
+            // console.log(sqlRemove);
             return connection.query("select 1");
         }
 
         return connection.query("Select 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             callback(1,0);
             return connection.end();
         }else{
             var sqlGet = ("SELECT home_id FROM home_prod WHERE prod_id = " + idProd);
-            console.log(sqlGet);
+            // console.log(sqlGet);
             connection.query(sqlGet, function(erro, result){
                 console.log(result);
                 if(erro || result[0] == undefined){
-                    // callback(1,0);
-                    console.log(chalk.yellow("PRODUTO NÃO POSSUI IMAGEM HOME"));
+                    // console.log(chalk.yellow("PRODUTO NÃO POSSUI IMAGEM HOME"));
                     return acess = false;
                 }else{
                     idImg = result[0].home_id;
@@ -479,15 +477,15 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
 
         return connection.query("Select 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             idImg = undefined;
         }else{
             var sqlGet = ("SELECT name_img FROM images_home WHERE home_id = "+ idImg);
-            console.log(sqlGet);
+            // console.log(sqlGet);
 
             connection.query(sqlGet, function(erro, result){
-                console.log(result);
+                // console.log(result);
                 if(erro){
                     callback(1,0);
                     return acess = false;
@@ -502,7 +500,7 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                             var img = (jsonPath + "/" + nameHome);
                             fs.unlink(img,function(err){
                                 if (err) throw err;
-                                console.log(img,'-- deleted');
+                                // console.log(img,'-- deleted');
                             });
                         }
                         return connection.query("select 1");
@@ -514,14 +512,14 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
 
         return connection.query("Select 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
 
         var sqlGet = ("SELECT det_id FROM det_prod WHERE prod_id = " + idProd);
-        console.log(sqlGet);
+        // console.log(sqlGet);
         connection.query(sqlGet, function(erro, result){
-            console.log(result);
+            // console.log(result);
             if(erro || result[0] == undefined){
-                console.log(chalk.yellow("PRODUTO N POSSUI IMAGENS DETALHADAS"));
+                // console.log(chalk.yellow("PRODUTO N POSSUI IMAGENS DETALHADAS"));
                 return acess = false;
             }else{
                 for(var i = 0; i < result.length; i++ ){
@@ -533,15 +531,15 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
 
         return connection.query("Select 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             idDet = undefined;
         }else{
             var sqlGet = ("SELECT name_img FROM images_det WHERE det_id in ("+idDet+")");
-            console.log(sqlGet);
+            // console.log(sqlGet);
             nameDet = [];
             connection.query(sqlGet, function(erro, result){
-                console.log(result);
+                // console.log(result);
                 if(erro){
                     callback(1,0);
                     return acess = false;
@@ -560,12 +558,12 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
         }
         return connection.query("SELECT 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             idDet = undefined;
         }else{
             var sqlRemove = ("DELETE FROM images_det WHERE det_id in ("+ idDet +")");
-            console.log(sqlRemove);
+            // console.log(sqlRemove);
             connection.query(sqlRemove,function(erro){
                 if(erro){
                     callback(1,0);
@@ -575,7 +573,7 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
         }
         return connection.query("SELECT 1");
     }).then(function(){
-        console.log("ACESS:",acess);
+        // console.log("ACESS:",acess);
         if(acess == false){
             nameDet = undefined;
         }else{
@@ -583,7 +581,7 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                 var img = (jsonPath + "\\" + file);
                 fs.unlink(img,function(err){
                     if (err) throw err;
-                    console.log(chalk.red(img," - DELETADA"));
+                    // console.log(chalk.red(img," - DELETADA"));
                 });
                 return true;
             }
@@ -612,7 +610,7 @@ Anuncio.prototype.desativarAnuncio = function(id, status, callback){
     db.then(function(conn){
         connection = conn;
 
-        console.log(id, status);
+        // console.log(id, status);
 
         if( status == 'true' ){
             var turnOFF = false;
@@ -623,9 +621,9 @@ Anuncio.prototype.desativarAnuncio = function(id, status, callback){
             var sqlDest = ("UPDATE produto SET ativo_prod = " + turnON + " WHERE id_prod = " + id );
         }
 
-        console.log(sqlDest);
+        // console.log(sqlDest);
         connection.query(sqlDest,function(err, result){
-            console.log(result);
+            // console.log(result);
             if(err){
                 callback(1, 0);
             }
