@@ -27,12 +27,12 @@ Event.prototype.getAnuncios = function(thatX,result){
     }
     if (isEmptyObject(thatX)) {
         thatX = {
-            statment : "WHERE ativo_prod = b'1' order by datacriacao_prod desc LIMIT 5",
+            statment : "WHERE ativo_prod = b'1' order by datacriacao_prod desc",
             statmentCat : '',
             notEnd : true
         }
     } else {
-        ( thatX.statment != undefined ? (thatX.statmentCat = '' ) : (thatX.statment = "WHERE ativo_prod = b'1' order by datacriacao_prod desc LIMIT 10"));
+        ( thatX.statment != undefined ? (thatX.statmentCat = '' ) : (thatX.statment = "WHERE ativo_prod = b'1' order by datacriacao_prod desc"));
     }
     
     db.then(function(conn){
@@ -43,8 +43,9 @@ Event.prototype.getAnuncios = function(thatX,result){
         var sqlGet = ("select "+ options +" from produto "+ thatX.statment);
         // console.log("QUERY 1",sqlGet);
         connection.query(sqlGet, function(erro,something){
-            //console.log("RESULTADO -> :",something);
-            //console.log("erro:",erro);
+            console.log(sqlGet);
+            console.log("RESULTADO -> :",something);
+            console.log("erro:",erro);
             if(something[0] == undefined){
                 produtos = undefined;
                 result(1, produtos);
@@ -69,7 +70,7 @@ Event.prototype.getAnuncios = function(thatX,result){
         return connection.query(sqlGet);
     
     }).then(function(categorias){
-        console.log(categorias);
+        // console.log(categorias);
         if( categorias.length > 0){
             cat = categorias;
         }else{
@@ -176,7 +177,7 @@ Event.prototype.getBanners = function(banners){
         connection = conn;
 
         var options = "banner"
-        var sqlGet = ("SELECT "+ options + " from banners WHERE ativo_banner =  b'1' order by data_criacao LIMIT 3");
+        var sqlGet = ("SELECT "+ options + " from banners WHERE ativo_banner =  b'1' order by data_criacao");
 
         connection.query(sqlGet, function(erro, result){
             console.log(result);

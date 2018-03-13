@@ -33,9 +33,11 @@
                <h3>Promoções</h3>
             </div>
             <ul class="carvg hm">
-                <% if(produto != undefined) { 
+                <% if(produto != undefined) {
+                  var count = 0;
                   for (var i = 0; i < produto.length; i++) { 
-                    if( produto[i].promo_prod != false){ %>
+                    if( produto[i].promo_prod != false && count <= 5){
+                    count = count + 1; %>
                     <li>
                       <div class="item">
                         <figure>
@@ -160,8 +162,10 @@
                 </div>
                 <ul class="carvg hm">
                     <% if(produto != undefined) { 
+                      var count = 0;
                       for (var i=0; i < produto.length; i++) { 
-                        if( produto[i].nacional_prod != 1 ){ %>
+                        if( produto[i].nacional_prod != 1 && count <= 5){
+                          count = count + 1; %>
                           <li>
                             <div class="item">
                               <figure>
@@ -286,8 +290,10 @@
                 </div>
                 <ul class="carvg hm">
                     <% if(produto != undefined) { 
+                      var count = 0;
                       for (var i=0; i < produto.length; i++) { 
-                        if( produto[i].nacional_prod != 0 ) { %>
+                        if( produto[i].nacional_prod != 0 && count <= 5) {
+                          count = count + 1; %>
                           <li>
                             <div class="item">
                               <figure>
@@ -412,8 +418,10 @@
                 </div>
                 <ul class="carvg hm">
                     <% if(produto != undefined) { 
+                      var count = 0;
                       for (var i=0; i < produto.length; i++) { 
-                        if( produto[i].categoria.includes('Excursão')) { %>
+                        if( produto[i].categoria.includes('Excursão') && count <= 5) {
+                          count = count + 1; %>
                           <li>
                             <div class="item">
                               <figure>
@@ -538,8 +546,10 @@
                 </div>
                 <ul class="carvg hm">
                     <% if(produto != undefined) { 
+                      var count = 0;
                       for (var i=0; i < produto.length; i++) { 
-                        if( produto[i].categoria.length > 1) { %>
+                        if( produto[i].categoria.length > 1 && count <= 5) { 
+                          count = count + 1;%>
                           <li>
                             <div class="item">
                               <figure>
@@ -664,8 +674,10 @@
                 </div>
                 <ul class="carvg hm">
                     <% if(produto != undefined) { 
+                      var count = 0;
                       for (var i=0; i < produto.length; i++) { 
-                        if( produto[i].categoria.includes('Cruzeiro')) { %>
+                        if( produto[i].categoria.includes('Cruzeiro') && count <= 5) { 
+                          count = count + 1;%>
                           <li>
                             <div class="item">
                               <figure>
@@ -798,7 +810,7 @@
                   </div>
                   <div>
                     <h4>Atendimento Personalizado</h4>
-                    <p>Exemplo exemplo exemplo Exemplo exemplo exemplo</p>
+                    <p>Atendimento diferenciado, 24h e em qualquer dia, nosso trabalho é lhe atender bem, seja onde for.</p>
                   </div>
                 </li>
                 <li>
@@ -807,7 +819,7 @@
                   </div>
                   <div>
                     <h4>O melhor preço</h4>
-                    <p>Exemplo exemplo exemplo Exemplo exemplo exemplo</p>
+                    <p>Temos compromisso com os menores valores, cobrimos qualquer orçamento.</p>
                   </div>
                 </li>
                 <li>
@@ -816,7 +828,7 @@
                   </div>
                   <div>
                     <h4>Novo Conceito em Turismo</h4>
-                    <p>Exemplo exemplo exemplo Exemplo exemplo exemplo</p>
+                    <p>Buscamos meios para que todos viagem e concretizem seus sonhos.</p>
                   </div>
                 </li>
               </ul>

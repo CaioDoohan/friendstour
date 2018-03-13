@@ -1058,22 +1058,28 @@ footer {
   background-color: #e6e6e6;
   padding: 15px 10px;
   box-sizing: border-box;
-  margin: 30px 0; }
+  margin: 30px 0;
+  box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.34902); }
   .fdl h3 {
     font-size: 30px;
     margin: 5px 0;
     font-family: Nunito-Black;
     color: #d05a35;
     text-align: center; }
-  .fdl h4 {
-    font-family: Nunito-Black;
-    color: #d05a35;
-    font-size: 22px;
-    text-align: left; }
   .fdl .sub-letter {
     display: table;
     width: 100%;
     margin: 25px 0; }
+    .fdl .sub-letter p {
+      text-align: center;
+      font-size: 16px;
+      padding: 3px 0;
+      font-family: Nunito-Light;
+      line-height: 25px; }
+    .fdl .sub-letter span, .fdl .sub-letter strong {
+      color: #d15a35; }
+    .fdl .sub-letter .pub {
+      font-family: Nunito-Black; }
 
 .tit {
   position: relative; }
@@ -1209,13 +1215,13 @@ footer {
     word-wrap: break-word;
     /* Internet Explorer 5.5+ */ }
   .lg pre {
-    white-space: pre-wrap; }
+    white-space: pre-wrap;
+    word-break: break-all;
+    /* Internet Explorer 5.5+ */ }
   .lg pre, .lg p {
     margin: 10px 0;
     line-height: 22px;
-    font-family: Nunito-Regular;
-    word-break: break-all;
-    /* Internet Explorer 5.5+ */ }
+    font-family: Nunito-Regular; }
   .lg .inc {
     color: green; }
     .lg .inc svg {
