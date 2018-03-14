@@ -548,7 +548,7 @@
                     <% if(produto != undefined) { 
                       var count = 0;
                       for (var i=0; i < produto.length; i++) { 
-                        if( produto[i].categoria.length > 1 && count <= 5) { 
+                        if( produto[i].categoria.length > 1 && count <= 5 &&  !produto[i].categoria.includes('Excursão') ) { 
                           count = count + 1;%>
                           <li>
                             <div class="item">

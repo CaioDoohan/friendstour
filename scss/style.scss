@@ -1480,6 +1480,16 @@ footer{
     }
   }
 }
+.title{
+  text-align: left;
+  margin: 35px 0 10px;
+  h4{
+    box-sizing: border-box;
+    font-family: Nunito-Black;
+    color: #d05a35;
+    font-size: 20px;
+  }
+}
 .list{
   display: table;
   width: 100%;

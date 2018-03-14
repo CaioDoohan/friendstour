@@ -26,7 +26,7 @@ router.get("/:format", function(req,res){
             break;
         case 'cruzeiros':
             var thatX = {
-                statmentCat : "and nome_cat = 'Cruzeiro'" ,
+                statmentCat : "and nome_cat LIKE '%Cruzeiro%'" ,
             }
             var title = 'Cruzeiros';
             var banner = "/images/cruzeiros.png";
@@ -38,13 +38,16 @@ router.get("/:format", function(req,res){
             var title = 'Excursões';
             var banner ="/images/excursoes.png";
             break;
+
+        case 'pacotes':
+            var title = 'Pacotes';
+            var banner ="/images/pacotes.png";
+        break;
     }
-    //console.log("OBJECT:",thatX);
 
     var EventModel =  new Event();
 
     EventModel.getAnuncios(thatX, function(erro,produtos){
-        // console.log("RESULTADO", produtos);
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){
                 produtos[i].id_prod;
@@ -60,8 +63,16 @@ router.get("/:format", function(req,res){
                 produtos[i].imagem;
             }
         }
-        //console.log(title);
-        res.render('lista', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});   
+
+        
+        if( format == "cruzeiros"){
+            res.render('listseg', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});   
+        }else if(format == "pacotes"){
+            console.log(produtos);
+            res.render('listpack', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});
+        }else{
+            res.render('lista', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});   
+        }
     });
 })
 

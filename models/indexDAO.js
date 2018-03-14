@@ -43,9 +43,9 @@ Event.prototype.getAnuncios = function(thatX,result){
         var sqlGet = ("select "+ options +" from produto "+ thatX.statment);
         // console.log("QUERY 1",sqlGet);
         connection.query(sqlGet, function(erro,something){
-            console.log(sqlGet);
-            console.log("RESULTADO -> :",something);
-            console.log("erro:",erro);
+            // console.log(sqlGet);
+            // console.log("RESULTADO -> :",something);
+            // console.log("erro:",erro);
             if(something[0] == undefined){
                 produtos = undefined;
                 result(1, produtos);
@@ -105,7 +105,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             var incF = [];
             var imgF;
 
-            console.log(chalk.blue("CICLO ID:", id));
+            // console.log(chalk.blue("CICLO ID:", id));
 
             for(var k = 0; k < cat.length; k++){
 
@@ -143,7 +143,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             }
 
             //console.log("IMAGEM DO ID:", imgF);
-            console.log(catF.length > 0 ? true : false);
+            // console.log(catF.length > 0 ? true : false);
             if( catF.length > 0 ){
                 prodFinal.push( {
                     id_prod : produtos[i].id_prod,
@@ -164,7 +164,7 @@ Event.prototype.getAnuncios = function(thatX,result){
         }
 
         result(0,prodFinal);
-        console.log("FINAL:",prodFinal);
+        // console.log("FINAL:",prodFinal);
        if(thatX.notEnd != true){
            //console.log("CONNECTION FECHADA");
            return connection.end();
@@ -180,7 +180,7 @@ Event.prototype.getBanners = function(banners){
         var sqlGet = ("SELECT "+ options + " from banners WHERE ativo_banner =  b'1' order by data_criacao");
 
         connection.query(sqlGet, function(erro, result){
-            console.log(result);
+            // console.log(result);
             if(erro || result[0] == undefined){
                 banners(undefined);
             }else{

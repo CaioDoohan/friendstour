@@ -1131,6 +1131,15 @@ footer {
   .flt.full select option {
     outline-color: #b9b9b9; }
 
+.title {
+  text-align: left;
+  margin: 35px 0 10px; }
+  .title h4 {
+    box-sizing: border-box;
+    font-family: Nunito-Black;
+    color: #d05a35;
+    font-size: 20px; }
+
 .list {
   display: table;
   width: 100%; }
