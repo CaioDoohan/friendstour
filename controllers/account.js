@@ -10,7 +10,7 @@ router.get('/',function(req, res, next) {
     var user;
     UserModel.getUsers(function(users){
         if(users != undefined){
-            console.log(users);
+            // console.log(users);
             for(var i = 0; i < users.length; i++){
                 users[i].user_id;
                 users[i].username;
@@ -19,10 +19,10 @@ router.get('/',function(req, res, next) {
             }
 
         }else{
-            console.log("== ->");
+            // console.log("== ->");
             users = undefined;
         }
-        console.log(user);
+        // console.log(user);
         res.render('admin/user', {title: 'Friendstour - Usuários', usuario : users });
     });
       
@@ -71,9 +71,9 @@ router.post('/register', function(req,res,next){
             password: password,
             action : action
         }
-        console.log(chalk.blue("NEW USER FROM CONTROL:", newUser));
+        // console.log(chalk.blue("NEW USER FROM CONTROL:", newUser));
         UserModel.createUser(newUser, function(erro,result){
-            console.log(result);
+            // console.log(result);
             if(result != 0){
                 data = {
                     msg : "Cadastro efetuado com sucesso!"
@@ -145,7 +145,7 @@ router.post('/validate', function(req,res,next){
 router.post('/remover', function(req,res){
     var id = req.body.id;
     var UserModel = new User();
-    console.log(id);
+    // console.log(id);
     UserModel.remove(id, function(callback){
         if(callback == undefined){
             res.json({ 

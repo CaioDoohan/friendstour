@@ -21,7 +21,7 @@ Banners.prototype.getAllBanners = function(banners){
         var sqlGet = ("SELECT "+ options + " from banners order by data_criacao");
 
         connection.query(sqlGet, function(erro,result){
-            console.log(result);
+            // console.log(result);
             if(erro || result[0] == undefined){
                 banners(1, undefined);
             }
@@ -45,11 +45,11 @@ Banners.prototype.addBanner = function(banner, callback){
 
             connection.query(sqlInsert, function(erro,result){
                 if(erro){
-                    console.log("1-)Result:", erro);
+                    // console.log("1-)Result:", erro);
                     callback(1, 0);
                 }
                 else{
-                    console.log("1-)Result:", result);
+                    // console.log("1-)Result:", result);
                     callback(0, 1);
                 }
             })
@@ -66,7 +66,7 @@ Banners.prototype.addBanner = function(banner, callback){
 Banners.prototype.removeBanner = function(id,name,callback){
     db.then(function(conn){
         connection = conn;
-        console.log(name);
+        // console.log(name);
         var sqlRemove = ("DELETE FROM banners WHERE banner_id = " + id);
         
         connection.query(sqlRemove, function(erro, result){
@@ -76,7 +76,7 @@ Banners.prototype.removeBanner = function(id,name,callback){
                 var img = (jsonPath + "\\" + name); 
                 fs.unlink(img,function(err){
                     if (err) throw err;
-                    console.log(chalk.red(img," - DELETADA"));
+                    // console.log(chalk.red(img," - DELETADA"));
                 });
             }
             return callback(0,1);
@@ -90,7 +90,7 @@ Banners.prototype.desativarBanner = function(id, status,callback){
     db.then(function(conn){
         connection = conn;
 
-        console.log(id, status);
+        // console.log(id, status);
 
         if( status == 'true' ){
             var sqlDest = ("UPDATE banners SET ativo_banner = b'0' WHERE banner_id = " + id );

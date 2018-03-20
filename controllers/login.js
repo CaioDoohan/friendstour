@@ -15,7 +15,7 @@ router.get('/', function(req, res,next){
 });
 
 router.get('/verify',passport.authenticate('bearer', { session: false }),  function(req, res) {
-    console.log('autenticado');
+    // console.log('autenticado');
 
     res.write('1');
     res.end();

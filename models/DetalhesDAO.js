@@ -19,12 +19,12 @@ DetalhesDAO.prototype.getId = function(id,callback){
         var options = "nome_prod, TRIM(desc_prod) AS desc_prod, data_prod, valor_prod, parcelas_prod, TRIM(texto_prod) AS texto_prod";
         
         var sqlGet = ("select "+ options +" from produto WHERE id_prod = "+ idProd);
-        console.log(sqlGet);
+        // console.log(sqlGet);
         return connection.query(sqlGet);
         //return connection.query("SELECT 1");
     })
     .then(function(result){
-        console.log(result[0]);
+        // console.log(result[0]);
         produto = result[0];
 
         return connection.query("select CP.id_prod,C.nome_cat from cat_prod as CP Inner join categoria as C on C.id_cat = CP.id_cat where id_prod in (" + idProd + " )");

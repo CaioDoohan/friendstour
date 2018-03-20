@@ -35,7 +35,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/email', function(req, res, next){
-    console.log(req.body);
+    // console.log(req.body);
     var erro;
     var confirm;
     var output = `

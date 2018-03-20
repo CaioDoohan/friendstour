@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/formulario_enviado', function(req, res, next) {
-    console.log(req.body);
+    // console.log(req.body);
     var erro;
     var confirm;
     var output = `
@@ -159,7 +159,7 @@ router.post('/formulario_enviado', function(req, res, next) {
 });
 
 router.post('/seu-pacote', function(req, res, next) {
-    console.log(req.body);
+    // console.log(req.body);
     var erro;
     var confirm;
     var output = `

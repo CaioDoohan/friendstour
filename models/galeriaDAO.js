@@ -116,10 +116,10 @@ Galeria.prototype.getImages = function(id, imgs){
 
         //console.log(sqlGet);
         connection.query(sqlGet, function(erro,result){
-            console.log(chalk.blue("DETS IDS:",result));
+            // console.log(chalk.blue("DETS IDS:",result));
             
             if(erro || result[0] == undefined){
-                console.log(chalk.blue("DETS IDS:",undefined));
+                // console.log(chalk.blue("DETS IDS:",undefined));
                 return idsDet = undefined;
             }else{
                 for(var i = 0; i < result.length; i++){
@@ -175,14 +175,14 @@ Galeria.prototype.getImages = function(id, imgs){
             home : home,
             det : det,
         }
-        console.log(imagens);
+        // console.log(imagens);
         imgs(0,imagens);
         return connection.end();
     })
 }
 
 Galeria.prototype.remover = function(idImagem,type, cb){
-    console.log("MODEL", idImagem, type);
+    // console.log("MODEL", idImagem, type);
     var acess = true;
     var removeProd;
     var removeImg;
@@ -218,7 +218,7 @@ Galeria.prototype.remover = function(idImagem,type, cb){
         connection.query(removeProd, function(erro,result){
             // console.log("RESULTADO",result);
             if(erro || result == undefined){
-                console.log(chalk.yellow("PRODUTO SEM ESSA IMAGEM"));
+                // console.log(chalk.yellow("PRODUTO SEM ESSA IMAGEM"));
             }
             return connection.query("select 1");
         });
@@ -226,7 +226,7 @@ Galeria.prototype.remover = function(idImagem,type, cb){
         return connection.query("SELECT 1");
         
     }).then(function(){
-        console.log("ACESS",acess);
+        // console.log("ACESS",acess);
         if(acess != false){
             // console.log("ACESS TRUE");
             connection.query(sqlGet, function(erro, result){
@@ -241,16 +241,16 @@ Galeria.prototype.remover = function(idImagem,type, cb){
                 return connection.query("SELECT 1");
             })
         }else{
-            console.log("ACESS FALSE");
+            // console.log("ACESS FALSE");
             cb(1,0);
             return connection.end();
         }
         return connection.query("SELECT 1");
     }).then(function(){
-        console.log("ACESS",acess);
+        // console.log("ACESS",acess);
         if(acess != false){
             connection.query(removeImg, function(erro, result){
-                console.log("QUERY PARA REMOVER A IMAGEM DA PASTA",result);
+                // console.log("QUERY PARA REMOVER A IMAGEM DA PASTA",result);
                 if(erro){
                     cb(1,0);
                     return acess = false;
@@ -259,16 +259,16 @@ Galeria.prototype.remover = function(idImagem,type, cb){
                     var img = (jsonPath + "\\" + nameImg); 
                     fs.unlink(img,function(err){
                         if (err) throw err;
-                        console.log(chalk.red(img," - DELETADA"));
+                        // console.log(chalk.red(img," - DELETADA"));
                     });
                     cb(0,1);
-                    console.log(chalk.yellow("CONEXÃO FECHADA"));
+                    // console.log(chalk.yellow("CONEXÃO FECHADA"));
                     return connection.end();
                 }
                 return connection.query("select 1");
             });
         }else{
-            console.log("ACESS FALSE");
+            // console.log("ACESS FALSE");
             // cb(1,0);
             // return connection.end();
         }
@@ -280,7 +280,7 @@ Galeria.prototype.desativar = function(id, status,type,callback){
     db.then(function(conn){
         connection = conn;
 
-        console.log("DADOS",id, status);
+        // console.log("DADOS",id, status);
 
         switch(type){
             case 'home':
@@ -304,7 +304,7 @@ Galeria.prototype.desativar = function(id, status,type,callback){
             return connection.query("SELECT 1");
         }         
 
-        console.log(sqlDest);
+        // console.log(sqlDest);
         connection.query(sqlDest,function(err, result){
             //console.log(result);
             if(err){

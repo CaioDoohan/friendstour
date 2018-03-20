@@ -68,7 +68,7 @@ router.get("/:format", function(req,res){
         if( format == "cruzeiros"){
             res.render('listseg', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});   
         }else if(format == "pacotes"){
-            console.log(produtos);
+            // console.log(produtos);
             res.render('listpack', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});
         }else{
             res.render('lista', { title: ("Friendstour - " + title), produto : produtos, banner : banner, type : title});   

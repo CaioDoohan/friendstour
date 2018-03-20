@@ -463,7 +463,7 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
             var sqlGet = ("SELECT home_id FROM home_prod WHERE prod_id = " + idProd);
             // console.log(sqlGet);
             connection.query(sqlGet, function(erro, result){
-                console.log(result);
+                // console.log(result);
                 if(erro || result[0] == undefined){
                     // console.log(chalk.yellow("PRODUTO NÃO POSSUI IMAGEM HOME"));
                     return acess = false;

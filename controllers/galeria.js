@@ -49,7 +49,7 @@ router.post('/post', function(req,res){
     GaleriaModel.getImages(idImagem, function(erro,result){
         // console.log("CONTROL",result);
         if( erro == 1){
-            console.log(chalk.yellow("ERRO"));
+            // console.log(chalk.yellow("ERRO"));
             res.json({
                 msg : "Erro"
             })

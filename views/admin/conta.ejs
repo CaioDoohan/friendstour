@@ -112,11 +112,11 @@
             type: request_method,
             data : form_data
         }).done(function(data){ 
-            console.log(data);
+            // console.log(data);
             $(".msgs").find('.alert').remove();
             $('input:checkbox').removeAttr('checked');
             if($.isArray(data)){
-                console.log(true);
+                // console.log(true);
                 $.each(data,function(idx, key){
                     $(".msgs").append("<div class='alert'>"+ data[idx].msg +"</div>");
                 });

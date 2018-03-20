@@ -46,9 +46,9 @@ router.get('/adicionar', function(req,res,next){
     var AnuncioModel = new Anuncio(null)
     
     AnuncioModel.getCategoria(function(erro,resultado){
-        console.log("CATEGORIA:", resultado);
+        // console.log("CATEGORIA:", resultado);
         AnuncioModel.getInclusos(function(erro,tipos){
-            console.log("INCLUSOS:", tipos);
+            // console.log("INCLUSOS:", tipos);
             res.render('admin/adicionar', { title : 'Friendstour - Adicionar', categoria : resultado, inclusos : tipos, produto : {}, add : null });
         });
     });
@@ -67,7 +67,7 @@ router.post('/validate', function(req,res){
         if(callback == false){
             msg = "Evento já existente";
             type = false;
-            console.log(chalk.blue(msg));
+            // console.log(chalk.blue(msg));
             return res.json( {msg : msg, type : type} );
             // return msg;
         }else if(callback == true){
@@ -75,7 +75,7 @@ router.post('/validate', function(req,res){
             type = true;
             return res.json({msg : msg, type : type});
         }else{
-            console.log(chalk.blue(err));
+            // console.log(chalk.blue(err));
             return res.json({msg : {} , type : undefined});
         }
     });
@@ -139,12 +139,12 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
                 }
             }
             
-            console.log('DADOS FORM:',dadosForm);
+            // console.log('DADOS FORM:',dadosForm);
             // var texto = dadosForm.desc_prod;
 
             // console.log('texto:',unescape(texto).trim());
-            console.log('IMGS:', imgHome);
-            console.log('IMGS:', detImg);
+            // console.log('IMGS:', imgHome);
+            // console.log('IMGS:', detImg);
 
             
             AnuncioModel.addAnuncio(dadosForm,imgHome, detImg, function(erro, confirm){
@@ -170,7 +170,7 @@ router.get("/editar/produto-:id",function(req,res,next){
 
     var id = req.params.id;
     var AnuncioModel = new Anuncio();
-    console.log(id);
+    // console.log(id);
 
     AnuncioModel.getFullAnuncio(id, function(erro,resultado){
 
@@ -193,7 +193,7 @@ router.get("/editar/produto-:id",function(req,res,next){
             inclusos : resultado.inclusos,
             criacao : resultado.criacao,
         }
-        console.log(produtoEdit);
+        // console.log(produtoEdit);
         AnuncioModel.getCategoria(function(erro,categorias){
             
             AnuncioModel.getInclusos(function(erro,incluso){

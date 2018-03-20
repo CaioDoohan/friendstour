@@ -14,7 +14,7 @@ $(document).ready(function(){
             }
         }).done(function(data){ 
             if(data != undefined){
-                console.log("Token Validado");
+                // console.log("Token Validado");
             }
         });    
     }

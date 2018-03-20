@@ -66,14 +66,12 @@ passport.use(new Strategy( function(token, cb) {
         var userX = jwt.decode(token, configJwt.jwtSecret);
         var UserModel = new User();
         UserModel.getByID(userX, function(recordnew){
-          // console.log(recordnew);
           var record = {
                 id: recordnew[0].user_id,
                 username: recordnew[0].username,
                 email: recordnew[0].email,
                 admin : recordnew[0].admin
           };
-          // console.log(record);
           return (record == null ? cb(null, false) : cb(null, record));              
         });
         

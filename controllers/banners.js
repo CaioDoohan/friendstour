@@ -95,8 +95,8 @@ router.post('/desativar', function(req,res){
     var id = req.body.id;
     var status = req.body.turn;
     
-    console.log(id);
-    console.log(status);
+    // console.log(id);
+    // console.log(status);
 
     var BannersModel = new Banners();
 

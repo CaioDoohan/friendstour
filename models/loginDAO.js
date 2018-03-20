@@ -50,11 +50,11 @@ LoginDAO.prototype.getByID = function(userX, callback){
             if(err) throw err;
 
             else if( result[0] == undefined ){
-                console.log(chalk.blue("USUARIO NAO ENCONTRADO"));
+                // console.log(chalk.blue("USUARIO NAO ENCONTRADO"));
                 return callback(null);
             }
             else{
-                console.log(chalk.blue("USUARIO ENCONTRADO"));
+                // console.log(chalk.blue("USUARIO ENCONTRADO"));
                 return callback(result);
             }
         });
