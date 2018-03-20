@@ -222,7 +222,7 @@ router.post('/email', function(req, res, next){
     // setup email data with unicode symbols  friendstour1@outlook.com
     let mailOptions = {
         from: '"Friends Tour - Reserva" <friendstour.funcionario@gmail.com>', // sender address
-        to: 'pereiradoohan@gmail.com', // list of receivers
+        to: 'friendstour1@outlook.com', // list of receivers
         subject: 'Friends Tour - Reserva ✔', // Subject line
         text: 'Olá Ademar, temos mais uma reserva!', // plain text body
         html: output // html body

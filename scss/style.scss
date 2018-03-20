@@ -637,7 +637,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
 .crl.vg{
   .carvg{
     box-sizing: border-box;
-    padding: 15px 0;
+    padding: 0 0 15px;
     position: relative;
 
     .undefined{
@@ -678,7 +678,7 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           max-width:484px;
           max-height:230px;
           width: 100%;
-          height: 100%;
+          height: 230px;
         }
       }
       &>div{
@@ -1093,11 +1093,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           width:100%;
         }
       }
-      a:hover{
-        img{
-          opacity: 0.3;
-        }
-      }
     }
   }
 }
@@ -1306,7 +1301,28 @@ footer{
     }
   }
 }
+.cont.mt{
+  margin: 15px 0;
+  &>div.col-12:last-child{
+    border: none;
+  }
 
+  h3{
+    text-align: center;
+  }
+  span{
+    display: table;
+    margin: 0 auto;
+  }
+  form{
+    &>button{
+      float: none;
+      display: table;
+      margin: 15px auto 0;
+      padding: 10px 50px;
+    }
+  }
+}
 .comp{
   .ct{
     display: table;
@@ -1450,6 +1466,26 @@ footer{
     }
   }
 }
+#cancel{
+  display: table;
+  width: 100%;
+  padding: 15px 0 5px;
+  min-height:43px;
+
+  button{
+    display: none;
+    background-color: rgb(234, 97, 54);
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover{
+      background-color: rgb(230, 80, 33);;
+    }
+  }
+}
 .flt.full{
   &>div{
     padding: 10px 0;
@@ -1482,7 +1518,7 @@ footer{
 }
 .title{
   text-align: left;
-  margin: 35px 0 10px;
+  margin: 5px 0 10px;
   h4{
     box-sizing: border-box;
     font-family: Nunito-Black;
@@ -1493,6 +1529,22 @@ footer{
 .list{
   display: table;
   width: 100%;
+
+  &>li{
+    width: 49%;
+    display: table;
+    float: left;
+    margin:10px 1%;
+  }
+
+  &>li:nth-child(2n+1){
+    margin-left: 0;
+    clear: both;
+  }
+
+  &>li:nth-child(2n){
+    margin-right: 0;
+  }
   tr{
     width:100%!important;
     padding: 10px 0;
@@ -1518,6 +1570,18 @@ footer{
       padding-left: 1%;
     }
   }
+}
+
+.left{
+  margin-left: 0!important;
+  clear: both !important;
+  margin-right: 1%!important;
+}
+
+.right{
+  margin-right: 0 !important;
+  clear:none!important;
+  margin-left: 1%!important;
 }
 
 .desc{
@@ -2140,12 +2204,20 @@ footer{
     max-width: 100%;
     height: 85px;
   }
+
+  .crl.vg .carvg .item figure img{
+    max-width:100%;
+    height: 190px;
+  }
 }
 
 @media screen and (max-width:730px){
 
-  .list{
-    padding: 25px 0 0!important;
+  // .list{
+  //   padding: 25px 0 0!important;
+  // }
+  .crl.vg .carvg .item figure img{
+    height: 170px;
   }
 
 }
@@ -2261,10 +2333,23 @@ footer{
 }
 
 @media screen and (max-width:580px){
+  .crl.vg .carvg .item figure img {
+    height: 300px;
+  }
   .list tr td{
     display: block;
     width: 100%;
     padding: 0!important;
+  }
+
+  .list{
+    display: table;
+    width: 100%;
+
+    &>li{
+      width: 100%;
+      margin:10px 0;
+    }
   }
 
   .listdet .det li{
@@ -2287,6 +2372,10 @@ footer{
 
   .shadow form span{
     font-size:25px;
+  }
+
+  .title{
+    margin: 5px 0;
   }
 }
 @media screen and (max-width:480px){
