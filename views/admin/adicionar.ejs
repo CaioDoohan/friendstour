@@ -132,8 +132,8 @@
         </div> 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script> 
-    <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-    <script src="http://esironal.github.io/cmtouch/lib/codemirror.js"></script>
+    <script src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    <!-- <script src="http://esironal.github.io/cmtouch/lib/codemirror.js"></script>
 	<script src="http://esironal.github.io/cmtouch/addon/hint/show-hint.js"></script>
 	<script src="http://esironal.github.io/cmtouch/addon/hint/xml-hint.js"></script>
 	<script src="http://esironal.github.io/cmtouch/addon/hint/html-hint.js"></script>
@@ -142,7 +142,7 @@
 	<script src="http://esironal.github.io/cmtouch/mode/css/css.js"></script>
 	<script src="http://esironal.github.io/cmtouch/mode/htmlmixed/htmlmixed.js"></script>
 	<script src="http://esironal.github.io/cmtouch/addon/selection/active-line.js"></script>
-	<script src="http://esironal.github.io/cmtouch/addon/edit/matchbrackets.js"></script>
+	<script src="http://esironal.github.io/cmtouch/addon/edit/matchbrackets.js"></script> -->
     <script>
         $(document).ready(function(){
             jQuery.browser = {};
@@ -173,7 +173,6 @@
                     $(".msgs").find('.alert').remove();
                     $(".msgs").append("<div class='alert' style='background-color: #f36e6e;border-color: #f36e6e;color: #fff;'>"+ msg +"</div>");
                 }else{
-                    console.log(confirmacao);
                     var msg = confirmacao;
                     $(".msgs").find('.alert').remove();
                     $.each(msg,function(idx, key){
