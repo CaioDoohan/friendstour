@@ -3,7 +3,11 @@ var nodemailer   = require('nodemailer');
 var router       = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('contato', { title: 'Friendstour - Contato'});
+    if( req.query.mt != undefined ){
+        res.render('contato', { title: 'Friendstour - Contato', mt : true});
+    }else{
+        res.render('contato', { title: 'Friendstour - Contato', mt : false});
+    }
 });
 
 router.post('/formulario_enviado', function(req, res, next) {

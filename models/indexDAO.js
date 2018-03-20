@@ -176,11 +176,11 @@ Event.prototype.getBanners = function(banners){
     db.then(function(conn){
         connection = conn;
 
-        var options = "banner"
+        var options = "banner,url"
         var sqlGet = ("SELECT "+ options + " from banners WHERE ativo_banner =  b'1' order by data_criacao");
 
         connection.query(sqlGet, function(erro, result){
-            // console.log(result);
+            console.log(result);
             if(erro || result[0] == undefined){
                 banners(undefined);
             }else{
@@ -188,7 +188,7 @@ Event.prototype.getBanners = function(banners){
             }
         })
 
-        connection.end();
+        return connection.end();
     })
 }
 

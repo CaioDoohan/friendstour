@@ -48,7 +48,7 @@ hr {
 pre {
   font-family: monospace, monospace;
   font-size: 1em;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 a {
@@ -448,8 +448,9 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     padding: 8px 10px 5px;
     border-radius: 0 0 8px 8px;
     box-sizing: border-box;
+    color: #fff!important;
     svg, p {
-      color: #fff!important;
+      color: inherit!important;
       font-weight: 800;
       font-size: 14px;
       display: table-cell;
@@ -653,8 +654,8 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     .slick-slide{
       margin:0 10px;
     }
-    .slick-track{
-      padding: 15px 0;
+    .slick-list{
+      padding: 20px 0 5px;
     }
     .item{
       max-width:484px;
@@ -913,6 +914,147 @@ h1, h2, h3, h4, h5, h6, ul, figure {
   }
 }
 
+/* Icon Pulse */
+@-webkit-keyframes hvr-icon-pulse {
+  25% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+  75% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+}
+@keyframes hvr-icon-pulse {
+  25% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+  75% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+}
+.pac{
+  &>div{
+    display: table;
+    width: 100%;
+    border: 1px solid #ececec;
+    position: relative;
+    padding: 5px 2%;
+    background-color: #ececec;
+    box-sizing: border-box;
+
+    .fs,.ts{
+      display: table;
+    }
+
+    .fs{
+      text-align: left;
+      display: table;
+      color: #f5683b;
+      z-index: 0;
+      position: relative;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+
+      p,svg{
+        display: table;
+        float: left;
+      }
+      p{
+        font-family: Nunito-black;
+        font-size: 20px;
+        padding-right: 19px;
+      }
+      svg{
+        font-size: 18px;
+        right: 0;
+        position: absolute;
+        transform: translateZ(0);
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+      }
+    }
+    
+    .make{
+      -webkit-animation-name: hvr-icon-pulse;
+      animation-name: hvr-icon-pulse;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+    }
+
+    .fik{
+      border: 3px solid #f5683b!important; 
+      background-color: #f5683b!important;
+    }
+
+    // .mike{
+    //   transform: perspective(1px) translateZ(0);
+    //   position: relative;
+    //   overflow: hidden;
+      
+    //   &>div{
+    //     content: "";
+    //     position: absolute;
+    //     display: inline-block!important;
+    //     z-index: -1;
+    //     left: 50%;
+    //     right: 50%;
+    //     bottom: 0;
+    //     background: #ffffff;
+    //     height: 2px;
+    //     border-radius: 5px;
+    //     -webkit-transition-property: left, right;
+    //     transition-property: left, right;
+    //     -webkit-transition-duration: 0.3s;
+    //     transition-duration: 0.3s;
+    //     -webkit-transition-timing-function: ease-out;
+    //     transition-timing-function: ease-out;
+    //   }
+    // }
+
+    // .go{
+    //   left:0!important;
+    //   right: 0!important;
+    // }
+    .ts{
+      position: absolute;
+      right: 0;
+      top: -3px;
+      padding: 0 2%;
+      border: 3px solid #d05a35;
+      border-radius: 0 4px 4px 0;
+      color: white;
+      background-color: #d05a35;
+      z-index: 1;
+      transition: all 0.3s;
+      div{
+        display: table;
+        padding: 2px 0;
+        h3,svg{
+          display: table-cell;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+
+        h3{
+          font-size: 22px;
+          padding: 0 10px;
+          line-height: 22px;
+          font-weight: bold;
+        }
+        svg{
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}
 .inc{
   svg,h6{
     color:green;
@@ -1273,6 +1415,7 @@ footer{
 
     h4,svg{
       font-size:32px;
+      color:inherit!important;
     }
 
     h5{
@@ -1288,6 +1431,7 @@ footer{
       &>svg,h4{
         display: table;
         float: left;
+        color:inherit!important;
       }
 
       h4{
@@ -1668,7 +1812,7 @@ footer{
   }
   pre{
     white-space: pre-wrap;
-    word-break: break-all;       /* Internet Explorer 5.5+ */
+    word-break: break-word;       /* Internet Explorer 5.5+ */
   }
   pre,p{
     margin:10px 0;
@@ -2230,19 +2374,35 @@ footer{
   .crl.vg .carvg .item figure img{
     max-width:100%;
     max-height: 100%;
+    height: 250px;
   }
   .crl.vg .carvg .slick-slide{
     min-height: 410px;
     margin: 0 16px;
   }
 
-  .crl.vg .slick-list{
-    min-height: 530px;
-  }
   .crl.vg .carvg .item > div .name h5 {
     padding: 8px 0;
   }
 
+  .pac{
+    .hv{
+      .fs{
+        p,svg{
+          font-size: 15px;
+        }
+      }
+
+      .ts{
+        h3{
+          font-size: 17px;
+        }
+        .ts{
+          font-size: 18px;
+        }
+      }
+    }
+  }
   footer .col-12{
     &>div{
       width:100%;
@@ -2334,7 +2494,10 @@ footer{
 
 @media screen and (max-width:580px){
   .crl.vg .carvg .item figure img {
-    height: 300px;
+    height: 260px;
+  }
+  .crl.vg .carvg .item > div{
+    padding: 5px 1.05%;
   }
   .list tr td{
     display: block;
@@ -2359,6 +2522,29 @@ footer{
   .det .valor > div{
     float: none;
     margin: 0 auto;
+  }
+
+  .pac{
+    margin: 15px 0;
+    &>div{
+      position: static;
+      padding: 18px 2%;
+      margin: 0 auto;
+
+      .fs,.ts{
+        margin: 5px auto;
+      }
+
+      .fs{
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .ts{
+        position: static;
+        border-radius: 4px;
+      }
+    }
   }
 
   .dl.dc h4{
@@ -2389,10 +2575,6 @@ footer{
   .scroll{
     top: 50px;
     right: 8%;
-  }
-  
-  .crl.vg .slick-list{
-    min-height: 445px;
   }
 
   .crl h3,.parc h3,.emp .empresa h3,.cont h3,.comp h3{
@@ -2437,9 +2619,9 @@ footer{
     margin: 0 0;
   }
 
-  .crl.vg .carvg{
-    padding: 8px 0;
-  }
+  // .crl.vg .carvg{
+  //   padding: 8px 0;
+  // }
 
   .crl.vg .carvg.list .item{
     margin: 20px 0;

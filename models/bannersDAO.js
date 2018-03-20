@@ -34,14 +34,13 @@ Banners.prototype.getAllBanners = function(banners){
     });
 }
 
-Banners.prototype.addBanner = function(banner, callback){
+Banners.prototype.addBanner = function(banner,url, callback){
 
     db.then(function(conn){
         
         connection = conn;
-
         if( banner != undefined && banner != null ){
-            var sqlInsert = ("INSERT INTO banners(banner) VALUE('" + banner + "')");
+            var sqlInsert = ("INSERT INTO banners(banner,url) VALUES('" + banner + "','"+ url +"')");
 
             connection.query(sqlInsert, function(erro,result){
                 if(erro){

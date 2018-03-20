@@ -10,7 +10,13 @@
                   <li>
                     <div class="item">
                       <figure>
-                        <img src="/images/uploads/banners/<%= banner[k]%>" alt="Friend's Tour" />
+                        <% if( url[k] != null ) { %>
+                        <a href="/<%= url[k]%>" title="Veja mais!">
+                          <img src="/images/uploads/banners/<%= banner[k]%>" alt="Friend's Tour" />
+                        </a>
+                        <%} else{%>
+                          <img src="/images/uploads/banners/<%= banner[k]%>" alt="Friend's Tour" />
+                        <% } %>
                       </figure>
                     </div>
                   </li>
@@ -666,6 +672,27 @@
                     <% } %>
                 </ul>
             </section>
+        </div>
+        <div class="row">
+          <section class="pac">
+            <div class="hv">
+              <a href="/contato?mt=1" title="Monte seu pacote!" class="fs">
+                <p>
+                  não achou o que procura
+                </p>
+                <i class="fas fa-question"></i>
+              </a>
+              <a href="/contato?mt=1" title="Monte seu pacote!!" class="ts">
+                <div>
+                    <h3>
+                      MONTE SEU PACOTE!
+                    </h3>
+                    <i class="fas fa-gift"></i>
+                    <div></div>
+                </div> 
+              </a>
+            </div>
+          </section>
         </div>
         <div class="row">
             <section class="crl vg int full">

@@ -53,4 +53,28 @@ $(document).ready(function(){
             $("#form").hide('slow');
         });
     });
+
+    function animake(element){
+        $(element).mouseover(function(){
+            $(".fs").find('svg').addClass('make');
+            $(".ts").addClass('fik');
+        });
+    
+        $(element).mouseleave(function(){
+            $(".fs").find('svg').removeClass('make');
+            $(".ts").removeClass('fik');
+        })
+    }
+
+    var width = $(window).width();
+    console.log(width);
+    if( width >= 985){
+        animake($(".hv"));
+    }else{
+        return false;
+    }
 });
+
+
+
+

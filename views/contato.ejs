@@ -51,7 +51,7 @@
       </section>
     </div>
     <div class="row">
-      <section class="col-12 cont mt">
+      <section class="col-12 cont mt" id="mt">
         <div class="col-12">
           <h3>MONTE SEU PACOTE</h3>
           <span>
@@ -84,12 +84,12 @@
         $('.date').mask('00/00/0000');
         $(".phone_with_ddd").mask("(00) 00000-0000");
     });
+
     $("#formCont").submit(function(event){
         event.preventDefault();
         var post_url = $(this).attr("action"); 
         var request_method = $(this).attr("method"); 
         var form_data = $(this).serialize(); 
-        // console.log(form_data);
         $.ajax({
             url : post_url,
             type: request_method,
@@ -123,6 +123,19 @@
             }
         });
     });
+
+    function goTo(element){
+      $('html,body').animate({
+        scrollTop: $(element).offset().top},
+        'slow');
+    }
+    <% if( mt != false) { %>
+      var hasmt = <%= mt%>;
+    <%}%>
+
+    if( hasmt != false){
+      goTo("#mt");
+    }
   </script>
 </main>
 <% include partial/footer %>

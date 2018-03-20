@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
     var thatX = {};
     
     EventModel.getAnuncios(thatX,function(erro,produtos){
-        // console.log("PRODS:",produtos);
         if( produtos != undefined ){
             for(var i=0 ; i < produtos.length; i++){
                 produtos[i].id_prod;
@@ -30,15 +29,18 @@ router.get('/', function(req, res, next) {
         }
         EventModel.getBanners(function(result){
             var banners = new Array();
+            var urls = new Array();
             // console.log(result);
+
             if(result != undefined){
                 for(var i = 0 ; i < result.length; i ++){
                     banners.push(result[i].banner);
+                    urls.push(result[i].url);
                 }
             }else{
                 banners = undefined;
             }
-            res.render('index', { title: 'Friendstour - Home', produto : produtos, banner : banners});   
+            res.render('index', { title: 'Friendstour - Home', produto : produtos, banner : banners, url : urls});   
         });
     });
 });

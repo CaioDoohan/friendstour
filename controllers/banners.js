@@ -49,6 +49,7 @@ router.post('/adicionar/dados_enviados', function(req,res){
 
     cpUpload(req,res,function(err) {
         var banner;
+        var url = req.body.url;
         //console.log("1-)BANNER:", banner)
         if( req.files != null && req.files != undefined ){
             banner = req.files.banner[0].filename;
@@ -56,7 +57,7 @@ router.post('/adicionar/dados_enviados', function(req,res){
 
         var BannersModel = new Banners();
         //console.log("2-)BANNER:", banner)
-        BannersModel.addBanner(banner, function(erro,result){
+        BannersModel.addBanner(banner,url, function(erro,result){
             var msg;
             //console.log("2-)Result:", result);
             if(erro == 1){
