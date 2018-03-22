@@ -10,6 +10,7 @@ var Event = function(){
 }
 
 Event.prototype.getAnuncios = function(thatX,result){
+    console.log("ENTROU");
     var idsProd = new Array();
     var produtos = new Array();
     var inc = new Array();
@@ -49,7 +50,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             if(something[0] == undefined){
                 produtos = undefined;
                 result(1, produtos);
-                return connection.end();
+                // return connection.end();
             }
             else{
                 produtos = something;
@@ -76,7 +77,7 @@ Event.prototype.getAnuncios = function(thatX,result){
         }else{
             produtos = undefined;
             result(1, produtos);
-            return connection.end();
+            // return connection.end();
         }
         
         // console.log("PRODUTO QUE POSSUI CATEGORIA EXCURSAO:",cat);
@@ -162,7 +163,7 @@ Event.prototype.getAnuncios = function(thatX,result){
             }
             
         }
-
+        console.log("AQ",thatX);
         result(0,prodFinal);
         // console.log("FINAL:",prodFinal);
        if(thatX.notEnd != true){
@@ -176,11 +177,11 @@ Event.prototype.getBanners = function(banners){
     db.then(function(conn){
         connection = conn;
 
-        var options = "banner,url"
+        var options = "banner, url"
         var sqlGet = ("SELECT "+ options + " from banners WHERE ativo_banner =  b'1' order by data_criacao");
 
         connection.query(sqlGet, function(erro, result){
-            console.log(result);
+            console.log(chalk.blue(result));
             if(erro || result[0] == undefined){
                 banners(undefined);
             }else{
@@ -188,6 +189,9 @@ Event.prototype.getBanners = function(banners){
             }
         })
 
+        return connection.query("SELECT 1");
+
+    }).then(function(){
         return connection.end();
     })
 }

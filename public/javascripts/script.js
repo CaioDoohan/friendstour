@@ -67,7 +67,7 @@ $(document).ready(function(){
     }
 
     var width = $(window).width();
-    console.log(width);
+
     if( width >= 985){
         animake($(".hv"));
     }else{

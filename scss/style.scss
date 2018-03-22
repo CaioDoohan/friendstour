@@ -54,6 +54,11 @@ pre {
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  color:#726277;
+}
+
+p{
+  color:#726277;
 }
 
 abbr[title] {
@@ -346,10 +351,12 @@ select[multiple]
 
 p{
   margin: 0;
+  color: inherit;
+  text-decoration: none;
 }
 a {
   text-decoration: none;
-  color: initial;
+  color: inherit;
 }
 
 h1, h2, h3, h4, h5, h6, ul, figure {
@@ -431,8 +438,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
 
 .hdI,footer {
   background-color: #ececec;
-  // box-shadow: 1px 1px 5px #0000004f;
-  // border-bottom: 1px solid #00000014;
 }
 
 .top {
@@ -600,12 +605,10 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     left: -8px;
     li button::before{
       font-size: 12px;
-      // color: #d05a35a6;
       color: #fff;
       opacity:0.4;
     }
     li.slick-active button::before{
-      // color: #d05a35;
       color: #fff;
       opacity:1;
     }
@@ -671,15 +674,11 @@ h1, h2, h3, h4, h5, h6, ul, figure {
       .up{
         min-height: 150px;
       }
-      // .down{
-      //   margin-top: 9%;
-      // }
+
       figure{
         img{
-          max-width:484px;
-          max-height:230px;
           width: 100%;
-          height: 230px;
+          height: auto;
         }
       }
       &>div{
@@ -761,7 +760,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           }
         }
         .local,.tempo,.inc{
-          // border-bottom: 1px solid #e0e0e0;
           display: table;
           width: 100%;
           margin: 6px 0;
@@ -785,10 +783,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
               text-align: left;
               font-size: 15px;
             }
-            // &::before{
-            //   content:"-";
-            //   padding:0 5px 0 3px;
-            // }
             &::after{
               content:"|";
               padding:0 4px;
@@ -900,7 +894,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     
     [dir="rtl"] .slick-next {
       left: -10px;
-      // top: 70px;
       right: auto;
     }
 
@@ -992,36 +985,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
       border: 3px solid #f5683b!important; 
       background-color: #f5683b!important;
     }
-
-    // .mike{
-    //   transform: perspective(1px) translateZ(0);
-    //   position: relative;
-    //   overflow: hidden;
-      
-    //   &>div{
-    //     content: "";
-    //     position: absolute;
-    //     display: inline-block!important;
-    //     z-index: -1;
-    //     left: 50%;
-    //     right: 50%;
-    //     bottom: 0;
-    //     background: #ffffff;
-    //     height: 2px;
-    //     border-radius: 5px;
-    //     -webkit-transition-property: left, right;
-    //     transition-property: left, right;
-    //     -webkit-transition-duration: 0.3s;
-    //     transition-duration: 0.3s;
-    //     -webkit-transition-timing-function: ease-out;
-    //     transition-timing-function: ease-out;
-    //   }
-    // }
-
-    // .go{
-    //   left:0!important;
-    //   right: 0!important;
-    // }
     .ts{
       position: absolute;
       right: 0;
@@ -1089,7 +1052,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     p{
       font-family:Nunito-black;
       padding: 0 3px;
-      // text-transform: uppercase;
     }
   }
   .imp{
@@ -1155,8 +1117,6 @@ h1, h2, h3, h4, h5, h6, ul, figure {
           padding: 0 5px;
           box-sizing: border-box;
           svg{
-            //border-radius: 50%;
-            //background: #2ec4b6;
             font-size: 35px;
             padding: 5px 10px;
             color: #2ec4b6;
@@ -1279,7 +1239,6 @@ footer{
     }
     .formpag{
       p{
-        // font-weight: 600;
         font-size:15px;
         padding: 5px 0;
         text-align: center;
@@ -1695,8 +1654,6 @@ footer{
 
     td{
       width: 48%;
-      // display: table;
-      // float: left;
       vertical-align: top;
       .item{
         margin: 10px 0;
@@ -1748,25 +1705,17 @@ footer{
 .lightbox{
   top:5%!important;
   position: fixed;
-  // .lb-image{
-  //   max-width:650px;
-  //   width: 100%;
-  //   height:390px;
-  // }
 }
 .prft{
   display: block;
   margin-bottom: 5px;
-  padding: 0 5px;
   box-sizing: border-box;
   figure{
-    border: 1px solid #d2d2d2;
     max-width:100%;
     box-sizing: border-box;
     img{
-      max-width:650px;
       width: 100%;
-      height:390px;
+      height:auto;
       cursor: pointer;
     }
   }
@@ -1775,8 +1724,6 @@ footer{
 .secft{
   display: table;
   width: 100%;
-  padding: 0 1%;
-  box-sizing: border-box;
   li{
     float: left;
     max-width: 18.7%;
@@ -1785,8 +1732,7 @@ footer{
     border: 1px solid #d2d2d2;
     box-sizing: border-box;
     img{
-      height: 60px;
-      max-width: 120px;
+      height: auto;
       width: 100%;
       cursor: pointer;
     }
@@ -1804,7 +1750,9 @@ footer{
   background-color: #e6e6e6;
   padding: 10px;
   box-sizing: border-box;
-  box-shadow: 0px 1px 11px rgb(144, 144, 144);
+  height: 390px;
+  border-radius: 0 5px 5px 0;
+  display: table;
   .txt{
     display: table;
     width: 100%;
@@ -1836,10 +1784,12 @@ footer{
 
 .lg.dsc{
   margin: 35px 0 10px;
+  height: auto;
+  border-radius: 0;
 }
 .dl{
   padding: 0 1%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
   padding: 14px 0;
 
@@ -1871,7 +1821,8 @@ footer{
 }
 .det{
   box-sizing: border-box;
-  display: block;
+  display: table;
+  width: 100%;
   position: relative;
 
   .local{
@@ -1893,8 +1844,8 @@ footer{
     }
   }
   &>ul,&>div{
-    margin: 10px 0;
-    // padding: 0 10px;
+    margin: 5px 0;
+
     box-sizing: border-box;
   }
 
@@ -1924,7 +1875,7 @@ footer{
 
   .valor{
     display: table;
-    margin-top: 25px;
+    margin-top: 14px;
     width: 100%;
     &>div{
       display: table;
@@ -1936,7 +1887,6 @@ footer{
     }
   }
   button{
-    // margin: 0 auto;
     display: table;
     padding: 5px 9px;
     box-sizing: border-box;
@@ -1995,7 +1945,8 @@ footer{
       padding: 15px 0;
       display: table;
       text-align: left;
-      margin: 0 auto
+      margin: 0 auto;
+      clear: both;
     }
     &>div{
       display: table;
@@ -2033,7 +1984,6 @@ footer{
       color: #726277;
       padding: 8px 5px;
       clear: both;
-      width: 470px;
       min-width: 100%;
       max-width: 1000px;
       min-height: 96px;
@@ -2059,6 +2009,7 @@ footer{
     float: right;
     color: #d05a35;
     cursor: pointer;
+    display: table;
   }
 }
 
@@ -2094,11 +2045,6 @@ footer{
   .prft{
     figure{
       overflow: hidden;
-
-      img{
-        width: auto;
-        // margin-left: -17%;
-      }
     }
   }
 }
@@ -2153,7 +2099,6 @@ footer{
     overflow: scroll;
     line-height: 40px;
     padding-top: 150px;
-    // display: none;
     animation: fadeout 0.8s;
     -moz-animation: fadeout 0.8s; /* Firefox */
     -webkit-animation: fadeout 0.8s; /* Safari and Chrome */
@@ -2299,6 +2244,10 @@ footer{
       width:100%;
     }
 
+    section.lg{
+      height: auto;
+    }
+
     .lg{
       margin-top: 20px;
     }
@@ -2333,51 +2282,23 @@ footer{
     }
   }
 
-  .prft{
-    figure{
-      img{
-        max-width: 100%;
-        height: auto;
-        margin-left: 0;
+  .lg.dsc{
+    .dl.dc{
+      h4{
         width: 100%;
       }
     }
   }
-
-  .secft li img{
-    max-width: 100%;
-    height: 85px;
-  }
-
-  .crl.vg .carvg .item figure img{
-    max-width:100%;
-    height: 190px;
-  }
 }
 
-@media screen and (max-width:730px){
-
-  // .list{
-  //   padding: 25px 0 0!important;
-  // }
-  .crl.vg .carvg .item figure img{
-    height: 170px;
-  }
-
-}
 @media screen and (max-width:688px){
   .crl.vg .carvg .item{
     max-width: 100%;
     margin: 15px auto 7.5px;
     min-height: 420px;
   }
-  .crl.vg .carvg .item figure img{
-    max-width:100%;
-    max-height: 100%;
-    height: 250px;
-  }
   .crl.vg .carvg .slick-slide{
-    min-height: 410px;
+    // min-height: 410px;
     margin: 0 16px;
   }
 
@@ -2487,15 +2408,9 @@ footer{
   .det h6{
     font-size:16px;
   }
-  .secft li img{
-    height: 60px;
-  }
 }
 
 @media screen and (max-width:580px){
-  .crl.vg .carvg .item figure img {
-    height: 260px;
-  }
   .crl.vg .carvg .item > div{
     padding: 5px 1.05%;
   }
@@ -2563,6 +2478,10 @@ footer{
   .title{
     margin: 5px 0;
   }
+
+  .txt{
+    text-align: center;
+  }
 }
 @media screen and (max-width:480px){
   .top .inf{
@@ -2587,13 +2506,6 @@ footer{
   .crl.vg .carvg .item > div .name h5,.cont .tel h5, .cont .loc h5,.comp .ct > div h4,.comp .ms.full > div > div h4, .comp .ms.full > div > div i{
     font-size:18px;
   }
-  // .crl.vg .carvg .item > div .local li h5, .crl.vg .carvg .item > div .tempo li h5, .crl.vg .carvg .item > div .inc li h5,.emp .empresa ul li > div h4{
-  //   font-size:13px;
-  // }
-
-  // .crl.vg .carvg .item > div .local li h6, .crl.vg .carvg .item > div .tempo li h6, .crl.vg .carvg .item > div .inc li h6,.emp .empresa ul li > div p,.top .inf i, .top .inf p,.comp .ct > div p,.comp .ms.full p{
-  //   font-size:12px;
-  // }
 
   .crl.vg .carvg .item > div .valor > div h6, .crl.vg .carvg .item > div .valor > div h5,.cont .tel h4, .cont .tel svg, .cont .loc h4, .cont .loc i{
     font-size:20px;
@@ -2614,14 +2526,14 @@ footer{
     margin-top: 12%;
   }
 
+  .cont .tel > div h4{
+    padding: 12px 0;
+  }
+
   .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc,.crl.vg .carvg .item > div .name,.crl.vg .carvg .item > div .inf{
     padding: 0px 0;
     margin: 0 0;
   }
-
-  // .crl.vg .carvg{
-  //   padding: 8px 0;
-  // }
 
   .crl.vg .carvg.list .item{
     margin: 20px 0;
@@ -2658,9 +2570,6 @@ footer{
   }
   .list{
     padding: 15px 0 0!important;
-  }
-  .secft li img{
-    height: 45px;
   }
 }
 

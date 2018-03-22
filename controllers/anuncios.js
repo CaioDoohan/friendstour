@@ -4,12 +4,12 @@ var moment   = require('moment');
 var chalk    = require('chalk');
 var Anuncio  = require("../models/anunciosDAO.js");
 const multer = require('multer');
+const sharp  = require('sharp');
 var validator = require('express-validator');
-//var Imagem = require('../models/imagensDAO');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/images/uploads/prods/");
+        cb(null, "public/images/uploads/prods/origin");
     },
     filename: function (req, file, cb) {
         cb(null, Date.now()+'-'+ file.originalname);
@@ -120,6 +120,11 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
     
             if(req.files.imghome){
                 if( req.files.imghome != undefined ){
+                    sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ req.files.imghome[0].filename)
+                    .resize(480, 280)
+                    .toFile(process.cwd() +'\\public\\images\\uploads\\prods\\croped\\'+ req.files.imghome[0].filename, function(err) {
+                        if(err) throw err;
+                    });
                     var imgHome = {
                         home : req.files.imghome[0].filename
                     }
@@ -128,10 +133,24 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
                 }
             }
             
+            function thumbThis(array){
+                sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ array.filename)
+                .resize(120, 60)
+                .toFile(process.cwd() +'\\public\\images\\uploads\\prods\\thumb\\'+ array.filename, function(err) {
+                    if(err) throw err;
+                });
+                return true;
+            }
             if(req.files.imgdet){
                 if(  req.files.imgdet != undefined ){
                     var detImg = [];
                     for(var i = 0; i < req.files.imgdet.length; i++){
+                        sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ req.files.imgdet[i].filename)
+                        .resize(653, 390)
+                        .toFile(process.cwd() +'\\public\\images\\uploads\\prods\\croped\\'+ req.files.imgdet[i].filename, function(err) {
+                            if(err) throw err;
+                        });
+                        thumbThis(req.files.imgdet[i]);
                         detImg.push(req.files.imgdet[i].filename);
                     }
                 }else{
@@ -140,7 +159,7 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
             }
             
             // console.log('DADOS FORM:',dadosForm);
-            // var texto = dadosForm.desc_prod;
+            var texto = dadosForm.desc_prod;
 
             // console.log('texto:',unescape(texto).trim());
             // console.log('IMGS:', imgHome);

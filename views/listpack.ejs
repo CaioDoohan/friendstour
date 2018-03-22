@@ -1,5 +1,6 @@
 <% include partial/header %>
 <% include partial/menu %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
 <script>
 
   function showVags(value, place){
@@ -7,6 +8,7 @@
     var vagas2 = $("#two").find('li[data-vg]');
     var count;
     var windowWith = $(window).width();
+    var wtf = 0;
 
     function ftz(array){
       count = 0;
@@ -24,9 +26,12 @@
         $(place).find("li[data-vg]").show();
         $(place).find("li.left").removeClass("left");
         $(place).find("li.right").removeClass("right");
+        ( wtf >= 1 ? $("#cancel").find('button').hide() : true);
         if(type != 'Nacional'){
+          wtf = wtf + 1;
           alert("Sem Anúncios internacionais em últimas vagas!");
         }else{
+          wtf = wtf + 1;
           alert("Sem Anúncios nacionais em últimas vagas!");
         }
       }
@@ -55,7 +60,7 @@
         }
       }           
     }else{
-      alert("Sem anúncios para ordenar");
+      alert("Sem Anúncios nacionais para ordenar");
     }
 
     if( vagas2.length >= 1){
@@ -67,7 +72,7 @@
         }
       }         
     }else{
-      alert("Sem anúncios para ordenar");
+      alert("Sem Anúncios internacionais para ordenar");
     } 
   }
 
@@ -99,7 +104,7 @@
   function getThis(type){
     var list1 = $("#one");
     var list2 = $("#two");
-
+    wtf = 0;
     $(list1).find("li.left").removeClass('left');
     $(list2).find("li.right").removeClass('right');
     $(list1).find("li[data-price]").show();
@@ -119,8 +124,7 @@
     }
   }
   $(document).ready(function(){
-
-    
+    $('.money').mask("#.##0" , { reverse:true});
   });
 </script>
 <main>
@@ -169,7 +173,7 @@
                     <figure>
                       <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                         <% if(produto[i].imagem != undefined ) { %>
-                          <img src="/images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                          <img src="/images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                         <% }
                         else { %>
                           <img src="/images/default.png" alt="Friend's Tour"/>
@@ -245,8 +249,8 @@
                                 <h5>
                                   a partir de:
                                 </h5>
-                                <h6>
-                                    R$<%= produto[i].valor_prod %>
+                                <h6>R$
+                                  <span class="money"><%= produto[i].valor_prod %></span>
                                 </h6>
                             </div>
                           </div>
@@ -299,7 +303,7 @@
                     <figure>
                       <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                         <% if(produto[i].imagem != undefined ) { %>
-                          <img src="/images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                          <img src="/images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                         <% }
                         else { %>
                           <img src="/images/default.png" alt="Friend's Tour"/>
@@ -375,8 +379,8 @@
                                 <h5>
                                   a partir de:
                                 </h5>
-                                <h6>
-                                    R$<%= produto[i].valor_prod %>
+                                <h6>R$
+                                  <span class="money"><%= produto[i].valor_prod %></span>
                                 </h6>
                             </div>
                           </div>

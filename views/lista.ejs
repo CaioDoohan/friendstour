@@ -1,5 +1,6 @@
 <% include partial/header %>
 <% include partial/menu %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
 <script>
 
   function showVags(value, place){
@@ -88,7 +89,7 @@
   }
 
   $(document).ready(function(){
-     
+    $('.money').mask("#.##0" , { reverse:true});
   });
 </script>
 <main>
@@ -131,7 +132,7 @@
                   <figure>
                     <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                       <% if(produto[i].imagem != undefined ) { %>
-                        <img src="/images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                        <img src="/images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                       <% }
                       else { %>
                         <img src="/images/default.png" alt="Friend's Tour"/>
@@ -207,8 +208,8 @@
                               <h5>
                                 a partir de:
                               </h5>
-                              <h6>
-                                  R$<%= produto[i].valor_prod %>
+                              <h6>R$
+                                <span class="money"><%= produto[i].valor_prod %></span>
                               </h6>
                           </div>
                         </div>

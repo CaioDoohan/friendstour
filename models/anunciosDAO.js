@@ -4,7 +4,9 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = new require('path');
 
-var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods');
+var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods','origin');
+var jsonCroped = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods','croped');
+var jsonThumb = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods','thumb');
 
 var db;
 var connection;
@@ -497,10 +499,16 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                             return acess = false;
                         }else{
                             //console.log("THAT SHIT",jsonPath);
-                            var img = (jsonPath + "/" + nameHome);
-                            fs.unlink(img,function(err){
+                            var origin = (jsonPath + "\\" + nameHome);
+                            fs.unlink(origin,function(err){
                                 if (err) throw err;
-                                // console.log(img,'-- deleted');
+                                // console.log(origin,'-- deleted');
+                            });
+
+                            var croped = (jsonCroped + "\\" + nameHome);
+                            fs.unlink(croped,function(err){
+                                if (err) throw err;
+                                // console.log(croped,'-- deleted');
                             });
                         }
                         return connection.query("select 1");
@@ -578,10 +586,22 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
             nameDet = undefined;
         }else{
             function deleteFile(file){
-                var img = (jsonPath + "\\" + file);
-                fs.unlink(img,function(err){
+                var origin = (jsonPath + "\\" + file);
+                fs.unlink(origin,function(err){
                     if (err) throw err;
-                    // console.log(chalk.red(img," - DELETADA"));
+                    // console.log(chalk.red(origin," - DELETADA"));
+                });
+
+                var croped = (jsonCroped + "\\" + file);
+                fs.unlink(croped,function(err){
+                    if (err) throw err;
+                    // console.log(croped,'-- deleted');
+                });
+
+                var thumb = (jsonThumb + "\\" + file);
+                fs.unlink(thumb,function(err){
+                    if (err) throw err;
+                    // console.log(thumb,'-- deleted');
                 });
                 return true;
             }

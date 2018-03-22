@@ -47,7 +47,11 @@ pre {
 
 a {
   background-color: transparent;
-  -webkit-text-decoration-skip: objects; }
+  -webkit-text-decoration-skip: objects;
+  color: #726277; }
+
+p {
+  color: #726277; }
 
 abbr[title] {
   border-bottom: none;
@@ -271,11 +275,13 @@ select[multiple] {
   vertical-align: top; }
 
 p {
-  margin: 0; }
+  margin: 0;
+  color: inherit;
+  text-decoration: none; }
 
 a {
   text-decoration: none;
-  color: initial; }
+  color: inherit; }
 
 h1, h2, h3, h4, h5, h6, ul, figure {
   font-weight: 400;
@@ -534,10 +540,8 @@ h1, h2, h3, h4, h5, h6, ul, figure {
     .crl.vg .carvg .item .up {
       min-height: 150px; }
     .crl.vg .carvg .item figure img {
-      max-width: 484px;
-      max-height: 230px;
       width: 100%;
-      height: 230px; }
+      height: auto; }
     .crl.vg .carvg .item > div {
       display: table;
       width: 100%;
@@ -1319,23 +1323,18 @@ footer {
 .prft {
   display: block;
   margin-bottom: 5px;
-  padding: 0 5px;
   box-sizing: border-box; }
   .prft figure {
-    border: 1px solid #d2d2d2;
     max-width: 100%;
     box-sizing: border-box; }
     .prft figure img {
-      max-width: 650px;
       width: 100%;
-      height: 390px;
+      height: auto;
       cursor: pointer; }
 
 .secft {
   display: table;
-  width: 100%;
-  padding: 0 1%;
-  box-sizing: border-box; }
+  width: 100%; }
   .secft li {
     float: left;
     max-width: 18.7%;
@@ -1344,8 +1343,7 @@ footer {
     border: 1px solid #d2d2d2;
     box-sizing: border-box; }
     .secft li img {
-      height: 60px;
-      max-width: 120px;
+      height: auto;
       width: 100%;
       cursor: pointer; }
   .secft > li:nth-child(5n+1) {
@@ -1357,7 +1355,9 @@ footer {
   background-color: #e6e6e6;
   padding: 10px;
   box-sizing: border-box;
-  box-shadow: 0px 1px 11px #909090; }
+  height: 390px;
+  border-radius: 0 5px 5px 0;
+  display: table; }
   .lg .txt {
     display: table;
     width: 100%;
@@ -1383,11 +1383,13 @@ footer {
       box-sizing: border-box; }
 
 .lg.dsc {
-  margin: 35px 0 10px; }
+  margin: 35px 0 10px;
+  height: auto;
+  border-radius: 0; }
 
 .dl {
   padding: 0 1%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
   padding: 14px 0; }
   .dl h4 {
@@ -1416,7 +1418,8 @@ footer {
 
 .det {
   box-sizing: border-box;
-  display: block;
+  display: table;
+  width: 100%;
   position: relative; }
   .det .local {
     display: table;
@@ -1431,7 +1434,7 @@ footer {
     margin: 0 auto;
     text-align: center; }
   .det > ul, .det > div {
-    margin: 10px 0;
+    margin: 5px 0;
     box-sizing: border-box; }
   .det li {
     display: table;
@@ -1450,7 +1453,7 @@ footer {
     margin-top: 0; }
   .det .valor {
     display: table;
-    margin-top: 25px;
+    margin-top: 14px;
     width: 100%; }
     .det .valor > div {
       display: table;
@@ -1509,7 +1512,8 @@ footer {
       padding: 15px 0;
       display: table;
       text-align: left;
-      margin: 0 auto; }
+      margin: 0 auto;
+      clear: both; }
     .shadow form > div {
       display: table;
       width: 100%; }
@@ -1538,7 +1542,6 @@ footer {
       color: #726277;
       padding: 8px 5px;
       clear: both;
-      width: 470px;
       min-width: 100%;
       max-width: 1000px;
       min-height: 96px;
@@ -1557,7 +1560,8 @@ footer {
     font-size: 35px;
     float: right;
     color: #d05a35;
-    cursor: pointer; }
+    cursor: pointer;
+    display: table; }
 
 .red {
   background-color: red;
@@ -1581,9 +1585,7 @@ footer {
     width: 100%;
     float: none; }
   .prft figure {
-    overflow: hidden; }
-    .prft figure img {
-      width: auto; } }
+    overflow: hidden; } }
 
 @media screen and (max-width: 870px) {
   .top > h1 img {
@@ -1750,6 +1752,8 @@ footer {
     font-size: 35px; }
   .listdet > div.col-8, .listdet section.lg {
     width: 100%; }
+  .listdet section.lg {
+    height: auto; }
   .listdet .lg {
     margin-top: 20px; }
   .listdet .det li {
@@ -1768,33 +1772,15 @@ footer {
   .listdet .fpag > li {
     float: none;
     margin: 5px auto !important; }
-  .prft figure img {
-    max-width: 100%;
-    height: auto;
-    margin-left: 0;
-    width: 100%; }
-  .secft li img {
-    max-width: 100%;
-    height: 85px; }
-  .crl.vg .carvg .item figure img {
-    max-width: 100%;
-    height: 190px; } }
-
-@media screen and (max-width: 730px) {
-  .crl.vg .carvg .item figure img {
-    height: 170px; } }
+  .lg.dsc .dl.dc h4 {
+    width: 100%; } }
 
 @media screen and (max-width: 688px) {
   .crl.vg .carvg .item {
     max-width: 100%;
     margin: 15px auto 7.5px;
     min-height: 420px; }
-  .crl.vg .carvg .item figure img {
-    max-width: 100%;
-    max-height: 100%;
-    height: 250px; }
   .crl.vg .carvg .slick-slide {
-    min-height: 410px;
     margin: 0 16px; }
   .crl.vg .carvg .item > div .name h5 {
     padding: 8px 0; }
@@ -1856,13 +1842,9 @@ footer {
   .det h5 {
     font-size: 18px; }
   .det h6 {
-    font-size: 16px; }
-  .secft li img {
-    height: 60px; } }
+    font-size: 16px; } }
 
 @media screen and (max-width: 580px) {
-  .crl.vg .carvg .item figure img {
-    height: 260px; }
   .crl.vg .carvg .item > div {
     padding: 5px 1.05%; }
   .list tr td {
@@ -1903,7 +1885,9 @@ footer {
   .shadow form span {
     font-size: 25px; }
   .title {
-    margin: 5px 0; } }
+    margin: 5px 0; }
+  .txt {
+    text-align: center; } }
 
 @media screen and (max-width: 480px) {
   .top .inf {
@@ -1929,6 +1913,8 @@ footer {
     min-height: 415px; }
   .crl.vg .carvg .item .down {
     margin-top: 12%; }
+  .cont .tel > div h4 {
+    padding: 12px 0; }
   .crl.vg .carvg .item > div .local, .crl.vg .carvg .item > div .tempo, .crl.vg .carvg .item > div .inc, .crl.vg .carvg .item > div .name, .crl.vg .carvg .item > div .inf {
     padding: 0px 0;
     margin: 0 0; }
@@ -1951,6 +1937,4 @@ footer {
   .flt.full select {
     width: 100%; }
   .list {
-    padding: 15px 0 0 !important; }
-  .secft li img {
-    height: 45px; } }
+    padding: 15px 0 0 !important; } }

@@ -33,7 +33,7 @@
             </div>
           </div>
           <p>
-              Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.
+            A nossa missão é se fazer cumprir o nosso propósito,e o nosso propósito é realizar o seu sonho.
           </p>
         </div>
         <div class="ms full">
@@ -46,7 +46,7 @@
             </div>
           </div>
           <p>
-              Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.
+            O nosso maior valor é o cliente Friends, nosso maior patrimônio é ver o seu sonho realizado, nossos valores são protegidos e guardados pela nossa total dedicação a você cliente Friends.
           </p>
         </div>
         <div class="ms full">
@@ -59,14 +59,14 @@
             </div>
           </div>
           <p>
-              Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico.
+            Com olhos voltados ao amanhã sempre estaremos a procura do melhor preço e da melhor forma a se pagar um sonho de viagem, com isso, buscamos cada vez mais parcerias que possam vir a agregar e fazer com que, barreiras e imprevistos, não  atrapalhem os seus sonhos.
           </p>
         </div>
       </section>
     </div>
     <div class="row">
       <section class="fdl col-12">
-        <div class="letter">
+        <div class="letter" id="ft">
           <h3>
             PROGRAMA FIDELIDADE 
           </h3>
@@ -88,5 +88,19 @@
       </section>
     </div>
   </div>
+  <script>
+    function goTo(element){
+      $('html,body').animate({
+        scrollTop: $(element).offset().top},
+        'slow');
+    }
+    <% if( ft != false) { %>
+      var hasft = <%= ft%>;
+    <%}%>
+
+    if( hasft != false){
+      goTo("#ft");
+    }
+  </script>
 </main>
 <% include partial/footer %>

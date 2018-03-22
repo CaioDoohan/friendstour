@@ -4,7 +4,8 @@ var chalk = require('chalk');
 var moment = require('moment');
 var fs = require('file-system');
 var path = new require('path');
-var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'banners');
+var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'banners','origin');
+var jsonCroped = path.join(__dirname, '..', 'public', 'images', 'uploads', 'banners','croped');
 var db;
 var connection;
 
@@ -72,10 +73,16 @@ Banners.prototype.removeBanner = function(id,name,callback){
             if(erro){
                 return callback(1,0);
             }else{
-                var img = (jsonPath + "\\" + name); 
-                fs.unlink(img,function(err){
+                var origin = (jsonPath + "\\" + name); 
+                fs.unlink(origin,function(err){
                     if (err) throw err;
-                    // console.log(chalk.red(img," - DELETADA"));
+                    // console.log(chalk.red(origin," - DELETADA"));
+                });
+
+                var croped = (jsonCroped + "\\" + name); 
+                fs.unlink(croped,function(err){
+                    if (err) throw err;
+                    // console.log(chalk.red(croped," - DELETADA"));
                 });
             }
             return callback(0,1);

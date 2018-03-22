@@ -4,11 +4,12 @@ var moment   = require('moment');
 var chalk    = require('chalk');
 var Banners  = require("../models/bannersDAO.js");
 const multer = require('multer');
+const sharp  = require('sharp');
 var validator = require('express-validator');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/images/uploads/banners/");
+        cb(null, "public/images/uploads/banners/origin/");
     },
     filename: function (req, file, cb) {
         cb(null, Date.now()+'-'+ file.originalname);
@@ -50,13 +51,19 @@ router.post('/adicionar/dados_enviados', function(req,res){
     cpUpload(req,res,function(err) {
         var banner;
         var url = req.body.url;
-        //console.log("1-)BANNER:", banner)
+
         if( req.files != null && req.files != undefined ){
+            sharp(process.cwd() +'\\public\\images\\uploads\\banners\\origin\\'+ req.files.banner[0].filename)
+            .resize(980, 395)
+            .toFile(process.cwd() +'\\public\\images\\uploads\\banners\\croped\\'+ req.files.banner[0].filename, function(err) {
+                if(err) throw err;
+                return true;
+            });
             banner = req.files.banner[0].filename;
         }
 
         var BannersModel = new Banners();
-        //console.log("2-)BANNER:", banner)
+        // console.log("2-)BANNER:", banner)
         BannersModel.addBanner(banner,url, function(erro,result){
             var msg;
             //console.log("2-)Result:", result);

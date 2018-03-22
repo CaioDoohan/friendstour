@@ -1,5 +1,11 @@
 <% include partial/header %>
 <% include partial/menu %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.money').mask("#.##0" , { reverse:true});
+  })
+</script>
     <main>
       <div class="container">
         <div class="row">
@@ -11,11 +17,11 @@
                     <div class="item">
                       <figure>
                         <% if( url[k] != null ) { %>
-                        <a href="/<%= url[k]%>" title="Veja mais!">
-                          <img src="/images/uploads/banners/<%= banner[k]%>" alt="Friend's Tour" />
-                        </a>
+                          <a href="/<%= url[k]%>" title="Veja mais!">
+                            <img src="/images/uploads/banners/croped/<%= banner[k]%>" alt="Friend's Tour" />
+                          </a>
                         <%} else{%>
-                          <img src="/images/uploads/banners/<%= banner[k]%>" alt="Friend's Tour" />
+                          <img src="/images/uploads/banners/croped/<%= banner[k]%>" alt="Friend's Tour" />
                         <% } %>
                       </figure>
                     </div>
@@ -49,7 +55,7 @@
                         <figure>
                           <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                             <% if(produto[i].imagem != undefined ) { %>
-                              <img src="images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                              <img src="images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                             <% }
                             else { %>
                               <img src="images/default.png" alt="Friend's Tour"/>
@@ -125,18 +131,26 @@
                                     <h5>
                                       a partir de:
                                     </h5>
-                                    <h6>
-                                        R$<%= produto[i].valor_prod %>
+                                    <h6>R$
+                                      <span class="money"><%= produto[i].valor_prod %></span>
                                     </h6>
                                 </div>
                               </div>
                               <ul class="fpag">
+                                <% if(produto[i].parcelas_prod > 1) {%>
                                 <li class="parc">
                                   <i class="fa fa-plus" aria-hidden="true"></i>
                                   <p>
                                     PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>X !
                                   </p>
                                 </li>
+                                <%} else { %>
+                                  <li class="parc">
+                                    <p>
+                                      PAGAMENTO Á VISTA !
+                                    </p>
+                                  </li>
+                                <% } %>
                               </ul>
                           </div>
                         </div>
@@ -177,7 +191,7 @@
                               <figure>
                                 <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                                   <% if(produto[i].imagem != undefined ) { %>
-                                    <img src="images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                                    <img src="images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                                   <% }
                                   else { %>
                                     <img src="images/default.png" alt="Friend's Tour"/>
@@ -253,18 +267,26 @@
                                           <h5>
                                             a partir de:
                                           </h5>
-                                          <h6>
-                                              R$<%= produto[i].valor_prod %>
+                                          <h6>R$
+                                            <span class="money"><%= produto[i].valor_prod %></span>
                                           </h6>
                                       </div>
                                     </div>
                                     <ul class="fpag">
+                                      <% if(produto[i].parcelas_prod > 1) {%>
                                       <li class="parc">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <p>
                                           PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>X !
                                         </p>
                                       </li>
+                                      <%} else { %>
+                                        <li class="parc">
+                                          <p>
+                                            PAGAMENTO Á VISTA !
+                                          </p>
+                                        </li>
+                                      <% } %>
                                     </ul>
                                 </div>
                               </div>
@@ -305,7 +327,7 @@
                               <figure>
                                 <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                                   <% if(produto[i].imagem != undefined ) { %>
-                                    <img src="images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                                    <img src="images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                                   <% }
                                   else { %>
                                     <img src="images/default.png" alt="Friend's Tour"/>
@@ -381,18 +403,26 @@
                                           <h5>
                                             a partir de:
                                           </h5>
-                                          <h6>
-                                              R$<%= produto[i].valor_prod %>
+                                          <h6>R$
+                                            <span class="money"><%= produto[i].valor_prod %></span>
                                           </h6>
                                       </div>
                                     </div>
                                     <ul class="fpag">
+                                      <% if(produto[i].parcelas_prod > 1) {%>
                                       <li class="parc">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <p>
                                           PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>X !
                                         </p>
                                       </li>
+                                      <%} else { %>
+                                        <li class="parc">
+                                          <p>
+                                            PAGAMENTO Á VISTA !
+                                          </p>
+                                        </li>
+                                      <% } %>
                                     </ul>
                                 </div>
                               </div>
@@ -433,7 +463,7 @@
                               <figure>
                                 <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                                   <% if(produto[i].imagem != undefined ) { %>
-                                    <img src="images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                                    <img src="images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                                   <% }
                                   else { %>
                                     <img src="images/default.png" alt="Friend's Tour"/>
@@ -509,18 +539,26 @@
                                           <h5>
                                             a partir de:
                                           </h5>
-                                          <h6>
-                                              R$<%= produto[i].valor_prod %>
+                                          <h6>R$
+                                            <span class="money"><%= produto[i].valor_prod %></span>
                                           </h6>
                                       </div>
                                     </div>
                                     <ul class="fpag">
+                                      <% if(produto[i].parcelas_prod > 1) {%>
                                       <li class="parc">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <p>
                                           PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>X !
                                         </p>
                                       </li>
+                                      <%} else { %>
+                                        <li class="parc">
+                                          <p>
+                                            PAGAMENTO Á VISTA !
+                                          </p>
+                                        </li>
+                                      <% } %>
                                     </ul>
                                 </div>
                               </div>
@@ -561,7 +599,7 @@
                               <figure>
                                 <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                                   <% if(produto[i].imagem != undefined ) { %>
-                                    <img src="images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                                    <img src="images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                                   <% }
                                   else { %>
                                     <img src="images/default.png" alt="Friend's Tour"/>
@@ -637,18 +675,26 @@
                                           <h5>
                                             a partir de:
                                           </h5>
-                                          <h6>
-                                              R$<%= produto[i].valor_prod %>
+                                          <h6>R$
+                                            <span class="money"><%= produto[i].valor_prod %></span>
                                           </h6>
                                       </div>
                                     </div>
                                     <ul class="fpag">
+                                      <% if(produto[i].parcelas_prod > 1) {%>
                                       <li class="parc">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <p>
                                           PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>X !
                                         </p>
                                       </li>
+                                      <%} else { %>
+                                        <li class="parc">
+                                          <p>
+                                            PAGAMENTO Á VISTA !
+                                          </p>
+                                        </li>
+                                      <% } %>
                                     </ul>
                                 </div>
                               </div>
@@ -682,7 +728,7 @@
                 </p>
                 <i class="fas fa-question"></i>
               </a>
-              <a href="/contato?mt=1" title="Monte seu pacote!!" class="ts">
+              <a href="/contato?mt=1" title="Monte seu pacote!" class="ts">
                 <div>
                     <h3>
                       MONTE SEU PACOTE!
@@ -710,7 +756,7 @@
                               <figure>
                                 <a href="/detalhes/<%= produto[i].id_prod %>" title="Veja mais">
                                   <% if(produto[i].imagem != undefined ) { %>
-                                    <img src="images/uploads/prods/<%= produto[i].imagem %>" alt="Friend's Tour"/>
+                                    <img src="images/uploads/prods/croped/<%= produto[i].imagem %>" alt="Friend's Tour"/>
                                   <% }
                                   else { %>
                                     <img src="images/default.png" alt="Friend's Tour"/>
@@ -786,18 +832,26 @@
                                           <h5>
                                             a partir de:
                                           </h5>
-                                          <h6>
-                                              R$<%= produto[i].valor_prod %>
+                                          <h6>R$
+                                            <span class="money"><%= produto[i].valor_prod %></span>
                                           </h6>
                                       </div>
                                     </div>
                                     <ul class="fpag">
+                                      <% if(produto[i].parcelas_prod > 1) {%>
                                       <li class="parc">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         <p>
                                           PAGUE EM ATÉ <span><%= produto[i].parcelas_prod %></span>X !
                                         </p>
                                       </li>
+                                      <%} else { %>
+                                        <li class="parc">
+                                          <p>
+                                            PAGAMENTO Á VISTA !
+                                          </p>
+                                        </li>
+                                      <% } %>
                                     </ul>
                                 </div>
                               </div>

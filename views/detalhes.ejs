@@ -21,8 +21,9 @@
             <div class="prft">
               <% if(produto.imagens != undefined){ %>
               <figure>
-                <a href="../../images/uploads/prods/<%= produto.imagens[0] %>" title="" class="example-image-link">
-                   <img src="../../images/uploads/prods/<%= produto.imagens[0] %>" alt="Magic City" class="example-image" selecionado="0"/>
+                <!-- ../../images/uploads/prods/<%= produto.imagens[0]%> -->
+                <a href="../../images/uploads/prods/croped/<%= produto.imagens[0] %>" title="" class="example-image-link">
+                   <img src="../../images/uploads/prods/croped/<%= produto.imagens[0]%>" alt="Magic City" class="example-image" selecionado="0"/>
                 </a>
               </figure>
               <% } else { %>
@@ -38,8 +39,8 @@
                 for(var i = 0; i < produto.imagens.length; i++ ){ %>
                     <li>
                       <figure>
-                          <a href="../../images/uploads/prods/<%= produto.imagens[i] %>" title="Friend's Tour" rel="lightshow" data-lightbox="cars" class="example-image-link">
-                            <img src="../../images/uploads/prods/<%= produto.imagens[i] %>" alt="Friend's Tour" class="example-image" selecionado="0"/>
+                          <a href="../../images/uploads/prods/croped/<%= produto.imagens[i] %>" title="Friend's Tour" rel="lightshow" data-lightbox="cars" class="example-image-link">
+                            <img src="../../images/uploads/prods/thumb/<%= produto.imagens[i] %>" alt="Friend's Tour" class="example-image" selecionado="0"/>
                           </a>
                       </figure>
                     </li>
@@ -93,7 +94,7 @@
                     a partir de:
                   </h5>
                   <h6>
-                    R$<%= produto.valor_prod%>
+                    R$<span class="money"><%= produto.valor_prod%></span>
                   </h6>
               </div>
             </div>
@@ -122,10 +123,14 @@
   </div>
   <div id="form" class="shadow">
       <form action="/detalhes/email" id="formsell" method="post">
-        <i class="fa fa-window-close fc" aria-hidden="true" title="Voltar"></i>
-        <span>
-          ENTRE EM CONTATO AGORA<br> COM UM DE NOSSOS VENDEDORES
-        </span>
+        <div>
+          <i class="fa fa-window-close fc" aria-hidden="true" title="Voltar"></i>
+        </div>
+        <div>
+          <span>
+            ENTRE EM CONTATO AGORA<br> COM UM DE NOSSOS VENDEDORES
+          </span>
+        </div>
         <input type="hidden" name="evento" value="<%= produto.nome_prod%>"/>
         <div>
             <input type="text" placeholder="Nome completo" name="nome" required/>
@@ -154,14 +159,18 @@
         $('.date').mask('00/00/0000');
         $('.rg').mask('00.000.000-0');
         $('.cpf').mask('000.000.000-00');
+        $('.money').mask("#.##0" , { reverse:true});
 
         $($(".example-image")[0]).parent().bind("click", function(e) {
            $(".example-image[selecionado=1]").click(), e.preventDefault()
         });
         
         var clickImage = function() {
-        $(".example-image").attr("selecionado", "0"), $(this).attr("selecionado", "1"), $($(".example-image")[0]).attr("src", $(this).attr("src"))
+          $(".example-image").attr("selecionado", "0"),
+          $(this).attr("selecionado", "1"),
+          $($(".example-image")[0]).attr("src", $(this).attr("src").replace("thumb","croped" ));
         };
+
         $(".example-image").each(function(e, a) {
         e > 0 && $(a).mouseover(clickImage).click(clickImage)
         });
