@@ -120,7 +120,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
         if(imgHome != undefined ){
             var homePath = imgHome.home;
             var sqlHome = ("INSERT INTO images_home(name_img) VALUE('" + homePath +"') " );
-            // console.log(sqlHome);
+            console.log(sqlHome);
             connection.query(sqlHome, function(erro, result){
                 if(erro){
                     callback(erro, 0);
@@ -154,7 +154,7 @@ Anuncio.prototype.addAnuncio = function(dadosForm,imgHome,detImg, callback){
         if( detPaths != undefined ){
             for(var i = 0; i < detPaths.length; i++){
                 var sqlDet = ("INSERT INTO images_det(name_img) VALUE('" + detPaths[i] + "')");
-
+                console.log(sqlDet);
                 connection.query(sqlDet, function(err,result){      
                     if(err){
                         callback(err, 0);

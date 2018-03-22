@@ -120,6 +120,8 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
     
             if(req.files.imghome){
                 if( req.files.imghome != undefined ){
+                    console.log(process.cwd());
+                    console.log(process.cwd() + '\\public\\images\\uploads\\prods\\origin\\'+ req.files.imghome[0].filename);
                     sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ req.files.imghome[0].filename)
                     .resize(480, 280)
                     .toFile(process.cwd() +'\\public\\images\\uploads\\prods\\croped\\'+ req.files.imghome[0].filename, function(err) {
@@ -134,6 +136,8 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
             }
             
             function thumbThis(array){
+                console.log(process.cwd());
+                console.log(process.cwd() + '\\public\\images\\uploads\\prods\\origin\\'+ array.filename);
                 sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ array.filename)
                 .resize(120, 60)
                 .toFile(process.cwd() +'\\public\\images\\uploads\\prods\\thumb\\'+ array.filename, function(err) {
@@ -145,6 +149,8 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
                 if(  req.files.imgdet != undefined ){
                     var detImg = [];
                     for(var i = 0; i < req.files.imgdet.length; i++){
+                        console.log(process.cwd() );
+                        console.log(process.cwd() + '\\public\\images\\uploads\\prods\\origin\\'+ req.files.imgdet[i].filename);
                         sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ req.files.imgdet[i].filename)
                         .resize(653, 390)
                         .toFile(process.cwd() +'\\public\\images\\uploads\\prods\\croped\\'+ req.files.imgdet[i].filename, function(err) {
