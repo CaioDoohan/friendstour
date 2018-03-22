@@ -500,15 +500,16 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                         }else{
                             //console.log("THAT SHIT",jsonPath);
                             var origin = (jsonPath + "\\" + nameHome);
+
                             fs.unlink(origin,function(err){
                                 if (err) throw err;
-                                // console.log(origin,'-- deleted');
+                                console.log(origin,'-- deleted');
                             });
 
                             var croped = (jsonCroped + "\\" + nameHome);
                             fs.unlink(croped,function(err){
                                 if (err) throw err;
-                                // console.log(croped,'-- deleted');
+                                console.log(croped,'-- deleted');
                             });
                         }
                         return connection.query("select 1");
@@ -589,19 +590,19 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                 var origin = (jsonPath + "\\" + file);
                 fs.unlink(origin,function(err){
                     if (err) throw err;
-                    // console.log(chalk.red(origin," - DELETADA"));
+                    console.log(chalk.red(origin," - DELETADA"));
                 });
 
                 var croped = (jsonCroped + "\\" + file);
                 fs.unlink(croped,function(err){
                     if (err) throw err;
-                    // console.log(croped,'-- deleted');
+                    console.log(croped,'-- deleted');
                 });
 
                 var thumb = (jsonThumb + "\\" + file);
                 fs.unlink(thumb,function(err){
                     if (err) throw err;
-                    // console.log(thumb,'-- deleted');
+                    console.log(thumb,'-- deleted');
                 });
                 return true;
             }
