@@ -3,13 +3,11 @@ var config = require('../config/dbConnection');
 var chalk = require('chalk');
 var fs = require('fs');
 var path = new require('path');
-
-var jsonPath = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods','origin');
-var jsonCroped = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods','croped');
-var jsonThumb = path.join(__dirname, '..', 'public', 'images', 'uploads', 'prods','thumb');
-
+var chokidar = require('chokidar');
 var db;
 var connection;
+
+var del = require('del');
 
 
 var Anuncio = function(){
@@ -402,12 +400,66 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
     var acess;
     var idDet = new Array();
     var nameDet = new Array();
+    var sqlPrefer = 'SET SQL_SAFE_UPDATES = 0';
+
+    var globalPath = path.join(__dirname,'..','public','images','uploads','prods');
+
+    watcher = chokidar.watch(globalPath,{
+        persistent: true
+    });
+
+    watcher.on('unlink', function(){
+        console.log("UNLINK");
+        watcher.close();
+    });
+
+    function test(array){
+        for( var i = 0; i < array.length; i++){
+            console.log("UNLINK", i);
+            fs.unlink(array[i], function(erro){
+                if(erro) throw erro;
+            });
+        }
+        return true;
+    }
+    function removeThis(file,type){
+        var teste = new Array();
+        if( type != '1' ){
+            var origin = (globalPath + "\\" + 'origin' + "\\" + file);
+            var croped = (globalPath + "\\" + 'croped' + "\\" + file);
+            var thumb = (globalPath + "\\" + 'thumb' + "\\" + file);
+            
+            teste.push(croped, thumb);
+
+            if( test(teste)){
+                console.log("AQUI");
+                fs.unlink(origin, function(erro){
+                    console.log(erro);
+                });
+            }
+
+        }else{
+            var origin = (globalPath + "\\" + 'origin' + "\\" + file);
+            var croped = (globalPath + "\\" + 'croped' + "\\" + file);
+
+            teste.push(origin, croped);
+
+            for( var i = 0; i < teste.length; i++){
+                console.log("UNLINK", i);
+                fs.unlink(teste[i], function(erro){
+                    if(erro) throw erro;
+                });
+            }
+        }        
+        
+        return true;
+    }
 
     db.then(function(conn){
         connection = conn;
         idProd = id;
         
-
+        connection.query(sqlPrefer);
         var sqlRemove = ("DELETE FROM produto WHERE id_prod = " + idProd);
         
         connection.query(sqlRemove, function(erro, result){
@@ -471,6 +523,13 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                     return acess = false;
                 }else{
                     idImg = result[0].home_id;
+                    
+                    connection.query("DELETE FROM home_prod WHERE prod_id = "+ idProd, function(erro,result){
+                        if(erro){
+                            console.log("DELETAR HOME_PROD",erro);
+                        }
+                    });
+
                     return idImg;
                 }
             });
@@ -484,8 +543,7 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
             idImg = undefined;
         }else{
             var sqlGet = ("SELECT name_img FROM images_home WHERE home_id = "+ idImg);
-            // console.log(sqlGet);
-
+            
             connection.query(sqlGet, function(erro, result){
                 // console.log(result);
                 if(erro){
@@ -498,19 +556,8 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                         if(erro){
                             return acess = false;
                         }else{
-                            //console.log("THAT SHIT",jsonPath);
-                            var origin = (jsonPath + "\\" + nameHome);
-
-                            fs.unlink(origin,function(err){
-                                if (err) throw err;
-                                console.log(origin,'-- deleted');
-                            });
-
-                            var croped = (jsonCroped + "\\" + nameHome);
-                            fs.unlink(croped,function(err){
-                                if (err) throw err;
-                                console.log(croped,'-- deleted');
-                            });
+                            console.log('entrou aqui');
+                            removeThis(nameHome,'1');
                         }
                         return connection.query("select 1");
                     });
@@ -534,6 +581,11 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
                 for(var i = 0; i < result.length; i++ ){
                     idDet.push(result[i].det_id);
                 }
+                connection.query("DELETE FROM det_prod WHERE prod_id = "+ idProd, function(erro,result){
+                    if(erro){
+                        console.log("DELETAR DET_PROD",erro);
+                    }
+                });
                 return idDet;
             }
         });
@@ -582,39 +634,23 @@ Anuncio.prototype.removeAnuncio = function(id, callback){
         }
         return connection.query("SELECT 1");
     }).then(function(){
-        // console.log("ACESS:",acess);
         if(acess == false){
             nameDet = undefined;
         }else{
-            function deleteFile(file){
-                var origin = (jsonPath + "\\" + file);
-                fs.unlink(origin,function(err){
-                    if (err) throw err;
-                    console.log(chalk.red(origin," - DELETADA"));
-                });
+            console.log("IMAGE HOME", nameHome);
+            // function deleteThis(file){
+            //     console.log(chalk.blue("AQUI"),file);
+            //     fs.unlink(file,function(err){
+            //         if (err) throw err;
+            //         console.log(chalk.red(file," - DELETADA"));
+            //     });
 
-                var croped = (jsonCroped + "\\" + file);
-                fs.unlink(croped,function(err){
-                    if (err) throw err;
-                    console.log(croped,'-- deleted');
-                });
-
-                var thumb = (jsonThumb + "\\" + file);
-                fs.unlink(thumb,function(err){
-                    if (err) throw err;
-                    console.log(thumb,'-- deleted');
-                });
-                return true;
-            }
+            //     return true;
+            // }
     
             if(nameDet != undefined){
                 for(var i = 0; i < nameDet.length; i++){
-                    deleteFile(nameDet[i],function(erro, result){
-                        if(erro){
-                            callback(1,0);
-                            return acess = false;
-                        }
-                    });
+                    removeThis(nameDet[i], '2');
                 }
                 callback(0,1);
                 return connection.query("SELECT 1");

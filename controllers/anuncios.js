@@ -120,7 +120,7 @@ router.post('/adicionar/dados_enviados', function(req,res,next){
     
             if(req.files.imghome){
                 if( req.files.imghome != undefined ){
-                    console.log(process.cwd());
+                    console.log("aheroiaheioaheoiaheioaheoiaheioaheioaheoiaheioa",process.cwd());
                     console.log(process.cwd() + '\\public\\images\\uploads\\prods\\origin\\'+ req.files.imghome[0].filename);
                     sharp(process.cwd() +'\\public\\images\\uploads\\prods\\origin\\'+ req.files.imghome[0].filename)
                     .resize(480, 280)
