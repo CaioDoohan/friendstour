@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-console.log(chalk.blue('|─ Loading JwtBearerStrategy...'));
+console.log(chalk.blue('─────── Loading JwtBearerStrategy...'));
 
 passport.use(new Strategy( function(token, cb) {
     try{
