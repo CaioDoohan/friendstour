@@ -26,11 +26,11 @@ router.get('/', function(req, res, next) {
                 produtos[i].inclusos;
                 produtos[i].imagem;
             }
+            
         }
         EventModel.getBanners(function(result){
             var banners = new Array();
             var urls = new Array();
-            console.log("CONTROL",result);
 
             if(result != undefined){
                 for(var i = 0 ; i < result.length; i ++){
